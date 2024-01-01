@@ -1,0 +1,70 @@
+<h3 class="fs-4 fw-bold mb-2 ps-4 ps-lg-0 pt-4 pt-lg-4 text-uppercase">Trouvez votre Navette collective</h3>
+<section class="bg-white section_n section_search">
+  <div class="btn-group mb-4" role="group" aria-label="Basic radio toggle button group" data-pg-collapsed>
+    <input type="radio" class="btn-check" name="btnradio" id="groupradio3" autocomplete="off" checked>
+    <label class="btn btn-primary" for="groupradio3">Je vais vers Aeroport / Gare</label>
+
+    <input type="radio" class="btn-check" name="btnradio" id="groupradio4" autocomplete="off">
+    <label class="btn btn-outline-primary" for="groupradio4">Je viens d&apos;un Aeroport / Gare</label>
+    </div>
+    <div class="bg-light p-lg-0 pb-3 pe-0 ps-0 pt-3">
+        <div class="bg-white container  p-lg-5 pb-4 pe-3 ps-3 pt-4 shadow-none" [ngClass]="{'pe-3': screen_all,'ps-3': screen_all,'p-lg-5 ': screen_all,'p-0': !screen_all}">
+        <!-- <form [formGroup]="registerForm" (ngSubmit)="onSubmit()"> -->
+            <div class="gx-0 row">
+                  <div class="input-group mb-3 pe-0 ps-0">
+                      <!-- <div class="border col-12 col-lg d-flex flex-column input-group input_search pb-1 pe-3 ps-3 pt-1">
+                          <div class="col d-flex form-floating g-0 justify-content-between " data-pg-dyn-id="did_107">
+                              <i class="col-auto fa-lg fa-map-marker-alt fas mb-auto mt-auto p-0 text-primary"></i>
+                              <input type="text" class="border-white form-control fs-6 mb-n1 text-truncate" id="floatingInput" placeholder="station/gare">
+                              <label for="floatingInput" class="fs-5 fw-normal mt-n1 ps-4 text-truncate w-100">Addresse</label>
+                          </div>
+                      </div> -->
+                      <!-- <div class="border col-12 col-lg d-flex flex-column input-group input_search pb-1 pe-3 ps-3 pt-1">
+                          <div class="col d-flex form-floating g-0 justify-content-between " data-pg-dyn-id="did_107">
+                              <i class="col-auto fa-lg fa-map-marker-alt fas mb-auto mt-auto p-0 text-primary"></i>
+                              <input type="text" class="border-white form-control fs-6 mb-n1 text-truncate" id="floatingInput" placeholder="station/gare">
+                              <label for="floatingInput" class="fs-5 fw-normal mt-n1 ps-4 text-truncate w-100">Station/Gare</label>
+                          </div>
+                      </div> -->
+                      <app-input-search  #label1 (textChanged)="switch.switched ? pointB = $event : pointA = $event" [label] = " !switch.switched ? 'Adresse' : 'Station / Gare'" class="border col-12 col-lg d-flex flex-column input-group input_search pb-1 pe-3 ps-3 pt-1"></app-input-search>
+                      <app-switch #switch (onSwitched) = " switch_($event)" class="bg-white border-0 border-dark input-group-text me-auto me-lg-0 ms-auto ms-lg-0 pb-3 pt-3"></app-switch>
+                      <app-input-search #label2 (textChanged)="!switch.switched ? pointB = $event : pointA = $event"  [label] = " switch.switched ? 'Adresse' : 'Station / Gare'" class="border col-12 col-lg d-flex flex-column input-group input_search pb-1 pe-3 ps-3 pt-1"></app-input-search>
+
+                  </div>
+                  <div class="pe-0 ps-0">
+                      <div>
+                          <div class="gx-0 row">
+                              <div class="col-auto col-lg input-group input-group-sm mb-auto mt-auto">
+                                  <div class="border col d-flex flex-column input-group input_search pb-1 pe-0 ps-3 pt-1 w-50">
+                                      <div class="col d-flex form-floating g-0 justify-content-between w-100" data-pg-dyn-id="did_107">
+                                          <input #date_ (input) = "change($event)" [(ngModel)]="date"  type="date" class="border-white form-control fs-6 mb-n1" id="floatingInput" placeholder="station/gare">
+                                          <label for="floatingInput" class="fs-5 fw-normal mt-n1 ps-2">Date</label>
+                                      </div>
+                                  </div>
+                                  <a (click)="btnclicked()"  *ngIf="true" class="align-items-center border-bottom border-dark border-end border-top btn btn-lg btn-primary d-flex fw-bold justify-content-center p-3 text-white w-auto" id="button-addon2"  target="_pg_blank">Allez-y</a>
+                              </div>
+
+                              <div *ngIf="screen_all" class="align-items-center col col-lg-4 d-lg-flex d-none">
+                                  <div class="align-items-center d-flex flex-column justify-content-center p-lg-2">
+                                      <img src="assets/img/sandwich.png"/>
+                                      <p class="d-none fs-6 fw-bold pt-2 text-center">Brunch</p>
+                                  </div>
+                                  <div class="align-items-center d-flex flex-column justify-content-center p-2">
+                                      <img src="assets/img/baby-car-seat%20(1).png"/>
+                                      <p class="d-none fs-6 fw-bold pt-2 text-center">Brunch</p>
+                                  </div>
+                                  <div class="align-items-center d-flex flex-column justify-content-center p-2">
+                                      <img src="assets/img/suitcases%20(2).png" width="100%" height="50"/>
+                                      <p class="d-none fs-6 fw-bold pt-2 text-center">Brunch</p>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            <!-- </form> -->
+        </div>
+    </div>
+</section>
+
+<app-toast title="Adresse non valide"></app-toast>

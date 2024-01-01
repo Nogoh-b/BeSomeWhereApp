@@ -1,0 +1,9 @@
+<!-- <div class="preloader">
+    <div class="spinner"></div>
+  </div>
+  <img [src]="src" (load)="onImageLoad()" height="300" class="image"/> -->
+
+  <div [ngStyle]="preloaderStyle">
+    <div class="spinner"></div>
+  </div>
+  <img [src]="imageSrc" (load)="onImageLoad()" [ngStyle]="imageStyle"  [ngClass]="class"/>

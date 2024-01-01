@@ -1,0 +1,5 @@
+<button [disabled] = "disabled || loading" type="submit" [class]="'align-items-center border-2 btn btn-lg text-white btn-primary d-flex fw-bold justify-content-center me-auto ms-auto w-75' +btn_class" [style.height]="bh">
+  <i *ngIf="!loading" [class]="class_"></i>
+  <span *ngIf="loading" role="status" aria-hidden="true" class="spinner-border spinner-border-sm mr-2"></span>
+   {{text}}
+</button>

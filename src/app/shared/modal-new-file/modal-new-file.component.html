@@ -1,0 +1,41 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="fileForm">
+
+  <div class="fade modal" id="newfileModal" tabindex="-1" role="dialog" aria-hidden="true" data-bs-keyboard="false"   data-pg-collapsed>
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content" style="background-color: rgba(255, 255, 255, 0);">
+            <div class="align-items-center d-flex flex-column">
+                <div class="bg-white border-5 border-end border-primary border-top d-flex justify-content-center mb-n5" style="width: 85px; height: 85px; border-radius: 50%; z-index: 1;">
+                    <img src="assets/img/icon/BESOMEWHERE.png" height="65" class="image-fit mb-3" width="65" style="z-index: 2;"/>
+                </div>
+                <div class="bg-white border border-3 border-primary">
+                    <div class="border-0 modal-header pb-2">
+                        <h4 class="me-auto modal-title ms-auto pt-4" style="z-index: 3;">{{title}}</h4>
+                    </div>
+                    <hr class="bg-primary border-1 border-primary border-top mb-0 me-3 ms-3  pb-0">
+                    <div class="border-0 modal-body pb-0 pe-4 ps-4">
+                        <div class="d-flex flex-column mb-3">
+                            <label for="formInput104">Que voulez-vous ajouter ?</label>
+                            <input formControlName = "name"   type="text" placeholder="ex: passport" class="border"/>
+                        </div>
+                        <div class="d-flex flex-column mb-3">
+                            <label for="formInput104"> Quantité à mettre dans ma valise </label>
+                            <input formControlName = "total"   type="number" value="1" class="border"/>
+                        </div>
+                        <div class="d-flex flex-column mb-3">
+                            <label for="formInput104">Quantité déjà dans ma valise</label>
+                            <input formControlName = "qty"  type="number" value="0" class="border"/>
+                        </div>
+                    </div>
+                    <!-- <p>Form value: {{ fileForm.value | json }}</p> -->
+                    <!-- <p>Form status: {{ fileForm.status | json }}</p> -->
+                    <div class="border-0 d-flex justify-content-center modal-footer">
+                        <button [disabled]="fileForm.status == 'INVALID' " type="submit" class="btn btn-primary text-light" data-bs-dismiss="modal">Enregistrer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-toast></app-toast>
+  </div>
+
+</form>

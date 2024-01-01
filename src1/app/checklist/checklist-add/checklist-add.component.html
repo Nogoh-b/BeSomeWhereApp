@@ -1,0 +1,231 @@
+<div  *ngIf="!for_home && ((id && checklist) || !id)" class="container-fluid container_add pe-0 ps-0" style="height: 92vh;
+
+/* padding-top: 99px !important */
+/* padding-left: 250px !important */
+/* padding-right: 250px !important */" data-pg-collapsed>
+    <section class="h-100  pe-xl-5 ps-xl-5">
+        <div class="gx-0 h-100 pe-xl-5 ps-xl-5 row">
+            <div class="col-lg-3 pe-2 pe-xl-4 ps-2">
+                <div class="card card_pub d-lg-block d-none h-auto mb-3 mt-4 p-3 shadow-none w-100" data-pg-collapsed>
+                    <div class="d-flex justify-content-between">
+                    </div>
+                    <div class="h-auto position-sticky  top-0">
+                        <app-home-ads></app-home-ads>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-6 col-xl-6 pe-xl-0 ps-xl-0 pt-4" data-pg-collapsed>
+              <form (ngSubmit)="onSubmit()" [formGroup]="checkListForm">
+
+                <div class="container-fluid pb-0 pe-0 pe-lg-5 pe-xl-0 ps-0 ps-lg-5 ps-xl-0">
+                    <div class="bg-white  p-3">
+                        <div class=" pe-0 ps-0">
+                            <div class="">
+                                <p class="border-2 border-bottom mb-4 pb-3 pt-2 text-muted" style="text-align: justify;">Pour ne rien oublier dans les valises et vous assurer un départ et des vacances 100% serein.  Avec notre check-list: Quoi faire , quoi apporter, qu&apos;elle activité et des choses indispensable, fini les prises de tête, les oublis et les crises de nerfs qui vont avec.</p>
+                                <div class=" pe-2">
+                                    <div class="form-floating mb-3" data-pg-dyn-id="did_107">
+                                        <input type="email" formControlName="title" [ngClass]="{ 'is-invalid': submitted && checkListForm.controls['title'].errors }"   class="form-control" id="title" placeholder="nom">
+                                        <label for="title">Nom de la Checklist</label>
+                                    </div>
+                                </div>
+
+                                <div *ngFor="let dest of destinaions let i =index" class="d-flex gx-0 row row-cols-2 row-cols-xl-2">
+                                  <!-- <p class="col-12 col-xl-12 fw-bold h5 pb-3 pt-2 text-black-50">Destination {{i+1}}</p> -->
+
+                                    <div class="col-12 col-xl-12  gx-0 pe-0 ps-0 pt-3 pb-3 row">
+                                      <h4 class="col fs-5 fw-bolder lead mb-0 pe-0 ps-0 text-black-50 text-uppercase">Destination {{i+1}}</h4>
+                                      <i *ngIf="i > 0" (click)="removeDestination(i)" class="col-auto fa-trash fa-lg fas m-auto pe-4 text-danger text-muted pointer"></i>
+                                    </div>
+                                    <div class=" pe-2">
+                                        <div class="form-floating mb-3 " data-pg-dyn-id="did_107">
+                                            <input type="date" formControlName="begindate{{i}}" [ngClass]="{ 'is-invalid':valids_array[i] && !valids_array[i].bd || (submitted && checkListForm.controls['begindate' + i].errors) }"  class="form-control" id="begindate{{i}}" placeholder="nom">
+                                            <label for="begindate{{i}}">Date de départ</label>
+                                        </div>
+                                    </div>
+                                    <div class=" pe-2">
+                                        <div class="form-floating mb-3 " data-pg-dyn-id="did_107">
+                                            <input type="date" class="form-control" formControlName="enddate{{i}}" [ngClass]="{ 'is-invalid': valids_array[i] && !valids_array[i].bd || (submitted && checkListForm.controls['enddate' + i].errors) }"  id="enddate{{i}}" placeholder="nom">
+                                            <label for="enddate{{i}}">Date de retour</label>
+                                        </div>
+                                    </div>
+                                    <div class=" pe-2">
+                                      <div class="form-floating mb-3" data-pg-dyn-id="did_107">
+                                          <input list="countrydatalistOptions"   (change)="countrySelected($event)" type="email" class="form-control  text-capitalize" [ngClass]="{ 'is-invalid':  (submitted && checkListForm.controls['country' + i].errors) }" formControlName="country{{i}}" id="country{{i}}" placeholder="nom" value>
+                                          <label for="country{{i}}">Pays</label>
+                                          <datalist id="countrydatalistOptions">
+                                            <option  *ngFor="let country of countries" [value]="country.translations.fr ? country.translations.fr : country.name">
+                                        </datalist>
+                                      </div>
+                                  </div>
+                                  <div class=" pe-2">
+                                      <div class="form-floating mb-3" data-pg-dyn-id="did_107">
+                                          <input list="citydatalistOptions" type="email" [ngClass]="{ 'is-invalid': submitted && checkListForm.controls['city' + i].errors }" formControlName="city{{i}}" class="form-control text-capitalize" id="city{{i}}" placeholder="nom">
+                                          <label for="city{{i}}">Ville</label>
+                                          <datalist id="citydatalistOptions">
+                                            <option class="text-l" *ngFor="let city of getCities(currentCountry)" [value]="city.name">
+                                        </datalist>
+                                      </div>
+                                  </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between  pb-4">
+                                <label (click)="addDestination()" class="pointer form-check-label ms-auto pe-2 text-danger text-decoration-underline" for="">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-plus-square-fill pe-2" viewBox="0 0 16 16">
+                                        <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
+                                    </svg>                                                                                Ajouter une destination
+                                </label>
+                            </div>
+
+                            <!-- mode de transport -->
+                            <div class=" pb-4">
+                                <p class="border-2 border-bottom border-top h2 pb-3 ps-2 pt-3">Mode de transport</p>
+                                <div class="d-flex gx-0 pe-2 ps-2 row row-cols-4 row-cols-xl-4">
+
+                                    <div (mouseleave) = "onMouseleave(input_trans)" (mouseenter) = "onMousenter(input_trans)"  *ngFor="let transport of model_trans let i = index" class="align-items-center d-flex flex-column justify-content-center pb-3 pt-3" data-pg-collapsed>
+                                      <input #input_trans  type="checkbox" value="o" class="btn-check" [formControlName] = "'trans'+ i" [id]="'trans'+ i" autocomplete="off">
+                                      <!-- <label #label_trans class="align-items-center btn btn-outline-primary d-flex justify-content-center" [for]="'trans'+ i" style="width: 60px; height: 60px; border-radius: 50%;"> -->
+                                      <label #label_trans (mouseleave) = "this.checkListForm.value['trans'+i] !== true  ? img_trans.src = 'assets/img/transport/'+transport.src+'.png' : img_trans.src = 'assets/img/transport/'+transport.src+'_h.png' " (mouseenter) = "img_trans.src = 'assets/img/transport/'+transport.src+'_h.png'" class="align-items-center btn btn-outline-primary d-flex justify-content-center" [for]="'trans'+ i" style="width: 60px; height: 60px; border-radius: 50%;">
+                                          <img #img_trans [src]=" this.checkListForm.value['trans'+i] !== true ? 'assets/img/transport/'+transport.src+'.png' : 'assets/img/transport/'+transport.src+'_h.png'" width="25" height="25"/>
+                                      </label>
+                                      <p #pName   class="pt-1">{{transport.name}}</p>
+                                  </div>
+
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <div class="form-check mb-3 ms-auto">
+                                    <input type="checkbox" formControlName = "with_baby" class="form-check-input" id="with_baby">
+                                    <label class="form-check-label" for="with_baby">presence d&apos;un bébé&nbsp; &lt;3 ans</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container d-flex flex-row-reverse pb-3 pe-4 ps-4 pt-4">
+                          <app-button [loading]="loading" class_="" btn_class="w-auto" [text]="checklist ? 'Mettre a jour' : 'Créer'"></app-button>
+                            <!-- <button type="submit" class="align-items-center btn btn-lg btn-outline-primary d-flex flex-row-reverse fs-5 fw-bold justify-content-center pe-5 ps-5 w-auto" style="height: 55px;">
+                                <i class="fa-arrow-right fas fw-bolder ps-2"></i>Créer
+                            </button> -->
+                        </div>
+                    </div>
+                </div>
+              </form>
+              <!-- <p>Form value: {{ checkListForm.value | json }}</p> -->
+              <!-- <p>Form status: {{ checkListForm.status | json }}</p> -->
+            </div>
+
+            <div class="col-lg-3  pe-2 ps-2 ps-xl-4">
+                <div class="card card_pub d-lg-block d-none h-auto mb-3 mt-4 p-3 shadow-none w-100" data-pg-collapsed>
+                  <div class="h-auto position-sticky  top-0">
+                    <app-home-ads></app-home-ads>
+                  </div>
+
+                </div>
+            </div>
+            </div>
+    </section>
+</div>
+
+
+<form *ngIf="for_home" (ngSubmit)="onSubmit()" [formGroup]="checkListForm">
+  <h3 class="fs-4 fw-bold mb-2 ps-4 ps-lg-0  pt-lg-4 text-uppercase">Checklist pour ne rien oublier </h3>
+
+  <div class="container-fluid pb-0 pe-0 pe-lg-5 pe-xl-0 ps-0 ps-lg-5 ps-xl-0">
+      <div class="bg-white  p-3">
+          <div class=" pe-0 ps-0">
+              <div class="">
+                  <!-- <p class="border-2 border-bottom mb-4 pb-3 pt-2 text-muted" style="text-align: justify;">Pour ne rien oublier dans les valises et vous assurer un départ et des vacances 100% serein.  Avec notre check-list: Quoi faire , quoi apporter, qu&apos;elle activité et des choses indispensable, fini les prises de tête, les oublis et les crises de nerfs qui vont avec.</p> -->
+                  <div class=" pe-2">
+                      <div class="form-floating mb-3" data-pg-dyn-id="did_107">
+                          <input type="email" formControlName="title" [ngClass]="{ 'is-invalid': submitted && checkListForm.controls['title'].errors }"   class="form-control" id="title" placeholder="nom">
+                          <label for="title">Nom de la Checklist</label>
+                      </div>
+                  </div>
+
+                  <div *ngFor="let dest of destinaions let i =index" class="d-flex gx-0 row row-cols-2 row-cols-xl-2">
+                    <!-- <p class="col-12 col-xl-12 fw-bold h5 pb-3 pt-2 text-black-50">Destination {{i+1}}</p> -->
+
+                      <div class="col-12 col-xl-12  gx-0 pe-0 ps-0 pt-3 pb-3 row">
+                        <h4 class="col fs-5 fw-bolder lead mb-0 pe-0 ps-0 text-black-50 text-uppercase">Destination {{i+1}}</h4>
+                        <i *ngIf="i > 0" (click)="removeDestination(i)" class="col-auto fa-trash fa-lg fas m-auto pe-4 text-danger text-muted pointer"></i>
+                      </div>
+                      <div class=" pe-2">
+                          <div class="form-floating mb-3 " data-pg-dyn-id="did_107">
+                              <input type="date" formControlName="begindate{{i}}" [ngClass]="{ 'is-invalid':!valids_array[i].bd || (submitted && checkListForm.controls['begindate' + i].errors) }"  class="form-control" id="begindate{{i}}" placeholder="nom">
+                              <label for="begindate{{i}}">Date de départ</label>
+                          </div>
+                      </div>
+                      <div class=" pe-2">
+                          <div class="form-floating mb-3 " data-pg-dyn-id="did_107">
+                              <input  type="date" class="form-control" formControlName="enddate{{i}}" [ngClass]="{ 'is-invalid': !valids_array[i].bd || (submitted && checkListForm.controls['enddate' + i].errors) }"  id="enddate{{i}}" placeholder="nom">
+                              <label for="enddate{{i}}">Date de retour</label>
+
+                          </div>
+                      </div>
+                      <div class=" pe-2">
+                          <div class="form-floating mb-3" data-pg-dyn-id="did_107">
+                              <input list="countrydatalistOptions"   (change)="countrySelected($event)" type="email" class="form-control  text-capitalize" [ngClass]="{ 'is-invalid':  (submitted && checkListForm.controls['country' + i].errors) }" formControlName="country{{i}}" id="country{{i}}" placeholder="nom" value>
+                              <label for="country{{i}}">Pays</label>
+                              <datalist id="countrydatalistOptions">
+                                <option  *ngFor="let country of countries" [value]="country.translations.fr ? country.translations.fr : country.name">
+                            </datalist>
+                          </div>
+                      </div>
+                      <div class=" pe-2">
+                          <div class="form-floating mb-3" data-pg-dyn-id="did_107">
+                              <input list="citydatalistOptions" type="email" [ngClass]="{ 'is-invalid': submitted && checkListForm.controls['city' + i].errors }" formControlName="city{{i}}" class="form-control text-capitalize" id="city{{i}}" placeholder="nom">
+                              <label for="city{{i}}">Ville</label>
+                              <datalist id="citydatalistOptions">
+                                <option class="text-l" *ngFor="let city of getCities(currentCountry)" [value]="city.name">
+                            </datalist>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="d-flex justify-content-between  pb-4">
+                  <label (click)="addDestination()" class="pointer form-check-label ms-auto pe-2 text-danger text-decoration-underline" for="">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-plus-square-fill pe-2" viewBox="0 0 16 16">
+                          <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
+                      </svg>                                                                                Ajouter une destination
+                  </label>
+              </div>
+
+              <!-- mode de transport -->
+              <div class=" pb-4">
+                  <p class="border-2 border-bottom border-top h2 pb-3 ps-2 pt-3">Mode de transport</p>
+                  <div class="d-flex gx-0 pe-2 ps-2 row row-cols-4 row-cols-xl-4">
+
+                      <div (mouseleave) = "onMouseleave(input_trans)" (mouseenter) = "onMousenter(input_trans)"  *ngFor="let transport of model_trans let i = index" class="align-items-center d-flex flex-column justify-content-center pb-3 pt-3" data-pg-collapsed>
+                        <input #input_trans  type="checkbox" value="o" class="btn-check" [formControlName] = "'trans'+ i" [id]="'trans'+ i" autocomplete="off">
+                        <!-- <label #label_trans class="align-items-center btn btn-outline-primary d-flex justify-content-center" [for]="'trans'+ i" style="width: 60px; height: 60px; border-radius: 50%;"> -->
+                        <label #label_trans (mouseleave) = "this.checkListForm.value['trans'+i] !== true  ? img_trans.src = 'assets/img/transport/'+transport.src+'.png' : img_trans.src = 'assets/img/transport/'+transport.src+'_h.png' " (mouseenter) = "img_trans.src = 'assets/img/transport/'+transport.src+'_h.png'" class="align-items-center btn btn-outline-primary d-flex justify-content-center" [for]="'trans'+ i" style="width: 60px; height: 60px; border-radius: 50%;">
+                            <img #img_trans [src]=" this.checkListForm.value['trans'+i] !== true ? 'assets/img/transport/'+transport.src+'.png' : 'assets/img/transport/'+transport.src+'_h.png'" width="25" height="25"/>
+                        </label>
+                        <p #pName   class="pt-1">{{transport.name}}</p>
+                    </div>
+
+                  </div>
+              </div>
+              <div class="d-flex justify-content-between">
+                  <div class="form-check mb-3 ms-auto">
+                      <input type="checkbox" formControlName = "with_baby" class="form-check-input" id="with_baby">
+                      <label class="form-check-label" for="with_baby">presence d&apos;un bébé&nbsp; &lt;3 ans</label>
+                  </div>
+              </div>
+          </div>
+
+          <div class="container d-flex flex-row-reverse pb-3 pe-4 ps-4 pt-4">
+            <app-button [loading]="loading" class_="" btn_class="w-auto" [text]="checklist ? 'Mettre a jour' : 'Créer'"></app-button>
+              <!-- <button type="submit" class="align-items-center btn btn-lg btn-outline-primary d-flex flex-row-reverse fs-5 fw-bold justify-content-center pe-5 ps-5 w-auto" style="height: 55px;">
+                  <i class="fa-arrow-right fas fw-bolder ps-2"></i>Créer
+              </button> -->
+          </div>
+      </div>
+  </div>
+</form>
+
+<app-toast title="Trajet non trouvé"></app-toast>
+
+<app-preloader-checklist-create *ngIf="id && !checklist"></app-preloader-checklist-create>

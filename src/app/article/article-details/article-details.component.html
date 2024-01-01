@@ -1,0 +1,164 @@
+<div *ngIf="article"  class="container-fluid container_home pe-0 pe-lg-5 ps-0 ps-lg-5 pt-0 pt-lg-5">
+  <!-- <div *ngIf="checklists && reservations" class="container-fluid container_home pe-0 pe-lg-5 ps-0 ps-lg-5 pt-0 pt-lg-5"> -->
+    <section>
+        <div class="gx-0 row">
+            <div class="col-lg-3 d-lg-none d-none d-xl-block pe-0 ps-0 pt-0">
+              <div class="h-auto position-sticky  top-0">
+                <app-home-ads ></app-home-ads>
+              </div>
+            </div>
+
+            <div class="col-lg-9 col-xl-6 column_center pe-0 pe-lg-5 pe-xl-3 ps-0 ps-lg-5 ps-xl-3 pb-4">
+              <div style="min-height: 100vh;
+              background: white;
+              padding: 15px;">
+
+
+              <div data-pg-collapsed>
+                <app-preloader-img [src]="article._embedded['wp:featuredmedia'] ?  article._embedded['wp:featuredmedia'][0] && article._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url : ''" width_="100%" height_="350px" objectFit="cover"></app-preloader-img>
+                <!-- <img [src]="article._embedded['wp:featuredmedia'] ?  article._embedded['wp:featuredmedia'][0] && article._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url : ''" width="100%" height="350"> -->
+                <h2 class="fw-bold text-center text-primary pt-3 pb-0" [innerHTML]="afficherTexteAvecEntitiesHTML(article.title.rendered)"></h2>
+              </div>
+              <div class="d-flex pb-2 pt-3 d-flex pb-2 pt-0 align-items-center justify-content-center" data-pg-collapsed>
+              <p class="align-items-center d-flex justify-content-start text-muted text-start fs-6"><i class="fa-lg fa-user fas pe-2"></i>{{article._embedded['wp:term'] ?  article._embedded['wp:term'][0] && article._embedded['wp:term'][0][0].name : 'Pas de ctégorie'}}</p>
+              <p class="align-items-center d-flex justify-content-start ps-4 text-muted text-start fs-6"><i class="fa-business-time fa-lg fas pe-2"></i>{{article.modified | date}}</p>
+              </div>
+              <p [ngClass]="{mask: (!have_to_suscribe || !user) && article.status === 'private'}" [innerHtml]="article.content.rendered"></p>
+
+
+              <div *ngIf="(!have_to_suscribe || !user) && article.status === 'private' " class="d-flex fixed-top flex-column-reverse position-relative" style="z-index: 0; position: absolute; height: 350px; top: -100px; background-color: rgba(255, 255, 255, 0.88);">
+                <div style="height: 80%;" class="bg-primary d-inline-flex flex-column justify-content-around p-5">
+                    <p href="" class="text-center text-white fs-5">
+                      {{!payment || payment.created_at  != payment.updated_at ? 'Pour pouvoir continuer à lire les articles il faudrait vous abonner !':
+                      getPreavisText()}}
+                    </p>
+                    <div *ngIf="!payment || payment.created_at  != payment.updated_at" class="text-center">
+                        <button type="button" (click)="clickToSuscribe()" class="btn border-2 fw-bolder btn-lg btn-outline-light btn-primary">Je m'abonnes</button>
+                    </div>
+                </div>
+            </div>
+            <button type="button  " id="btnPricing"  data-bs-toggle="modal" data-bs-target="#pricingModal" class="hide_btn btn border-2 fw-bolder btn-lg btn-outline-light btn-primary"></button>
+            <button type="button  " id="btnAuth"  data-bs-toggle="modal" data-bs-target="#authModal" class="hide_btn btn border-2 fw-bolder btn-lg btn-outline-light btn-primary"></button>
+
+
+              <section class=" pb-0 pt-5 text-secondary" data-pg-collapsed>
+                    <h2 class="ps-0 text-start">Articles simillaires</h2>
+                    <div class="container-fluid">
+
+                    <section class=" p-0 pt-0 w-100 ">
+
+                        <div class="container-fluid">
+                            <div class="justify-content-center gx-3 row  row-cols-1 row-cols-lg-2 row-cols-md-2 row-cols-sm-2 row-cols-xxl-2">
+                                <div *ngFor="let article_s of articles" class="pb-3 pt-3">
+                                    <div  *ngIf="article.status != 'publish' && !have_to_suscribe " class="bg-white ">
+                                      <div class="article_eti">Payant</div>
+                                      <a (click)="reload()" [routerLink]="['/article', article_s.id]" class="d-block">
+                                        <app-preloader-img [src]="article_s._embedded['wp:featuredmedia'] ?  article_s._embedded['wp:featuredmedia'][0] && article_s._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url : ''" width_="700px" height_="480px"></app-preloader-img>
+                                        <!-- <img style="height:200px" [src]="article_s._embedded['wp:featuredmedia'] ?  article_s._embedded['wp:featuredmedia'][0] && article_s._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url : ''" width="700" height="480"> -->
+                                      </a>
+                                        <div class="p-3">
+                                            <a (click)="reload()" [routerLink]="['/article', article_s.id]" class="text-dark text-decoration-none"><h3 class="fw-bold h5 mb-1">{{article_s.title.rendered}}</h3></a>
+                                                <h4 class="fw-bold h6 mb-1 text-secondary">{{article_s._embedded['wp:term'] ?  article_s._embedded['wp:term'][0] && article_s._embedded['wp:term'][0][0].name : 'Pas de ctégorie'}}</h4>
+                                                <p class="mb-0 text-dark">{{article_s.modified | date}}</p>
+          <!--                                  <div class="align-items-center d-flex justify-content-between small">
+                                                <a href="#" class="align-items-center d-flex text-dark text-decoration-none"><img src="https://images.unsplash.com/photo-1537151625747-768eb6cf92b2?ixid=MXwyMDkyMnwwfDF8c2VhcmNofDE5fHxkb2d8ZW58MHx8fA&ixlib=rb-1.2.1q=85&fm=jpg&crop=faces&cs=srgb&w=400&h=400&fit=crop" class="me-2 rounded-circle" width="48" height="48" alt="..."><div>
+                                                    </div></a>
+                                                <span>6 min read</span>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="articles && articles.length % 2 === 1"></div>
+
+                            </div>
+                        </div>
+                    </section>
+                    </div>
+              </section>
+
+
+              <owl-carousel-o [options]="customOptions">
+                <ng-template *ngFor="let article of articles" class="bg-primary" carouselSlide>
+                  <div [routerLink]="['/article', article.id]" class="pe-2 ps-2 pointer">
+                    <div class="card">
+                        <div class="image-wrapper">
+                          <app-preloader-img [src]="article._embedded['wp:featuredmedia'] ?  article._embedded['wp:featuredmedia'][0] && article._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url : ''" width_="100%" height_="100%"></app-preloader-img>
+                          <!-- <img [src]="article._embedded['wp:featuredmedia'] ?  article._embedded['wp:featuredmedia'][0] && article._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url : ''" class="h-100 w-100"> -->
+                        </div>
+                        <div class="text-box-wrapper">
+                            <div class="text-box">
+                                <h4>{{article.title.rendered | shorten: 20 : '...'}}</h4>
+                            </div>
+                        </div>
+                        <div class="button-wrapper">
+                            <a class="button " href="" target="">{{article.date | date}}</a>
+                        </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </owl-carousel-o>
+
+              <div *ngIf="!hasCommented()" class="">
+                <form id="algin-form">
+                    <div class="form-group">
+                        <h4>Laissez un commentaire</h4>
+                        <label for="message" class="pb-2">Message</label>
+                        <textarea [(ngModel)]="comment" #textArea name="msg" id=""msg cols="30" rows="5" class="form-control p-4 text-white" style="background-color: black;"></textarea>
+                    </div>
+
+                    <div class="form-group pt-2">
+                        <!-- <button type="button" id="post" class="btn p-2">Poster votre commentaire</button> -->
+                        <app-button [disabled] ="comment.length=== 0 " [ngClass]="{disabled: comment.length === 0}" (click)="addComment(textArea.value)" [loading]="loading" class_="" btn_class="w-auto p-2" [text]="'Poster votre commentaire'"></app-button>
+                    </div>
+                </form>
+            </div>
+
+              <section *ngIf="comments.length > 0" class=" pb-0 pt-5 text-secondary" data-pg-collapsed>
+                    <h2 class="ps-0 text-start">Commentaires</h2>
+                    <div class="container-fluid">
+
+                    <section class=" p-0 pt-0 w-100 ">
+
+                        <div *ngFor="let comment of comments" class="container-fluid">
+                          <div class="comment mt-4 text-justify">
+                            <!-- <app-preloader-img [src]="getPictureUserOnComment(comment.user_id)" [class]="['rounded-circle']" width_="40px" height_="40px"></app-preloader-img> -->
+                            <!-- <img [src]="getPictureUserOnComment(comment.user_id)" alt="" class="rounded-circle" width="40" height="40"> -->
+                            <h4 class="ps-0">{{comment.author_name}}</h4>
+                            <!-- <h4 class="ps-3">{{getNameUserOnComment(comment.user_id)}}</h4> -->
+                            <span class="fs-5"> - {{comment.date_gmt | date}}</span>
+                            <br>
+                            <p [innerHTML] = "comment.content.rendered" class="pt-2"></p>
+                        </div>
+                        </div>
+                    </section>
+                    </div>
+              </section>
+
+              </div>
+
+            </div>
+            <div class="col-lg-3 pe-2 pe-xl-4 ps-2">
+              <div class="h-auto position-sticky  top-0">
+                <app-home-ads></app-home-ads>
+              </div>
+            </div>
+            </div>
+    </section>
+  </div>
+
+  <!-- <app-preloader-home *ngIf="!article"></app-preloader-home> -->
+  <div *ngIf="!article" class="bg-white" style="height: 95vh;">
+    <app-loading-page class="h-100"></app-loading-page>
+  </div>
+  <!-- <circle-progress
+  [percent]="85"
+  [radius]="100"
+  [outerStrokeWidth]="16"
+  [innerStrokeWidth]="8"
+  [outerStrokeColor]="'#78C000'"
+  [innerStrokeColor]="'#C7E596'"
+  [animation]="true"
+  [animationDuration]="300"
+  ></circle-progress> -->
+
+  <app-pricing></app-pricing>

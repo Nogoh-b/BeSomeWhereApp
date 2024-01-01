@@ -1,0 +1,102 @@
+<div class="bg-white p-3">
+
+
+    <div class="bg-white d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">Points</h1>
+      <div class="btn-toolbar mb-2 mb-md-0">
+        <app-button (click)="del_modal.datas = getAllChecked(selected_data) " *ngIf="getAllChecked(selected_data).length > 0" class_="fas fa-trash" btn_class = "btn btn-outline-primary  btn-light" text="Suprimer" data-bs-toggle="modal" data-bs-target="#deleteModal"> </app-button>
+        <!-- <app-button (click)="del_modal.datas = getAllChecked(selected_data) " *ngIf="getAllChecked(selected_data).length > 0" class_="fas fa-trash" btn_class = "btn btn-outline-primary  btn-light" text="Suprimer" data-bs-toggle="modal" data-bs-target="#deleteModal"> </app-button> -->
+        <app-button class_="fas fa-plus" btn_class = "btn btn-outline-primary  btn-light" text="Ajouter" data-bs-toggle="modal" data-bs-target="#modalAddPoint"> </app-button>
+          <!-- <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalAddPoint" >Ajouter</button> -->
+
+      </div>
+    </div>
+    <div class="table-responsive">
+    </div>
+
+    <div class="container mt-3 px-2">
+      <div class="mb-2 d-flex justify-content-between align-items-center">
+          <div class="pl-2 position-relative d-flex align-items-center">
+            <input #search_input (change)="change()" [(ngModel)]="search_option" type="search"  class="form-control w-auto" placeholder="Recherche...">
+            <span class=" ps-3 w-auto"><b>{{points && points.length }}</b> points</span>
+          </div>
+          <div class="px-2 d-flex align-items-center">
+              <span class="pe-3">Filter par :  </span>
+              <select  style="min-width: 100px;"  style="min-width: 100px;"  #select value="id"  [(ngModel)]="sort_option" class=" pe-3 form-select w-auto h-100" id="inputGroupSelect01">
+                <option value="id" selected>Identifiant</option>
+                <option value="country">Pays</option>
+                <option value="city">Ville</option>
+                <option value="address">Adresse</option>
+                <option value="update_at">Derniere Modification</option>
+                <option value="type">Type</option>
+            </select>
+          </div>
+      </div>
+
+
+      <div class="table-responsive">
+          <table class="table table-hover table-responsive table-borderless">
+              <thead>
+                  <tr class="bg-light">
+                      <th scope="col" width="5%">
+                          <input   (change)="selectOrUnselectAll(input_.checked, points)" [checked]="isAllchecked(selected_data)" #input_ class="form-check-input" type="checkbox">
+                      </th>
+                      <th scope="col" width="5%">#</th>
+                      <th scope="col" width="20%">Date de creation</th>
+                      <!-- <th>Image</th> -->
+                      <th>Pays</th>
+                      <th>Ville</th>
+                      <th class="text-end">Adresse</th>
+                      <th class="text-end">Type</th>
+                      <th class="text-end">Action</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr  routerLinkActive="router-link-active"  *ngFor="let point of getPoints() | orderBy:  select.value | filterBy: ['country', 'city','address']: search_input.value  let i = index" class="">
+                      <th scope="row">
+                          <input #inp (change)="selectOrUnselect(inp.checked, i)"  [checked]="selected_data[i].selected"  class="form-check-input" type="checkbox">
+                      </th>
+                      <td [routerLink]="['point1', point.id]">{{point.id}}</td>
+                      <td [routerLink]="['point1', point.id]">{{point.updated_at |date}}</td>
+                      <!-- <td [routerLink]="['/point1', point.id]">
+                          <img src="https://i.imgur.com/VKOeFyS.png" width="25">
+                      </td> -->
+                      <td [routerLink]="['point1', point.id]"><i class="fa fa-check-circle-o green"></i><span class="ms-1">{{point.country}}</span></td>
+                      <td [routerLink]="['point1', point.id]"><span class="ms-1">{{point.city}}</span></td>
+                      <td [routerLink]="['point1', point.id]" class="fw-bold text-end"><span class="fw-normal">{{point.address}}</span> </td>
+                      <td [routerLink]="['point1', point.id]" class="fw-bold text-end"><span class="fw-normal">{{point.is_station ? 'Station' : 'Autre'}}</span> </td>
+                      <td [routerLink]="['point1', point.id]" class="text-end"><span class="fw-normal">
+                        <a [routerLink]="['point', point.id]" class="pointer pe-2">Editer</a>
+                        <a  [routerLink]="['horraires_stations', point.id]" class="pointer ps-2" *ngIf="point.is_station">Gérer</a>
+                      </span> </td>
+                  </tr>
+S
+              </tbody>
+          </table>
+          <div class="d-flex">
+              <ul class="ms-auto pagination">
+                  <li (click)="navigateToPage(currentPage === 0 ? 0 : currentPage - 1)" class="page-item"  [ngClass]="{'disable': currentPage === 0, 'pointer': currentPage > 0}">
+                      <a class="page-link" >Précedent</a>
+                  </li>
+                  <li (click)="navigateToPage(i)" *ngFor="let point of  pagination let i = index" class="page-item" [ngClass]="{'active': currentPage === i, 'pointer': currentPage !== i}">
+                      <a  class="page-link " >{{i+1}}</a>
+                  </li>
+
+                  <li (click)="navigateToPage(currentPage === pagination && pagination.length - 1 ? currentPage : currentPage + 1)" class="page-item" [ngClass]="{'disable': currentPage === pagination && pagination.length - 1, 'pointer': !(currentPage < pagination && pagination.length - 1)}">
+                      <a class="page-link" >Suivant</a>
+                  </li>
+              </ul>
+          </div>
+      </div>
+    </div>
+</div>
+
+
+
+
+
+<app-point-create ></app-point-create>
+
+<app-modal-delete-admin #del_modal [dataType]="datatype" (onDeleted)="toast_c.open('Be Somewhere', 'Point(s) suprimé (s)')"></app-modal-delete-admin>
+<app-toast #toast_c></app-toast>
+<app-preloader></app-preloader>

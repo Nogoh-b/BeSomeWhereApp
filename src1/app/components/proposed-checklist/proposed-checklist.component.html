@@ -1,0 +1,49 @@
+<div class="align-items-center border-bottom border-dark d-flex justify-content-between pb-3 pe-2 ps-2 pt-2 text-warning " data-pg-collapsed>
+  <p class="fs-4 fw-bolder"> Checklist Proposée </p>
+  <i class="fa-2x fa-angle-down fas"></i>
+</div>
+<div id="proposed-checklist">
+
+  <div class="accordion" id="panels1">
+    <div *ngFor="let checlist of proposedChecklist let i  = index" class="accordion-item border-0">
+        <div>
+            <button [disabled]="!file" class="accordion-button bg-white border-2 border-danger border-start pb-1" type="button" data-bs-toggle="collapse"  [attr.data-bs-target]="'#bodyitem'+i" aria-expanded="true" aria-controls="collapseOne">
+                <div class="div_img_accordeon p-2">
+                    <img [src]="SERVER_FOR_UPLOAD + checlist.src" width="30" height="30">
+                    <!-- <img [src]="'assets/img/checklist/icons8-'+checlist.src +'.png'" width="30" height="30"> -->
+                </div>
+                <div class="ps-2 w-100">
+                    <div class="align-items-center d-flex justify-content-between ">
+                        <p class="fs-5 fw-bold text-dark">{{checlist.name}}</p>
+                    </div>
+                </div>
+            </button>
+        </div>
+        <div id="bodyitem{{i}}" class="accordion-collapse border-white collapse" aria-labelledby="collapse1" data-bs-parent="#panels1">
+            <div class="accordion-body border-white pe-2 ps-2 pt-0">
+                <div *ngFor="let item of getItems(checlist.id)" class="border-bottom gx-0 pb-3 pe-2 ps-2 pt-3 row row_item">
+                    <div class="align-items-center col-auto d-flex pe-0">
+                        <button [disabled]="spinner.value <= 0 || !file " (click)="addItem(item)" type="button" class="btn btn-light btn-outline-primary  border-2 border-primary">Transférer vers ma valise </button>
+                    </div>
+                    <div class="align-items-center col d-flex ps-2">
+                        <p class="fw-bold  pe-0 text-start">{{item.name}}</p>
+                    </div>
+                    <div class="align-items-lg-center col-12 col-lg-auto d-flex d-lg-flex justify-content-end ps-0">
+                      <app-spinner-bouton (value_changed)="item.total = $event" #spinner [max_value]="100" [label]="'Quantité'" ></app-spinner-bouton>
+                        <!-- <form id="number-spinner-horizontal" class="col-auto ps-3 t-neutral">
+                            <fieldset class="l-contain--medium me-n2 spinner spinner--horizontal">
+                                <button class="align-items-center bg-dark border-0 d-flex fw-bolder js-spinner-horizontal-subtract justify-content-center spinner__button spinner__button--left text-light" data-type="subtract" title="Subtract 1" aria-controls="spinner-input">- </button>
+                                <input type="number" class="align-items-center d-flex js-spinner-input-horizontal justify-content-center spinner__input" id="spinner-input" value="0" min="0" max="20" step="1" pattern="[0-9]*" role="alert" aria-live="assertlive" style="width: 25px;"/>
+                                <button data-type="add" class="align-items-center bg-dark border-0 d-flex fw-bolder js-spinner-horizontal-add justify-content-center spinner__button spinner__button--right text-light" title="Add 1" aria-controls="spinner-input">+ </button>
+                            </fieldset>
+                        </form> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </div>
+</div>
+
+

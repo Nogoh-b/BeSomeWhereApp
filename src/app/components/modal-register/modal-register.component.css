@@ -1,0 +1,16 @@
+.btn-close{
+  padding-left: 50px;
+}
+
+div#registeModal{
+  overflow: auto;
+}
+
+
+.error-p{
+  color: red;
+  font-size: small;
+  text-align: center;
+  padding: 5px;
+  font-style: italic;
+}

@@ -1,0 +1,26 @@
+<div class="fade modal" id="deleteModal" tabindex="-1" role="dialog" aria-hidden="true" data-bs-keyboard="false" data-pg-collapsed>
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+      <div class="modal-content" style="background-color: rgba(255, 255, 255, 0);">
+          <div class="align-items-center d-flex flex-column">
+              <div class="bg-white border-5 border-end border-primary border-top d-flex justify-content-center mb-n5" style="width: 85px; height: 85px; border-radius: 50%; z-index: 1;">
+                  <img src="assets/img/icon/BESOMEWHERE.png" height="65" class="image-fit mb-3" width="65" style="z-index: 2;"/>
+              </div>
+              <div class="bg-white border border-3 border-primary">
+                  <div class="border-0 modal-header pb-2">
+                      <h4 class="me-auto modal-title ms-auto pt-4" style="z-index: 3;">Suppréssion</h4>
+                  </div>
+                  <hr class="bg-primary border-1 border-primary border-top mb-0 me-3 ms-3  pb-0">
+                  <div class="border-0 modal-body pb-0 pe-4 ps-4 w-100">
+                      <p  class="text-wrap w-100">Voulez vous supprimer <b>{{datas && datas.length > 1 ? 'ces éléménts' :' cet élement' }}</b> </p>
+                  </div>
+                  <div class="border-0 d-flex justify-content-center modal-footer">
+                    <app-button id="close_btn" data-bs-dismiss="modal" type = 'button'  btn_class = "btn btn-outline-primary  btn-light" text="Annuler" ></app-button>
+                      <button (click)="deleteFolder('5')" type="button" class="btn btn-primary ps-2 text-light">
+                          <i class="fa-trash-alt fas pe-2"></i>Suprimer
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

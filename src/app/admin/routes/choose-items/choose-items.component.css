@@ -1,0 +1,7 @@
+.input-group input{
+  height: 30px!important;
+  min-height: 30px;
+}
+.accordion-button:not(.collapsed) {
+  background-color: white;
+}

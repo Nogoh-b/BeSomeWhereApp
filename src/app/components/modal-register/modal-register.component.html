@@ -1,0 +1,163 @@
+<div class="fade modal pg-show-modal" id="registeModal" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="false" data-pg-collapsed>
+  <div class="modal-dialog modal-fullscreen">
+      <div class="h-100 modal-content">
+          <div class="d-flex fixed-top justify-content-end position-absolute">
+              <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close" style="z-index: 5px;"></button>
+          </div>
+          <section class="bg-light h-100" data-pg-collapsed>
+              <div class="g-0 h-100 row row-cols-1 row-cols-lg-2">
+                  <div class="align-items-center col-left d-flex d-lg-flex me-auto ms-auto">
+                      <img src="assets/img/reading.svg" width="100%" class="d-flex h-50" height="100%"/>
+                  </div>
+                  <div class="align-items-lg-center align-items-start bg-white col-12 col-lg-4 d-flex d-lg-flex h-100 justify-content-center justify-content-lg-center">
+                      <div class="bg-white mt-lg-0 mt-n5 pb-lg-0 pe-5 pe-lg-5 ps-5 ps-lg-5 pt-lg-0 w-100">
+                          <div class="align-items-center d-flex justify-content-center justify-content-lg-start ms-lg-n4 mt-lg-0 mt-n5">
+                              <div class="bg-white border-5 border-end border-primary border-top d-flex justify-content-center mb-4 mb-lg-0" style="width: 120px; height: 120px; border-radius: 50%; z-index: 1;">
+                                  <img src="assets/img/icon/BESOMEWHERE.png" height="100" class="image-fit mb-3" width="100" style="z-index: 2;"/>
+                              </div>
+                          </div>
+                          <h1 class="fw-bolder mb-2 text-center text-dark text-lg-start" style="z-index: 4;">Inscription</h1>
+                          <p class="fs-6 mb-3 text-black-50 text-center text-lg-start">Inscrivez vous avant de continuer</p>
+                          <form (submit)="tryRegister(registerForm.value)" [ngClass]="{'was-validated': submited && registerForm.valid}" [formGroup]="registerForm" >
+                              <div class="mb-3">
+                                  <p class="pb-1"></p>
+                                  <div class="border border-1 border-primary input-group" [ngClass]="{'border-danger': submited && !registerForm.get('name').valid}">
+                                      <span class="bg-white border-0 input-group-text" id="addon-wrapping1"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-clipboard-data text-primary" viewBox="0 0 16 16">
+                                              <path d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V7zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0V9z"/>
+                                              <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                                              <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                                          </svg></span>
+                                      <input formControlName="name" [ngClass]="{'is-invalid': submited && !registerForm.get('first_name').valid}" class="border-0 form-control fs-6" id="floatingInput" placeholder="Speudo">
+                                  </div>
+                              </div>
+                              <div class="d-flex mb-3">
+                                  <div class="border border-1 border-primary input-group me-2" [ngClass]="{'border-danger': submited && !registerForm.get('first_name').valid}">
+                                      <span class="bg-white border-0 input-group-text" id="addon-wrapping1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" class="text-primary">
+                                              <g>
+                                                  <path fill="none" d="M0 0h24v24H0z"/>
+                                                  <path d="M11 14.062V20h2v-5.938c3.946.492 7 3.858 7 7.938H4a8.001 8.001 0 0 1 7-7.938zM12 13c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6z"/>
+                                              </g>
+                                          </svg></span>
+                                      <input type="text" formControlName="first_name" class="border-0 form-control pe-1" placeholder="Nom" aria-label="User Email" aria-describedby="addon-wrapping1">
+                                  </div>
+                                  <div class="border border-1 border-primary input-group ms-2" [ngClass]="{'border-danger': submited && !registerForm.get('last_name').valid}">
+                                      <span class="bg-white border-0 input-group-text" id="addon-wrapping1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" class="text-primary">
+                                              <g>
+                                                  <path fill="none" d="M0 0h24v24H0z"/>
+                                                  <path d="M11 14.062V20h2v-5.938c3.946.492 7 3.858 7 7.938H4a8.001 8.001 0 0 1 7-7.938zM12 13c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6z"/>
+                                              </g>
+                                          </svg></span>
+                                      <input [ngClass]="{'is-invalid': submited && !registerForm.get('last_name').valid}" type="text" formControlName="last_name" class="border-0 form-control pe-1" placeholder="Prénom" aria-label="User Email" aria-describedby="addon-wrapping1">
+                                  </div>
+                              </div>
+                              <div class="mb-3">
+                                  <div class="border border-1 border-primary input-group" [ngClass]="{'border-danger': submited && !registerForm.get('email').valid}">
+                                      <span class="bg-white border-0 input-group-text" id="addon-wrapping1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" class="text-primary">
+                                              <g>
+                                                  <path fill="none" d="M0 0h24v24H0z"></path>
+                                                  <path d="M3 3h18a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm17 4.238l-7.928 7.1L4 7.216V19h16V7.238zM4.511 5l7.55 6.662L19.502 5H4.511z"></path>
+                                              </g>
+                                          </svg></span>
+                                      <input [ngClass]="{'is-invalid': submited && !registerForm.get('email').valid}" type="email" formControlName="email" name="email"  ngModel email="true" class="border-0 form-control" placeholder="Email" aria-label="User Email" aria-describedby="addon-wrapping1">
+                                  </div>
+                              </div>
+                              <div class="d-none mb-3">
+                                  <p class="pb-1">Date de Naissance</p>
+                                  <div class="border border-1 border-primary input-group" [ngClass]="{'border-danger': submited && !registerForm.get('date')}">
+                                      <span class="bg-white border-0 input-group-text" id="addon-wrapping1"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-clipboard-data text-primary" viewBox="0 0 16 16">
+                                              <path d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V7zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0V9z"/>
+                                              <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                                              <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                                          </svg></span>
+                                      <input [ngClass]="{'is-invalid': submited && !registerForm.get('date')}" type="date" class="border-0 form-control fs-6" id="floatingInput" placeholder="station/gare">
+                                  </div>
+                              </div>
+                              <div class="d-flex flex-column justify-content-end mb-3 ms-auto">
+                                  <p class="pb-1 text-end">Genre</p>
+                                  <div class="d-flex justify-content-end">
+                                    <div class="pe-2 w-50">
+                                        <div class="border border-1 border-primary input-group" [ngClass]="{'border-danger': submited && !registerForm.get('phone').valid}">
+                                            <span class="bg-white border-0 input-group-text" id="addon-wrapping1"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="text-primary" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+                                                </svg></span>
+                                            <input [ngClass]="{'is-invalid': submited && !registerForm.get('phone').valid}" formControlName="phone" type="number" class="border-0 form-control" placeholder="Numéro + code indicatif " aria-label="User Email" aria-describedby="addon-wrapping1">
+                                        </div>
+                                    </div>
+                                    <!-- <div class="btn-group ps-2" role="group" aria-label="Basic radio toggle button group">
+                                      <input formControlName="gender" name="gender" value="0" type="radio" class="btn-check"  id="groupradio1" autocomplete="off" checked>
+                                      <label class="btn btn-outline-danger" for="groupradio1">Homme</label>
+                                      <input formControlName="gender"  name="gender" value="1" type="radio" class="btn-check"  id="groupradio2" autocomplete="off">
+                                      <label class="btn btn-outline-danger" for="groupradio2">Femme</label>
+                                    </div> -->
+                                    <div class="d-flex justify-content-end w-50">
+                                        <div class="btn-group " role="group" aria-label="Basic radio toggle button group">
+                                            <input formControlName="gender" name="gender" value="0" type="radio" class="btn-check"  id="groupradio1" autocomplete="off" checked>
+                                            <label class="align-items-center btn btn-outline-danger d-flex" for="groupradio1">Homme</label>
+                                            <input  formControlName="gender"  name="gender" value="1" type="radio" class="btn-check"  id="groupradio2" autocomplete="off">
+                                            <label class="align-items-center btn btn-outline-danger d-flex" for="groupradio2">Femme</label>
+                                        </div>
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="mb-3">
+                                  <div class="border border-1 border-primary input-group" [ngClass]="{'border-danger': submited && !registerForm.get('password').valid}">
+                                      <span class="bg-white border-0 input-group-text" id="addon-wrapping2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" class="text-primary">
+                                              <g>
+                                                  <path fill="none" d="M0 0h24v24H0z"></path>
+                                                  <path d="M10.758 11.828l7.849-7.849 1.414 1.414-1.414 1.415 2.474 2.474-1.414 1.415-2.475-2.475-1.414 1.414 2.121 2.121-1.414 1.415-2.121-2.122-2.192 2.192a5.002 5.002 0 0 1-7.708 6.294 5 5 0 0 1 6.294-7.708zm-.637 6.293A3 3 0 1 0 5.88 13.88a3 3 0 0 0 4.242 4.242z"></path>
+                                              </g>
+                                          </svg></span>
+                                      <input [ngClass]="{'is-invalid': submited && !registerForm.get('password').valid}" type="password" formControlName="password" placeholder="Password" aria-label="Password" aria-describedby="addon-wrapping2" class="border-0 form-control"/>
+                                  </div>
+                              </div>
+                              <div class="mb-3">
+                                  <div class="border border-1 border-primary input-group" [ngClass]="{'border-danger': submited && !registerForm.get('cur_country').valid}">
+                                    <!-- <input list="countrydatalistOptions" type="email" class="form-control  text-capitalize border-0" formControlName="cur_country" placeholder="Pays de résidence"> -->
+                                    <input list="countrydatalistOptions" [ngClass]="{'is-invalid': submited && !registerForm.get('cur_country').valid}" type="text" formControlName="cur_country" placeholder="Pays de résidence" aria-label="cur_country" aria-describedby="addon-wrapping2" class="border-0 form-control"/>
+                                    <!-- <label for="country">Pays</label> -->
+
+                                          <datalist id="countrydatalistOptions">
+                                            <option  *ngFor="let country of countries" [value]="country.translations.fr ? country.translations.fr : country.name">
+                                        </datalist>
+                                      <!-- <input [ngClass]="{'is-invalid': submited && !registerForm.get('cur_country').valid}" type="text" formControlName="cur_country" placeholder="Pays de résidence" aria-label="Password" aria-describedby="addon-wrapping2" class="border-0 form-control"/> -->
+                                  </div>
+                              </div>
+                              <app-button [loading] = "isLoading" btn_class="btn d-block w-100 btn-primary fw-bold pb-2 ps-3 pe-3 pt-2 text-white" [text]="'Enregistrement'"></app-button>
+                              <!-- <button type="submit" class="btn d-block w-100 btn-primary fw-bold pb-2 ps-3 pe-3 pt-2" style="height: 50px;">Enregistrement</button> -->
+                          </form>
+                            <p class="error-p">
+                                {{error}}
+                            </p>
+
+                          <div class="d-none">
+                              <div>
+                                  <p class="pt-4 text-black-50 text-center">Ou utilisez&nbsp;</p>
+                              </div>
+
+                              <div class="align-items-center d-flex justify-content-center mt-2 pb-4">
+                                  <!-- <svg (click)="tryFacebookLogin()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="width: 50px !important; height: 50px;" class="text-primary pointer">
+                                      <g>
+                                          <path fill="none" d="M0 0h24v24H0z"/>
+                                          <path d="M15.402 21v-6.966h2.333l.349-2.708h-2.682V9.598c0-.784.218-1.319 1.342-1.319h1.434V5.857a19.19 19.19 0 0 0-2.09-.107c-2.067 0-3.482 1.262-3.482 3.58v1.996h-2.338v2.708h2.338V21H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1h-4.598z"/>
+                                      </g>
+                                  </svg> -->
+                                  <svg (click)="tryGoogleLogin()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="width: 50px; height: 50px;" class="text-danger pointer">
+                                      <g>
+                                          <path fill="none" d="M0 0h24v24H0z"/>
+                                          <path d="M12 11h8.533c.044.385.067.78.067 1.184 0 2.734-.98 5.036-2.678 6.6-1.485 1.371-3.518 2.175-5.942 2.175A8.976 8.976 0 0 1 3 11.98 8.976 8.976 0 0 1 11.98 3c2.42 0 4.453.89 6.008 2.339L16.526 6.8C15.368 5.681 13.803 5 12 5a7 7 0 1 0 0 14c3.526 0 6.144-2.608 6.577-6H12v-2z"/>
+                                      </g>
+                                  </svg>
+                              </div>
+                          <!-- <p>Form value: {{ registerForm.value | json }}</p>
+                          <p>Form status: {{ registerForm.status | json }}</p> -->
+                        </div>
+                      </div>
+                  </div>
+              </div>
+          </section>
+      </div>
+  </div>
+</div>
+
+<app-toast></app-toast>
+

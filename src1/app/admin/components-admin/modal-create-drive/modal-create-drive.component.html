@@ -1,0 +1,84 @@
+
+
+
+
+<div class="fade modal" id="modalAddDrive" tabindex="-1" role="dialog" aria-hidden="true" data-bs-keyboard="false" data-pg-collapsed>
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+      <div class="modal-content" style="background-color: rgba(255, 255, 255, 0);">
+          <div class="align-items-center d-flex flex-column">
+              <div class="bg-white border-5 border-end border-primary border-top d-flex justify-content-center mb-n5" style="width: 85px; height: 85px; border-radius: 50%; z-index: 1;">
+                  <img src="assets/img/icon/BESOMEWHERE.png" height="65" class="image-fit mb-3" width="65" style="z-index: 2;"/>
+              </div>
+              <div class="bg-white border-3 border-primary">
+                  <div class="border-0 modal-header pb-2">
+                      <h4 class="me-auto modal-title ms-auto pt-4" style="z-index: 3;">Création de l'horraire</h4>
+                  </div>
+
+                  <form id="drive_form" (ngSubmit)="onSubmitDrive()" [formGroup]="formGroupDrive">
+
+
+                    <div class="bg-white container mb-3 mt-2 pe-4 ps-4 pt-2">
+
+
+                        <div class="gx-0 mb-2 row">
+                            <div class="form-floating ">
+                              <p class="fw-bold mb-0 ">Date-heure</p>
+                              <div class="form-floating ">
+                                  <input formControlName= "date" type="datetime-local" class="border form-control form-control-sm" id="floatingInput" placeholder="name@example.com">
+                                  <label for="floatingInput">Date</label>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white container mb-3 mt-2 pe-4 ps-4 pt-2">
+
+
+                        <div class="gx-0 mb-2 row">
+                            <div class="">
+                              <input  formControlName="to_station" id="formDatalists451" name="to_station" type="checkbox" class="form-check-input">
+                              <!-- <input class="fs-6"  type="checkbox"  class="form-control fs-6"  placeholder="Ville"> -->
+                              <label for="formDatalists451" class="ps-2">Le point d'arrivé ?</label>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="bg-white container mb-3 mt-2 pe-4 ps-4 pt-2">
+
+                        <div class="row row-cols-2">
+                          <div>
+                              <div class="form-floating ">
+                                  <input formControlName="id_car" type="text" class="form-control" id="floatingInput" placeholder="n">
+                                  <label for="floatingInput"> Transport</label>
+                              </div>
+                          </div>
+                          <div>
+                              <div class="form-floating ">
+                                  <input formControlName="total_places"  type="number" class="form-control" id="floatingInput" placeholder="n">
+                                  <label for="floatingInput">Nbr. Places</label>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                      <div class="border-0 d-flex justify-content-center modal-footer">
+                        <!-- <button type="reset" class="border-2 btn btn-light" >Annuler</button>
+                        <button  type="submit" class="btn btn-primary ps-2 text-light" >
+                            <i class="fa-trash-alt fas pe-2"></i>Enregistrer
+                        </button> -->
+                        <app-button data-bs-dismiss="modal" type = 'reset'  btn_class = "btn btn-light text ps-2 border-1 border-dark  h-auto fw-normal" text="Annuler"></app-button>
+                        <app-button  [loading] = "loading" btn_class = "btn btn-primary ps-2 text-light h-auto text-l" text="Enregistrer"></app-button>
+                    </div>
+
+                </form>
+              </div>
+
+          </div>
+
+      </div>
+  </div>
+  <app-toast title="Trajet non trouvé"></app-toast>
+  <p>{{formGroupDrive.value | json}}</p>
+</div>
+
+

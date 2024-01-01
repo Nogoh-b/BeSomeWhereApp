@@ -1,0 +1,49 @@
+<div  class="block border-4 border-primary border-top d-lg-block d-none mb-4 pb-0 pt-3 shadow-none timeline">
+  <div class="gx-0 pe-3 ps-3 pt-3 row">
+      <i class="col-auto d-none fa-lg fa-map-marked fas m-auto text-primary"></i>
+      <h4 class="col fs-5 fw-bolder lead mb-0 pe-0 ps-4 text-uppercase">Mes Trajets</h4>
+      <i class="col-auto fa-angle-down fa-lg fas m-auto pe-4 text-muted"></i>
+      <div class="d-none heading pb-3 pg-empty-placeholder pt-3"></div>
+      <hr class="mt-4">
+  </div>
+  <div *ngIf="LastReservation">
+    <div [routerLink]="['/mes-trajets', LastReservation.id]" routerLinkActive="router-link-active"  *ngIf="LastReservation" class="pointer" >
+      <div *ngIf="LastReservation.points[0]"  class="pe-3 ps-3">
+          <div class="tl-item">
+              <div class="tl-dot b-primary"></div>
+              <div class="tl-content w-100">
+                  <div class="gx-0 row">
+                      <div class="col">{{LastReservation.points[0].address}} {{LastReservation.points[0].city}} {{LastReservation.points[0].country}}</div>
+                      <div class="col-auto mt-1 text-muted tl-date">
+                          <div class="text-end">{{LastReservation.starting_date | date}}</div>
+                          <div class="text-end">{{LastReservation.starting_date  | date:'shortTime'}}</div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="tl-item">
+              <div class="tl-dot b-primary"></div>
+              <div class="tl-content w-100">
+                  <div class="gx-0 row">
+                    <div class="col">{{LastReservation.points[1].address}} {{LastReservation.points[1].city}} {{LastReservation.points[1].country}}</div>
+                    <div class="col-auto mt-1 text-muted tl-date">
+                          <div class="text-end">{{LastReservation.arrival_date | date}}</div>
+                          <div class="text-end">{{LastReservation.arrival_date  | date:'shortTime'}}</div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+
+    </div>
+  </div>
+  <p [routerLink]="['/mes-trajets']" [queryParams] = "{archived: false}" *ngIf="LastReservation && reservations && FutureReservations.length > 1" class="ps-5 text-start text-warning pointer">+{{FutureReservations.length - 1}} trajet(s)...</p>
+
+  <app-empty-page title = "Aucun Trajet reservé" *ngIf="!LastReservation" title_class="fs-6"></app-empty-page>
+  <div [routerLink]="['/trajets/creation/1']" routerLinkActive="router-link-active"  class="card mb-2 p-3 shadow-none">
+    <button class="btn btn-lg btn-outline-primary fs-5 fw-bolder rounded1 rounded-01 w-auto border-2 border-primary" type="text" style="height: 50px;">
+        <i class="fa-clipboard-check fa-lg fas pe-2"></i>Ajouter
+    </button>
+  </div>
+</div>

@@ -1,0 +1,135 @@
+<section *ngIf="routes" class="h-100">
+  <div class="h-100 row g-0">
+      <div class="col-lg-3 pe-0 ps-0">
+</div>
+      <div class="col-lg-6 pe-0 pe-lg-5 ps-0 ps-lg-5 pt-4">
+
+          <app-route-card [price_visible] = "false" *ngIf="curRoute" [route] = "curRoute"    [curStatus] = "statusCard"  ></app-route-card>
+
+          <div class="container pe-0 pe-xl-5 ps-0 ps-xl-5">
+              <div class="bg-white mt-4 p-2">
+                  <p class="fs-3 fw-bold pb-4 pe-auto ps-4 pt-3">Horaires <span class="fs-5">(Tarif de nuit 22h-5h30/ Jour 5h30-22h)</span></p>
+                  <div class="pe-5 ps-5" *ngFor="let route of routes let i = index">
+                      <div class="border-1 border-bottom border-dark border-top g-0 p-2 row row-cols-2 row_shedulde">
+                          <!-- <div class="align-items-center border-dark d-flex pb-2 pt-2">
+                              <i class="fa-clock fa-lg fas pe-2 text-secondary"></i>
+                              <p class="fs-5 fw-bold text-secondary">{{route.starting_date | date:'shortTime'}} - {{route.arrival_date | date:'shortTime'}}</p>
+                          </div> -->
+                          <div class="align-items-center border-dark d-flex pb-2 pt-2">
+                            <i class="fa-clock fa-lg fas pe-2 text-info"></i>
+                            <div class="gx-0 p-1" data-pg-collapsed>
+                                <p class="display-6 fs-6 pb-2 text-black-50 text-center">Départ</p>
+                                <p class="fs-5 fw-bolder text-center">{{(route.starting_date | date).toUpperCase()}}</p>
+                                <p class="fs-6 fw-bold text-info text-center">{{route.starting_date | date:'shortTime'}}</p>
+                              </div>
+                              <p class="pe-2 ps-2">-</p>
+                              <div class="gx-0 p-1 w-auto" data-pg-collapsed>
+                                <p class="display-6 fs-6 pb-2 text-black-50 text-center">Arrivée</p>
+                                <p class="fs-5 fw-bold  text-center">{{(route.arrival_date | date).toUpperCase()}}</p>
+                              <p class="fs-6 fw-bold text-info text-center">{{route.arrival_date | date:'shortTime'}}</p>
+                          </div>
+                            <!-- <div class="gx-0  p-1">
+                                <p class="fs-6 text-black-50 text-center">Arrivée</p>
+                                <p class="fs-5 fw-bold text-info text-center">{{route.arrival_date | date:'shortTime'}}</p>
+                            </div> -->
+                        </div>
+                        <div class="d-flex flex-column flex-row-reverse1 justify-content-center ">
+                          <div class="align-items-center d-flex flex-row-reverse  ">
+                            <div class="">
+                              <div class="col-auto pt-2 text-muted  justify-content-center align-items-center d-flex">
+                                <div class="fs-3 fw-bold text-danger text-end">{{route.price}} &euro;</div>
+                              </div>
+                              <div class="align-items-center d-flex flex-row-reverse justify-content-center p-2">
+                                <img src="./assets/img/car-seat1.png" width="40" height="40">
+                                <p class="fs-6 fw-bold pt-1 text-muted">{{route.places}} places disponible</p>
+                              </div>
+                            </div>
+                            </div>
+                          <div class="d-flex justify-content-end mb-3">
+                            <div [ngClass]="{disabled: spiner_btn.value <= 0}" class="form-check align-items-center d-flex form-switch" data-pg-collapsed>
+                              <input  #in_take class="form-check-input" type="checkbox" value="1" [name]="'for_disabled'+ i" [(ngModel)]="reservation.take_at_home" (change)="changeTakeToHome(in_take.checked )"  [id]="'flexRadioDefault'+i">
+                              <label class="form-check-label" [for]="'flexRadioDefault'+i">Venir à ma porte (+{{price_take_to_home}} €)</label>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+
+                    <!-- <div class="accordion" id="panels1" data-pg-collapsed>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="collapse1"> <button class="accordion-button bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input " id="formInput15">
+                                        <label class="form-check-label " for="formInput15">okk</label>
+                                        <label class="form-check-label" for="formInput15">Venir à ma porte</label>
+
+                                    </div>
+                                </button> </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="collapse1" data-bs-parent="#panels1">
+                                <div class="accordion-body">
+                                    <strong>This is the first item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the
+                                    <code>.accordion-body</code>, though the transition does limit overflow.
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                      <div class="align-items-sm-center align-items-start d-flex d-sm-flex flex-column flex-sm-row justify-content-sm-end justify-content-start">
+                          <app-spinner-bouton [value]="reservation && reservation.passengers ? reservation.passengers.length : 0" #spiner_btn [max_value] = "route.places"></app-spinner-bouton>
+                          <button [disabled]="spiner_btn.value <= 0" (click)="goToNextStep(route, spiner_btn.value)" routerLinkActive="router-link-active"  type="text" class="align-items-center btn btn-lg btn-outline-danger d-flex flex-row-reverse float-end fw-bold justify-content-center mt-3 mb-3" style="height: 55px;">
+                              <i class="fa-arrow-right fas fw-bolder pb-1 ps-3 "></i>Continuer ( {{reservation.take_at_home ? (route.price )* spiner_btn.value + price_take_to_home : route.price * spiner_btn.value }} € )
+                          </button>
+                      </div>
+                  </div>
+              </div>
+              <div class="container d-none">
+                  <button type="text" class="align-items-center btn btn-lg btn-outline-primary d-flex flex-row-reverse float-end fw-bold justify-content-center w-75" style="height: 55px;">
+                      <!-- <i class="fa-arrow-right fas fw-bolder pb-1 ps-3"></i>Continuer (5places) -->
+                  </button>
+              </div>
+              <div class="justify-content-end pe-4 ps-4 pt-4">
+</div>
+          </div>
+          <div class="col d-none"> 
+              <div class="border border-2 border-primary d-flex flex-column input-group input_search pb-2 pe-3 ps-3 pt-2">
+                  <div class="align-items-center d-flex justify-content-center  row">
+                      <div class="col">
+                          <label class="fw-bold ps-3 text-uppercase">station/gare</label>
+                          <input type="text" class="border-0 border-primary form-control me-0" placeholder="Point de départ" aria-label="Username">
+                      </div>
+                      <div class="col-auto d-flex flex-column">
+                          <span class="bg-gradient fs-4 fw-bold p-1 rounded-top text-center text-primary">+</span>
+                          <span class="fs-4 fw-bold p-1 rounded-bottom text-center text-primary">-</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="d-none mt-5">
+              <div class="bg-white container-fluid mb-1 mt-1 pb-4 pt-4">
+                  <p class="fs-5 pb-3 text-muted">Liste des points les plus proches de votre addresse :</p>
+                  <div class="list-group">
+                      <a href="#" class="border-2 border-end border-end-0 border-start-0 border-top-0 d-flex flex-column justify-content-center list-group-item list-group-item-action"> <div class="d-flex justify-content-between w-100">
+                              <h5 class="fw-light mb-1"><i class="fa-map-marker-alt fas pe-3"></i>69 rue du chemin</h5>
+                              <small class="mb-auto mt-auto">20 km</small>
+                          </div> </a>
+                      <a href="#" class="border-2 border-bottom border-end-0 border-start-0 border-top-0 d-flex flex-column justify-content-center list-group-item list-group-item-action"> <div class="d-flex justify-content-between w-100">
+                              <h5 class="fw-light mb-1"><i class="fa-map-marker-alt fas pe-3"></i>75001 rue nanterre</h5>
+                              <small class="mb-auto mt-auto">20 km</small>
+                          </div> </a>
+                      <a href="#" class="border-2 border-bottom border-end-0 border-start-0 border-top-0 d-flex flex-column justify-content-center list-group-item list-group-item-action"> <div class="d-flex justify-content-between w-100">
+                              <h5 class="fw-light mb-1"><i class="fa-map-marker-alt fas pe-3"></i>75001 rue nanterre</h5>
+                              <small class="mb-auto mt-auto">20 km</small>
+                          </div> </a>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-lg-3 pe-0 ps-0">
+</div>
+</div>
+</section>
+
+<div *ngIf="!routes" class="bg-white" style="height: 95vh;">
+  <app-loading-page class="h-100"></app-loading-page>
+</div>
+
+<app-toast></app-toast>

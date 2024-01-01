@@ -1,0 +1,81 @@
+<div *ngIf="route" [class]="route_css">
+  <div class="bg-light gx-0 m-lg-0 p-lg-0 pb-3 pe-0 ps-0 pt-0 row ">
+      <div class="bg-white border-b  col-12 col-xl container-fluid pb-3 pt-3 align-items-center d-flex justify-content-center1">
+      <!-- <div class="bg-white border-b  col-12 col-xl container-fluid pb-3 pt-3 align-items-center d-flex justify-content-center"> -->
+          <div class="w-100">
+              <div class="tl-item">
+                  <div *ngIf="globals.TrajetCardStatus.ChooseSchedules != curStatus" class=" tl-content">
+                    <p *ngIf="!isISameDay()" class="fs-5 date fw-bold  text-center">{{(route.starting_date | date).toUpperCase()}}</p>
+                    <div class="fw-bolder text-info text-center" [ngClass]="{'fs-5': isISameDay(), 'fs-6': !isISameDay()}">{{route.starting_date | date:'shortTime'}}</div>
+                    <div class="text-center fs-7 text-danger fw-bold">Point de rendez-vous</div>
+                  </div>
+                  <div class="b-primary mt-2 tl-dot"></div>
+                  <div class="tl-content w-100">
+                      <div class="gx-0 row">
+                          <div class="col fs-5 fw-bold">
+                            <p class="fs-5">{{route.points[0].address}}</p>
+                            <p class="lead text-muted">{{route.points[0].country}}</p>
+                          </div>
+                          <div *ngIf="price_visible" class="col-auto pt-2 text-muted tl-date">
+                            <div class="fs-4 fw-bold text-danger text-center">{{getTotal()}} &euro;</div>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tl-item">
+                    <div *ngIf="globals.TrajetCardStatus.ChooseSchedules != curStatus"  class=" tl-content">
+                      <p *ngIf="!isISameDay()" class="fs-5 date fw-bold  text-center">{{(route.arrival_date | date).toUpperCase()}}</p>
+                      <div class="fw-bold text-info text-center" [ngClass]="{'fs-5': isISameDay(), 'fs-6': !isISameDay()}">{{route.arrival_date  | date:'shortTime'}}</div>
+                      <div class="text-center fs-7 text-danger fw-bold">Point d’arrivé </div>
+                  </div>
+                    <div class="b-primary  tl-dot"></div>
+                    <div class="tl-content w-100">
+                      <div class="gx-0 row">
+                          <div class="col fs-5 fw-bold pe-0">
+                            <p class="fs-5">{{route.points[1].address}}</p>
+                            <p class="lead text-muted">{{route.points[1].country}}</p>
+                          </div>
+                          <div *ngIf="isISameDay() && price_visible" class="align-items-center col-12 col-sm-auto d-flex justify-content-end pt-2 pe-3 text-muted tl-date">
+                              <p class="fs-6 pe-3">{{route.starting_date | date}}</p>
+                              <i class="fa-3x fa-angle-right fas"></i>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div *ngIf="globals.TrajetCardStatus.ChooseSchedules < curStatus && detailsIsVisible" class=" border-b align-items-stretch bg-white col col-xl-auto container-fluid d-flex mb-xl-0 ms-0 ms-xl-2 mt-3 mt-xl-0 pb-4 pe-2 ps-2 pt-4">
+      <!-- <div *ngIf="route.items && route.items.length" class="align-items-stretch bg-white col col-xl-auto container-fluid d-flex mb-xl-0 ms-0 ms-xl-2 mt-3 mt-xl-0 pb-4 pe-2 ps-2 pt-4"> -->
+          <div class="d-flex d-lg-flex flex-row flex-xl-column justify-content-between justify-content-xl-between w-100">
+              <div class="align-items-center d-flex justify-content-between p-2">
+                  <img src="assets/img/seat%20(2).png" width="25" height="25"/>
+                  <p class="fw-bold ps-2">{{'x'+total_passengers()}}</p>
+              </div>
+              <div class="align-items-center d-flex justify-content-between p-2">
+                  <img src="assets/img/map.png" width="25" height="25"/>
+                  <p class="fw-bold ps-2">{{take_at_home ? 'x'+take_at_home_count : 'x0'}}</p>
+              </div>
+              <div class="align-items-center d-flex justify-content-between p-2">
+                  <img src="assets/img/sandwich.png" width="25" height="25"/>
+                  <p class="fw-bold ps-2">{{total_meals()}}</p>
+              </div>
+              <div class="align-items-center d-flex justify-content-between p-2">
+                  <img src="assets/img/suitcases%20(2).png" width="25" height="25"/>
+                  <p class="fw-bold ps-2">{{total_suitcase()}}</p>
+                </div>
+                <div class="align-items-center d-flex justify-content-between p-2">
+                  <img src="assets/img/baby-car-seat%20(1).png" width="25" height="25"/>
+                  <p class="fw-bold ps-2">{{total_babyseats()}}</p>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!-- <div *ngIf="route.take_at_home && screen_tah" class="bg-light  me-0 ms-0 p-lg-0 pb-3 mt-3">
+    <div class="bg-white p-3">
+        <div class="">
+            <p class="fw-bold fs-5"><i class="fa-lg fa-map-marker-alt fas pe-2 text-primary"></i>Adresse de départ</p>
+            <p class="ms-4 mt-2">{{route.take_to_home_adr}}</p>
+        </div>
+    </div>
+</div> -->
+</div>

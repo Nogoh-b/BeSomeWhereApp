@@ -1,0 +1,109 @@
+<div *ngIf="curRoute" class="container-fluid pe-0 pe-lg-5 ps-0 ps-lg-5" style="height: 92vh;
+
+/* padding-top: 99px !important */
+/* padding-left: 250px !important */
+/* padding-right: 250px !important */">
+<section class="h-100">
+  <div class="h-100 row g-0">
+
+    <div class="col-lg-3 pg-empty-placeholder"></div>
+      <div class="col-lg-6 col-md-12 pe-0 pe-lg-5 ps-0 ps-lg-5 pt-4">
+
+        <app-route-card *ngIf="curRoute"  [take_at_home_count]="takeAtHomeCount(reservation.passengers,reservation.take_at_home)"  [route] = "curRoute" [curStatus] = "statusCard"   [take_at_home]="reservation.take_at_home" [passengers]="reservation.passengers.length" [items]="reservation.items"></app-route-card>
+        <div *ngIf="curRoute" class="container  pb-4 pe-0 pe-xl-5 ps-0 ps-xl-5 pt-4">
+              <div class="bg-white border-2 border-primary border-start  me-xl-0  ms-xl-0 mt-4 p-2">
+                  <p class="fs-4 fw-bold ps-3">Resumé de la commande</p>
+                  <div class="p-2">
+                      <button class="bg-white border-0 border-dark pb-4 pe-0 pe-xl-5 ps-0 ps-xl-5 pt-4 w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          <div class="align-items-center border-bottom d-flex gx-2 p-3 row">
+                              <img src="assets/img/route.png" class="col-auto pe-0 ps-0" width="50" height="50">
+                              <div class="col w-100">
+                                  <div class="g-0 row row-cols-3">
+                                      <p class="col-6 fs-5 pe-2 ps-2 text-body text-start">Siège(s)</p>
+                                      <p class="col-3 fs-5 fst-italic text-end text-muted">x{{total_passenger().toFixed(0)}}</p>
+                                      <p class="col-3 fs-5 fw-bold text-body text-end">{{total_price_passenger(false).toFixed(2)}} €</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div *ngIf="reservation.take_at_home" class="align-items-center border-bottom d-flex gx-2 p-3 row">
+                              <img src="assets/img/map.png" class="col-auto pe-0 ps-0" width="50" height="50">
+                              <div class="col w-100">
+                                  <div class="g-0 row row-cols-3">
+                                      <p class="col-6 fs-5 pe-2 ps-2 text-body text-start">Venir à ma porte</p>
+                                      <p class="col-3 fs-5 fst-italic text-end text-muted">x{{ takeAtHomeCount(reservation.passengers,reservation.take_at_home) }}</p>
+                                      <p class="col-3 fs-5 fw-bold text-body text-end">{{(price_take_to_home * takeAtHomeCount(reservation.passengers,reservation.take_at_home)).toFixed(2)}} €</p>
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div class="align-items-center border-bottom d-flex gx-2 p-3 row">
+                              <img src="assets/img/sandwich.png" class="col-auto pe-0 ps-0" width="50" height="50">
+                              <div class="col w-100">
+                                  <div class="align-items-center d-flex g-0 row row-cols-3">
+                                      <p class="col-6 fs-5 pe-2 ps-2 text-body text-start">Petits plaisirs</p>
+                                      <p class="col-3 fs-5 fst-italic text-end text-muted">x{{total_meals().toFixed(0)}}</p>
+                                      <p class="col-3 fs-5 fw-bold text-body text-end">{{total_price_meals().toFixed(2)}} €</p>
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div class="align-items-center border-bottom d-flex gx-2 p-3 row">
+                              <img src="assets/img/suitcases%20(2).png" class="col-auto pe-0 ps-0" width="50" height="50">
+                              <div class="col w-100">
+                                  <div class="align-items-center d-flex g-0 row row-cols-3">
+                                      <p class="col-6 fs-5 pe-2 ps-2 text-body text-start">Valise supplémentaire</p>
+                                      <p class="col-3 fs-5 fst-italic text-end text-muted">x{{total_suitcase().toFixed(0)}}</p>
+                                      <p class="col-3 fs-5 fw-bold text-body text-end">{{total_price_suitcase().toFixed(2)}} €</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="align-items-center border-bottom d-flex gx-2 p-3 row">
+                              <img src="assets/img/baby-car-seat%20(1).png" class="col-auto pe-0 ps-0" width="50" height="50">
+                              <div class="col w-100">
+                                  <div class="align-items-center d-flex g-0 row row-cols-3">
+                                      <p class="col-6 fs-5 pe-2 ps-2 text-body text-start">Siège bébé</p>
+                                      <p class="col-3 fs-5 fst-italic text-end text-muted">x{{total_babyseats().toFixed(0)}}</p>
+                                      <p class="col-3 fs-5 fw-bold text-body text-end">{{total_price_babyseats().toFixed(2)}} €</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="align-items-center d-flex gx-2 p-3 row">
+                              <div class="col w-100">
+                                  <div class="align-items-center d-flex g-0 row row-cols-2">
+                                      <p class="fs-4 fw-bold pe-2 ps-2 text-body text-start">Total</p>
+                                      <p class="fs-4 fw-bold text-end text-info">{{(getTotal()).toFixed(2)}} € <span class="fs-6 ">TTC</span></p>
+                                  </div>
+                              </div>
+                          </div>
+                      </button>
+                  </div>
+                  <p class="text-center text-muted">
+                    Le service de paiement en ligne n’est pas encore disponible.
+                    Un paiement en espèce ou virement sera a réalisé sur place.
+                    Pour toute question contactez nous sur <a  [href]="'mailto:'+ email_admin" >{{email_admin}}</a>
+                    Merci pour votre confiance.
+                  </p>
+                  <div class="container d-flex flex-column-reverse pb-3 pe-4 ps-4 pt-3">
+                      <!-- <button type="text" class="align-items-center border-2 btn btn-lg btn-outline-light btn-primary d-flex fw-bold justify-content-center me-auto ms-auto w-75" style="height: 55px;">
+                          <i class="fa-lg fa-paypal fab pe-2"></i>  Payer avec paypal
+                      </button> -->
+                      <app-button (click)="buy()" [loading]="loading" [text] = " !is_for_update() ? 'Reserver ' : 'Reserver ( +' + get_new_total().toFixed(2) +' € ) '" class_="fa-lg fa-paypal1 fab pe-2"></app-button>
+                      <!-- <app-button (click)="buy()" [loading]="loading" [text] = " !is_for_update() ? 'Payer avec paypal ' : 'Payer avec paypal ( +' + get_new_total().toFixed(2) +' € ) '" class_="fa-lg fa-paypal fab pe-2"></app-button> -->
+                      <!-- <app-button (click)="buy()" [loading]="loading" [text] = " reservation && reservation.id && get_new_total() <= 0 ? 'Payer avec paypal ' : 'Payer avec paypal ( +' + get_new_total().toFixed(2) +' € ) '" class_="fa-lg fa-paypal fab pe-2"></app-button> -->
+                  </div>
+              </div>
+          </div>
+
+      </div>
+    <div class="col-lg-3 pg-empty-placeholder"></div>
+
+  </div>
+</section>
+
+</div>
+
+<div *ngIf="!curRoute" class="bg-white" style="height: 95vh;">
+  <app-loading-page class="h-100"></app-loading-page>
+</div>
+
+<app-toast></app-toast>

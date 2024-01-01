@@ -1,0 +1,188 @@
+<div class="row row-cols-2">
+
+  <div class="bg-white p-3">
+
+
+    <div class="bg-white d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">Catégories </h1>
+      <div class="btn-toolbar mb-2 mb-md-0">
+        <app-button (click)="del_modal1.datas = getAllChecked1(selected_data1) " *ngIf="getAllChecked1(selected_data1).length > 0" class_="fas fa-trash" btn_class = "btn btn-outline-primary  btn-light" text="Suprimer" data-bs-toggle="modal" data-bs-target="#deleteModal"> </app-button>
+        <app-button class_="fas fa-plus" btn_class = "btn btn-outline-primary  btn-light" text="Ajouter" data-bs-toggle="modal" data-bs-target="#modalItemCat"> </app-button>
+          <!-- <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalAddPoint" >Ajouter</button> -->
+
+      </div>
+    </div>
+    <div class="table-responsive">
+    </div>
+
+    <div class="container mt-3 px-2">
+      <div class="mb-2 d-flex justify-content-between align-items-center">
+          <div class="pl-2 position-relative d-flex align-items-center">
+            <input #search_input1 (change)="change()" [(ngModel)]="search_option1" type="search"  class="form-control w-auto" placeholder="Recherche...">
+            <span class=" ps-3 w-auto"><b>{{item_categories && item_categories.length  }}</b> Catégories</span>
+          </div>
+          <div class="px-2 d-flex align-items-center">
+              <span class="pe-3">Filter par :  </span>
+              <select  style="min-width: 100px;"  #select1 value="id"  [(ngModel)]="sort_option" class=" pe-3 form-select w-auto h-100" id="inputGroupSelect01">
+                <option value="name">Nom</option>
+                <option value="category.name">Categorie</option>
+            </select>
+          </div>
+      </div>
+
+
+      <div class="table-responsive">
+          <table class="table table-hover table-responsive table-borderless">
+              <thead>
+                  <tr class="bg-light">
+                      <th scope="col" width="5%">
+                          <!-- <input   (change)="selectOrUnselectAll(input_.checked, item_proposed)" [checked]="isAllchecked(selected_data)" #input_ class="form-check-input" type="checkbox"> -->
+                      </th>
+                      <th scope="col" width="5%">#</th>
+                      <th scope="col" width="20%">Date de creation</th>
+                      <th class="text-end">Images</th>
+                      <th>Nom</th>
+                      <!-- <th class="text-end">Pays</th> -->
+                      <!-- <th class="text-end">Action</th> -->
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr  routerLinkActive="router-link-active"  *ngFor="let item_category of getItem_Categories()  | orderBy:  select1.value | filterBy: ['name', 'category.name']: search_input1.value   let i = index" class="">
+                      <th scope="row">
+                          <input #inp1 (change)="selectOrUnselect1(inp1.checked, i)"  [checked]="selected_data1 && selected_data1[i] && selected_data1[i].selected"  class="form-check-input" type="checkbox">
+                      </th>
+                      <td >{{item_category.id}}</td>
+                      <td >
+                        <app-preloader-img [src]="SERVER_FOR_UPLOAD + item_category.src" [height_]="'25px'" [width_]="'30px'"></app-preloader-img>
+                        
+                        <!-- <img width="30" height="25" alt=""> -->
+                    </td>
+                      <td > {{item_category.name}}
+                      <!-- <td > {{item_category.category.name}} -->
+                      </td>
+                      <td  class="text-end"><span class="fw-normal">
+                        <a (click)="modalItCat.createForm(item_category)"  data-bs-toggle="modal" data-bs-target="#modalItemCat" class="checklister pe-2 pointer">Editer</a>
+                        <a   class="checklister ps-2" (click)="del_modal1.setData([item_category], datatype1)" data-bs-toggle="modal" data-bs-target="#deleteModal" class="pointer"> Supprimer</a>
+                      </span> </td>
+                  </tr>
+
+              </tbody>
+          </table>
+          <div class="d-flex">
+              <ul class="ms-auto pagination">
+                  <li (click)="navigateToPage1(currentPage1 === 0 ? 0 : currentPage1 - 1)" class="page-item"  [ngClass]="{'disable': currentPage1 === 0, 'checklister': currentPage1 > 0}">
+                      <a class="page-link" >Précedent</a>
+                  </li>
+                  <li (click)="navigateToPage1(i)" *ngFor="let checklist of  pagination1 let i = index" class="page-item" [ngClass]="{'active': currentPage1 === i, 'checklister': currentPage1 !== i}">
+                      <a  class="page-link " >{{i+1}}</a>
+                  </li>
+
+                  <li (click)="navigateToPage1(currentPage1 === pagination1 && pagination1.length - 1 ? currentPage1 : currentPage1 + 1)" class="page-item" [ngClass]="{'disable': currentPage1 === pagination1 && pagination1.length - 1, 'checklister': !(currentPage1 < pagination1 && pagination1.length - 1)}">
+                      <a class="page-link" >Suivant</a>
+                  </li>
+              </ul>
+          </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Items -->
+
+  <div class="bg-white p-3">
+
+
+    <div class="bg-white d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">Elements Proposés </h1>
+      <div class="btn-toolbar mb-2 mb-md-0">
+        <app-button (click)="del_modal1.datas = getAllChecked(selected_data) " *ngIf="getAllChecked(selected_data).length > 0" class_="fas fa-trash" btn_class = "btn btn-outline-primary  btn-light" text="Suprimer" data-bs-toggle="modal" data-bs-target="#deleteModal"> </app-button>
+        <app-button class_="fas fa-plus" btn_class = "btn btn-outline-primary  btn-light" text="Ajouter" data-bs-toggle="modal" data-bs-target="#modalProposerItem"> </app-button>
+          <!-- <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalAddPoint" >Ajouter</button> -->
+
+      </div>
+    </div>
+    <div class="table-responsive">
+    </div>
+
+    <div class="container mt-3 px-2">
+      <div class="mb-2 d-flex justify-content-between align-items-center">
+          <div class="pl-2 position-relative d-flex align-items-center">
+            <input #search_input (change)="change()" [(ngModel)]="search_option" type="search"  class="form-control w-auto" placeholder="Recherche...">
+            <span class=" ps-3 w-auto"><b>{{item_proposed && item_proposed.length }}</b> Elements Proposés </span>
+          </div>
+          <div class="px-2 d-flex align-items-center">
+              <span class="pe-3">Filter par :  </span>
+              <select  style="min-width: 100px;"  #select value="id"  [(ngModel)]="sort_option" class=" pe-3 form-select w-auto h-100" id="inputGroupSelect01">
+                <option value="name">Nom</option>
+                <option value="category.name">Categorie</option>
+            </select>
+          </div>
+      </div>
+
+
+      <div class="table-responsive">
+          <table class="table table-hover table-responsive table-borderless">
+              <thead>
+                  <tr class="bg-light">
+                      <th scope="col" width="5%">
+                          <!-- <input   (change)="selectOrUnselectAll(input_.checked, item_proposed)" [checked]="isAllchecked(selected_data)" #input_ class="form-check-input" type="checkbox"> -->
+                      </th>
+                      <th scope="col" width="5%">#</th>
+                      <th scope="col" width="20%">Date de creation</th>
+                      <th>Nom</th>
+                      <!-- <th class="text-end">Pays</th> -->
+                      <th class="text-end">Catégory</th>
+                      <th class="text-end">Action</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr  routerLinkActive="router-link-active"  *ngFor="let item_proposed of getItem_Proposeds()  | orderBy:  select.value | filterBy: ['name', 'category.name']: search_input.value   let i = index" class="">
+                      <th scope="row">
+                          <input #inp (change)="selectOrUnselect(inp.checked, i)"  [checked]="selected_data[i] && selected_data[i].selected"  class="form-check-input" type="checkbox">
+                      </th>
+                      <td >{{item_proposed.id}}</td>
+                      <td >{{item_proposed.updated_at |date}}</td>
+                      <td > {{item_proposed.name}}
+                      <td > {{item_proposed.category.name}}
+                      </td>
+                      <td  class="text-end"><span class="fw-normal">
+                        <a  data-bs-toggle="modal" (click)="modalItProposeds.createForm(item_proposed)"  data-bs-target="#modalProposerItem" class="checklister pe-2 pointer">Editer</a>
+                        <a   class="checklister ps-2" (click)="del_modal1.setData([item_proposed], datatype)" data-bs-toggle="modal" data-bs-target="#deleteModal" class="pointer"> Supprimer</a>
+                      </span> </td>
+                  </tr>
+
+              </tbody>
+          </table>
+          <div class="d-flex">
+              <ul class="ms-auto pagination">
+                  <li (click)="navigateToPage(currentPage === 0 ? 0 : currentPage - 1)" class="page-item"  [ngClass]="{'disable': currentPage === 0, 'checklister': currentPage > 0}">
+                      <a class="page-link" >Précedent</a>
+                  </li>
+                  <li (click)="navigateToPage(i)" *ngFor="let checklist of  pagination let i = index" class="page-item" [ngClass]="{'active': currentPage === i, 'checklister': currentPage !== i}">
+                      <a  class="page-link " >{{i+1}}</a>
+                  </li>
+
+                  <li (click)="navigateToPage(currentPage === pagination && pagination.length - 1 ? currentPage : currentPage + 1)" class="page-item" [ngClass]="{'disable': currentPage === pagination && pagination.length - 1, 'checklister': !(currentPage < pagination && pagination.length - 1)}">
+                      <a class="page-link" >Suivant</a>
+                  </li>
+              </ul>
+          </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!--  -->
+
+
+
+<app-modal-add-proposed-checklist  (onUpdated)="onProposedUpdate($event)"  (onCreated)="onProposedAdded($event)"  #modalItProposeds></app-modal-add-proposed-checklist>
+<app-modal-add-item-proposed-category (onUpdated)="onProposedCategorieUpdate($event)"  (onCreated)="onProposedCategorieAdded($event)"#modalItCat></app-modal-add-item-proposed-category>
+
+<!-- <app-checklist-create ></app-checklist-create> -->
+
+<!-- <app-modal-delete #del_modal [dataType]="datatype" (onDeleted)="toast_c.open('Be Somewhere', 'Element(s) suprimé (s)')"></app-modal-delete> -->
+<app-modal-delete-admin #del_modal1 (onDeleted)="toast_c.open('Be Somewhere', 'Element(s) suprimé (s)')"></app-modal-delete-admin>
+<app-toast #toast_c></app-toast>
+<app-preloader></app-preloader>

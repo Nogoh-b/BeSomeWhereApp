@@ -1,0 +1,138 @@
+<form *ngIf="point" (submit)="onSumit()" [formGroup]="formPoint">
+
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom" data-pg-collapsed>
+    <h1 class="h2">Point #{{point.id}}</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+
+       <app-button  (click)="data_to_del = point"  type ="text" class_="fas fa-trash-alt "  btn_class ="btn   btn-danger "   data-bs-toggle="modal" data-bs-target="#deleteModal" text="Supprimer"></app-button>
+
+       <div class="ps-2">
+
+         <!-- <app-button  type ="text" class_="fas fa-hand "  btn_class ="btn   btn-success "    text="Gérer"></app-button> -->
+       </div>
+       <div class="ps-2">
+
+         <app-button [loading]="loading1"  class_="fas fa-save" btn_class ="btn btn-outline-primary text-white" text="Enregistrer"></app-button>
+       </div>
+    </div>
+  </div>
+
+
+  <div class=" table-responsive">
+    <div class="gx-0 pe-5 ps-5 row row-cols-2" data-pg-collapsed>
+        <div class="col-12 p-2">
+            <div class="bg-white container p-4">
+                <div class="gx-0 row row-cols-2">
+                    <div class="col-8 form-floating pe-2 ps-0">
+                        <input type="text" formControlName="title" name="title" class="border form-control" id="floatingInput" placeholder="name@example.com">
+                        <label for="floatingInput">Titre</label>
+                    </div>
+                    <div class="align-items-center col-4 d-none">
+                        <select class="form-select h-100" id="inputGroupSelect01">
+                            <option selected>Type de point...</option>
+                            <option formControlName="type" name="type"   value="0">Station/Gare</option>
+                            <option formControlName="type" name="type"   value="1">Points proches</option>
+                        </select>
+                    </div>
+                </div>
+                <label for="floatingTextarea" class="mb-3 ">Commentaires</label>
+                <div class="border form-floating ">
+                    <!-- <textarea formControlName="description" name="description"   class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="min-height: 150px;"></textarea> -->
+                    <!-- <input type="text" formControlName="description"> -->
+                    <quill-editor
+                    formControlName="description"
+                    name="description"
+                    (onContentChanged)="logChange($event);"
+                    (onSelectionChanged)="logSelection($event);"></quill-editor>
+                    <!-- <editor formControlName="description" [init]="tinyMceConfig"></editor> -->
+                    <!-- <ck-editor name="editor1" [(ngModel)]="editorValue" skin="moono-lisa" language="en" [fullPage]="true"></ck-editor> -->
+                    <!-- <ck-editor [type]="'decoupled'" [uploadConfig]="config" [heading]="heading" [toolbar]="toolbar" [language]="'zh-cn'" [readOnly]="false" [(ngModel)]="content"></ck-editor> -->
+
+                </div>
+                <div  class="pe-1 ps-1 pt-3 pb-3">
+                  <input  formControlName="is_station" id="formDatalists451" name="is_station" type="checkbox" class="form-check-input">
+                  <!-- <input class="fs-6"  type="checkbox"  class="form-control fs-6"  placeholder="Ville"> -->
+                  <label for="formDatalists451" class="ps-2">Le point est une Station ?</label>
+                </div>
+                <div class="gx-0 mb-3 mt-3 row row-cols-2">
+                    <div class=" form-floating  pe-2">
+                      <input class="fs-6"  #input_  formControlName="country" name="country"    (change)="countrySelected($event)" [ngClass]="{'is-invalid' : !countryIsvalid}" class=" form-control fs-6" list="countrydatalistOptions" id="floatingInput" placeholder="Pays">
+                      <datalist id="countrydatalistOptions">
+                        <option  *ngFor="let country of countries" [value]="country.translations.fr ? country.translations.fr : country.name">
+                        </datalist>
+                        <label for="floatingInput">Pays</label>
+                        <div *ngIf="!countryIsvalid" [ngClass]="{'invalid-feedback' : !countryIsvalid} ">
+                          Choisissez un pays parmis ceux proposés
+                        </div>
+                      </div>
+
+                  <div  class="pe-1 ps-1 form-floating">
+                    <input class="fs-6" [readOnly]=" !countryIsvalid || !currentCountry" formControlName="city" name="city"  (change)="citySelected($event)" [ngClass]="{'is-invalid' : !cityIsvalid}"  class="form-control fs-6" list="citydatalistOptions" id="formDatalists45" placeholder="Ville">
+                    <datalist id="citydatalistOptions">
+                        <option class="text-l" *ngFor="let city of getCities(currentCountry)" [value]="city.name">
+                    </datalist>
+                    <label for="formDatalists45">Ville</label>
+                    <div class="invalid-feedback">
+                      Choisissez une ville parmis celles proposés
+                    </div>
+                  </div>
+                </div>
+                <div class="gx-0 row">
+                    <div  class="pe-1 ps-1 form-floating">
+                      <input class="fs-6" [readOnly]=" !currentCity" formControlName="address" name="address"  (change)="addressSelected($event)" (input)="textInput($event)"    [ngClass]="{'is-invalid' : !addressIsvalid}"  class="form-control fs-6" list="adressdatalistOptions" id="formDatalists45" placeholder="Ville">
+                      <datalist id="adressdatalistOptions">
+                        <option class="text-l" *ngFor="let point of points let i = index" [value]="point.title">{{point.address.city}} - {{point.address.countryName}} </option>
+                          <!-- <option [value]="points && points.length">gabes</option> -->
+                      </datalist>
+                      <label for="formDatalists45">Adresse</label>
+                      <div class="invalid-feedback">
+                        Choisissez une addresse parmis celles proposés
+                      </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- <div class="col-5">
+            <form *ngIf="point" (submit)="onSumit1()" [formGroup]="formPointAround">
+              <div class="bg-white container mb-3 mt-2 pb-3 pe-4 ps-4 pt-2">
+                  <div class="align-items-center border-bottom border-info d-flex fs-4 pb-1">
+                      <i class="fa-map-marker-alt fas pe-2 text-info"></i>
+                      <p class="mb-0">Points aux allentours</p>
+                  </div>
+
+                  <input type="hidden" formControlName="parent" class="border form-control" id="floatingInput" placeholder="name@example.com">
+                  <input type="hidden" formControlName="type" class="border form-control" id="floatingInput" placeholder="name@example.com">
+                  <div class="gx-0 mb-2 row">
+                      <div class="form-floating ">
+                          <input type="email" formControlName="title" class="border form-control" id="floatingInput" placeholder="name@example.com">
+                          <label for="floatingInput">Titre</label>
+                      </div>
+                  </div>
+                  <div class="d-flex justify-content-end">
+
+                      <app-button [loading]="loading2" class_="fa-plus fas pe-2" btn_class ="btn btn-outline-primary h-auto text-white" text="Ajouter"></app-button>
+
+                  </div>
+              </div>
+              <div class="bg-white container mb-2 mt-2 pb-4 pe-4 ps-4 pt-2">
+                  <div *ngFor="let arround of point.arround" class="align-items-center border-bottom d-flex fs-6 justify-content-start pb-3 pt-3">
+                      <i class="fa-lg fa-map-marker-alt fas pe-2"></i>
+                      <p class="mb-0">{{arround.title}}</p>
+                      <i (click)="data_to_del = arround" class="fa-lg fa-trash-alt fas ms-auto pe-2" data-bs-toggle="modal" data-bs-target="#deleteModal" ></i>
+                  </div>
+
+              </div>
+            </form>
+        </div> -->
+    </div>
+  </div>
+</form>
+<!-- <p>Form value: {{ formPoint.value | json }}</p>
+<p>Form status: {{ formPoint.status | json }}</p>
+<p>Form value2: {{ formPointAround.value | json }}</p>
+<p>Form status2: {{ formPointAround.status | json }}</p> -->
+
+<app-toast title="Trajet non trouvé"></app-toast>
+<app-modal-delete #delete_modal [datas] = "[data_to_del]" [dataType]="dataType" (onDeleted)="onFileDeleted($event)"></app-modal-delete>

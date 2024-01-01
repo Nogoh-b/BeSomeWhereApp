@@ -1,0 +1,141 @@
+<div class="fade modal pg-show-modal" id="pricingModal" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="false" data-pg-collapsed>
+  <div class="modal-dialog modal-fullscreen">
+      <div class="h-100 modal-content">
+        <section  *ngIf="!has_sucribed" class="bg-light pb-5 pt-5 vh-100" data-pg-collapsed>
+          <div class="container pb-4 pt-4">
+              <div class="text-center">
+                  <h2 class="h6 mb-1 text-primary text-uppercase">Pricing</h2>
+                  <!-- <h3 class="fw-bold h2 mb-3">Choisissez votre</h3> -->
+                  <!-- <p class="fw-light mb-4">                                Choose the plan that’s right for you. </p> -->
+              </div>
+              <div class="align-items-center justify-content-center row">
+                  <div class="col-lg-4 col-md-6 d-none py-3" data-pg-collapsed>
+                      <div class="text-secondary">
+                          <div class="bg-white mb-3 p-4 pricing_items__price_info rounded shadow">
+                              <div class="align-items-center d-flex fw-light h5">
+                                  <span class="align-self-start currency">€</span>
+                                  <span class="display-4 fw-bold text-dark">{{price_article_suscribe}}</span>
+                                  <span class="align-self-end term">/mo</span>
+                              </div>
+                              <!-- <h4 class="fw-bold h2 mb-0 text-dark">Starter</h4> -->
+                          </div>
+                          <div class="bg-white p-4 rounded shadow">
+                              <ul class="list-unstyled mb-4">
+                                  <li class="pb-2 pt-2">
+                                      <svg viewBox="0 0 24 24" fill="currentColor" height="24" width="24" class="bg-primary me-2 p-1 rounded-circle text-white">
+                                          <path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"></path>
+                                      </svg>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            20 Pages
+                                  </li>
+                                  <li class="pb-2 pt-2">
+                                      <svg viewBox="0 0 24 24" fill="currentColor" height="24" width="24" class="bg-primary me-2 p-1 rounded-circle text-white">
+                                          <path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"></path>
+                                      </svg>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            10 GB Storage
+                                  </li>
+                                  <li class="opacity-50 pb-2 pt-2">
+                                      <svg viewBox="0 0 24 24" fill="currentColor" height="24" width="24" class="bg-secondary me-2 p-1 rounded-circle text-white">
+                                          <path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"></path>
+                                      </svg>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            500 GB Bandwidth
+                                  </li>
+                                  <li class="opacity-50 pb-2 pt-2">
+                                      <svg viewBox="0 0 24 24" fill="currentColor" height="24" width="24" class="bg-secondary me-2 p-1 rounded-circle text-white">
+                                          <path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"></path>
+                                      </svg>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            Custom Domain
+                                  </li>
+                                  <li class="opacity-50 pb-2 pt-2">
+                                      <svg viewBox="0 0 24 24" fill="currentColor" height="24" width="24" class="bg-secondary me-2 p-1 rounded-circle text-white">
+                                          <path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"></path>
+                                      </svg>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            24/7 Support
+                                  </li>
+                              </ul>
+                              <a href="#" class="btn d-block w-100 btn-outline-dark rounded-pill">Sign Up</a>
+                          </div>
+                      </div>
+                  </div>
+
+
+
+                  <div class="col-lg-4 col-md-6 py-3" data-pg-collapsed>
+                      <div class="text-secondary">
+                          <div class="bg-primary mb-3 p-4 pricing_items__price_info rounded shadow text-white">
+                              <div class="align-items-center d-flex fw-light h5">
+                                  <span class="align-self-start currency">€</span>
+                                  <span class="display-4 fw-bold">{{price_article_suscribe}}</span>
+                                  <span class="align-self-end term">/mo</span>
+                              </div>
+                          </div>
+                          <div class="bg-primary p-4 rounded shadow text-white">
+                              <ul class="list-unstyled mb-4">
+                                  <li class="pb-2 pt-2" data-pg-collapsed>
+                                      <svg viewBox="0 0 24 24" fill="currentColor" height="24" width="24" class="bg-white me-2 p-1 rounded-circle text-primary">
+                                          <path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"></path>
+                                      </svg>                                &nbsp;Accès à tous les articles
+                                  </li>
+                              </ul>
+                              <app-button (click)="submit()" bh="30" [loading]="loading" class_="fas fa-save1" btn_class="btn d-block btn-lg border-2 fw-bolder fs-5 w-100 btn-light rounded-pill flex align-items-center justify-content-center " text="Choisir l'option" >
+                            </app-button>
+                              <!-- <a (click)="submit()" class="btn d-block btn-lg border-2 fw-bolder fs-5 w-100 btn-light rounded-pill flex align-items-center justify-content-center" target="_pg_blank1">Choisir l'option</a> -->
+                          </div>
+                      </div>
+                  </div>
+
+
+    
+
+
+                  <div class="col-lg-4 col-md-6 d-none py-3" data-pg-collapsed>
+                      <div class="text-secondary">
+                          <div class="bg-white mb-3 p-4 pricing_items__price_info rounded shadow">
+                              <div class="align-items-center d-flex fw-light h5">
+                                  <span class="align-self-start currency">$</span>
+                                  <span class="display-4 fw-bold text-dark">40</span>
+                                  <span class="align-self-end term">/mo</span>
+                              </div>
+                              <h4 class="fw-bold h2 mb-0 text-dark">Epic</h4>
+                          </div>
+                          <div class="bg-white p-4 rounded shadow">
+                              <ul class="list-unstyled mb-4">
+                                  <li class="pb-2 pt-2">
+                                      <svg viewBox="0 0 24 24" fill="currentColor" height="24" width="24" class="bg-primary me-2 p-1 rounded-circle text-white">
+                                          <path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"></path>
+                                      </svg>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            Unlimited Pages
+                                  </li>
+                                  <li class="pb-2 pt-2">
+                                      <svg viewBox="0 0 24 24" fill="currentColor" height="24" width="24" class="bg-primary me-2 p-1 rounded-circle text-white">
+                                          <path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"></path>
+                                      </svg>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            Unlimited Storage
+                                  </li>
+                                  <li class="pb-2 pt-2">
+                                      <svg viewBox="0 0 24 24" fill="currentColor" height="24" width="24" class="bg-primary me-2 p-1 rounded-circle text-white">
+                                          <path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"></path>
+                                      </svg>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            Unlimited Bandwidth
+                                  </li>
+                                  <li class="pb-2 pt-2">
+                                      <svg viewBox="0 0 24 24" fill="currentColor" height="24" width="24" class="bg-primary me-2 p-1 rounded-circle text-white">
+                                          <path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"></path>
+                                      </svg>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            Custom Domain
+                                  </li>
+                                  <li class="pb-2 pt-2">
+                                      <svg viewBox="0 0 24 24" fill="currentColor" height="24" width="24" class="bg-primary me-2 p-1 rounded-circle text-white">
+                                          <path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"></path>
+                                      </svg>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            24/7 Support
+                                  </li>
+                              </ul>
+                              <a href="#" class="btn d-block w-100 btn-outline-dark rounded-pill">Sign Up</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+        </section>
+        <div style="/* height: 100%; */flex-direction: column;align-items: center;justify-content: center;" class="h-100 d-flex flex-direction-column" *ngIf="has_sucribed">{{ getPreavisText() }}>
+
+            <p >
+              <app-button (click)="reload()" bh="30" class_="fas fa-save1" btn_class="btn d-block btn-lg border-2 fw-bolder fs-5 w-100 btn-primary rounded-pill flex align-items-center justify-content-center " text="Compris !" >
+              </app-button>
+            </p>
+        </div>
+      </div>
+  </div>
+</div>
+
+

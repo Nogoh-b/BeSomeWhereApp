@@ -1,0 +1,195 @@
+<div *ngIf="drive" class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom" data-pg-collapsed>
+  <h1 class="h2">Station (<span class="fs-6">{{drive && drive.pointA.address + ','+drive.pointA.city + ','+drive.pointA.country }} - {{drive.date }} - {{drive && drive.to_station ? 'Arrivée' : 'Départ' }}</span>)</h1>
+  <div class="btn-toolbar mb-2 mb-md-0">
+
+     <app-button [loading]="false" (click)="wantDelete(drive, dataTypeDrive)" type ="text" class_="fas fa-trash-alt "  btn_class ="btn   btn-danger "   data-bs-toggle="modal" data-bs-target="#deleteModal" text="Supprimer"></app-button>
+     <div class="ps-2" (click)="onSubmitDrive()">
+        <app-button  [loading]="loading2" class_="fas fa-save" btn_class ="btn btn-outline-primary text-white" text="Enregistrer"></app-button>
+     </div>
+  </div>
+</div>
+
+<div *ngIf="routes" class="gx-0 pe-5 ps-5 row row-cols-2">
+  <div class="col-7 p-2">
+
+    <form id="d" disabled (ngSubmit)="onSubmitRoute()" [formGroup]="formGroupRoute">
+      <div class="bg-white container mb-3 mt-2 pb-3 pe-4 ps-4 pt-2">
+        <div class="align-items-center border-bottom border-info d-flex fs-4 pb-1">
+            <i class="fa-map-marker-alt fas pe-2 text-info"></i>
+            <p class="mb-0">{{!drive.to_station ? 'Point d\'arrivé': 'Point de départ'}}</p>
+        </div>
+        <div class="gx-0 mb-2 row pt-4 ">
+          <div class="form-floating ">
+              <input (change)="adressSelected($event,true)"  list="point_a_list" formControlName="point" [ngClass]="{'is-invalid' : !address1Isvalid && !point1}"  type="text" class="form-control" id="floatingInput" placeholder="d">
+              <datalist id="point_a_list">
+                <option  *ngFor="let point of points" [value]=" point.address">{{point.title}} </option>
+                </datalist>
+              <label for="floatingInput">{{!drive.to_station ? 'Point d\'arrivé': 'Point de départ'}}</label>
+              <!-- <div *ngIf="!address1Isvalid && !point1" [ngClass]="{'invalid-feedback' : !address1Isvalid && !point1} ">
+                Choisissez une adresse parmis ceux proposés
+              </div> -->
+          </div>
+      </div>
+    </div>
+      <div class="bg-white container mb-3 p-4">
+
+
+
+          <div class="align-items-center border-bottom border-info d-flex fs-4 pb-1">
+              <i class="fa-clock fas pe-2 text-info"></i>
+              <p class="mb-0">Horaires</p>
+          </div>
+
+
+          <div class="gx-0  pt-4 row row-cols-4">
+            <div class="col-12 col-lg-5 gx-0 mt-2 pe-2 row">
+                <p class="fw-bold mb-0 ">Date</p>
+                <div class="form-floating ">
+                    <input formControlName= "date"  type="date" class="border form-control form-control-sm" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Date</label>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-5 mt-2 ">
+                <p class="fw-bold text-truncate">Heure {{!drive.to_station ? 'Arrivé': 'Départ'}}</p>
+                <div class="d-flex mb-3 mt-3">
+                    <div class="align-items-center d-flex time_i w-100">
+                        <input formControlName="date_time" type="time" class="border form-control" id="floatingInputHeure">
+                    </div>
+                </div>
+            </div>
+            <div class="pt-4 col-12">
+              <div class="form-floating ">
+                  <input  formControlName="price" type="number" class="border form-control" id="floatingInput" placeholder="n">
+                  <label for="floatingInput">Prix (€)</label>
+              </div>
+          </div>
+            <div class="align-items-center col-12 d-flex select_div d-none">
+                <select formControlName="back" class="form-select form-select-sm h-100" id="inputGroupSelect01">
+                    <option  value="0" selected>Allé (Point A -> Point B )</option>
+                    <option  value="1">Retour (Point B -> Point A )</option>
+                </select>
+            </div>
+        </div>
+
+          <input type="hidden" formControlName="status" value="0">
+          <input type="hidden" formControlName="for_disabled" value="1">
+          <div class="d-flex justify-content-end mt-4">
+              <!-- <button  type="submit" class="btn btn-outline-primary btn-sm pe-4 ps-4">
+                  <i class="fa-plus fas pe-2"></i>Ajouter
+              </button> -->
+
+            </div>
+            <app-button [loading]="loading1"  btn_class=" h-auto w-50 text-white " text="Ajouter"></app-button>
+
+          </div>
+        </form>
+
+      <form id="drive_form" (ngSubmit)="onSubmitDrive()" [formGroup]="formGroupDrive">
+
+
+
+      </form>
+
+      <app-routelist (wantEdit)= "modal_edit_route.updateForm($event)" (wantDelete)="wantDelete($event, dataTypeRoute)" [routes] = "routes" (onClickRoute)="getReservations($event)"></app-routelist>
+
+  </div>
+
+
+
+  <div class="col-5">
+    <form id="drive_form" (ngSubmit)="onSubmitDrive()" [formGroup]="formGroupDrive">
+      <div class="bg-white container mb-3 mt-2 pb-3 pe-4 ps-4 pt-2 d-none">
+          <div class="align-items-center border-bottom border-info d-flex fs-4 pb-1">
+              <i class="fa-map-marker-alt fas pe-2 text-info"></i>
+              <p class="mb-0">Station</p>
+          </div>
+          <div class="gx-0 mb-3 mt-4 row row-cols-2">
+              <div class="align-items-center d-flex pe-2">
+                  <div class="form-floating ">
+                    <input [readonly] = "true" formControlName1="pointa_country" type="text" class="border form-control" id="floatingInput" placeholder="d">
+                    <label for="floatingInput">Pays</label>
+                </div>
+              </div>
+              <div class="align-items-center d-flex select_div">
+
+                  <div class="form-floating ">
+                    <input [readonly] = "true"  formControlName1="pointa_city" type="text" class="border form-control" id="floatingInput" placeholder="d">
+                    <label for="floatingInput">Ville</label>
+                </div>
+              </div>
+          </div>
+          <div class="gx-0 mb-2 row">
+              <div class="form-floating ">
+                  <input [readonly] = "true" formControlName1="pointa_address" type="text" class="border form-control" id="floatingInput" placeholder="d">
+                  <label for="floatingInput">Adresse</label>
+              </div>
+          </div>
+      </div>
+      <div class="bg-white container mb-3 mt-2 pb-3 pe-4 ps-4 pt-2 d-none">
+          <div class="align-items-center border-bottom border-info d-flex fs-4 pb-1">
+              <i class="fa-map-marker-alt fas pe-2 text-info"></i>
+              <p class="mb-0">Points B</p>
+          </div>
+          <div class="gx-0 mb-2 row">
+            <div class="form-floating ">
+                <input (change)="adressSelected($event,true)"  list="point_a_list" formControlName1="point" [ngClass]="{'is-invalid' : !address1Isvalid && !point1}"  type="text" class="form-control" id="floatingInput" placeholder="d">
+                <datalist id="point_a_list">
+                  <option  *ngFor="let point of points" [value]=" point.id">{{point.city}} - {{point.country}}</option>
+                  </datalist>
+                <label for="floatingInput">Point B</label>
+                <div *ngIf="!address1Isvalid && !point1" [ngClass]="{'invalid-feedback' : !address1Isvalid && !point1} ">
+                  Choisissez une adresse parmis ceux proposés
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="bg-white container mb-3 mt-2 pb-3 pe-4 ps-4 pt-2">
+          <div class="align-items-center border-bottom border-info d-flex fs-4 mb-3 pb-1">
+              <i class="fa-euro-sign fas pe-2 text-info"></i>
+              <p class="mb-0">Details</p>
+          </div>
+          <div class="row row-cols-1">
+
+            <div class="pt-3 col-6">
+                <div class="form-floating ">
+                    <input readonly formControlName="total_places"  type="number" class="border form-control" id="floatingInput" placeholder="n">
+                    <label for="floatingInput">Nbr. Places</label>
+                </div>
+            </div>
+        </div>
+        <div class="pt-3 col-6">
+          <div class="form-floating ">
+              <input readonly  type="text" class="form-control" [value]="drive && drive.places" id="floatingInput" placeholder="Places disponibles">
+              <label for="floatingInput">Places disponibles</label>
+          </div>
+        </div>
+        <div class="pt-3">
+          <div class="form-floating ">
+              <input formControlName="id_car"  type="text" class="form-control" [value]="drive && drive.id_car" id="floatingInput" placeholder="Transport">
+              <label for="floatingInput">Transport</label>
+          </div>
+        </div>
+        <div class="pt-3">
+          <div class="form-floating ">
+            <input formControlName= "date" type="datetime-local" class="border form-control form-control-sm" id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput">Date</label>
+        </div>
+        </div>
+      </div>
+    </form>
+
+      <app-routedetails  [total_take_at_home]="total_take_at_home_total" [items]="items" [passengers]="passengers" [route]="currentRoute"></app-routedetails>
+
+
+  </div>
+</div>
+
+<app-toast #toast_c></app-toast>
+
+<app-modal-delete-admin #delete_modal [datas] = "[data_to_del]" [dataType]="dataType" (onDeleted)="onFileDeleted($event)"></app-modal-delete-admin>
+<app-modal-edit-place-trajet #modal_edit_route (route_updated)="toast_c.open('Be Somewhere', 'Elément mis à jour')"></app-modal-edit-place-trajet>
+
+<app-loading-page *ngIf="!drive" class="h-100"></app-loading-page> 
+<!-- <p>{{formGroupRoute.value |json}}</p> -->
+<!-- <p>{{formGroupRoute.status}}</p> -->

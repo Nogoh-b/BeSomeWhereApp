@@ -1,0 +1,99 @@
+<!-- <section *ngIf="station_"> -->
+<section *ngIf="station_" >
+  <div class="d-flex d-lg-flex flex-column-reverse flex-lg-row-reverse g-0 row" style="min-height: 100%; height: 100%;">
+      <div class="col-lg-8 pe-0 ps-0">
+          <div style="width: 100%" class="h-100 map_container">
+            <div #map id="map" class="map h-100" width="100%" height="600"  >
+            </div>
+
+            <div *ngIf="selected_adr && showContent" class="details_point content">
+              <p class="p_title ">Points aux allentours<span style="cursor: pointer; color: white !important; text-decoration: underline; font-size: 15px;" (click)="closeContent()"> Voir dans le plan</span> </p>
+              <!-- <i class="fas fa-times""></i>  -->
+              <div class="details_point1" >
+                <p class="pt-2 p_details" [innerHTML]="selected_adr && selected_adr.description"></p>
+              </div>
+            </div>
+              <!-- <iframe  width="100%" height="600" class="h-100" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street,%20Dublin,%20Ireland+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" ></iframe> -->
+          </div>
+      </div>
+
+      <div class="col-lg-4 h-100 pe-0 pe-lg-4 ps-0 ps-lg-4 pt-0">
+        <div class="d-flex flex-column h-100 justify-content-evenly" data-pg-collapsed>
+            <div  class="bg-white container-fluid mb-1 mt-1 p-4">
+
+              <app-home-search1 #home_search class_="bg-white container pb-4 pe-3 ps-3 pt-4 shadow-none p-lg-0" (on_search) ="onSearch($event, '.div-propostion')" (points_retreived) = "points_retreived($event)" #h [screen_all] = false [date] = "extra && extra.date" [address] = "extra && extra.address"  [station] = "station_" [switched] = "extra && isSwitched(extra.s)" ></app-home-search1>
+
+              <!-- <div class="gx-0 row">
+                <div class="input-group mb-3 pe-0 ps-0">
+                    <app-input-search #label1    [label] = " !switch.switched ? 'Adresse' : 'Station / Gare'" class="border col-12 col-lg d-flex flex-column input-group input_search pb-1 pe-3 ps-3 pt-1"></app-input-search>
+                    <app-switch #switch  class="bg-white border-0 border-dark input-group-text me-auto me-lg-0 ms-auto ms-lg-0 pb-3 pt-3"></app-switch>
+                    <app-input-search #label2   [label] = " switch.switched ? 'Adresse' : 'Station / Gare'" class="border col-12 col-lg d-flex flex-column input-group input_search pb-1 pe-3 ps-3 pt-1"></app-input-search>
+
+                </div>
+            </div> -->
+
+          </div>
+
+            <div class="bg-white container-fluid mb-1 mt-2 p-4 div-propostion">
+                <p *ngIf="this.address && this.address"  class="fs-5 pb-0 text-muted">Proposition d’adresse où on peut vous récupérer :</p>
+                <!-- <p *ngIf="this.address && this.address"  class="fs-5 pb-0 text-muted">Liste des points les plus proches de {{address && address.address}}:</p> -->
+                <div class="pb-0">
+                  <div class="list-group overflow-auto" style="height: 250px;">
+                          <app-loading-page class="h-100" *ngIf="!aroundPoints"></app-loading-page>
+                          <a [ngClass]="{active: selected_index === i}" *ngFor="let point of aroundPoints let i = index"  (click)="setPoint(i,  '.btn-search')" class="pointer border-2 border-end border-end-0 border-start-0 border-top-0 d-flex flex-column justify-content-center list-group-item list-group-item-action" >
+                            <div class="d-flex justify-content-between w-100">
+                                  <i class="fa-map-marker-alt fas pe-0 text-danger mt-auto mb-auto mr-2" style="font-size: 1.3rem; margin-right: 5px;"></i>
+                                  <h5 class="text-truncate fw-bold mt-2">{{point.title != '' ? point.title : point.address + ', '+point.city+ ', '+point.country}}</h5>
+                                  <small class="mb-auto mt-auto text-danger">{{point.distance}} km</small>
+                              </div>
+                          </a>
+                  </div>
+                </div>
+                <div class="d-flex ">
+                  <button class="open_content mt-4" (click)="openContent()" *ngIf="!showContent"><i class="fas fa-eye"></i> </button>
+                  <button *ngIf="selected_adr" (click)="getRoute(home_search.switched)" routerLinkActive="router-link-active"  type="text" class="btn-search align-items-center btn btn-lg btn-outline-primary d-flex flex-row-reverse fw-bold justify-content-center ms-auto ms-sm-auto mt-4 mt-sm-4  w-50">
+                      <i class="fa-arrow-right fas fw-bolder pb-1 ps-3"></i>Continuer
+                  </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- <div class="col-lg-4 h-auto pe-0 pe-lg-4 ps-0 ps-lg-4 pt-0">
+      <div>
+          <div  class="bg-white container-fluid mb-1 mt-1 p-4">
+
+              <app-home-search1 class_="bg-white container pb-4 pe-3 ps-3 pt-4 shadow-none p-lg-0" (on_search) ="onSearch()" (points_retreived) = "points_retreived($event)" #h [screen_all] = false [date] = "extra && extra.date" [address] = "extra && extra.address"  [station] = "station_" [switched] = "extra && isSwitched(extra.s)" ></app-home-search1>
+
+          </div>
+          <div class="bg-white container-fluid mb-1 mt-4 p-4">
+              <p class="fs-5  pb-3 text-muted">Liste des points les plus proches de votre addresse :</p>
+              <div class="list-group ">
+                  <a [ngClass]="{active: selected_index === i}" *ngFor="let point of aroundPoints let i = index"  (click)="markOrUnMark(i)" class=" pointer border-2 border-end border-end-0 border-start-0 border-top-0 d-flex flex-column justify-content-center list-group-item list-group-item-action">
+                    <div class="d-flex justify-content-between w-100">
+                          <i class="fa-map-marker-alt fas pe-0 text-danger mt-auto mb-auto mr-2" style="font-size: 1.3rem; margin-right: 5px;"></i>
+                          <h5 class="text-truncate fw-bold mt-2">{{point.address+ ', '+point.city+ ', '+point.country}}</h5>
+                          <small class="mb-auto mt-auto text-danger">{{point.distance}} km</small>
+                      </div>
+                  </a>
+
+              </div>
+              <button (click)="getRoute()" routerLinkActive="router-link-active"  type="text" class="align-items-center btn btn-lg btn-outline-primary d-flex flex-row-reverse fw-bold justify-content-center ms-auto ms-sm-auto mt-4 mt-sm-4  w-50">
+                  <i class="fa-arrow-right fas fw-bolder pb-1 ps-3"></i>Continuer
+              </button>
+          </div>
+      </div>
+  </div> -->
+
+  </div>
+</section>
+
+
+<!-- <button class="open_content" (click)="openContent()" *ngIf="!showContent"><i class="fas fa-eye"></i> </button> -->
+
+<app-loading *ngIf="loading"></app-loading>
+
+<app-toast title="Trajet non trouvé"></app-toast>
+
+<app-preloader [time]="2000"></app-preloader>

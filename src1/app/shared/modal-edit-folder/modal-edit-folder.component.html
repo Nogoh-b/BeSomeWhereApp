@@ -1,0 +1,41 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="folderForm">
+
+    <div #newf class="fade modal" id="editfolderModal" tabindex="-1" role="dialog" aria-hidden="true" data-bs-keyboard="false" data-pg-collapsed>
+      <div class="modal-dialog modal-dialog-centered modal-sm">
+          <div class="modal-content" style="background-color: rgba(255, 255, 255, 0);">
+              <div class="align-items-center d-flex flex-column">
+                  <div class="bg-white border-5 border-end border-primary border-top d-flex justify-content-center mb-n5" style="width: 85px; height: 85px; border-radius: 50%; z-index: 1;">
+                      <img src="assets/img/icon/BESOMEWHERE.png" height="65" class="image-fit mb-3" width="65" style="z-index: 2;"/>
+                  </div>
+                  <div class="bg-white border border-3 border-primary">
+                      <div class="border-0 modal-header pb-2">
+                          <h4 class="me-auto modal-title ms-auto pt-4" style="z-index: 3;">{{title}}</h4>
+                      </div>
+                      <hr class="bg-primary border-1 border-primary border-top mb-0 me-3 ms-3  pb-0">
+                      <div class="border-0 modal-body pb-0 pe-4 ps-4">
+
+                          <div  class="d-flex flex-column mb-3">
+                              <label for="formInput104">Donner un nom à ma valise </label>
+                              <input formControlName = "name"  type="text" placeholder="ex: John Doe" class="border"/>
+                          </div>
+                          <div *ngIf="false" class="mb-3">
+                              <label for="formInput104">Nom du sac par défaut</label>
+                              <select id="formInput104" formControlName = "name"   class="form-select" aria-label="Default select example">
+                                  <option *ngFor="let item of proposedChecklist" [value]="item.name" selected="">{{item.name}}</option>
+                              </select>
+                          </div>
+                      </div>
+                      <!-- <p>Form value: {{ folderForm.value | json }}</p> -->
+                      <!-- <p>Form status: {{ folderForm.valid | json }}</p> -->
+                      <span id="close1" data-bs-dismiss="modal"></span>
+                      <div class="border-0 d-flex justify-content-center modal-footer">
+                        <app-button [disabled]="!folderForm.valid " [loading] = "loading" class_="" btn_class="w-auto h-auto" [text]="cur_folder ? 'Enregistrer' : 'Créer'"></app-button>
+                        <!-- <button class="btn btn-primary text-light" data-bs-dismiss="modal">Enregistrer</button> -->
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </form>
+  

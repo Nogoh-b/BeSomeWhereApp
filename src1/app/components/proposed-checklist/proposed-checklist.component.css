@@ -1,0 +1,22 @@
+.div_img_accordeon img {
+  width: 20px!important;
+  height: 20px!important;
+  max-width: 20px;
+}
+
+.accordion .accordion-button {
+  border: 0px !important;
+  padding-left: 0;
+}
+
+.div_img_accordeon {
+  border-radius: 50%;
+  border: 2px solid #ffc107;
+  background-color: rgba(228, 41, 41, 0);
+  padding: 8px !important;
+}
+
+#proposed-checklist{
+  height: 50vh;
+    overflow-y: scroll;
+}

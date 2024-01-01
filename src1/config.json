@@ -1,0 +1,17 @@
+{
+  "small_pleasures_type" : ["Viennoiserie", "Sandwich", "Boisson","Autres", "Tout"],
+  "suit_case_price" : 5.1,
+  "price_take_to_home" : 25,
+  "price_article_souscription" : 15,
+  "price_supporte_per_day" : 5,
+  "price_supporte_per_week" : 4,
+  "price_supporte_per_month" : 3,
+  "phone_number": "+32 466 336 159",
+  "emails_admin" : ["bsomkwe@gmail.com", "besomewhere.contact@gmail.com"],
+  "support_language" : ["Francais", "Anglais"],
+  "contact_number" : {
+    "France" : "+33076485511"
+  },
+  "contact_email":"besomewhere.contact@gmail.com"
+
+}

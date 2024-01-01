@@ -1,0 +1,72 @@
+
+
+
+<div *ngIf="articles"  class="container-fluid container_home pe-0 pe-lg-5 ps-0 ps-lg-5 pt-0 pt-lg-5">
+  <!-- <div *ngIf="checklists && reservations" class="container-fluid container_home pe-0 pe-lg-5 ps-0 ps-lg-5 pt-0 pt-lg-5"> -->
+    <section>
+        <div class="gx-0 row">
+            <div class="col-lg-3 pe-2 pe-xl-4 ps-2">
+              <div class="h-auto position-sticky  top-0">
+                <app-home-ads image = "https://images.unsplash.com/photo-1603788569892-2c720de85ba0?ixid=MnwyMDkyMnwwfDF8c2VhcmNofDd8fGF2aW9ufGVufDB8fHx8MTYzMzgxNzgwNg&ixlib=rb-1.2.1q=85&fm=jpg&crop=faces&cs=srgb&w=300&h=500&fit=crop"  title="Découvrez nos offres pour le Maroc" description = 'Les rues de Chefchaouen Entre des histoires très ancrées, du street art,  propose un paysage Magnifique&nbsp;'></app-home-ads>
+              </div>
+            </div>
+
+            <div class="col-lg-9 col-xl-6 column_center pe-0 pe-lg-5 pe-xl-3 ps-0 ps-lg-5 ps-xl-3 pb-4">
+		        <section class=" p-3 ">
+		            <div class="d-flex justify-content-between">
+		                <h1 class="text-start">Articles&nbsp;</h1>
+		                <div class="mb-3">
+		                    <select (change) = "categoryChange($event)" id="formInput62" class="form-select" aria-label="Default select example">
+		                        <option [value]="0" [selected]="selected == '0'" >Toute les catégories</option>
+		                        <option *ngFor="let category of articleCategories" [value]="category.id" [selected]="selected == category.id.toString()">{{category.name}}</option>
+
+		                    </select>
+		                </div>
+		            </div>
+		            <div class="container-fluid">
+		                <div class="justify-content-left gx-3 row  row-cols-1 row-cols-lg-2 row-cols-md-2 row-cols-sm-2 row-cols-xxl-3">
+		                    <div *ngFor="let article of articles" class="pb-3 pt-3">
+		                        <div class="bg-white ">
+                              <div  *ngIf="article.status != 'publish' && !has_suscribed " class="article_eti">Payant</div>
+                              <a [routerLink]="['/article', article.id]" class="d-block">
+                                <app-preloader-img [src]="article._embedded['wp:featuredmedia'] ?  article._embedded['wp:featuredmedia'][0] && article._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url : ''" width_="700px" height_="250px"></app-preloader-img>
+                                <!-- <img [src]="article._embedded['wp:featuredmedia'] ?  article._embedded['wp:featuredmedia'][0] && article._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url : ''" width="700" height="480"> -->
+                              </a>
+		                            <div class="p-3">
+		                                <a [routerLink]="['/article', article.id]" class="text-dark text-decoration-none"><h3 class="fw-bold h5 mb-1" [innerHTML]="(article.title.rendered)"></h3></a>
+                                        <h4 class="fw-bold h6 mb-1 text-secondary">{{article._embedded['wp:term'] ?  article._embedded['wp:term'][0] && article._embedded['wp:term'][0][0].name : 'Pas de ctégorie'}}</h4>
+                                        <p class="mb-0 text-dark">{{article.modified | date}}</p>
+	<!-- 	                                <div class="align-items-center d-flex justify-content-between small">
+		                                    <a href="#" class="align-items-center d-flex text-dark text-decoration-none"><img src="https://images.unsplash.com/photo-1537151625747-768eb6cf92b2?ixid=MXwyMDkyMnwwfDF8c2VhcmNofDE5fHxkb2d8ZW58MHx8fA&ixlib=rb-1.2.1q=85&fm=jpg&crop=faces&cs=srgb&w=400&h=400&fit=crop" class="me-2 rounded-circle" width="48" height="48" alt="..."><div>
+		                                        </div></a>
+		                                    <span>6 min read</span>
+		                                </div> -->
+		                            </div>
+		                        </div>
+		                    </div>
+
+		                </div>
+		            </div>
+		        </section>
+
+            </div>
+            <div class="col-lg-3 pe-2 pe-xl-4 ps-2">
+              <div class="h-auto position-sticky  top-0">
+                <app-home-ads></app-home-ads>
+              </div>
+            </div>
+            </div>
+    </section>
+  </div>
+
+  <app-preloader-home *ngIf="!articles"></app-preloader-home>
+  <!-- <circle-progress
+  [percent]="85"
+  [radius]="100"
+  [outerStrokeWidth]="16"
+  [innerStrokeWidth]="8"
+  [outerStrokeColor]="'#78C000'"
+  [innerStrokeColor]="'#C7E596'"
+  [animation]="true"
+  [animationDuration]="300"
+  ></circle-progress> -->

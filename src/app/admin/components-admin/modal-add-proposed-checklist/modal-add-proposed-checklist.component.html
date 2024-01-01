@@ -1,0 +1,77 @@
+
+
+<div class="fade modal" id="modalProposerItem" tabindex="-1" role="dialog" aria-hidden="true" data-bs-keyboard="false" data-pg-collapsed>
+  <div class="modal-dialog modal-dialog-centered modal-l">
+      <div class="modal-content" style="background-color: rgba(255, 255, 255, 0);">
+          <div class="align-items-center d-flex flex-column">
+              <div class="bg-white border-5 border-end border-primary border-top d-flex justify-content-center mb-n5" style="width: 85px; height: 85px; border-radius: 50%; z-index: 1;">
+                  <img src="assets/img/icon/BESOMEWHERE.png" height="65" class="image-fit mb-3" width="65" style="z-index: 2;"/>
+              </div>
+              <div class="bg-white border border-3 border-primary w-100">
+                  <div class="border-0 modal-header pb-2">
+                      <h4 class="me-auto modal-title ms-auto pt-4" style="z-index: 3;">{{ item ? 'Modification' : 'Création'}}</h4>
+                  </div>
+                  <form  (submit)="onSumit()" [formGroup]="formItem_Proposed">
+
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-0 pb-2 mb-0 border-bottom" data-pg-collapsed>
+                      <!-- <div class="btn-toolbar mb-2 mb-md-0">
+                          <button type="submit" class="btn btn-outline-primary ">
+                              <i class="fa-save fas pe-2"></i>Enregistrer
+                          </button>
+                      </div> -->
+                    </div>
+
+
+                    <div class=" table-responsive">
+                      <div class="gx-0  row row-cols-1" data-pg-collapsed>
+                          <div class="col-12 p-2">
+                              <div class="bg-white container p-3">
+                                  <div class="gx-0 row row-cols-1">
+                                      <div class="col form-floating pe-2 ps-0">
+                                          <input type="text" formControlName="name" name="name" class="border form-control" id="floatingInput" placeholder="name@example.com">
+                                          <label for="floatingInput">Nom</label>
+                                      </div>
+
+                                  </div>
+                                  <div class="d-flex align-items-center mb-3 mt-3">
+                                    <select #select value="id"  formControlName="category_id" name="category_id"  class=" pe-3 form-select " id="inputGroupSelect01">
+                                      <option *ngFor="let category of categories" [value]="category.id" selected>{{category.name}}</option>
+                                  </select>
+                                </div>
+                                  <!-- <div class="gx-0 mb-3 mt-3 row row-cols-1">
+                                      <div class=" form-floating  pe-2">
+                                        <input class="fs-6"  #input_   [ngClass]="{'is-invalid' : false}" class=" form-control fs-6" list="countrydatalistOptions" id="floatingInput" placeholder="Pays">
+                                        <datalist id="countrydatalistOptions">
+                                          <option  *ngFor="let category of categories" [value]="category.id">ddd </option>>
+                                          </datalist>
+                                          <label for="floatingInput">Catégorie</label>
+
+                                        </div>
+                                  </div> -->
+                                  <!-- <app-upload *ngIf="attach_ad" (fileDeleted)="file_deleted($event)" (fileUploaded)="file_uploaded($event)" [just_for_file]="true"></app-upload> -->
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+
+                  <div class="border-0 d-flex justify-content-center modal-footer">
+                    <!-- <button type="reset" class="border border-2 btn btn-light" >Annuler</button>
+                    <button  type="submit" class="btn btn-primary ps-2 text-light" >
+                        <i class="fa-trash-alt fas pe-2"></i>Enregistrer
+                    </button> -->
+                    <!-- <div>{{formItem_Proposed && formItem_Proposed.value | json}}</div> -->
+                    <app-button id="close_btn"type = 'button'  btn_class = "btn btn-outline-primary  btn-light" text="Annuler" data-bs-dismiss="modal" ></app-button>
+                    <app-button [loading] = "loading" btn_class = "btn btn-primary ps-2 text-light h-auto text-l" text="Enregistrer"></app-button>
+                </div>
+
+                <app-toast title="Trajet non trouvé"></app-toast>
+              </form>
+              </div>
+              <!-- <button class="close" type="button" data-dismiss="modal" >dd</button> -->
+          </div>
+
+      </div>
+  </div>
+</div>
+
+

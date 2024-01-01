@@ -1,0 +1,45 @@
+<div class="d-flex gx-0 row row-cols-1 row-cols-sm-3 w-100">
+  <p class="pb-2 pt-0 text-start w-100">Aéroport/Gare uniquement</p>
+  <div class="pe-1 ps-1 p-2">
+    <select #input_   (change)="countrySelected($event)" [(ngModel)]="country" class=" form-control fs-6">
+      <option value="">- Pays -</option>
+      <option  *ngFor="let country of countries" [value]="country">{{country}}</option>
+    </select>
+    <!-- <input class="fs-6"  #input_   (change)="countrySelected($event)" [(ngModel)]="country" [ngClass]="{'is-invalid' : !countryIsvalid}" class=" form-control fs-6" list="countrydatalistOptions" id="formDatalists45" placeholder="Pays">
+      <datalist id="countrydatalistOptions">
+        <option  *ngFor="let country of countries" [value]="country.translations.fr ? country.translations.fr : country.name">
+        </datalist>
+      <div *ngIf="!countryIsvalid" [ngClass]="{'invalid-feedback' : !countryIsvalid} ">
+        Choisissez un pays parmis ceux proposés
+      </div> -->
+    </div>
+    <div  class="pe-1 ps-1 p-2">
+      <select class="fs-6" (change)="citySelected($event)" [(ngModel)]="city" [ngClass]="{'is-invalid' : !cityIsvalid, 'desactivated':cities.length == 0}"  class="form-control fs-6" >
+      <option value="">- Ville -</option>
+      <option  *ngFor="let city of cities" [value]="city">{{city}}</option>
+      </select>
+      <!-- <input class="fs-6" [readOnly]=" !countryIsvalid || !currentCountry" (change)="citySelected($event)" [(ngModel)]="city" [ngClass]="{'is-invalid' : !cityIsvalid}"  class="form-control fs-6" list="citydatalistOptions2" id="formDatalists451" placeholder="Ville">
+      <datalist id="citydatalistOptions2">
+          <option class="text-l" *ngFor="let city of getCities(currentCountry)" [value]="city.name">
+      </datalist>
+      <div class="invalid-feedback">
+        Choisissez une ville parmis ceux proposés
+      </div> -->
+  </div>
+  <div  class="pe-1 ps-1 p-2">
+    <select class="fs-6" (change)="addressSelected($event)" [(ngModel)]="address" [ngClass]="{'is-invalid' : !cityIsvalid, 'desactivated':addresses.length == 0}"  class="form-control fs-6" >
+      <option value="">- Addresse -</option>
+      <option  *ngFor="let address of addresses" [value]="toString(address)">{{address.title}}</option>
+    </select>
+      <!-- <input class="fs-6" [readOnly]="!currentCity || getAddress().length === 0" (change)="addressSelected($event)" [(ngModel)]="address" [ngClass]="{'is-invalid' : !addressIsvalid}"  class="form-control fs-6" list="adressdatalistOptions4" id="formDatalists45" placeholder="Station/Gare">
+      <datalist id="adressdatalistOptions4">
+        <option class="text-l" *ngFor="let address of getAddress(currentCountry)" [value]="address.address">
+      </datalist>
+      <div class="invalid-feedback">
+        Choisissez une station/Gare parmis celles proposées
+      </div>
+      <div class="text-danger" *ngIf="currentCity && getAddress().length === 0">
+        Aucune station/Gare trouvée !
+      </div> -->
+  </div>
+</div>

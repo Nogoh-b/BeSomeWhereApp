@@ -1,0 +1,90 @@
+<div class="fade modal pg-show-modal" id="authModal" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="false" data-pg-collapsed>
+  <div class="modal-dialog modal-fullscreen">
+      <div class="h-100 modal-content">
+          <div class="d-flex fixed-top justify-content-end position-absolute">
+              <button #btn_close type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close" style="z-index: 5px;"></button>
+          </div>
+          <section class="bg-light h-100">
+              <div class="g-0 h-100 row row-cols-1 row-cols-lg-2">
+                  <div class="position-fixed">
+</div>
+                  <div (click)="closeModal()" class="align-items-center col-left d-flex d-lg-flex me-auto ms-auto">
+                      <img src="assets/img/reading.svg" width="100%" class="d-flex h-50 " height="100%"/>
+                      <div class="bg-dark d-none h-100 opacity-50 pg-empty-placeholder position-absolute top-0 w-50"></div>
+                  </div>
+                  <div class="align-items-lg-center align-items-start bg-white col-12 col-lg-4 d-flex d-lg-flex h-100 justify-content-center justify-content-lg-center">
+                      <div class="bg-transparent mt-n5  p-lg-5 pe-5 ps-5 w-100" style="z-index: 1;">
+                          <div class="align-items-center d-flex justify-content-center justify-content-lg-start ms-lg-n4">
+                              <div class="bg-white border-5 border-end border-primary border-top d-flex justify-content-center mb-4 mb-lg-5" style="width: 150px; height: 150px; border-radius: 50%; z-index: 1;">
+                                  <img src="assets/img/icon/BESOMEWHERE.png" height="150" class="image-fit mb-3" width="150" style="z-index: 2;"/>
+                              </div>
+                          </div>
+                          <h1 class="fw-bolder mb-4 text-center text-dark text-lg-start" style="z-index: 4;">Connexion</h1>
+                          <p class="fs-6 mb-5 text-black-50 text-center text-lg-start">Connectez vous avant de continuer</p>
+                          <form (submit)="tryLogin(loginForm.value)" [ngClass]="{'was-validated': submited && loginForm.valid}" [formGroup]="loginForm" class="pb-3 pb-lg-0 needs-validation">
+                              <div class="mb-3">
+                                  <div class="border border-1 border-primary input-group text-primary" [ngClass]="{'border-danger': submited && !loginForm.get('email').valid}">
+                                      <span class="bg-white border-0 input-group-text" id="addon-wrapping1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" class="border-1 border-primary text-primary">
+                                              <g>
+                                                  <path fill="none" d="M0 0h24v24H0z"></path>
+                                                  <path d="M3 3h18a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm17 4.238l-7.928 7.1L4 7.216V19h16V7.238zM4.511 5l7.55 6.662L19.502 5H4.511z"></path>
+                                              </g>
+                                          </svg></span>
+                                      <input [ngClass]="{'is-invalid': submited && !loginForm.get('email').valid}" type="email" class="border-0 form-control" formControlName="email" placeholder="Email" aria-label="User Email" name="email"  ngModel email="true" aria-describedby="addon-wrapping1">
+                                      <!-- <div class="valid-feedback">Valid.</div> -->
+                                    </div>
+                              </div>
+                              <div class="mb-2">
+                                  <div class="border border-1  input-group text-primary" [ngClass]="{'border-primary': !submited, 'border-danger': submited && !loginForm.get('password').valid}">
+                                      <span class="bg-white border-0 input-group-text" id="addon-wrapping2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" class="border-1 border-primary text-primary">
+                                              <g>
+                                                  <path fill="none" d="M0 0h24v24H0z"></path>
+                                                  <path d="M10.758 11.828l7.849-7.849 1.414 1.414-1.414 1.415 2.474 2.474-1.414 1.415-2.475-2.475-1.414 1.414 2.121 2.121-1.414 1.415-2.121-2.122-2.192 2.192a5.002 5.002 0 0 1-7.708 6.294 5 5 0 0 1 6.294-7.708zm-.637 6.293A3 3 0 1 0 5.88 13.88a3 3 0 0 0 4.242 4.242z"></path>
+                                              </g>
+                                          </svg></span>
+                                      <input class=" border-0 form-control" [ngClass]="{'is-invalid': submited && !loginForm.get('password').valid}" type="password" placeholder="Password" formControlName="password" aria-label="Password" aria-describedby="addon-wrapping2" />
+                                  </div>
+                              </div>
+                              <div class="mb-4">
+                                  <!-- <input type="checkbox" class="form-check-input" id="exampleCheck1"/>
+                                  <label class="form-check-label" for="exampleCheck1">Rappelez vous de moi</label> -->
+                                  <span data-bs-toggle="modal" (click)="openModal1('resetModal')" data-bs-target="#resetModal" class=" pointer text-primary text-right font-italic">
+                                    Mot de passe oublié ?
+                                  </span>
+                              </div>
+
+                              <app-button [loading] = "isLoading" btn_class="btn d-block w-100 btn-primary fw-bold pb-2 ps-3 pe-3 pt-2 text-white" [text]="'Connexion'"></app-button>
+                              <!-- <button type="submit" class="btn d-block w-100 btn-primary fw-bold pb-2 ps-3 pe-3 pt-2" style="height: 50px;">Connexion</button> -->
+                              <p class="pt-4 text-center text-primary" data-bs-dismiss="modal"  (click)="openModal1('registeModal')"  data-bs-toggle="modal" data-bs-target="#registeModal"><b class="text-body">Pas encore inscrit ? </b><a class="pointer">inscription</a></p>
+                              <!-- <p class="pt-4 text-center text-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#registeModal"><b class="text-body">Déja inscrit ? </b>Connexion</p> -->
+                              <div class="d-none">
+                                  <div>
+                                      <p class="pt-4 text-black-50 text-center">Ou utilisez&nbsp;</p>
+                                  </div>
+                                  <div class="align-items-center d-flex justify-content-center mt-4 pb-4">
+                                    <!-- <svg (click)="tryFacebookLogin()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="width: 50px !important; height: 50px;" class="text-primary pointer">
+                                        <g>
+                                            <path fill="none" d="M0 0h24v24H0z"/>
+                                            <path d="M15.402 21v-6.966h2.333l.349-2.708h-2.682V9.598c0-.784.218-1.319 1.342-1.319h1.434V5.857a19.19 19.19 0 0 0-2.09-.107c-2.067 0-3.482 1.262-3.482 3.58v1.996h-2.338v2.708h2.338V21H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1h-4.598z"/>
+                                        </g>
+                                    </svg> -->
+                                    <svg (click)="tryGoogleLogin()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" style="width: 50px; height: 50px;" class="text-danger pointer">
+                                        <g>
+                                            <path fill="none" d="M0 0h24v24H0z"/>
+                                            <path d="M12 11h8.533c.044.385.067.78.067 1.184 0 2.734-.98 5.036-2.678 6.6-1.485 1.371-3.518 2.175-5.942 2.175A8.976 8.976 0 0 1 3 11.98 8.976 8.976 0 0 1 11.98 3c2.42 0 4.453.89 6.008 2.339L16.526 6.8C15.368 5.681 13.803 5 12 5a7 7 0 1 0 0 14c3.526 0 6.144-2.608 6.577-6H12v-2z"/>
+                                        </g>
+                                    </svg>
+                                </div>
+                              </div>
+                          </form>
+                          <app-toast></app-toast>
+                          <!-- <p>Form value: {{ loginForm.value | json }}</p>
+                          <p>Form status: {{ loginForm.status | json }}</p> -->
+                      </div>
+                  </div>
+              </div>
+          </section>
+      </div>
+  </div>
+</div>
+<app-modal-reset-pwd></app-modal-reset-pwd>

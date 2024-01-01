@@ -1,0 +1,81 @@
+
+
+
+
+<div class="fade modal" id="detailsuser" tabindex="-1" role="dialog" aria-hidden="true" data-bs-keyboard="false" data-pg-collapsed>
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+      <div class="modal-content" style="background-color: rgba(255, 255, 255, 0);">
+          <div class="align-items-center d-flex flex-column">
+              <div class="bg-white border-5 border-end border-primary border-top d-flex justify-content-center mb-n5" style="width: 85px; height: 85px; border-radius: 50%; z-index: 1;">
+                  <img src="assets/img/icon/BESOMEWHERE.png" height="65" class="image-fit mb-3" width="65" style="z-index: 2;"/>
+              </div>
+              <div class="bg-white border-3 border-primary">
+                  <div class="border-0 modal-header pb-2">
+                      <h4 class="me-auto modal-title ms-auto pt-5" style="z-index: 3;">Détails de l'utilisateur</h4>
+                  </div>
+
+
+                  <div *ngIf="user" class="card">
+                    <div class="card-body" data-pg-collapsed>
+                      <div class="dropdown float-end">
+                        <!-- <div>
+
+                            <svg data-bs-toggle="modal" data-bs-target="#deleteModal" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-trash fs-4 text-danger pointer" viewBox="0 0 16 16" data-pg-collapsed>
+                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                            </svg>
+                            <svg data-bs-toggle="modal" data-bs-target="#modal1" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-trash fs-4 text-primary pointer" viewBox="0 0 16 16" data-pg-collapsed>
+                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                            </svg>
+                        </div> -->
+                    </div>
+                        <div class="align-items-center d-flex">
+                            <!-- <app-preloader-img [src]="user.image ? user.image :'./assets/img/empty_profil.jpg'" [height_]="'100px'" [width_]="'100px'"></app-preloader-img> -->
+                            <img [src]="user.image ? user.image :'./assets/img/empty_profil.jpg'" width="100" height="100" class="rounded-circle avatar-lg img-thumbnail" alt="profile-image">
+                            <div class="w-100 ms-3">
+                                <h4 class="fw-bold my-0">{{user.name}}</h4>
+                                <p class="text-muted text-center">Depuis le {{user.created_at | date}}</p>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <!-- <h4 class="font-13 text-uppercase">About Me :</h4> -->
+                            <!-- <p class="text-muted text-center font-13 mb-3">
+                    Hi I'm Johnathn Deo,has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type.
+                            </p> -->
+                            <p class="text-muted text-center mb-2 font-13"><strong class="text-body">Nom Complet :</strong> <span class="ms-2">{{user.first_name }} {{user.last_name}}</span></p>
+                            <p class="text-muted text-center mb-2 font-13"><strong class="text-body">Mobile :</strong><span class="ms-2">{{user.phone}}</span></p>
+                            <p class="text-muted text-center mb-2 font-13"><strong class="text-body">Email :</strong> <span class="ms-2">{{user.email}}</span></p>
+                            <p *ngIf="user.country && user.country !=''" class="text-muted text-center mb-1 font-13"><strong class="text-body">Location :</strong> <span class="ms-2"> {{ user.country }} - {{user.city }}</span></p>
+
+                          </div>
+                    </div>
+                </div>
+
+                <div *ngIf="reservations && checklists" class="card">
+                  <div class="card-body text-center">
+                      <div class="gx-0 row row-cols-2">
+                          <div class="border-end border-light">
+                              <h5 class="text-muted text-center mt-1 mb-2 fw-normal">Checklists</h5>
+                              <h2 class="fw-bold mb-0">{{checklists && checklists.length}}</h2>
+                          </div>
+                          <div>
+                              <h5 class="text-muted text-center mt-1 mb-2 fw-normal">Reservations</h5>
+                              <h2 class="fw-bold mb-0">{{reservations && reservations.length}}</h2>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <app-loading-page *ngIf="!reservations || !checklists" class="h-100"></app-loading-page>
+
+              </div>
+
+          </div>
+
+      </div>
+  </div>
+  <app-toast title="Trajet non trouvé"></app-toast>
+  <!-- <p>{{formGroupDrive.value | json}}</p> -->
+</div>
+
+

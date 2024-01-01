@@ -1,0 +1,110 @@
+
+
+<div class="fade modal" id="modalAddMeals" tabindex="-1" role="dialog" aria-hidden="true" data-bs-keyboard="false" data-pg-collapsed>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content" style="background-color: rgba(255, 255, 255, 0);">
+          <div class="align-items-center d-flex flex-column">
+              <div class="bg-white border-5 border-end border-primary border-top d-flex justify-content-center mb-n5" style="width: 85px; height: 85px; border-radius: 50%; z-index: 1;">
+                  <img src="assets/img/icon/BESOMEWHERE.png" height="65" class="image-fit mb-3" width="65" style="z-index: 2;"/>
+              </div>
+              <div class="bg-white border border-3 border-primary">
+                  <div class="border-0 modal-header pb-2">
+                      <h4 class="me-auto modal-title ms-auto pt-4" style="z-index: 3;">Création du petit plaisir</h4>
+                  </div>
+                  <form *ngIf="true" (submit)="onSumit()" [formGroup]="formMeats">
+
+                    <!-- <input type="hidden" formControlName="type" name="type" >
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom" data-pg-collapsed>
+                      <div class="btn-toolbar mb-2 mb-md-0">
+                          <button type="submit" class="btn btn-outline-primary ">
+                              <i class="fa-save fas pe-2"></i>Enregistrer
+                          </button>
+                      </div>
+                    </div> -->
+
+
+                    <div class=" table-responsive">
+                      <div class="gx-0  " data-pg-collapsed>
+                          <div class="col-12 p-2">
+                              <div class="bg-white container p-3">
+                                  <div class="gx-0  ">
+                                      <div class=" form-floating pe-2 ps-0">
+                                          <input type="text" formControlName="name" name="name" class="border form-control" id="floatingInput" placeholder="name@example.com">
+                                          <label for="floatingInput">Nom</label>
+                                      </div>
+                                  </div>
+                              </div>
+
+                                <div class="bg-white container p-3 row row-cols-2 gx-0 ">
+                                    <div class=" form-floating pe-2 ps-0">
+                                        <input type="number" formControlName="quantity" name="quantity" class="border form-control" id="floatingInput" placeholder="name@example.com">
+                                        <label for="floatingInput">Quantité</label>
+                                    </div>
+                                    <div class=" form-floating pe-2 ps-0">
+                                        <input type="number" formControlName="price" name="price" class="border form-control" id="floatingInput" placeholder="name@example.com">
+                                        <label for="floatingInput">Price</label>
+                                    </div>
+                                </div>
+                                <div class="border form-floating ">
+                                  <textarea formControlName="description" name="description"   class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="min-height: 150px;"></textarea>
+
+                                  <quill-editor
+                                  formControlName="description"
+                                  name="description"
+                                  ></quill-editor>
+
+                              </div>
+                                <!-- <div class="bg-white container p-3 ">
+                                    <div class=" form-floating pe-2 ps-0">
+                                        <input type="text" formControlName="title" name="title" class="border form-control" id="floatingInput" placeholder="name@example.com">
+                                        <label for="floatingInput">Catégorie</label>
+                                    </div>
+                                </div> -->
+                                <div class="bg-white container p-3 ">
+                                  <select #cat_select style="height: 50px ;" formControlName="category" class="form-control">
+                                    <option [value]="itemCategory.Meal">Petit Plaisir</option>
+                                    <option [value]="itemCategory.BabySeats">Siège Bébé</option>
+                                  </select>
+                                </div>
+                                <div *ngIf="can_screen_sub() " class="bg-white container p-3 ">
+                                  <select style="height: 50px ;" formControlName="sub_category" class="form-control">
+                                  <!-- <select formControlName="title" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.title.errors }"> -->
+                                    <!-- <option value="Categorie">Catégorie</option> -->
+                                    <option *ngFor="let small_pleasure of small_pleasures_type let i = index" [value]="i">{{small_pleasure}}</option>
+                                    <!-- <option *ngFor="let small_pleasure of small_pleasures_type" [value]="small_pleasure">{{small_pleasure}}</option> -->
+
+                                    <!-- <option [value]="typeMeals.Viennoiserie">Viennoiserie</option>
+                                    <option [value]="typeMeals.Sandwich">Sandwich</option>
+                                    <option [value]="typeMeals.Boisson">Boisson</option>
+                                    <option [value]="typeMeals.All">All</option> -->
+                                  </select>
+                                </div>
+                                <div class="bg-white container p-0 ">
+                                  <app-upload   (fileDeleted)="file_deleted($event)" (fileUploaded)="file_uploaded($event)" [just_for_file]="true"></app-upload>
+                                  <!-- <app-upload  (fileDeleted)="file_deleted($event)" (fileUploaded)="file_uploaded($event)" [just_for_file]="formMeats.get('category').value === itemCategory.Meal.toString() "></app-upload> -->
+                                </div>
+                          </div>
+                      </div>
+                    </div>
+
+                  <div class="border-0 d-flex justify-content-center modal-footer">
+                    <!-- <button type="reset" class="border border-2 btn btn-light" >Annuler</button>
+                    <button  type="submit" class="btn btn-primary ps-2 text-light" >
+                        <i class="fa-trash-alt fas pe-2"></i>Enregistrer
+                    </button> -->
+                  <!-- <div>{{formMeats.value | json}}</div> -->
+                    <app-button data-bs-dismiss="modal" type = 'reset'  btn_class = "btn btn-outline-primary  btn-light" text="Annuler"></app-button>
+                    <app-button [loading] = "loading" btn_class = "btn btn-primary ps-2 text-light h-auto text-l" text="Enregistrer"></app-button>
+                </div>
+
+                <app-toast title="Trajet non trouvé"></app-toast>
+              </form>
+              </div>
+
+          </div>
+
+      </div>
+  </div>
+</div>
+
+

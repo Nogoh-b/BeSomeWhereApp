@@ -1,0 +1,15 @@
+nbrice1996@gmail.com
+88938F5EB6197530581FA73755B82AC71374
+smtp.elasticemail.com
+2525
+
+
+Username
+bsomkwe@gmail.com
+Password
+91E89548269642D4B6D76AFE1D4E5563E404
+Copy
+Server
+smtp.elasticemail.com
+Port
+2525

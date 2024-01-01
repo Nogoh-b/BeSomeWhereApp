@@ -1,0 +1,50 @@
+<div *ngIf="checklists && reservations"  class="container-fluid container_home pe-0 pe-lg-5 ps-0 ps-lg-5 pt-0 pt-lg-5">
+<!-- <div *ngIf="checklists && reservations" class="container-fluid container_home pe-0 pe-lg-5 ps-0 ps-lg-5 pt-0 pt-lg-5"> -->
+  <section>
+      <div class="gx-0 row">
+          <div class="col-lg-3 d-lg-none d-none d-xl-block pe-0 ps-0 pt-0 ">
+            <div class="h-auto position-sticky top-0">
+              <app-home-checklist  (wantCreateChecklist)="wantAddNewCheklist('#checklistAdd')" [checklists]="checklists"></app-home-checklist>
+              <app-home-ads image = "https://images.unsplash.com/photo-1603788569892-2c720de85ba0?ixid=MnwyMDkyMnwwfDF8c2VhcmNofDd8fGF2aW9ufGVufDB8fHx8MTYzMzgxNzgwNg&ixlib=rb-1.2.1q=85&fm=jpg&crop=faces&cs=srgb&w=300&h=500&fit=crop"  title="Découvrez nos offres pour le Maroc" description = 'Les rues de Chefchaouen Entre des histoires très ancrées, du street art,  propose un paysage Magnifique&nbsp;'></app-home-ads>
+            </div>
+          </div>
+
+          <div class="col-lg-9 col-xl-6 column_center pe-0 pe-lg-5 pe-xl-3 ps-0 ps-lg-5 ps-xl-3 pb-0">
+            <app-home-card-blog></app-home-card-blog>
+            <app-checklist-add id="checklistAdd" [for_home] ="true" *ngIf="checklist_add"></app-checklist-add>
+              <div class="mt-4">
+                <app-first-reservation-div height="400px" *ngIf="is_first_reservation"></app-first-reservation-div>
+              </div>
+              <app-home-search1></app-home-search1>
+              <div class="d-xl-none p-2">
+                <h3 class="fs-4 fw-bold mb-2 ps-4 ps-lg-0 pt-4  pt-lg-4 text-uppercase" >Mes checklists</h3>
+                <app-home-checklist (wantCreateChecklist)="openCreateChecklist('#checklistAdd')" [screen_all]="false" class="" [checklists]="checklists"></app-home-checklist>
+              </div>
+              <app-home-visit [users]="users && users.length"></app-home-visit>
+              <app-home-about></app-home-about>
+          </div>
+          <div class="col-lg-3 pe-2 pe-xl-4 ps-2">
+              <div class="h-auto position-sticky  top-0">
+                  <app-home-trajet   [reservations]="reservations" ></app-home-trajet>
+                  <app-home-ads image = "https://images.unsplash.com/photo-1571175081012-fbb2d3ba5b90?ixid=MnwyMDkyMnwwfDF8c2VhcmNofDJ8fFR1bmlzaWV8ZW58MHx8fHwxNjMzODE3ODM5&ixlib=rb-1.2.1q=85&fm=jpg&crop=faces&cs=srgb&w=300&h=500&fit=crop"  title="Découvrez nos offres pour le Maroc" description = 'Les rues de Chefchaouen Entre des histoires très ancrées, du street art,  propose un paysage Magnifique&nbsp;'></app-home-ads>
+              </div>
+          </div>
+          </div>
+  </section>
+</div>
+<!-- <button type="button" (click)="sendMail()" class="btn border-2 fw-bolder btn-lg btn-outline-light btn-primary">Je m'abonnes</button> -->
+<!-- <app-home-search1></app-home-search1> -->
+
+<app-preloader-home *ngIf="!checklists || !reservations"></app-preloader-home>
+<!-- <app-contact-us></app-contact-us> -->
+<!-- <circle-progress
+[percent]="85"
+[radius]="100"
+[outerStrokeWidth]="16"
+[innerStrokeWidth]="8"
+[outerStrokeColor]="'#78C000'"
+[innerStrokeColor]="'#C7E596'"
+[animation]="true"
+[animationDuration]="300"
+></circle-progress> -->
+<app-toast></app-toast>

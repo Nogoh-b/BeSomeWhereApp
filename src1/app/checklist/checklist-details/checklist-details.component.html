@@ -1,0 +1,195 @@
+<div *ngIf="checklist" class="container-fluid container_home pe-0 ps-0" style="height: 92vh;
+
+/* padding-top: 99px !important */
+/* padding-left: 250px !important */
+/* padding-right: 250px !important */" data-pg-collapsed>
+    <section class="h-100 bg-transparent">
+        <div class="gx-0 h-100 row bg-transparent">
+          <div class="col-lg-3 pe-2 pe-xl-4 ps-2 pt-4">
+            <div class="h-auto position-sticky  top-0">
+                <app-home-ads></app-home-ads>
+            </div>
+          </div>
+
+            <div class="col-12 col-lg-5 pe-lg-0 pe-xl-5 ps-lg-2 ps-xl-5 pt-4">
+              <div class="">
+                <app-checklist-card
+                (onWantDeleted)="delete_modal.want_delete_cheklist(checklist)"
+                [forCustomize]="true"
+                [checklist]="checklist"></app-checklist-card>
+              </div>
+                <div class="container-fluid mt-lg-4  pb-0 pb-lg-3">
+                    <div class=" pe-0 ps-0">
+                        <div class="align-items-center bg-white border d-none justify-content-center pb-4 pt-4">
+                            <div class="pe-4 ps-4">
+                                <button type="button" class="border border-1 border-primary btn btn-lg btn-light btn-outline-primary btn_tools fw-bold" style="border-radius: 0; width: auto; height: 40px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" class="mb-1" style="width: 25px; height: 25px;">
+                                        <g>
+                                            <path fill="none" d="M0 0h24v24H0z"></path>
+                                            <path d="M9.243 19H21v2H3v-4.243l9.9-9.9 4.242 4.244L9.242 19zm5.07-13.556l2.122-2.122a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414l-2.122 2.121-4.242-4.242z"></path>
+                                        </g>
+                                    </svg>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Ajouter
+                                </button>
+                            </div>
+                            <div class="pe-4 ps-4">
+                                <button type="button" class="border border-1 border-primary btn btn-lg btn-light btn-outline-primary btn_tools fw-bold" style="border-radius: 0; width: auto; height: 40px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" class="mb-1" style="width: 25px; height: 25px;">
+                                        <g>
+                                            <path fill="none" d="M0 0h24v24H0z"/>
+                                            <path d="M4 3h16l2 4v13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7.004L4 3zm9 11v-4h-2v4H8l4 4 4-4h-3zm6.764-7l-1-2H5.237l-1 2h15.527z"/>
+                                        </g>
+                                    </svg>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Archiver
+                                </button>
+                            </div>
+                        </div>
+
+
+
+                        <div class="bg-white mt-4 p-3  mt-5 mt-lg-0">
+                          <div class="align-items-center border-bottom border-dark d-flex justify-content-between pb-3 pe-2 ps-2 pt-2 text-warning" data-pg-collapsed>
+                            <p class="fw-bold h3 text-capitalize">Checklist Personnalisée</p>
+                            <i class="fa-2x fa-angle-down fas"></i>
+                          </div>
+                            <div class="align-items-center container d-flex flex-column gx-0 justify-content-center pb-2 pt-3 row">
+
+                                <!-- <app-toolsbar-checklist #toolBarChecklist
+                                #toolsBar
+                                (onDelete)="delete_modal.want_delete_folder(getCurrentFolder())"
+                                (onCreateFolder)="folder_modal.reset()"
+                                (onCreateFile)="file_modal.reset()"
+                                (onEdit) ="folder_modal.init(getCurrentFolder())"
+                                (onDeposit)="refresh(checklist.id)"
+                                (onActionPerformed)="toast.open('Be Somewhere',$event)"
+                                [currentFolder] = "getCurrentFolder()"></app-toolsbar-checklist> -->
+
+                                <app-folder-state [title]="checklist.title" (wantEdit)="folder_modal_edit.init(getCurrentFolder())" (folderSelected)="navigateToFolder($event)" *ngIf="fillesTree.length > 0" [files] ="folders"  [stats]="folders.length <= 0 ? checklist.stats  : folders[folders.length - 1].stats" ></app-folder-state>
+
+                                <!-- files details -->
+
+                                <div class="border mt-2 ">
+                                  <div *ngIf="checklist.stats.total_folders != -1">
+                                      <div>
+                                          <p class="align-items-center bg-light border-bottom d-flex  h5 justify-content-between pb-2 ps-3 pt-2 text-black-50">Ma valise{{ folders.length > 0 ?' : '+ folders[folders.length -1].name :''}}
+                                            <button *ngIf="folders.length > 0" data-bs-target="#deleteModal" data-bs-toggle="modal" (click)="delete_modal.want_delete_folder(getCurrentFolder())" type="button" class="btn fs-6 btn-outline-danger ms-1 me-3 border-2 fw-bolder border-danger color-danger rounded-pill">
+                                              <i class="fa-trash-alt fa-lg fas pe-2"></i>Suprimer ma valise
+                                            </button>
+                                            <button (click)="folder_modal.reset()" *ngIf="folders.length > -1"  data-bs-target="#newfolderModal" data-bs-toggle="modal" (click)="delete_modal.want_delete_folder(getCurrentFolder())" type="button" class="btn fs-6 btn-outline-danger ms-1 me-3 border-2 fw-bolder border-danger color-danger rounded-pill">
+                                              <i [ngClass]="{'fa-suitcase':  folders.length === 0 , 'fa-plus':  folders.length > 0  }" class="fa-suitcase fa-lg fas pe-2"></i>{{ folders.length > 0 ? 'ajouter un rangement ' : 'Créer  et remplir mon sac'}}
+                                            </button>
+                                          </p>
+                                      </div>
+                                      <button *ngIf="folders.length > 0" (click)="file_modal.reset()" data-bs-toggle="modal"  data-bs-target="#newfileModal" type="button" class="btn border-2 fw-bold btn-outline-primary ms-1 rounded-pill m-3  fs-6">
+                                        <i class="fa-file fa-lg fas pe-2"></i>Choses à mettre dans ma valise
+                                    </button>
+                                      <div class="gx-0 p-2 row row-cols-3 row-cols-lg-4 row-cols-md-6 row-cols-sm-5 row-cols-xl-4" data-pg-collapsed>
+                                          <div (click)="getFiles(file, checklist.id)" *ngFor="let file of getFolders()" class="align-items-center d-flex div-suitcase gx-0 justify-content-center pb-2 pointer row-cols-2">
+                                              <div  class="align-items-center col-3 d-flex flex-column justify-content-center  w-100" style="transition: all 55555 ease-in;">
+                                                  <img src="assets/img/travel-bag.png" width="80%" height="80%"/>
+                                                  <span class="badge bg-primary border mb-2 rounded-pill">{{file.name}}</span>
+                                                  <div class="d-none text-danger">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" class="col-auto fa-edit fas mb-2 mt-auto pe-2 text-primary">
+                                                          <g>
+                                                              <path fill="none" d="M0 0h24v24H0z"></path>
+                                                              <path d="M5 19h1.414l9.314-9.314-1.414-1.414L5 17.586V19zm16 2H3v-4.243L16.435 3.322a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414L9.243 19H21v2zM15.728 6.858l1.414 1.414 1.414-1.414-1.414-1.414-1.414 1.414z"></path>
+                                                          </g>
+                                                      </svg>
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="col-auto fa-edit fas mb-2 mt-auto ps-2" viewBox="0 0 16 16">
+                                                          <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                                                      </svg>
+                                                  </div>
+                                              </div>
+                                          </div>
+
+                                      </div>
+                                  </div>
+
+
+                                  <div *ngIf="haveElement() && checklist.stats.total_files != 0" data-pg-collapsed>
+                                      <div class="">
+                                          <p class="bg-light border-bottom border-top h5 pb-2 ps-3 pt-2 text-black-50">Contenu de la valise {{ folders.length > 0 ?' : '+ folders[folders.length -1].name :''}}</p>
+                                      </div>
+                                      <div class="pe-3 ps-3 pt-2">
+                                          <table class=" table table-hover">
+                                              <thead class="">
+                                                  <tr class="">
+                                                      <th scope="col" class="text-center">Status</th>
+                                                      <th scope="col">Description</th>
+                                                      <th scope="col" class="text-center">A mettre dans ma valise</th>
+                                                      <th scope="col" class="text-center">Déjà dans ma valise </th>
+                                                      <th></th>
+                                                  </tr>
+                                              </thead>
+                                              <tbody class="">
+                                                  <tr *ngFor="let file of getElements()">
+                                                        <th scope="row" class="text-center"><i *ngIf="file.total === file.qty" class="fa-check-circle far text-success"></i></th>
+                                                        <td><p>{{file.name}}</p></td>
+                                                        <td class="text-center">{{file.total}}</td>
+                                                        <td class="text-center">{{file.qty}}</td>
+                                                        <td>
+                                                            <div>
+                                                                <i  data-bs-target="#deleteModal" data-bs-toggle="modal" (click)="delete_modal.want_delete_file(file)" class="fa-trash-alt pointer far m-1"></i>
+                                                                <i  data-bs-target="#newfileModal" data-bs-toggle="modal" (click)="file_modal.edit(file)" class="fa-edit far m-1 pointer"></i>
+                                                                <!-- <i     (click)="file_modal.currentFileToEdit = file" class="fa-copy far m-1 pointer"></i> -->
+                                                                <!-- <i   (click)="toolBarChecklist.copy(file)"  (click)="file_modal.currentFileToEdit = file" class="fa-copy far m-1 pointer"></i> -->
+                                                            </div>
+                                                        </td>
+                                                  </tr>
+                                              </tbody>
+                                          </table>
+                                      </div>
+                                  </div>
+
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-4 pe-0 pe-lg-5 ps-0 ps-lg-3 pt-4">
+                <div class="bg-white col-12 col-xl d-lg-block d-none container-fluid mb-2 p-3">
+                  <app-checklist-state [stats]="checklist.stats"></app-checklist-state>
+                </div>
+                <div class="bg-white col-12 col-xl container-fluid mb-2 mt-4 p-3 ">
+                    <app-proposed-checklist [file_id]="getCurrentFileId()"  [file]="getCurrentFolder()" (onItemAdded) ="addItemToFileTree($event)"  [checklist_id]= "checklist.id"></app-proposed-checklist>
+                </div>
+            </div>
+            </div>
+    </section>
+
+
+    <app-modal-new-folder #folder_modal
+    [folder_id]="getCurrentFileId()"
+    [isFirstLevel]="folders.length > 0"
+    (onFolderUpdated) ="refresh(checklist.id)"
+    [cheklist_id]= "checklist.id"
+    (onFolderCreate)="refresh(checklist.id)"></app-modal-new-folder>
+    <app-modal-edit-folder #folder_modal_edit
+    [folder_id]="getCurrentFileId()"
+    [isFirstLevel]="folders.length > 0"
+    (onFolderUpdated) ="refresh(checklist.id)"
+    [cheklist_id]= "checklist.id"
+    (onFolderCreate)="refresh(checklist.id)"></app-modal-edit-folder>
+
+    <app-modal-new-file #file_modal
+    [folder_id]="getCurrentFileId()"
+    [cheklist_id]= "checklist.id"
+    (onFileUpdated)="refresh(checklist.id)"
+    (onFileCreate)="refresh(checklist.id)"></app-modal-new-file>
+
+    <app-modal-delete #delete_modal
+    [currentFolder] = "getCurrentFolder()"
+    (onChecklistDeleted)= "checklistDeleted()"
+    (onFolderDeleted) = "folderDeleted(getPreviousFileIndex())"
+    (onFileDeleted)="fileDeleted(checklist.id)"></app-modal-delete>
+    <app-modal-delete #delete_checklist [checklist] = "checklist"  (onFileDeleted)="fileDeleted(checklist.id)"></app-modal-delete>
+</div>
+
+
+
+<app-toast #toast></app-toast>
+
+
+<app-preloader-checklist-details *ngIf="!checklist"></app-preloader-checklist-details>

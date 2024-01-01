@@ -1,0 +1,169 @@
+<div *ngIf="items && passengers" class="bg-white container mb-2 mt-2 pb-4 pe-4 ps-4 pt-2">
+  <div *ngIf="title != ''"class="align-items-center border-bottom border-info d-flex fs-4 mb-4 pb-1">
+    <i class="fa-clock fas pe-2 text-info"></i>
+    <p class="mb-0">{{title}}</p>
+  </div>
+  <div *ngIf="route" class="align-items-center border-bottom border-info d-flex fs-4 mb-3 pb-1">
+      <i class="fa-map-marker-alt fas pe-2 text-info"></i>
+      <p class="mb-0">Horaire #{{route.id}}</p>
+  </div>
+  <div class="gx-0 row row-cols-12">
+
+    <div class="container pe-xl-5 ps-xl-5 pt-0">
+
+
+      <div *ngIf="!passengersVisible" class="border-b bg-white me-xl-0 ms-xl-0 pe-3 ps-3 pt-3 mb-2 pb-4">
+        <p class="fs-6 fw-normal text-black-50 text-start"><i class="fa-user fas pe-2 text-danger"></i>{{ 'Nombre de passager : ' +  passengers.length }}</p>
+
+      </div>
+      <div *ngIf="passengersVisible" class="border-b bg-white me-xl-0 ms-xl-0 pe-3 ps-3 pt-2 mb-2 pb-4">
+        <p class="fs-4 fw-bold pb-2 ps-0 pt-0">Passager (s)</p>
+        <div class="gx-0 row">
+            <div *ngFor="let passenger of passengers let i = index" class="col-md-6 col-lg-6 p-1">
+                <div class="border border-1 p-3 shadow-sm" style="/* border-radius: 15px */">
+                    <div class="align-items-center border-1 border-bottom border-danger d-flex justify-content-between mb-2">
+                        <p class="fs-5 fw-bold pb-1 text-body">{{passenger.first_name + ' '+passenger.last_name}}</p>
+                    </div>
+                    <span *ngIf="i === 0" class="fs-6 pt-2 text-muted"><i class="fa-birthday-cake fas pe-2 text-danger"></i>{{passenger.birthday | date}}</span>
+                    <!-- <span class="pt-2 text-muted"><i class="fa-birthday-cake fas pe-2 text-danger"></i>{{passenger.birthday | date}}</span> -->
+                    <p class="fs-6 fw-normal text-black-50 text-start"><i class="fa-user fas pe-2 text-danger"></i>{{ passenger.gender === 0 ? 'Homme' : 'Femme' }}</p>
+                    <p *ngIf="passenger.phone" class="fs-6 fw-normal text-black-50 text-start"><i class="fa-phone-alt fas pe-2 text-danger"></i>{{ passenger.phone }}</p>
+                    <p *ngIf="passenger.email" class="fs-6 fw-normal text-black-50 text-start"><i class="fa-envelope fas pe-2 text-danger"></i>{{ passenger.email }}</p>
+                    <p *ngIf="reservation.take_to_home_adr && i === 0 " class="fs-6 fw-normal text-black-50 text-start"><i class="fa-map-marker-alt fas pe-2 text-danger"></i>{{ reservation.take_to_home_adr }}</p>
+                    <p *ngIf="i > 0 && passenger.birthday && passenger.birthday.length > 0" class="fs-6 fw-normal text-black-50 text-start"><i class="fa-map-marker-alt fas pe-2 text-danger"></i>{{ passenger.birthday  }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- reservation -->
+      <div  class="border-b bg-white  me-xl-0 ms-xl-0 p-2">
+        <p class="fs-4 fw-bold pb-2 pl-3 ps-2 pt-0">Option (s)</p>
+
+          <div class="accordion" id="panels1">
+              <div class="accordion-item border-0 show " data-pg-collapsed>
+                    <button class="accordion-button bg-white border-2 border-start border-white show p-0 pt-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" data-pg-collapsed>
+                      <div class="align-items-center d-flex gx-0 pb-2 pe-0 ps-0 pt-2 row w-100">
+                        <img src="assets/img/sandwich.png" width="25" height="25" class="">
+                        <div class="col w-25">
+                            <div class="align-items-center d-flex g-0 row row-cols-3">
+                                <p class="col-6 fs-5 pe-2 ps-2 text-body text-start">Petits Plaisirs</p>
+                                <p class="col-3 fs-5 fst-italic text-center text-muted pe-0">x{{total_meals()}}</p>
+                                <p class="col-3 fs-5 fw-bold text-body text-center pe-0">{{total_price_meals().toFixed(2)}} &euro;</p>
+                            </div>
+                        </div>
+                    </div>
+                  </button>
+
+                    <div *ngFor="let item of items" id="collapseOne" class="accordion-collapse border-white collapse" aria-labelledby="collapse1" data-bs-parent="#panels1" data-pg-collapsed>
+                        <div *ngIf="isMeal(item)" class="accordion-body border-white pb-0 ps-5 pt-0">
+                            <div class="align-items-center border-bottom d-flex gx-0 pb-2 pe-0 ps-0 p-2 row" data-pg-collapsed>
+                                    <app-preloader-img [src]="SERVER+item.src" [class]="['m_i', 'col-auto', 'pe-0', 'ps-0']"  [height_]="'35px'" [width_]="'35px'"></app-preloader-img>
+                                    <!-- <img [src]="SERVER+item.src" class="m_i col-auto pe-0 ps-0" width="35" height="35"> -->
+                                <div class="col w-100">
+                                    <div class="align-items-center d-flex g-0 row row-cols-3">
+                                        <p class="col-6 fs-6 pe-2 ps-2 text-body text-start">{{item.name}}</p>
+                                        <p class="col-3 fs-6 fst-italic text-end text-muted pe-4">x{{item.quantity}}</p>
+                                        <p class="col-3 fs-6 fw-bold text-body text-end pe-4">{{item.price.toFixed(2)}} €</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="align-items-center border-bottom d-flex gx-2 p-2 row" data-pg-collapsed>
+                    <img src="assets/img/route.png" class="col-auto pe-0 ps-0" width="50" height="50">
+                    <div class="col w-100">
+                        <div class="align-items-center d-flex g-0 row row-cols-3">
+                            <p class="col-6 fs-5 pe-2 ps-2 text-body text-start">Siège</p>
+                            <p class="col-3 fs-5 fst-italic text-center text-muted">x{{total_passenger()}}</p>
+                            <p class="col-3 fs-5 fw-bold text-body text-center">{{total_price_passenger().toFixed(2)}} &euro;</p>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="total_take_at_home > 0" class="align-items-center border-bottom1 div_accordion d-flex gx-2 p-4 px-2 row" data-pg-collapsed>
+                  <img src="assets/img/map.png" class="col-auto pe-0 ps-0" width="50" height="50">
+                  <div class="col w-100">
+                      <div class="align-items-center d-flex g-0 row row-cols-3">
+                          <p class="col-6 fs-5 pe-2 ps-2 text-body text-start">Venir à votre porte</p>
+                          <p class="col-3 fs-5 fst-italic text-center text-muted">{{total_take_at_home / take_at_home_price}}</p>
+                          <p class="col-3 fs-5 fw-bold text-body text-center">{{total_take_at_home.toFixed(2)}} &euro;</p>
+                      </div>
+                  </div>
+              </div>
+                <div class="align-items-center border-bottom d-flex gx-2 p-2 row" data-pg-collapsed>
+                  <img src="assets/img/suitcases%20(2).png" class="col-auto pe-0 ps-0" width="50" height="50">
+                  <div class="col w-100">
+                        <div class="align-items-center d-flex g-0 row row-cols-3">
+                          <p class="col-6 fs-5 pe-2 ps-2 text-body text-start">Valise supplémentaire</p>
+                          <p class="col-3 fs-5 fst-italic text-center text-muted">x{{total_suitcase()}}</p>
+                          <p class="col-3 fs-5 fw-bold text-body text-center">{{total_price_suitcase().toFixed(2)}} &euro;</p>
+                        </div>
+                    </div>
+                  </div>
+                  <!-- <div class="align-items-center d-flex gx-2 pb-3 pe-3 p-2 row" data-pg-collapsed>
+                    <img src="assets/img/baby-car-seat%20(1).png" class="col-auto pe-0 ps-0" width="50" height="50">
+                    <div class="col w-100">
+                        <div class="align-items-center d-flex g-0 row row-cols-3">
+                            <p class="col-6 fs-5 pe-2 ps-2 text-body text-start">Siège bébé</p>
+                            <p class="col-3 fs-5 fst-italic text-center text-muted">x{{total_babyseats()}}</p>
+                            <p class="col-3 fs-5 fw-bold text-body text-center">{{  total_price_babyseats()}} &euro;</p>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="accordion-item border-0 show" data-pg-collapsed>
+                  <button class="accordion-button bg-white border-21 border-start border-white pe-2 ps-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="true" aria-controls="collapse2" data-pg-collapsed>
+
+                    <div class="align-items-center border-bottom1  d-flex gx-2 p-0 row w-100" data-pg-collapsed>
+                        <img src="assets/img/baby-car-seat%20(1).png" class="col-auto pe-0 ps-0" width="50" height="50">
+                        <div class="col w-100">
+                            <div class="align-items-center d-flex g-0 row row-cols-3">
+                                <p class="col-6 fs-5 pe-2 ps-2 text-body text-start">Siège bébé</p>
+                                <p class="col-3 fs-5 fst-italic text-center text-muted">x{{total_babyseats()}}</p>
+                                <p class="col-3 fs-5 fw-bold text-body text-center">{{total_babyseats().toFixed(2)}} &euro;</p>
+                            </div>
+                        </div>
+                    </div>
+                  </button>
+
+                  <div *ngFor="let item of items" id="collapse2" class="accordion-collapse border-white collapse" aria-labelledby="collapse1" data-bs-parent="#panels1" data-pg-collapsed>
+                    <div *ngIf="isBabySeat(item)" class="accordion-body border-white pb-0 ps-5 pt-0">
+                        <div class="align-items-center border-bottom1 div_accordion d-flex gx-0 pb-2 pe-0 ps-0 pt-2 row" data-pg-collapsed>
+                            <!-- <img class="m_i col-auto pe-0 ps-0" width="35" height="35"> -->
+                            <app-preloader-img [src]="SERVER+item.src" [class]="['m_i', 'col-auto', 'pe-0', 'ps-0']"  [height_]="'35px'" [width_]="'35px'"></app-preloader-img>
+                            <!-- <app-preloader-img  [src]="SERVER+item.src" [height_]="'40px'" [width_]="'40px'"></app-preloader-img> -->
+                                <div class="col w-100">
+                                <div class="align-items-center d-flex g-0 row row-cols-3">
+                                    <p class="col-6 fs-6 pe-2 ps-2 text-body text-start">{{item.name}}</p>
+                                    <p class="col-3 fs-6 fst-italic text-end text-muted pe-4">x{{item.quantity}}</p>
+                                    <p class="col-3 fs-6 fw-bold text-body text-end pe-4">{{item.price}} €</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="align-items-center bg-light d-flex gx-0 p-3 row" data-pg-collapsed>
+            <div class="col w-100">
+                <div class="align-items-center d-flex g-0 row row-cols-2">
+                    <p class="fs-4 fw-bold pe-2 ps-2 text-body text-start">Total</p>
+                    <p class="fs-4 fw-bold text-end text-info">{{(total_price_meals()+ total_take_at_home + total_price_suitcase() + total_price_passenger() + total_price_babyseats()).toFixed(2)}} €</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+  </div>
+</div>
+
+<div *ngIf="route && (!items || !passengers)" class="align-items-center d-flex flex-column pt-5">
+  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-archive fs-1 text-primary" viewBox="0 0 16 16" data-pg-collapsed>
+      <path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+  </svg>
+  <h4 class="text-center">Aucune Donnée</h4>
+</div>

@@ -1,0 +1,58 @@
+
+
+
+
+<!-- === File Upload ===
+Design a file upload element. Is it the loading screen and icon? A progress element? Are folders being uploaded by flying across the screen like Ghostbusters? ;)
+-->
+
+<div *ngIf="!just_for_file" id="FileUpload">
+  <div class="wrapper">
+    <div class="upload">
+      <p>
+        <!-- Glisser-Déposer -->
+        <span (click)="input_f.click()  " class="upload__button">
+          <input #input_f [formGroup]="myForm" (change)="fileChange($event)" accept=".jpg, .jpeg, .png" hidden='true'  type="file" class="h-full w-full opacity-0" name="" multiple>
+          + Choisir
+        </span>
+      </p>
+    </div>
+    <div  class="uploaded uploaded--one d-flex">
+      <div *ngIf="filesPreviews && filesPreviews.length > 0 " style="min-height: 125px;" class="d-flex  justify-items-end overflow-auto w-100">
+        <div *ngFor="let f of filesPreviews let i = index" class="class-pics px-3 py-4 w-64">
+          <div *ngIf="isLoading(i) && f" style="padding-left: 25px;    padding-top: 25px;          margin-bottom: -49px;" class="text-white d-flex items-center w-100 rounded align ">
+            <!-- <ion-spinner  class="text-white" name="circular"></ion-spinner> -->
+            <div class="spinner-border text-primary" role="status">
+           </div>
+          </div>
+
+          <app-preloader-img  [src]="f" [class]="['h-100', 'w-100', 'rounded-lg', 'align','-mb-7']" ></app-preloader-img>
+          <!-- <img [src]="f"  class="h-100 w-100 rounded-lg align -mb-7" /> -->
+
+          <div *ngIf="!isLoading(i)"  (click)="deleteFile(i,true)" class="bg-dark opacity-75 font-semibold p-1 relative text-white  flex items-center justify-end">
+            <i   class="fas fa-trash-alt  text-xl text-white"></i>
+          </div>
+        </div>
+
+      </div>
+      <!-- <div *ngFor="let f of filesPreviews let i = index">
+        <i class="far fa-file-pdf"></i>
+        <div  class="file">
+          <div class="file__name">
+            <p>lorem_ipsum.pdf</p>
+            <i class="fas fa-times"></i>
+          </div>
+          <div class="progress">
+            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:100%"></div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+
+  </div>
+</div>
+  <div *ngIf="just_for_file" class="text-center">
+    <app-preloader-img  [src]="src" [class]="['avatar', 'img-circle', 'pimg-thumbnail']" width_="80px" height_="80px"></app-preloader-img>
+    <!-- <img [src]="src" width="80" height="80" class="avatar img-circle img-thumbnail" alt="avatar"> -->
+    <input formControlName="image"  (change)="fileChange($event)" type="file" class="form-control">
+</div>

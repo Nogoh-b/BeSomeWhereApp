@@ -1,0 +1,66 @@
+<div *ngIf="reservations" class=" table-responsive">
+  <div class="gx-0 pe-5 ps-5 row row-cols-2">
+      <div class="col-7 p-2">
+          <div class="bg-white container mb-3 p-4">
+            <form (submit)="getData(route_id)" [formGroup]="formFilter">
+                <div class="d-flex gx-0  row row-cols-3 row-cols-xl-3">
+
+                  <div  class=" pe-2">
+                      <div class="form-floating mb-2" data-pg-dyn-id="did_107">
+                          <input type="date" #date value="now"      min="{{'2021-12-12'}}"  class="form-control" id="floatingInput" name="email" [formControlName]="'from'"  placeholder="nom" >
+                          <label for="floatingInput">Du</label>
+                      </div>
+                  </div>
+                  <div  class=" ps-2">
+                      <div class="form-floating mb-2" data-pg-dyn-id="did_107">
+                          <input type="date" min="{{date.value}}" class="form-control" id="floatingInput" name="phone" [formControlName]="'to'"  placeholder="nom" >
+                          <label for="floatingInput">Au</label>
+                      </div>
+                  </div>
+                  <app-button [loading]="loading" btn_class="h-100 text-white" class="pb-2" text="Rechercher"></app-button>
+              </div>
+            </form>
+          </div>
+
+          <div class="bg-white container p-4">
+              <div class="align-items-center border-bottom border-info d-flex fs-4 mb-4 pb-1">
+                  <i class="fa-clock fas pe-2 text-info"></i>
+                  <p class="mb-0">Liste des reservations  ( par trajet )</p>
+              </div>
+              <div class="table-responsive">
+                  <table class="table table-borderless table-hover table-responsive">
+                      <thead>
+                          <tr class="bg-light">
+                              <th scope="col" width="5%" class="text-center">#</th>
+                              <th class="text-center">Trajet</th>
+                              <th class="text-center">Prix total</th>
+                              <!-- <th class="text-center">items</th> -->
+                              <th class="text-center">Date de départ</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr (click)="setCurrentReservation(reservation.id) " *ngFor="let reservation of reservations let i = index" class="pointer" [ngClass]="{'table-active': i === currentIndex}">
+                              <td class="align-middle d-table-cell">{{reservation.id}}</td>
+                              <td class="align-middle d-table-cell text-center">{{reservation.pointA +' - '+ reservation.pointB}}<br> Transport :  {{reservation.transport}}</td>
+                              <td>
+                                <p class="align-middle d-table-cell text-black-50">{{reservation.total_price}} €</p>
+                              </td>
+                              <!-- <td class="align-middle d-table-cell fw-bold text-center"><span class="fw-normal">{{reservation}</span> </td> -->
+                              <!-- <td class="align-middle d-table-cell text-center">{{reservation.strating_date | date}}</td> -->
+                              <td class="align-middle d-table-cell text-center">{{reservation.starting_date | date }} <p class="hours">( {{reservation.starting_date | date : 'shortTime'}} - {{reservation.arrival_date | date : 'shortTime'}} ) </p> </td>
+                          </tr>
+
+                      </tbody>
+                  </table>
+
+              </div>
+          </div>
+      </div>
+      <div class="col-5">
+        <app-routedetails [take_at_home_count] = "take_at_home_count" [total_take_at_home] = "total_take_at_home" [total_passengers]="total_passenger_" [price_passengers] = "total_price_passenger_" *ngIf="reservations.length > 0 && !loading" [passengersVisible] = "true" [items] = " total_items1" [passengers]="[]" [reservation]="reservations && reservations[0]" ></app-routedetails>
+      </div> 
+  </div> 
+</div>   
+
+<app-loading-page *ngIf="!reservations" class="h-100"></app-loading-page>
+<app-preloader></app-preloader>

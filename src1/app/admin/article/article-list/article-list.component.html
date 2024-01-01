@@ -1,0 +1,102 @@
+<div *ngIf="articles" class="bg-white p-3">
+
+
+  <div class="bg-white d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Articles</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+      <!-- <app-button (click)="del_modal.datas = getAllChecked(selected_data) " *ngIf="getAllChecked(selected_data).length > 0" class_="fas fa-trash" btn_class = "btn btn-outline-primary  btn-light" text="Suprimer" data-bs-toggle="modal" data-bs-target="#deleteModal"> </app-button> -->
+      <app-button class_="fas fa-plus" btn_class = "btn btn-outline-primary  btn-light" text="Ajouter" [routerLink]="['article/creation']" routerLinkActive="router-link-active" > </app-button>
+        <!-- <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalAddPoint" >Ajouter</button> -->
+
+    </div>
+  </div>
+  <div class="table-responsive">
+  </div>
+
+  <div class="container mt-3 px-2">
+    <div class="mb-2 d-flex justify-content-between align-items-center">
+        <div class="pl-2 position-relative d-flex align-items-center">
+          <input #search_input (change)="change_()" [(ngModel)]="search_option" type="search"  class="form-control w-auto" placeholder="Recherche...">
+          <!-- <input #search_input (change)="change_()" [(ngModel)]="search_option" type="search" (input)="searchData($event)" class="form-control w-auto" placeholder="Recherche..."> -->
+          <span class=" ps-3 w-auto"><b>{{articles && articles.length }}</b> articles</span>
+        </div>
+        <div class="px-2 d-flex align-items-center">
+            <span class="pe-3">Filter par :  </span>
+            <select #select value="id"  [(ngModel)]="sort_option" class=" pe-3 form-select w-auto h-100" id="inputGroupSelect01">
+            <!-- <select #select value="id" (change)="change_()" [(ngModel)]="sort_option" (change)="sort($event)" class=" pe-3 form-select w-auto h-100" id="inputGroupSelect01"> -->
+              <option value="id">Identifiant</option>
+              <option value="title.rendered">Titre</option>
+              <option value="content.rendered">Description</option>
+              <!-- <option value="update_at">Auteur</option> -->
+              <option value="modified">Date</option>
+          </select>
+        </div>
+    </div>
+
+
+    <div class="table-responsive">
+        <table class="table table-hover table-responsive table-borderless">
+            <thead>
+                <tr class="bg-light">
+                    <th scope="col" width="5%">
+                        <input   (change)="selectOrUnselectAll(input_.checked, articles)" [checked]="isAllchecked(selected_data)" #input_ class="form-check-input" type="checkbox">
+                    </th>
+                    <th scope="col" width="5%">#</th>
+                    <th>Image</th>
+                    <th scope="col" width="20%">Titre</th>
+                    <th>Description</th>
+                    <th>Type</th>
+                    <th class="text-end">Date</th>
+                    <!-- <th class="text-end">Type</th> -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr  routerLinkActive="router-link-active"  *ngFor="let article of getarticles()  | orderBy: select.value | filterBy: ['title.rendered', 'content.rendered']: search_input.value let i = index  " class="pointer">
+                    <th scope="row">
+                        <input #inp (change)="selectOrUnselect(inp.checked, i)"  [checked]="selected_data[i].selected"  class="form-check-input" type="checkbox">
+                    </th>
+                    <td [routerLink]="['/article', article.id]">{{article.id}}</td>
+                    <td [routerLink]="['/article', article.id]">
+                        <app-preloader-img [src]="article._embedded['wp:featuredmedia'] ?  article._embedded['wp:featuredmedia'][0] && article._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url : ''" [height_]="'40px'" [width_]="'40px'"></app-preloader-img>
+                        <!-- <img [src]="article._embedded['wp:featuredmedia'] ?  article._embedded['wp:featuredmedia'][0] && article._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url : ''" width="40" height="40"> -->
+                    </td>
+                    <td [routerLink]="['/article', article.id]">{{article.title.rendered}}</td>
+                    <td [routerLink]="['/article', article.id]" ><p class="" [innerHtml]="article.excerpt.rendered | shorten: 150 :'...'" class="ms-1 ">{{article.excerpt.rendered}}</p></td>
+                    <!-- <td [routerLink]="['/article', article.id]" ><p class="" [innerHtml]="article.excerpt.rendered" class="ms-1 desc">{{article.excerpt.rendered}}</p></td> -->
+                    <td [routerLink]="['/article', article.id]"><span class="ms-1"> <span class="badge " [ngClass]="{'bg-primary': article.status === 'publish','bg-secondary': article.status != 'publish'}">{{article.status === "publish" ? "Public" : "Privé"}}</span>
+                      </span></td>
+                    <td [routerLink]="['/article', article.id]" class="fw-bold text-end"><span class="fw-normal">{{article.date | date}}</span> </td>
+                    <!-- <td [routerLink]="['/article', article.id]" class="text-end"><span class="fw-normal">{{article.type}}</span> </td> -->
+                </tr>
+
+            </tbody>
+        </table>
+        <!-- <li *ngFor="let item of users | filterBy: ['work.company', 'first_name']: 'bruce'">{{item.first_name }} - {{item.last_name }} - {{item.work.company }}</li> -->
+        <div class="d-flex">
+            <ul class="ms-auto pagination">
+                <li (click)="navigateToPage(currentPage === 0 ? 0 : currentPage - 1)" class="page-item"  [ngClass]="{'disable': currentPage === 0, 'pointer': currentPage > 0}">
+                    <a class="page-link" >Précedent</a>
+                </li>
+                <li (click)="navigateToPage(i)" *ngFor="let point of  pagination let i = index" class="page-item" [ngClass]="{'active': currentPage === i, 'pointer': currentPage !== i}">
+                    <a  class="page-link " >{{i+1}}</a>
+                </li>
+
+                <li (click)="navigateToPage(currentPage === pagination && pagination.length - 1 ? currentPage : currentPage + 1)" class="page-item" [ngClass]="{'disable': currentPage === pagination && pagination.length - 1, 'pointer': !(currentPage < pagination && pagination.length - 1)}">
+                    <a class="page-link" >Suivant</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+  </div>
+
+  <app-modal-delete #del_modal [dataType]="datatype" (onDeleted)="toast_c.open('Be Somewhere', 'Article(s) suprimé (s)')"></app-modal-delete>
+  <app-toast #toast_c></app-toast>
+</div>
+
+
+
+
+
+
+<app-loading-page *ngIf="!articles" class="h-100"></app-loading-page>
+<app-preloader></app-preloader>

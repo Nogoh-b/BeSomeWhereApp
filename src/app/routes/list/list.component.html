@@ -1,0 +1,43 @@
+
+
+<div  *ngIf="reservations && reservations.length > 0" class="container-fluid container_route pe-0 pe-lg-5 ps-0 ps-lg-5 pt-0 pt-lg-5">
+  <section>
+      <div class="gx-0 row">
+        <div class="col-lg-3 pe-2 pe-xl-4 ps-2">
+          <div class="h-auto position-sticky  top-0">
+            <app-home-ads></app-home-ads>
+          </div>
+        </div>
+
+          <div class="col-xs-4 col-lg col-xl-6 column_center pe-0 pe-lg-5 pe-xl-3 ps-0 ps-lg-5 ps-xl-3">
+              <div class="align-items-center bg-white d-flex flex-column mb-3 p-3 text-black-50">
+                <div class="d-flex justify-content-center w-100">
+                    <button (click)="screen_archived(isArchived)"  type="button" class="btn btn-outline-primary me-1 rounded-pill">
+                        <i class="fa-file-archive fas pe-1"></i> {{isArchived ? 'Mes Trajets' : "Tajets Archivés"}}
+                    </button>
+                    <button routerLink="/trajets/creation/1" type="button" class="btn btn-outline-danger ms-1 rounded-pill border-1 border-danger">
+                        <i class="fa-plus fas pe-1"></i>Ajouter un trajet
+                    </button>
+                </div>
+            </div>
+            <div class="align-items-center col container-fluid d-flex fs-5 fw-bold mb-xl-2 pb-2 pe-4 ps-4 pt-3 text-truncate text-wrap">
+              <p class="fs-4 pe-0">{{ isArchived ? 'Mes Trajets Archivés' : 'Mes Trajets Actifs'}}</p>
+            </div>
+              <div *ngFor="let reservation of reservations" class=" pb-lg-3 pointer mb-3" >
+                  <app-route-card [screen_tah]="false"  [routerLink]="['/mes-trajets', reservation.id]" routerLinkActive="router-link-active"  [passengers_array]="reservation.passengers"   [route] = "reservation" [take_at_home]="reservation.take_at_home"  [passengers]="reservation.passengers.length" [items]="reservation.items" [take_at_home_count] = "takeAtHomeCount(reservation.passengers, reservation.take_at_home)" [curStatus] = "status"></app-route-card>
+              </div>
+          </div>
+          <div class="col-lg-3 pe-2 pe-xl-4 ps-2">
+            <div class="h-auto position-sticky  top-0">
+                <app-home-ads image = "https://images.unsplash.com/photo-1571175081012-fbb2d3ba5b90?ixid=MnwyMDkyMnwwfDF8c2VhcmNofDJ8fFR1bmlzaWV8ZW58MHx8fHwxNjMzODE3ODM5&ixlib=rb-1.2.1q=85&fm=jpg&crop=faces&cs=srgb&w=300&h=500&fit=crop"  title="Découvrez nos offres pour le Maroc" description = 'Les rues de Chefchaouen Entre des histoires très ancrées, du street art,  propose un paysage Magnifique&nbsp;'></app-home-ads>
+            </div>
+        </div>
+          </div>
+  </section>
+</div>
+
+
+<app-preloader-route-list *ngIf="!reservations"></app-preloader-route-list>
+<div  *ngIf="reservations && reservations.length === 0" class="vh-100">
+  <app-empty-page (btn2_clicked)="screen_archived(isArchived)" route_btn1="trajets/creation/1" btn1_text="Ajouter un trajet" [btn2_text]="isArchived ? 'Mes Trajets' : 'Tajets Archivés'" title = "Aucun Trajet reservé!"  title_class="fs-5"></app-empty-page>
+</div>

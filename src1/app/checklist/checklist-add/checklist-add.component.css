@@ -1,0 +1,39 @@
+.svg_trans {
+  width: 35px;
+  height: 35px;
+}
+
+.trans_div_active {
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+}
+
+.svg_trans:hover {
+  color: #ffffff !important;
+}
+
+.trans_div_active:hover {
+  background-color: #1b7eba;
+}
+
+.btn_tools {
+  border-radius: 50%;
+  width: 85px;
+  height: 85px;
+}
+
+svg{
+  width: 20px;
+  height: 20px;
+}
+label.align-items-center.btn {
+  border: 1px solid gray;
+}
+@media screen and (min-width:1400px) {
+  .container_add {
+      /* padding-top: 170px !important */
+      padding-left: 130px !important;
+      padding-right: 130px !important;
+  }
+}

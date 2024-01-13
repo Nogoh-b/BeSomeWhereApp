@@ -71,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "BeSomeWhereApp:build:production"
+              "buildTarget": "BeSomeWhereApp:build:production"
             },
             "development": {
-              "browserTarget": "BeSomeWhereApp:build:development"
+              "buildTarget": "BeSomeWhereApp:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -82,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "BeSomeWhereApp:build"
+            "buildTarget": "BeSomeWhereApp:build"
           }
         },
         "test": {

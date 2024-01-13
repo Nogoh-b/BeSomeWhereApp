@@ -14,7 +14,7 @@
                       <p *ngIf="currentFolder && !currentFile" class="text-wrap w-100">Voulez vous supprimer le Sac de <b>{{currentFolder && currentFolder.name}}</b> , ainsi que tous son contenu ? </p>
                       <p *ngIf="currentFile" class="text-wrap w-100">Voulez vous supprimer l'élement <b>{{currentFile && currentFile.name}} ? </b> </p>
                       <p *ngIf="checklist && !currentFolder && !currentFile" class="text-wrap w-100">Voulez vous supprimer la checklist <b>{{checklist && checklist.title}} ?</b> </p>
-                      <p *ngIf="reservation && !currentFolder && !currentFile" class="text-wrap w-100 text-center">Voulez vous annuler cette reservation ? Toute annulation et irréversible. Vous devrez contacter le service client <b>besomewhere.contact@gmail.com</b> afin de demander remboursement </p>
+                      <p *ngIf="reservation && !currentFolder && !currentFile" class="text-wrap w-100 text-center">Voulez vous annuler cette reservation ? Toute annulation et irréversible. Vous devrez contacter le service client <b>besomewhere.contact&#64;gmail.com</b> afin de demander remboursement </p>
                       <!-- <p *ngIf="reservation && !currentFolder && !currentFile" class="text-wrap w-100">Voulez vous annuler cette reservation ? </p> -->
                       <p *ngIf="user && !currentFolder && !currentFile" class="text-wrap w-100">Voulez vous suprimer votre compte. Cela sera irreverssible? </p>
                   </div>

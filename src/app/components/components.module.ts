@@ -47,6 +47,7 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { PreloaderComponent } from './preloader/preloader/preloader.component';
 import { PreloaderImgComponent } from './preloader-img/preloader-img.component';
+import { StripeFormComponent } from './stripe-form/stripe-form.component';
 
 
 @NgModule({
@@ -86,7 +87,8 @@ import { PreloaderImgComponent } from './preloader-img/preloader-img.component';
     ContactUsComponent,
     ContactListComponent,
     PreloaderImgComponent,
-    PreloaderImgComponent
+    PreloaderImgComponent,
+    StripeFormComponent
   ],
   imports: [
     CommonModule,
@@ -142,6 +144,7 @@ import { PreloaderImgComponent } from './preloader-img/preloader-img.component';
       HomeChecklistComponent,
     IvyCarouselModule,
       HomeSearchComponent,
+      StripeFormComponent,
       PreloaderImgComponent
     ]
 })

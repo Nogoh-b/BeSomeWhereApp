@@ -34,7 +34,9 @@ import { AboutUsComponent } from './orthers/about-us/about-us.component';
 import { SecurityCovidPageComponent } from './orthers/security-covid-page/security-covid-page.component';
 import { StartingPointComponent } from './orthers/starting-point/starting-point.component';
 import { SecurityNetworkComponent } from './orthers/security-network/security-network.component';
+// import { NgxStripeModule } from 'ngx-stripe';
 // import {JpImagePreloadModule} from 'ng-image-preload';
+// NgxStripeModule.forRoot('***your-stripe-publishable-key***'),
 
 @NgModule({
   declarations: [

@@ -1,13 +1,13 @@
 import { UserServiceFireBase } from 'src/app/service/core/user.service';
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ConfServiceAdmin } from '../admin/service/conf-admin/conf.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AdminGuard implements CanActivate {
+export class AdminGuard  {
   constructor(private userServiceFireBase: UserServiceFireBase,
     private confService: ConfServiceAdmin,
     private router: Router) { }

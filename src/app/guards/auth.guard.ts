@@ -1,12 +1,12 @@
 import { ToastComponent } from './../shared/toast/toast.component';
 import { Injectable, ViewChild } from '@angular/core';
-import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router} from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class AuthGuard  {
   @ViewChild(ToastComponent) toast_c : ToastComponent
   constructor(private router: Router) { }
   canActivate(

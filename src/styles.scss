@@ -587,6 +587,12 @@ h2{
 .input-group input {
   min-height: 50px;
 }
+.modal{
+  z-index: 50!important;
+}
+.sticky-top {
+  z-index: 20!important;
+}
 
 /* login and register */
 @media screen and (max-width:1024px) {

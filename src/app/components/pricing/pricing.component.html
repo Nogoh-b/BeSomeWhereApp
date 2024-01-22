@@ -1,4 +1,4 @@
-<div class="fade modal pg-show-modal" id="pricingModal" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="false" data-pg-collapsed>
+<div *ngIf="canVisible" class="fade modal pg-show-modal" id="pricingModal" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="false" data-pg-collapsed>
   <div class="modal-dialog modal-fullscreen">
       <div class="h-100 modal-content">
         <section  *ngIf="!has_sucribed" class="bg-light pb-5 pt-5 vh-100" data-pg-collapsed>
@@ -71,7 +71,8 @@
                                       </svg>                                &nbsp;Accès à tous les articles
                                   </li>
                               </ul>
-                              <app-button (click)="submit()" bh="30" [loading]="loading" class_="fas fa-save1" btn_class="btn d-block btn-lg border-2 fw-bolder fs-5 w-100 btn-light rounded-pill flex align-items-center justify-content-center " text="Choisir l'option" >
+
+                              <app-button (click)="openModal()" bh="30" [loading]="loading" class_="fas fa-save1" btn_class="btn d-block btn-lg border-2 fw-bolder fs-5 w-100 btn-light rounded-pill flex align-items-center justify-content-center " text="Choisir l'option" >
                             </app-button>
                               <!-- <a (click)="submit()" class="btn d-block btn-lg border-2 fw-bolder fs-5 w-100 btn-light rounded-pill flex align-items-center justify-content-center" target="_pg_blank1">Choisir l'option</a> -->
                           </div>

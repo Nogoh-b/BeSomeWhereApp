@@ -87,7 +87,8 @@
                       <!-- <button type="text" class="align-items-center border-2 btn btn-lg btn-outline-light btn-primary d-flex fw-bold justify-content-center me-auto ms-auto w-75" style="height: 55px;">
                           <i class="fa-lg fa-paypal fab pe-2"></i>  Payer avec paypal
                       </button> -->
-                      <app-button (click)="buy()" [loading]="loading" [text] = " !is_for_update() ? 'Reserver ' : 'Reserver ( +' + get_new_total().toFixed(2) +' € ) '" class_="fa-lg fa-paypal1 fab pe-2"></app-button>
+                      <app-button (click)="openModal()" [loading]="loading" [text] = " !is_for_update() ? 'Reserver ' : 'Reserver ( +' + get_new_total().toFixed(2) +' € ) '" class_="fa-lg fa-paypal1 fab pe-2"></app-button>
+                      <!-- <app-button (click)="buy()" [loading]="loading" [text] = " !is_for_update() ? 'Reserver ' : 'Reserver ( +' + get_new_total().toFixed(2) +' € ) '" class_="fa-lg fa-paypal1 fab pe-2"></app-button> -->
                       <!-- <app-button (click)="buy()" [loading]="loading" [text] = " !is_for_update() ? 'Payer avec paypal ' : 'Payer avec paypal ( +' + get_new_total().toFixed(2) +' € ) '" class_="fa-lg fa-paypal fab pe-2"></app-button> -->
                       <!-- <app-button (click)="buy()" [loading]="loading" [text] = " reservation && reservation.id && get_new_total() <= 0 ? 'Payer avec paypal ' : 'Payer avec paypal ( +' + get_new_total().toFixed(2) +' € ) '" class_="fa-lg fa-paypal fab pe-2"></app-button> -->
                   </div>

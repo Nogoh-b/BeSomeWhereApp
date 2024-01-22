@@ -68,7 +68,7 @@ import { SecurityNetworkComponent } from './orthers/security-network/security-ne
     HttpClientModule,
     SharedModule,
     ComponentsAdminModule,
-    IvyCarouselModule,
+    // IvyCarouselModule,
     NgCircleProgressModule.forRoot({
       "radius": 40,
       "outerStrokeColor": "#1b7eba",

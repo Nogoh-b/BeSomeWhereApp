@@ -2,12 +2,14 @@ import { ToastComponent } from './../../shared/toast/toast.component';
 import { ReservationService } from './../../service/reservation/reservation.service';
 import { Item_Drive } from './../../model/Model/Item_Drive';
 import { RouteService } from 'src/app/service/route/route.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import * as globals from 'src/global';
 import { Reservation } from 'src/app/model/Model/Reservation';
 import { Passenger } from 'src/app/model/Model/Passenger';
 import { EmailService } from 'src/app/service/email/email.service';
+import { DialogService } from '@ngneat/dialog';
+import { DataResumeProps, Item, StripCardComponent } from 'src/app/components/strip-card/strip-card.component';
 declare let Email : any;
 
 @Component({
@@ -24,7 +26,10 @@ export class OrderComponent implements OnInit {
   reservation : Reservation = localStorage.getItem('reservation') && JSON.parse(localStorage.getItem('reservation'));
   price_take_to_home =  JSON.parse(localStorage.getItem("conf")).price_take_to_home
   email_admin = JSON.parse(localStorage.getItem("conf")).contact_email
-  
+  private dialog = inject(DialogService);
+  private title = 'Paiement';
+  resume_data : DataResumeProps = {total_price : 0, items : []}
+
   constructor(public route : Router, 
     public routeService : RouteService,
     public emailService: EmailService, 
@@ -42,6 +47,47 @@ export class OrderComponent implements OnInit {
   }
   takeAtHomeCount(passengers, take_at_home){
     return globals.total_take_at_homr(passengers, take_at_home)
+  }
+  openModal(){
+    this.resume_data.total_price = this.getTotal().toFixed(2)
+    let items: Item[] = []
+    items.push({categorie:'Siège(s)',price: this.total_price_passenger(false).toFixed(2), quantity : this.total_passenger()})
+    items.push({categorie:'Venir à ma porte',price:(this.price_take_to_home * this.total_take_at_homr()).toFixed(2),quantity: this.total_take_at_homr()})
+    items.push({categorie:'Petits plaisirs',price: this.total_price_meals().toFixed(2) ,quantity: this.total_meals()})
+    items.push({categorie:'Valise supplémentaire',price:this.total_price_suitcase().toFixed(2),quantity: this.total_suitcase()})
+    items.push({categorie:'Siège bébé',price:this.total_price_babyseats().toFixed(2),quantity: this.total_babyseats()})
+    this.resume_data.items = items
+    console.log('payments_data ', this.resume_data)
+    localStorage.setItem('payments_data',JSON.stringify(this.resume_data))
+    const dialogRef = this.dialog.open(StripCardComponent, {
+      data: {
+        title: this.title,
+      },
+      size : 'fullScreen',
+      onClose : () =>{
+        console.log('closed')
+      }
+      
+    });
+    dialogRef.afterClosed$.subscribe((result) => {
+      console.log(`After dialog has been closed ${result}`);
+      if(result)
+        this.buy()
+    });
+    const intervalId = setInterval(() => {
+      const d = document.getElementsByClassName('ngneat-dialog-backdrop');
+      const dc = document.getElementsByClassName('ngneat-dialog-content');
+      
+      if (d.length > 0) {
+        // Arrêtez l'intervalle si la condition est remplie
+        clearInterval(intervalId);
+    
+        // Modifiez le padding de l'élément
+        (d[0] as HTMLElement).style.padding = '0';
+        (dc[0] as HTMLElement).style.setProperty('border-radius', '0', 'important'); // Remplacez '10px' par la valeur de border-radius souhaitée
+        (dc[0] as HTMLElement).style.setProperty('background', '#f9fafb', 'important'); // Remplacez '#f00' par la couleur de fond souhaitée
+      }
+    }, 1);
   }
   buy(){
 
@@ -164,20 +210,20 @@ export class OrderComponent implements OnInit {
   total_take_at_homr(){
     let reservation_t = 0
     let passengers = this.data.passengers
-    console.log('route_passengers ', passengers)
+    // console.log('route_passengers ', passengers)
     if(this.data.take_at_home) {
       reservation_t++; // Increment reservation_t si take_at_home est true
     }
     if (!passengers)
       return 0
-    console.log('reservation_t ',reservation_t); //Affiche le total de reservation_t
+    // console.log('reservation_t ',reservation_t); //Affiche le total de reservation_t
     passengers.forEach(passenger => {
         if(passenger.take_at_home) {
             reservation_t++; // Increment reservation_t si birthday n'est pas vide
         }
     })
 
-console.log('reservation_t ',reservation_t); //Affiche le total de reservation_t
+// console.log('reservation_t ',reservation_t); //Affiche le total de reservation_t
 return reservation_t
 }
   total_price_meals(){

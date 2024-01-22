@@ -56,7 +56,8 @@
                     <td >{{payment.id}}</td>
                     <td >{{formatDate(payment.created_at)}}</td>
                     <td >{{  !canScreenDate_sus(payment.status, payment.created_at , payment.updated_at) ? '-' : formatDate(payment.updated_at )}}  </td>
-                    <td > {{!(payment.updated_at != payment.created_at && payment.status === 1 )? '-' : formatDate(addSecondsToDate(payment.updated_at,ecart))}} </td>
+                    <td > {{!(payment.status === 1 )? '-' : formatDate(addSecondsToDate(payment.updated_at,ecart))}} </td>
+                    <!-- <td > {{!(payment.updated_at != payment.created_at && payment.status === 1 )? '-' : formatDate(addSecondsToDate(payment.updated_at,ecart))}} </td> -->
                     <td > {{payment.total}} € </td>
                     <td > {{payment.reason === 1 ? 'Reservation' : 'Abonement Article'}}
                     </td>
@@ -64,7 +65,7 @@
                     <!-- <th >{{payment.first_name}} {{payment.last_name}} </th> -->
 
                     <td > 
-                      <div *ngIf="( isValid(payment.updated_at, ecart)) || payment.updated_at === payment.created_at  " class="ps-2 d-flex align-items-center">
+                      <div *ngIf="false" class="ps-2 d-flex align-items-center">
                         <select  style="min-width: 100px;"  #select value="id"  [(ngModel)]="payment.status" class=" pe-3 form-select w-auto h-100" id="inputGroupSelect01">
                           <option [value]="0">Refusé</option>
                             <option [value]="1">Autorisé</option>
@@ -75,8 +76,8 @@
                           </app-button>
                         </div>
                     </div>
-                    <div *ngIf="!(( isValid(payment.updated_at, ecart)) || payment.updated_at === payment.created_at) ">
-                      <p class="text-center text-danger">Terminé</p>
+                    <div>
+                      <p class="text-center text-danger">{{( isValid(payment.updated_at, ecart)) ? 'En cours' :'Terminé'}}</p>
                     </div>
                     </td>
                     <!-- <td > {{payment.reason === 1 ? '#' + payment.id_r : '-'}}

@@ -65,7 +65,7 @@ import { CKEditorModule } from 'ngx-ckeditor';
     SharedModule,
     FormsModule,
     AngularFireAuthModule,
-    CKEditorModule,// BrowserAnimationsModule,
+    // CKEditorModule,// BrowserAnimationsModule,
     // AppRoutingModule,
     EditorModule,
     QuillModule.forRoot(),

@@ -48,6 +48,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { PreloaderComponent } from './preloader/preloader/preloader.component';
 import { PreloaderImgComponent } from './preloader-img/preloader-img.component';
 import { StripeFormComponent } from './stripe-form/stripe-form.component';
+import { StripCardComponent } from './strip-card/strip-card.component';
+import { StripeComponent } from './stripe-payment/stripe.component';
 
 
 @NgModule({
@@ -88,7 +90,9 @@ import { StripeFormComponent } from './stripe-form/stripe-form.component';
     ContactListComponent,
     PreloaderImgComponent,
     PreloaderImgComponent,
-    StripeFormComponent
+    StripeFormComponent,
+    StripCardComponent,
+    StripeComponent
   ],
   imports: [
     CommonModule,
@@ -99,6 +103,7 @@ import { StripeFormComponent } from './stripe-form/stripe-form.component';
     SharedModule,
     FormsModule,
     TooltipModule,
+    // IvyCarouselModule,
     ModalModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
@@ -142,10 +147,11 @@ import { StripeFormComponent } from './stripe-form/stripe-form.component';
       HomeVisitComponent,
       FooterComponent,
       HomeChecklistComponent,
-    IvyCarouselModule,
       HomeSearchComponent,
       StripeFormComponent,
-      PreloaderImgComponent
+      PreloaderImgComponent,
+      StripCardComponent,
+      StripeComponent
     ]
 })
 export class ComponentsModule {

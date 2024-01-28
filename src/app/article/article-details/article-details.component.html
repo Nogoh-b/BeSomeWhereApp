@@ -29,10 +29,12 @@
               <div *ngIf="(!have_to_suscribe || !user) && article.status === 'private' " class="d-flex fixed-top flex-column-reverse position-relative" style="z-index: 0; position: absolute; height: 350px; top: -100px; background-color: rgba(255, 255, 255, 0.88);">
                 <div style="height: 80%;" class="bg-primary d-inline-flex flex-column justify-content-around p-5">
                     <p href="" class="text-center text-white fs-5">
-                      {{!payment || payment.created_at  != payment.updated_at ? 'Pour pouvoir continuer à lire les articles il faudrait vous abonner !':
+                      <!-- {{!payment || payment.created_at  != payment.updated_at ? 'Pour pouvoir continuer à lire les articles il faudrait vous abonner !': -->
+                      {{true ? 'Pour pouvoir continuer à lire les articles il faudrait vous abonner !':
                       getPreavisText()}}
                     </p>
-                    <div *ngIf="!payment || payment.created_at  != payment.updated_at" class="text-center">
+                    <!-- <div *ngIf="!payment || payment.created_at  != payment.updated_at" class="text-center"> -->
+                    <div class="text-center">
                         <button type="button" (click)="clickToSuscribe()" class="btn border-2 fw-bolder btn-lg btn-outline-light btn-primary">Je m'abonnes</button>
                     </div>
                 </div>

@@ -21,6 +21,8 @@
     "@ckeditor/ckeditor5-angular": "^6.0.1",
     "@fireflysemantics/angular-stripe-service": "^1.0.7",
     "@ngneat/dialog": "^5.0.0",
+    "@ngx-translate/core": "^9.1.1",
+    "@ngx-translate/http-loader": "^8.0.0",
     "@stripe/stripe-js": "^2.3.0",
     "@tinymce/tinymce-angular": "^7.0.0",
     "@types/quill": "^1.3.10",

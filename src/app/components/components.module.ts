@@ -50,11 +50,14 @@ import { PreloaderImgComponent } from './preloader-img/preloader-img.component';
 import { StripeFormComponent } from './stripe-form/stripe-form.component';
 import { StripCardComponent } from './strip-card/strip-card.component';
 import { StripeComponent } from './stripe-payment/stripe.component';
+import { LanguageSelectorComponent } from './language-selector/language-selector.component';
+import { TranslatePipe } from '../pipe/translation/translation.pipe';
 
 
 @NgModule({
   declarations: [
-    NavBarComponent,
+    NavBarComponent, 
+    TranslatePipe,
     HomeTrajetComponent,
     FooterComponent,
     HomeChecklistComponent,
@@ -92,7 +95,8 @@ import { StripeComponent } from './stripe-payment/stripe.component';
     PreloaderImgComponent,
     StripeFormComponent,
     StripCardComponent,
-    StripeComponent
+    StripeComponent,
+    LanguageSelectorComponent
   ],
   imports: [
     CommonModule,
@@ -101,7 +105,6 @@ import { StripeComponent } from './stripe-payment/stripe.component';
     CarouselModule.forRoot(),
     NgPipesModule,
     SharedModule,
-    FormsModule,
     TooltipModule,
     // IvyCarouselModule,
     ModalModule.forRoot(),
@@ -151,6 +154,8 @@ import { StripeComponent } from './stripe-payment/stripe.component';
       StripeFormComponent,
       PreloaderImgComponent,
       StripCardComponent,
+      TranslatePipe,
+      LanguageSelectorComponent,
       StripeComponent
     ]
 })

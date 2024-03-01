@@ -137,13 +137,14 @@ export class ChecklistDetailsComponent implements OnInit {
     return !this.getCurrentFolder() ? 0 : this.getCurrentFolder().id
   }
   getCurrentFolder(){
+    // console.log('getCurrentFolder ',this.folders )
     return this.folders && this.folders.length <= 0 ? null : this.folders[this.folders.length-1]
   }
   getPreviousFileIndex(){
     return this.folders && this.folders.length <= 1  ? -1 : this.folders.length - 2
   }
   getPreviousFolder(){
-    return this.folders && this.folders.length <= 1 ? null : this.folders[this.folders.length-2]
+    return this.folders && this.folders.length <= 1 ? null : this.folders[this.folders.length-2] 
   }
 
   checklistDeleted(){

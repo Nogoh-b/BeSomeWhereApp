@@ -582,7 +582,9 @@ h2{
   opacity: 0.5;
   cursor: none;
 }
-
+.modal-backdrop {
+  z-index: 5!important;
+}
 
 .input-group input {
   min-height: 50px;

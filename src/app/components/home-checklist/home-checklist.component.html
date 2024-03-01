@@ -6,11 +6,11 @@
 
                 <div *ngIf="screen_all" class="gx-0 pe-3 ps-3 pt-3 row">
                     <i class="col-auto d-none fa-lg fa-map-marked fas m-auto text-primary"></i>
-                    <h4 class="col fs-5 fw-bolder lead mb-0 pe-0 ps-4 text-uppercase">Mes Checklists</h4>
+                    <h4 class="col fs-5 fw-bolder lead mb-0 pe-0 ps-4 text-uppercase">{{'Help_for_packing_your_suitcase' | translate}}</h4>
                     <i class="col-auto fa-angle-down fa-lg fas m-auto pe-4 text-muted"></i>
                     <hr class="mt-4">
                 </div>
-                <app-empty-page title = "Aucune Checklist créé" *ngIf="!lastChecklist" title_class="fs-5"></app-empty-page>
+                <app-empty-page [title] = "'No_Journey_Created' | translate" *ngIf="!lastChecklist" title_class="fs-5"></app-empty-page>
     </div>
 
     <div routerLinkActive="router-link-active"  *ngIf="lastChecklist" class="pointer block  mb-0 pb-0 pt-3 shadow-none timeline">
@@ -44,7 +44,7 @@
         <div (click)="wantCreateChecklist.emit()"  routerLinkActive="router-link-active"  class=" d-flex align-items-center card mb-2 p-3 shadow-none">
         <!-- <div [routerLink]="['/checklist/creation']" routerLinkActive="router-link-active"  class="card mb-2 p-3 shadow-none"> -->
           <button class="btn btn-lg btn-outline-primary fs-5 fw-bolder rounded1 rounded-01  border-2 border-primary w-auto" type="text" style="height: 50px;">
-              <i class="fa-clipboard-check fa-lg fas pe-2"></i>Ajouter
+              <i class="fa-clipboard-check fa-lg fas pe-2"></i>{{'Add_a_journey' | translate}}
           </button>
         </div>
 

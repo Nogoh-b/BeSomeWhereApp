@@ -5,7 +5,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { UserServiceFireBase } from './service/core/user.service';
 import { AuthService } from './service/core/auth.service';
 import { ComponentsModule } from './components/components.module';
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { LocationStrategy, PathLocationStrategy, HashLocationStrategy } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
@@ -34,10 +34,14 @@ import { AboutUsComponent } from './orthers/about-us/about-us.component';
 import { SecurityCovidPageComponent } from './orthers/security-covid-page/security-covid-page.component';
 import { StartingPointComponent } from './orthers/starting-point/starting-point.component';
 import { SecurityNetworkComponent } from './orthers/security-network/security-network.component';
+import { TranslatePipe } from './pipe/translation/translation.pipe';
+import { TranslationService } from './service/translation/translation.service';
 // import { NgxStripeModule } from 'ngx-stripe';
 // import {JpImagePreloadModule} from 'ng-image-preload';
 // NgxStripeModule.forRoot('***your-stripe-publishable-key***'),
-
+// function initializeApp(translationService: TranslationService) {
+//   return () => translationService.setLanguage('fr'); // Définissez la langue initiale ici
+// }
 @NgModule({
   declarations: [
     AppComponent,
@@ -78,7 +82,7 @@ import { SecurityNetworkComponent } from './orthers/security-network/security-ne
       ComponentsModule.forRoot()
 
     ],
-    providers: [AuthService,{ provide: LocationStrategy, useClass: HashLocationStrategy }, UserServiceFireBase, DatePipe, AuthGuard],
+    providers: [TranslationService, AuthService,{ provide: LocationStrategy, useClass: HashLocationStrategy }, UserServiceFireBase, DatePipe, AuthGuard],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

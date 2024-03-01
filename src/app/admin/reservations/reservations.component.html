@@ -26,7 +26,7 @@
                       <tbody>
                           <tr (click)="setCurrentReservation(i) " *ngFor="let reservation of reservations let i = index" class="pointer" [ngClass]="{'table-active': i === currentIndex}">
                               <td class="align-middle d-table-cell">{{reservation.id}}</td>
-                              <td class="align-middle d-table-cell text-center">{{reservation.customer.first_name +' '+reservation.customer.last_name}}</td>
+                              <td class="align-middle d-table-cell text-center">{{reservation?.customer?.first_name +' '+reservation?.customer?.last_name}}</td>
                               <td>
                                 <p class="align-middle d-table-cell text-black-50">{{(total_price_meals(reservation) + total_price_suitcase(reservation) + total_price_passenger(reservation) + total_price_babyseats(reservation) + getTakeAtHomeOption(reservation)).toFixed(2)}} €</p>
                               </td>

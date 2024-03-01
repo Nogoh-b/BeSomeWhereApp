@@ -652,6 +652,9 @@ input[type="checkbox"] {
 .details_point ol{
   margin: 0!important;
 }
+.modal-backdrop {
+  z-index: 5!important;
+}
 
 .modal-content{
   border: none!important;

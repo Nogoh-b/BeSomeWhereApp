@@ -1,0 +1,14 @@
+{
+
+        "Prenium": "Prenium",
+        "CheckList1": "Bonjour cher {{var1}}  {{var2}}  {{var3}}",
+        "Nav_Trip": "My current Trip",
+        "Nav_Comunauty": "Community",
+        "Nav_About": "About Us",
+        "Nav_Blog": "Blog",
+        "Nav_Login": "Login",
+        "Nav_Logout": "Logout",
+        "Nav_Profile": "Profile",
+
+        "Nav_CheckList": "Help to Pack my  suitcase"
+}

@@ -9,6 +9,13 @@
         "Nav_Login": "Login",
         "Nav_Logout": "Logout",
         "Nav_Profile": "Profile",
+        "Help_for_packing_your_suitcase": "Help for packing your suitcase",
+        "No_Journey_Created": "No Journey Created",
+        "Add_a_journey": "Add a journey",
+        "Journey": "Journey",
+        "See_more": "See more",
+        "from": "from",
+        "to": "to",
 
         "Nav_CheckList": "Help to Pack my  suitcase"
 }

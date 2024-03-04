@@ -9,6 +9,12 @@
         "Nav_Login": "Connexion",
         "Nav_Logout": "Déconnexion",
         "Nav_Profile": "Profil",
-
+        "Help_for_packing_your_suitcase": "Aide pour préparer votre valise",
+        "No_Journey_Created": "Aucun voyage crée",
+        "Add_a_journey": "Ajouter un voyage",
+        "Journey": "Voyage",
+        "See_more": "Voir plus",
+        "from": "du",
+        "to": "au",
         "WelcomeTextValue": "Bonjour cher {{nomDeLaPersonne}}."
 }

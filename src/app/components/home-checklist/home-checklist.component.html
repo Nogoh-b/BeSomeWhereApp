@@ -15,7 +15,7 @@
 
     <div routerLinkActive="router-link-active"  *ngIf="lastChecklist" class="pointer block  mb-0 pb-0 pt-3 shadow-none timeline">
           <div [routerLink]="['/checklist', lastChecklist.id]">
-              <h3 class="h6 pe-4 ps-4 text-decoration-underline text-start text-truncate">Checklist : {{lastChecklist.title}}</h3>
+              <h3 class="h6 pe-4 ps-4 text-decoration-underline text-start text-truncate">{{'Journey' | translate}} : {{lastChecklist.title}}</h3>
               <div *ngFor="let route of lastChecklist.routes">
                   <div class="pe-4 ps-4">
                       <div class="pb-0 pt-0 tl-item">
@@ -27,7 +27,7 @@
                                   <div class="col-auto ps-0">
                                       <div class="align-items-center col d-flex fw-normal">{{route.country }} {{route.city}}</div>
                                       <div class="col mt-1 text-muted tl-date">
-                                          <div class="text-start" style="font-size: 12px;">du {{route.starting_date | date}} au {{route.arrival_date | date}}</div>
+                                          <div class="text-start" style="font-size: 12px;">{{'from' | translate}} {{route.starting_date | date}} {{'to' | translate}} {{route.arrival_date | date}}</div>
                                       </div>
                                   </div>
                               </div>
@@ -39,7 +39,7 @@
 
               </div>
           </div>
-          <p *ngIf="lastChecklist && FutureChecklists.length > 1" [routerLink]="['/mes-checklists']" routerLinkActive="router-link-active" [queryParams] = "{archived: false}"  class="ps-4 text-start text-warning pointer">+{{FutureChecklists.length - 1}} checklist...</p>
+          <p *ngIf="lastChecklist && FutureChecklists.length > 1" [routerLink]="['/mes-checklists']" routerLinkActive="router-link-active" [queryParams] = "{archived: false}"  class="ps-4 text-start text-warning pointer">+{{FutureChecklists.length - 1}} {{'Voyage' | translate}}...</p>
     </div>
         <div (click)="wantCreateChecklist.emit()"  routerLinkActive="router-link-active"  class=" d-flex align-items-center card mb-2 p-3 shadow-none">
         <!-- <div [routerLink]="['/checklist/creation']" routerLinkActive="router-link-active"  class="card mb-2 p-3 shadow-none"> -->

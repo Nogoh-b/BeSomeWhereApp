@@ -1,24 +1,24 @@
-<h3 class="fs-4 fw-bold mb-2 ps-4 ps-lg-0  pt-lg-4 text-uppercase" [ngClass]="{'pt-0': screen_all,'pt-lg-4': screen_all }">Trouvez votre Navette collective </h3>
+<h3 class="fs-4 fw-bold mb-2 ps-4 ps-lg-0  pt-lg-4 text-uppercase" [ngClass]="{'pt-0': screen_all,'pt-lg-4': screen_all }">{{'BookAAeatWith' | translate }}</h3>
 <section class="bg-white section_n section_search" data-pg-collapsed>
   <div class="bg-light p-lg-0 pb-3 pe-0 ps-0 pt-3">
       <div [class]="class_ ">
         <div class="btn-group mb-4" role="group" aria-label="Basic radio toggle button group" data-pg-collapsed>
           <input (change)=" switch_(false)" [checked]="!switched" type="radio" class="btn-check" name="btnradio" id="groupradio3" autocomplete="off" checked>
-          <label class="btn btn-outline-primary p-3 border-2 fw-bold  d-flex align-items-center" style="height: 40px ; font-size: 0.9rem!important;" for="groupradio3">Je vais vers Aeroport / Gare</label>
+          <label class="btn btn-outline-primary p-3 border-2 fw-bold  d-flex align-items-center" style="height: 40px ; font-size: 0.9rem!important;" for="groupradio3">{{'FromHomeToAiportStation' | translate}}</label>
 
           <input (change)=" switch_(true)" [checked]="switched" type="radio" class="btn-check" name="btnradio" id="groupradio4" autocomplete="off">
-          <label class="btn btn-outline-primary p-3 border-2 fw-bold d-flex align-items-center" style="height: 40px ; font-size: 0.9rem!important;" for="groupradio4">Je viens d&apos;un Aeroport / Gare</label>
+          <label class="btn btn-outline-primary p-3 border-2 fw-bold d-flex align-items-center" style="height: 40px ; font-size: 0.9rem!important;" for="groupradio4">{{'FromAirportStationToHome' | translate}}</label>
           </div>
           <div class="gx-0 row">
               <div class="input-group mb-3 pe-0 ps-0">
-                <p class="pb-2 w-100 text-end">Votre adresse  de départ </p>
+                <p class="pb-2 w-100 text-end">{{'YourDepartureAdress' | translate}} </p>
                 <div class="w-100">
                   <app-input-search-adress [address] = "address" (addressChange)="addressChoose($event)"  *ngIf="!switched"></app-input-search-adress>
                   <app-input-search-station [station] = "station" (onStationChoose)="stationChoose($event)"  *ngIf="switched"></app-input-search-station>
                 </div>
                 <app-switch [class]="'w-100'" #switch (onSwitched) = " switch_($event)" class="bg-white border-0 border-dark input-group-text me-auto me-lg-0 ms-auto ms-lg-0 pb-3 pt-3"></app-switch>
                 <div class="w-100">
-                  <p class="col-12 pb-2 text-end w-100">Arrivée</p>
+                  <p class="col-12 pb-2 text-end w-100">{{'SelectDestination' | translate}}</p>
                   <app-input-search-adress [address] = "address"  (addressChange)="addressChoose($event)" *ngIf="switched"></app-input-search-adress>
                   <app-input-search-station [station] = "station"  (onStationChoose)="stationChoose($event)" *ngIf="!switched"></app-input-search-station>
                 </div>
@@ -34,7 +34,7 @@
                                     <label for="floatingInput" class="fs-5 fw-normal mt-n1 ps-2">Date</label>
                                   </div>
                               </div>
-                              <a (click)="btnclicked()" class="align-items-center border-bottom border-dark border-end border-top btn btn-lg btn-primary d-flex fw-bold justify-content-center p-3 text-white w-auto" id="button-addon2" target="_pg_blank">Allez-y</a>
+                              <a (click)="btnclicked()" class="align-items-center border-bottom border-dark border-end border-top btn btn-lg btn-primary d-flex fw-bold justify-content-center p-3 text-white w-auto" id="button-addon2" target="_pg_blank">{{'go' | translate}}</a>
                           </div>
                           <!-- <div *ngIf="screen_all" class="align-items-center col col-lg-4 d-lg-flex d-none">
                               <div class="align-items-center d-flex flex-column justify-content-center p-lg-2">

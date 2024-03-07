@@ -4,7 +4,7 @@
       <b>Votre réservation a bien été pris en compte</b>
   </div>
   <p class="fs-5">
-    Cher Voyageur, Nous n’avons jamais été autant heureux que d’avoir été votre  1er choix comme  {{users  && users.length > 0 &&  users.length}} autres personnes. Prolongez le rêve dites-nous d’où vous venez
+    {{'dearTraveler' | translate}}
 </p>
   <div *ngIf="!is_always_saved && user" class="align-items-center d-flex justify-content-center">
       <button type="button" class="btn btn-primary text-white w-auto" data-bs-target="#addressModal" data-bs-toggle="modal">Go</button>

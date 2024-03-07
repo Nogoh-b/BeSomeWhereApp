@@ -14,3 +14,9 @@ div#registeModal{
   padding: 5px;
   font-style: italic;
 }
+
+
+div#registeModal {
+  overflow-x: hidden;
+  background: white;
+}

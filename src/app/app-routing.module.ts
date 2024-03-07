@@ -16,6 +16,9 @@ import { ArticleDetailsComponent } from './article/article-details/article-detai
 import { ArticleListComponent } from './article/article-list/article-list.component';
 import { AuthGuard } from './guards/auth.guard';
 import { SecurityNetworkComponent } from './orthers/security-network/security-network.component';
+import { ConditionsOfSaleComponent } from './pages_utils/conditions-of-sale/conditions-of-sale.component';
+import { LastCommunicationComponent } from './pages_utils/last-communication/last-communication.component';
+import { TermsOfUseAndPrivacypolicyComponent } from './pages_utils/terms-of-use-and-privacypolicy/terms-of-use-and-privacypolicy.component';
 
 const routes: Routes = [
   {
@@ -80,7 +83,19 @@ const routes: Routes = [
  }
 ,
  {
-  path: 'mieux-nous-connaitre', component: SecurityNetworkComponent,
+  path: 'securite', component: SecurityNetworkComponent,
+ }
+,
+ {
+  path: 'conditions-de-vente', component:     ConditionsOfSaleComponent,
+ }
+,
+ {
+  path: 'dernieres-news', component:     LastCommunicationComponent,
+ }
+,
+ {
+  path: 'termes-utilisations', component:     TermsOfUseAndPrivacypolicyComponent,
  }
 ];
 

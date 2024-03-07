@@ -19,6 +19,7 @@ import { EmptyPageComponent } from './empty-page/empty-page.component';
 import { LoadingPageComponent } from './loading-page/loading-page.component';
 import { UploadComponent } from './upload/upload.component';
 import { ModalEditFolderComponent } from './modal-edit-folder/modal-edit-folder.component';
+import { TranslatePipe } from '../pipe/translation/translation.pipe';
 
 
 
@@ -27,6 +28,7 @@ import { ModalEditFolderComponent } from './modal-edit-folder/modal-edit-folder.
     TimelineComponent,
     InputSearchComponent,
     InputComponentComponent,
+    TranslatePipe,
     SwitchComponent,
     RouteCardComponent,
     ButtonComponent,
@@ -55,6 +57,7 @@ import { ModalEditFolderComponent } from './modal-edit-folder/modal-edit-folder.
     UploadComponent,
     ModalNewFileComponent,
     ModalDeleteComponent,
+    TranslatePipe,
     ModalNewFolderComponent,
     ModalEditFolderComponent,
     InputComponentComponent,

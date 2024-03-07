@@ -36,6 +36,9 @@ import { StartingPointComponent } from './orthers/starting-point/starting-point.
 import { SecurityNetworkComponent } from './orthers/security-network/security-network.component';
 import { TranslatePipe } from './pipe/translation/translation.pipe';
 import { TranslationService } from './service/translation/translation.service';
+import { ConditionsOfSaleComponent } from './pages_utils/conditions-of-sale/conditions-of-sale.component';
+import { LastCommunicationComponent } from './pages_utils/last-communication/last-communication.component';
+import { TermsOfUseAndPrivacypolicyComponent } from './pages_utils/terms-of-use-and-privacypolicy/terms-of-use-and-privacypolicy.component';
 // import { NgxStripeModule } from 'ngx-stripe';
 // import {JpImagePreloadModule} from 'ng-image-preload';
 // NgxStripeModule.forRoot('***your-stripe-publishable-key***'),
@@ -53,7 +56,10 @@ import { TranslationService } from './service/translation/translation.service';
     AboutUsComponent,
     SecurityCovidPageComponent,
     StartingPointComponent,
-    SecurityNetworkComponent
+    SecurityNetworkComponent,
+    ConditionsOfSaleComponent,
+    LastCommunicationComponent,
+    TermsOfUseAndPrivacypolicyComponent
   ],
   imports: [
     BrowserModule,
@@ -82,6 +88,9 @@ import { TranslationService } from './service/translation/translation.service';
       ComponentsModule.forRoot()
 
     ],
+  exports:[ 
+  ]
+,
     providers: [TranslationService, AuthService,{ provide: LocationStrategy, useClass: HashLocationStrategy }, UserServiceFireBase, DatePipe, AuthGuard],
   bootstrap: [AppComponent],
   schemas: [

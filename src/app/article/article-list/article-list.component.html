@@ -17,7 +17,7 @@
 		                <h1 class="text-start">Articles&nbsp;</h1>
 		                <div class="mb-3">
 		                    <select (change) = "categoryChange($event)" id="formInput62" class="form-select" aria-label="Default select example">
-		                        <option [value]="0" [selected]="selected == '0'" >Toute les catégories</option>
+		                        <option [value]="0" [selected]="selected == '0'" >{{'all_categories' | translate}}</option>
 		                        <option *ngFor="let category of articleCategories" [value]="category.id" [selected]="selected == category.id.toString()">{{category.name}}</option>
 
 		                    </select>
@@ -27,7 +27,7 @@
 		                <div class="justify-content-left gx-3 row  row-cols-1 row-cols-lg-2 row-cols-md-2 row-cols-sm-2 row-cols-xxl-3">
 		                    <div *ngFor="let article of articles" class="pb-3 pt-3">
 		                        <div class="bg-white ">
-                              <div  *ngIf="article.status != 'publish' && !has_suscribed " class="article_eti">Payant</div>
+                              <div  *ngIf="article.status != 'publish' && !has_suscribed " class="article_eti">{{'premium' | translate}}</div>
                               <a [routerLink]="['/article', article.id]" class="d-block">
                                 <app-preloader-img [src]="article._embedded['wp:featuredmedia'] ?  article._embedded['wp:featuredmedia'][0] && article._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url : ''" width_="700px" height_="250px"></app-preloader-img>
                                 <!-- <img [src]="article._embedded['wp:featuredmedia'] ?  article._embedded['wp:featuredmedia'][0] && article._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url : ''" width="700" height="480"> -->

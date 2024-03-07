@@ -3,25 +3,27 @@
       <div class="align-items-center gx-0 mb-3 row">
           <div class="pb-4 pb-xl-0 pe-3 pe-lg-3 ps-3 ps-lg-3 pt-4 pt-xl-0">
               <div class="bg-light gx-0  pe-0 ps-0 row">
-                  <div [routerLink]="['/nos-mesures-de-sécurité-contre-la-propagation-du-covid-19']" routerLinkActive="router-link-active"  class="bg-white col-12 col-md-4 pb-3 pe-1 ps-1 ps-lg-1 pt-3">
+                  <div [routerLink]="['/dernieres-news']" routerLinkActive="router-link-active"  class="bg-white col-12 col-md-4 pb-3 pe-1 ps-1 ps-lg-1 pt-3">
                       <div class="border pb-3 pt-3">
                           <div class="ps-3 pe-3">
                               <!-- <i class="fa-3x fa-head-side-mask fas pb-3"></i> -->
                               <img src="assets/img/icon/Newspaper.svg.png"  class="w-50" />
-                              <p class="mb-0">Last Communication
-                              </p>
+
+                              <p class="mb-4">{{'LastCommunication' | translate}}</p>
+
                               <p class="mb-0 pt-3 text-decoration-underline text-success pointer">Cliquez ici &gt;</p>
                           </div>
                       </div>
                   </div>
 
 
-                  <div [routerLink]="['/mieux-comprendre-les-points-de-départs']" class="bg-white col-12 col-md-4 pb-3 pe-1 ps-1 ps-lg-2 pt-3">
+                  <div [routerLink]="['/conditions-de-vente']" class="bg-white col-12 col-md-4 pb-3 pe-1 ps-1 ps-lg-2 pt-3">
                       <div class="border pb-3 pt-3">
                           <div class="ps-3 pe-3">
                               <!-- <i class="fa-3x fa-car-side fas pb-3"></i> -->
                               <img src="assets/img/icon/ticket.jpeg"  class="w-50" />
-                              <p class="mb-4">Conditions générale de  vente</p>
+                              <p class="mb-0">{{'ConditionsOfSale' | translate}}
+                            </p>
                               <p class="mb-0"></p>
                               <p class="mb-0"></p>
                               <p class="mb-0"></p>
@@ -34,13 +36,13 @@
                   </div>
 
                   
-                  <div [routerLink]="['/mieux-nous-connaitre']" class="bg-white col-12 col-md-4 pb-3 pe-1 ps-1 ps-lg-2 pt-3">
+                  <div [routerLink]="['/termes-utilisations']" class="bg-white col-12 col-md-4 pb-3 pe-1 ps-1 ps-lg-2 pt-3">
                     <div class="border pb-3 pt-3">
                         <div class="ps-3 pe-3">
                               <img src="assets/img/icon/secure.jpeg"  class="w-50" />
                               <!-- <i class="fa-3x fa-tasks fas pb-3"></i> -->
-                              <p class="mb-4">Conditions générale d’utilisation et de confidentialité</p>
-                              <p class="mb-0 pt-3 text-decoration-underline text-success pointer">Cliquez ici &gt;</p>
+                              <p class="mb-4">{{'TermsOfUseAndPrivacypolicy' | translate}}</p>
+                              <p class="mb-0 pt-3 text-decoration-underline text-success pointer">{{'clickHere' | translate}}</p>
                           </div>
                       </div>
                   </div>

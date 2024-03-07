@@ -51,13 +51,11 @@ import { StripeFormComponent } from './stripe-form/stripe-form.component';
 import { StripCardComponent } from './strip-card/strip-card.component';
 import { StripeComponent } from './stripe-payment/stripe.component';
 import { LanguageSelectorComponent } from './language-selector/language-selector.component';
-import { TranslatePipe } from '../pipe/translation/translation.pipe';
 
 
 @NgModule({
   declarations: [
     NavBarComponent, 
-    TranslatePipe,
     HomeTrajetComponent,
     FooterComponent,
     HomeChecklistComponent,
@@ -154,7 +152,6 @@ import { TranslatePipe } from '../pipe/translation/translation.pipe';
       StripeFormComponent,
       PreloaderImgComponent,
       StripCardComponent,
-      TranslatePipe,
       LanguageSelectorComponent,
       StripeComponent
     ]

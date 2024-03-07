@@ -16,6 +16,66 @@
         "See_more": "See more",
         "from": "from",
         "to": "to",
+        "premium": "Premium",
+        "Aucun_Trajet_reserve": "No trips recorded",
+        "AddATrip": "Add a trip",
+        "FromAirportStationToHome": "From airport/station to home",
+        "FromHomeToAiportStation": "From home to aiport/station",
+        "BookAAeatWith" : "Book a seat with your sharing taxi",
+        "YourDepartureAdress" : "Your departure adress",
+        "SelectAirportStation": "Select airport /station",
+        "SelectDestination" : "Select destination",
+        "YourFullAddress" : "Your full address (with City, country)",
+        "Nav_CheckList": "Help to Pack my  suitcase",
+        "country": "Country",
+        "city": "City",
+        "airport": "Airport",
 
-        "Nav_CheckList": "Help to Pack my  suitcase"
+        "LastCommunication": "Last Communication",
+        "ConditionsOfSale": "Conditions of Sale",
+        "TermsOfUseAndPrivacypolicy": "Terms of Use and Privacy policy",
+        "clickHere": "Click Here",
+        "dearTraveler": "Dear traveler, we have never been happier than being your first choice, just like many others.Extend the dream and tell us where you come from.",
+
+        "TheyVisitedUs": "They visited us, click here to See",
+        "my_journeys": "My Journeys",
+        "Archived_Journey": "Archived Journey",
+        "Archived_trips": "Archived trips",
+        "My_trips": "My Trips",
+        "all_categories": "All Categories",
+        "you_are_reading_an_article": "You are reading an article reserved for subscribers. To continue to read, subscribe.",
+        "go": "Go",
+        "suscribe" : "To suscribe",
+        "simullar_articles" : "Similar articles",
+        "leave_a_comment" :  "Leave a comment",
+        "comments" : "Comments",
+        "publish_message" :  "Publish the message",
+        "proceed_payment": "Proceed to payment",
+        "you_have_access_to_all_article": "You have access to all the articles By making the purchase on the website, you thereby accept our general terms and Conditions of Sale in their entirety",
+        "price" : "Price",
+        "connect_before_continue": "Log in before continuing",
+        "sucribr_before_continue": "Suscribe before continuing",
+        "login": "Sign In",
+        "PasswordForgotten" : "Password forgotten",
+        "notYetRegistered" : "not yet registered",
+        "SignUp" : "Sign Up",
+        "Surname" : "Surname",
+        "name" : "Name",
+        "gender" : "Gender",
+        "female"  : "Female",
+        "Mes_Trajets": "My trips",
+        "man" : "Man",
+        "PhoneNumber" :"Phone number with country code",
+        "Password": "Password",
+        "ResidenceCountry" : "Residence country",
+        "suscribe_r": "Suscribe"
+
+
+
+
+
+
+
+
+
 }

@@ -30,12 +30,11 @@
                 <div style="height: 80%;" class="bg-primary d-inline-flex flex-column justify-content-around p-5">
                     <p href="" class="text-center text-white fs-5">
                       <!-- {{!payment || payment.created_at  != payment.updated_at ? 'Pour pouvoir continuer à lire les articles il faudrait vous abonner !': -->
-                      {{true ? 'Pour pouvoir continuer à lire les articles il faudrait vous abonner !':
-                      getPreavisText()}}
+                      {{ (true ? 'you_are_reading_an_article' : getPreavisText()) | translate }}
                     </p>
                     <!-- <div *ngIf="!payment || payment.created_at  != payment.updated_at" class="text-center"> -->
                     <div class="text-center">
-                        <button type="button" (click)="clickToSuscribe()" class="btn border-2 fw-bolder btn-lg btn-outline-light btn-primary">Je m'abonnes</button>
+                        <button type="button" (click)="clickToSuscribe()" class="btn border-2 fw-bolder btn-lg btn-outline-light btn-primary">{{'suscribe' | translate}}</button>
                     </div>
                 </div>
             </div>
@@ -44,7 +43,7 @@
 
 
               <section class=" pb-0 pt-5 text-secondary" data-pg-collapsed>
-                    <h2 class="ps-0 text-start">Articles simillaires</h2>
+                    <h2 class="ps-0 text-start">{{'simullar_articles' | translate}}</h2>
                     <div class="container-fluid">
 
                     <section class=" p-0 pt-0 w-100 ">
@@ -53,7 +52,7 @@
                             <div class="justify-content-center gx-3 row  row-cols-1 row-cols-lg-2 row-cols-md-2 row-cols-sm-2 row-cols-xxl-2">
                                 <div *ngFor="let article_s of articles" class="pb-3 pt-3">
                                     <div  *ngIf="article.status != 'publish' && !have_to_suscribe " class="bg-white ">
-                                      <div class="article_eti">Payant</div>
+                                      <div class="article_eti">{{'premium' | translate}}</div>
                                       <a (click)="reload()" [routerLink]="['/article', article_s.id]" class="d-block">
                                         <app-preloader-img [src]="article_s._embedded['wp:featuredmedia'] ?  article_s._embedded['wp:featuredmedia'][0] && article_s._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url : ''" width_="700px" height_="480px"></app-preloader-img>
                                         <!-- <img style="height:200px" [src]="article_s._embedded['wp:featuredmedia'] ?  article_s._embedded['wp:featuredmedia'][0] && article_s._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url : ''" width="700" height="480"> -->
@@ -103,20 +102,20 @@
               <div *ngIf="!hasCommented()" class="">
                 <form id="algin-form">
                     <div class="form-group">
-                        <h4>Laissez un commentaire</h4>
+                        <h4>{{'leave_a_comment' | translate}}</h4>
                         <label for="message" class="pb-2">Message</label>
                         <textarea [(ngModel)]="comment" #textArea name="msg" id=""msg cols="30" rows="5" class="form-control p-4 text-white" style="background-color: black;"></textarea>
                     </div>
 
                     <div class="form-group pt-2">
                         <!-- <button type="button" id="post" class="btn p-2">Poster votre commentaire</button> -->
-                        <app-button [disabled] ="comment.length=== 0 " [ngClass]="{disabled: comment.length === 0}" (click)="addComment(textArea.value)" [loading]="loading" class_="" btn_class="w-auto p-2" [text]="'Poster votre commentaire'"></app-button>
+                        <app-button [disabled] ="comment.length=== 0 " [ngClass]="{disabled: comment.length === 0}" (click)="addComment(textArea.value)" [loading]="loading" class_="" btn_class="w-auto p-2" [text]="'publish_message' | translate"></app-button>
                     </div>
                 </form>
             </div>
 
               <section *ngIf="comments.length > 0" class=" pb-0 pt-5 text-secondary" data-pg-collapsed>
-                    <h2 class="ps-0 text-start">Commentaires</h2>
+                    <h2 class="ps-0 text-start">{{'comments' | translate}}</h2>
                     <div class="container-fluid">
 
                     <section class=" p-0 pt-0 w-100 ">

@@ -4,7 +4,7 @@
         <section  *ngIf="!has_sucribed" class="bg-light pb-5 pt-5 vh-100" data-pg-collapsed>
           <div class="container pb-4 pt-4">
               <div class="text-center">
-                  <h2 class="h6 mb-1 text-primary text-uppercase">Pricing</h2>
+                  <h2 class="h6 mb-1 text-primary text-uppercase">{{"price" | translate}}</h2>
                   <!-- <h3 class="fw-bold h2 mb-3">Choisissez votre</h3> -->
                   <!-- <p class="fw-light mb-4">                                Choose the plan that’s right for you. </p> -->
               </div>
@@ -68,11 +68,11 @@
                                   <li class="pb-2 pt-2" data-pg-collapsed>
                                       <svg viewBox="0 0 24 24" fill="currentColor" height="24" width="24" class="bg-white me-2 p-1 rounded-circle text-primary">
                                           <path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"></path>
-                                      </svg>                                &nbsp;Accès à tous les articles
+                                      </svg>                                {{'you_have_access_to_all_article' | translate}}
                                   </li>
                               </ul>
 
-                              <app-button (click)="openModal()" bh="30" [loading]="loading" class_="fas fa-save1" btn_class="btn d-block btn-lg border-2 fw-bolder fs-5 w-100 btn-light rounded-pill flex align-items-center justify-content-center " text="Choisir l'option" >
+                              <app-button (click)="openModal()" bh="30" [loading]="loading" class_="fas fa-save1" btn_class="btn d-block btn-lg border-2 fw-bolder fs-5 w-100 btn-light rounded-pill flex align-items-center justify-content-center " [text]="'proceed_payment' | translate" >
                             </app-button>
                               <!-- <a (click)="submit()" class="btn d-block btn-lg border-2 fw-bolder fs-5 w-100 btn-light rounded-pill flex align-items-center justify-content-center" target="_pg_blank1">Choisir l'option</a> -->
                           </div>

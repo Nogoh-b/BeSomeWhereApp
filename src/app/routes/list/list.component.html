@@ -39,5 +39,5 @@
 
 <app-preloader-route-list *ngIf="!reservations"></app-preloader-route-list>
 <div  *ngIf="reservations && reservations.length === 0" class="vh-100">
-  <app-empty-page (btn2_clicked)="screen_archived(isArchived)" route_btn1="trajets/creation/1" btn1_text="Ajouter un trajet" [btn2_text]="isArchived ? 'Mes Trajets' : 'Tajets Archivés'" title = "Aucun Trajet reservé!"  title_class="fs-5"></app-empty-page>
+  <app-empty-page (btn2_clicked)="screen_archived(isArchived)" route_btn1="trajets/creation/1" btn1_text="AddATrip" [btn2_text]="isArchived ? 'My_trips' : 'Archived_trips'" title = "No_Journey_Created"  title_class="fs-5"></app-empty-page>
 </div>

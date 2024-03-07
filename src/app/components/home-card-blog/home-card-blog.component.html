@@ -63,7 +63,7 @@ Fashion Week Styles
     <slide *ngFor="let article of articles">
         <div [routerLink]="['/article', article.id]" class="pe-2 ps-2 pointer">
             <div class="card">
-              <div *ngIf="article.status != 'publish' && !has_suscribed" class="article_eti">Payant</div>
+              <div *ngIf="article.status != 'publish' && !has_suscribed" class="article_eti">{{'premium' | translate}}</div>
               <div class="image-wrapper">
                   <!-- <img [src]="article._embedded['wp:featuredmedia'] ?  article._embedded['wp:featuredmedia'][0] && article._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url : ''" class="h-100 w-100"> -->
                     <!-- <app-preloader-img  [src]="article._embedded['wp:featuredmedia'] ?  article._embedded['wp:featuredmedia'][0] && article._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url : ''"  [height_]="'300px'"></app-preloader-img> -->
@@ -103,7 +103,7 @@ Fashion Week Styles
   </ng-template>
 </owl-carousel-o> -->
 
-<p class="text-end pe-2 mt-n3 pt-4 pointer" ><a [routerLink]="['/article']" style="position: relative;z-index: 49;width: 100%!important;" href="google.com"> {{'See_more' | translate}}...</a></p>
+<p class="text-end pe-2 mt-n3 pt-4 pointer" ><a [routerLink]="['/article']" style="position: relative;z-index: 15;width: 100%!important;" href="google.com"> {{'See_more' | translate}}...</a></p>
 
 
 <section *ngIf="!articles" class="border-2 border-primary pt-2 pt-lg-0 section_blog section_n">

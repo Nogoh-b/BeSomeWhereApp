@@ -1,9 +1,11 @@
 // translate.pipe.ts
 
-import { Pipe, PipeTransform } from '@angular/core';
+import { Injectable, Pipe, PipeTransform } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TranslationService } from 'src/app/service/translation/translation.service';
-
+// @Injectable({
+//   providedIn: 'root',
+// })
 @Pipe({
   name: 'translate',
   pure: false, // rendre le pipe impur

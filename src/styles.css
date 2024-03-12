@@ -655,6 +655,9 @@ input[type="checkbox"] {
 .modal-backdrop {
   z-index: 5!important;
 }
+.overflow-auto {
+  overflow: auto !important;
+}
 
 .modal-content{
   border: none!important;

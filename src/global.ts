@@ -4,7 +4,7 @@
 import {Observable} from "rxjs";
 const DEV =  false
 export const email_admin = /*'nogohbrice@yahoo.fr';nyassokelydiane@gmail.com//*/'besomewhere.contact@gmail.com';
-export const stripe_url = DEV ? 'http://localhost:3000' : 'https://seed-misty-bonobo.glitch.me';
+// export const stripe_url = DEV ? 'http://localhost:3000' : 'https://seed-misty-bonobo.glitch.me';
 export const stripe_pk = DEV ?
 'pk_test_51KVFRLK7lUbrszmIsaL6Xtjh9vufBQGvFKAwmjFjtCcqdtZWEs80pMvxWcNEgXWvqWJ6XT0IHtbLDBuko3cnfnyg00rFIW7QE2' 
 :
@@ -14,6 +14,7 @@ export const stripe_pk = DEV ?
 export const KEY_FOR_PUSH_MESSAGING= 'AAAAla-ImJY:APA91bEaEwecDU3ku6hZ-ODRQb3U3zOa9mjmM_CNRMyg0sJQ9Pyn1riezr7msKn9zOmPPpEeJR_NYpFeueQQz01GjEnJoR-6916uEIam-rTloHIPM0E8ndDlMvk8BUa8DSu9QaPz_ZlR';
 export const LOGIN='nogoh:Lionelbrice123@';
 export const SERVER = /*'http://bisooft.com/'//'https://polydor-btsh.com/'// */ 'https://besomewhereapp.com/';
+export const stripe_url = DEV ? 'http://localhost:3000' : 'http://back.besomewhereapp.com';
 // export const SERVER = /*'http://bisooft.com/'//'https://polydor-btsh.com/'// */ 'http://localhost/';
 //  export const SERVER = 'http://localhost/'//'https://polydor-btsh.com/'// 'http://testanna.bnbsoftservice.com/';
 //export const SERVER_LOCAL = 'http://localhost/'//'http://testanna.bnbsoftservice.com/';

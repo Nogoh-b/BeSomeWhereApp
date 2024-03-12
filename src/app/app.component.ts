@@ -29,6 +29,19 @@ export class AppComponent {
     private router: Router,
      private userService: UserService){
       
+
+          // Écoute des changements de route
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        // Code à exécuter lorsque la route change
+        console.log('La route a changé:', event.url);
+        
+        // Modification du style du body
+        document.body.classList.add('overflow-auto');
+      }
+    });
+
+
       // emailService.sendMail({ "email": 'nogohbrice@gmail.com',
       // "subject": "Commande",
       // "content": "Votre reservation à été prise en compte"}).subscribe(r => {console.log('email result ' ,r)})
@@ -106,5 +119,7 @@ export class AppComponent {
     })
 
    }
+
+   
 
 }

@@ -68,6 +68,21 @@
         "PhoneNumber" :"Phone number with country code",
         "Password": "Password",
         "ResidenceCountry" : "Residence country",
+        "suitcase_preparation_checklist" : "Help to prepare  suitcase to forget nothing",
+        "journey_name" : "Give a name to your journey",
+        "return_date" : "Date de retour",
+        "departure_date" : "Date de départ",
+        "add_destination" : "Ajouter une destination",
+        "means_of_transport" : "Means of transport",
+        "encrypted_dates_inconsistency" : "The dates encrypted are not consistent",
+        "fill_all_field" : "Fill in all the fields",
+        "car" : "car",
+        "plane" : "plane",
+        "boat" : "boat",
+        "walkin" : "walking",
+        "bike" : "bike",
+        "train" : "train",
+        "moto" : "moto",
         "suscribe_r": "Suscribe"
 
 

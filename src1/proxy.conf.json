@@ -1,7 +1,0 @@
-{
-  "/api/*": {
-      "target": "https://largescalematrix.router.hereapi.com",
-      "secure": false,
-      "logLevel": "debug"
-  }
-}

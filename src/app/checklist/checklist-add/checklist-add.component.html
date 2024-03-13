@@ -129,7 +129,7 @@
 
 
 <form *ngIf="for_home" (ngSubmit)="onSubmit()" [formGroup]="checkListForm">
-  <h3 class="fs-4 fw-bold mb-2 ps-4 ps-lg-0  pt-lg-4 text-uppercase">Checklist pour ne rien oublier </h3>
+  <h3 class="fs-4 fw-bold mb-2 ps-4 ps-lg-0  pt-lg-4 text-uppercase">{{ 'suitcase_preparation_checklist' |translate}}</h3>
 
   <div class="container-fluid pb-0 pe-0 pe-lg-5 pe-xl-0 ps-0 ps-lg-5 ps-xl-0">
       <div class="bg-white  p-3">
@@ -139,7 +139,7 @@
                   <div class=" pe-2">
                       <div class="form-floating mb-3" data-pg-dyn-id="did_107">
                           <input type="email" formControlName="title" [ngClass]="{ 'is-invalid': submitted && checkListForm.controls['title'].errors }"   class="form-control" id="title" placeholder="nom">
-                          <label for="title">Nom de la Checklist</label>
+                          <label for="title">{{ 'journey_name' |translate}}</label>
                       </div>
                   </div>
 
@@ -153,20 +153,20 @@
                       <div class=" pe-2">
                           <div class="form-floating mb-3 " data-pg-dyn-id="did_107">
                               <input type="date" formControlName="begindate{{i}}" [ngClass]="{ 'is-invalid':!valids_array[i].bd || (submitted && checkListForm.controls['begindate' + i].errors) }"  class="form-control" id="begindate{{i}}" placeholder="nom">
-                              <label for="begindate{{i}}">Date de départ</label>
+                              <label for="begindate{{i}}">{{ 'departure_date' |translate}}</label>
                           </div>
                       </div>
                       <div class=" pe-2">
                           <div class="form-floating mb-3 " data-pg-dyn-id="did_107">
                               <input  type="date" class="form-control" formControlName="enddate{{i}}" [ngClass]="{ 'is-invalid': !valids_array[i].bd || (submitted && checkListForm.controls['enddate' + i].errors) }"  id="enddate{{i}}" placeholder="nom">
-                              <label for="enddate{{i}}">Date de retour</label>
+                              <label for="enddate{{i}}">{{ 'return_date' |translate}}</label>
 
                           </div>
                       </div>
                       <div class=" pe-2">
                           <div class="form-floating mb-3" data-pg-dyn-id="did_107">
                               <input list="countrydatalistOptions"   (change)="countrySelected($event)" type="email" class="form-control  text-capitalize" [ngClass]="{ 'is-invalid':  (submitted && checkListForm.controls['country' + i].errors) }" formControlName="country{{i}}" id="country{{i}}" placeholder="nom" value>
-                              <label for="country{{i}}">Pays</label>
+                              <label for="country{{i}}">{{ 'country' |translate}}</label>
                               <datalist id="countrydatalistOptions">
                                 <option  *ngFor="let country of countries" [value]="country.translations.fr ? country.translations.fr : country.name">
                             </datalist>
@@ -175,7 +175,7 @@
                       <div class=" pe-2">
                           <div class="form-floating mb-3" data-pg-dyn-id="did_107">
                               <input list="citydatalistOptions" type="email" [ngClass]="{ 'is-invalid': submitted && checkListForm.controls['city' + i].errors }" formControlName="city{{i}}" class="form-control text-capitalize" id="city{{i}}" placeholder="nom">
-                              <label for="city{{i}}">Ville</label>
+                              <label for="city{{i}}">{{ 'city' |translate}}</label>
                               <datalist id="citydatalistOptions">
                                 <option class="text-l" *ngFor="let city of getCities(currentCountry)" [value]="city.name">
                             </datalist>
@@ -194,7 +194,7 @@
 
               <!-- mode de transport -->
               <div class=" pb-4">
-                  <p class="border-2 border-bottom border-top h2 pb-3 ps-2 pt-3">Mode de transport</p>
+                  <p class="border-2 border-bottom border-top h2 pb-3 ps-2 pt-3">{{ 'means_of_transport' |translate}}</p>
                   <div class="d-flex gx-0 pe-2 ps-2 row row-cols-4 row-cols-xl-4">
 
                       <div (mouseleave) = "onMouseleave(input_trans)" (mouseenter) = "onMousenter(input_trans)"  *ngFor="let transport of model_trans let i = index" class="align-items-center d-flex flex-column justify-content-center pb-3 pt-3" data-pg-collapsed>

@@ -66,6 +66,26 @@
         "PhoneNumber" :"Numéro avec Code pays",
         "Mes_Trajets": "Mes Voyages",
         "ResidenceCountry" : "Pays de residence",
+        "journey_name" : "Donnez un nom à votre voyage",
+        "suitcase_preparation_checklist" : "Aide à préparer sa valise pour ne rien oublier",
+        "return_date" : "Return date",
+        "departure_date" : "Departure date",
+        "add_destination" : "Add a destination",
+        "means_of_transport" : "Mode de transport",
+        "encrypted_dates_inconsistency" : "Les dates entrées ne sont pas cohérentes",
+        "fill_all_field" : "Remplisser tout les champs",
+        "car" : "voture",
+        "plane" : "avion",
+        "boat" : "bateau",
+        "walkin" : "marche",
+        "bike" : "vélo",
+        "train" : "train",
+        "moto" : "moto",
+        "create" : "create",
+        "create" : "créer",
+        "baby_presence" : "Presence of a baby",
+        "baby_presence" : "Présence d’un bébé",
+
         "suscribe_r": "Enregistrement"
 
 

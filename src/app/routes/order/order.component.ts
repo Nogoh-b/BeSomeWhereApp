@@ -51,11 +51,11 @@ export class OrderComponent implements OnInit {
   openModal(){
     this.resume_data.total_price = this.getTotal().toFixed(2)
     let items: Item[] = []
-    items.push({categorie:'Siège(s)',price: this.total_price_passenger(false).toFixed(2), quantity : this.total_passenger()})
-    items.push({categorie:'Venir à ma porte',price:(this.price_take_to_home * this.total_take_at_homr()).toFixed(2),quantity: this.total_take_at_homr()})
-    items.push({categorie:'Petits plaisirs',price: this.total_price_meals().toFixed(2) ,quantity: this.total_meals()})
-    items.push({categorie:'Valise supplémentaire',price:this.total_price_suitcase().toFixed(2),quantity: this.total_suitcase()})
-    items.push({categorie:'Siège bébé',price:this.total_price_babyseats().toFixed(2),quantity: this.total_babyseats()})
+    items.push({categorie:'reserved_seats',price: this.total_price_passenger(false).toFixed(2), quantity : this.total_passenger()})
+    items.push({categorie:'come_to_my_door',price:(this.price_take_to_home * this.total_take_at_homr()).toFixed(2),quantity: this.total_take_at_homr()})
+    items.push({categorie:'snack_service_souvenirs',price: this.total_price_meals().toFixed(2) ,quantity: this.total_meals()})
+    items.push({categorie:'additional_suitcases',price:this.total_price_suitcase().toFixed(2),quantity: this.total_suitcase()})
+    items.push({categorie:'baby_seat_option',price:this.total_price_babyseats().toFixed(2),quantity: this.total_babyseats()})
     this.resume_data.items = items
     console.log('payments_data ', this.resume_data)
     localStorage.setItem('payments_data',JSON.stringify(this.resume_data))
@@ -130,7 +130,7 @@ export class OrderComponent implements OnInit {
           // this.loading = false
           this.toast_c.open('', 'Trajet réservé')
           localStorage.removeItem('reservation')
-          this.toast_c.open("Be Somewhere", "Reservation Enregistrée")
+          this.toast_c.open("Be Somewhere", "reservation_confirmed")
           this.emailService.sendMail({ "email": user.email,
           "subject": "Commande",
           "content": "Votre reservation à été prise en compte"}).subscribe(r => {})

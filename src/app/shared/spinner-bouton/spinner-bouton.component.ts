@@ -8,7 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class SpinnerBoutonComponent implements OnInit {
 
   @Input() max_value: number = 20;
-  @Input() label: string = 'Passagers';
+  @Input() label: string = 'passenger';
   @Input() value = 0 ;
   @Input() class_ = "align-items-center d-flex justify-content-center pb-2 pb-sm-4 pe-2 pe-sm-2 ps-2 ps-sm-2 pt-0 pt-sm-4 t-neutral" ;
   // @Input() class_ = "align-items-center d-flex justify-content-center pb-4 pt-4 t-neutral" ;

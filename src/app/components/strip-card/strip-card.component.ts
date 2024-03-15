@@ -42,7 +42,7 @@ export class StripCardComponent {
       items.push({categorie:'Venir à ma porte',price:'17.00',quantity: 3})
       items.push({categorie:'Petits plaisirs',price:'20.00',quantity: 3})
       items.push({categorie:'Valise supplémentaire',price:'5.00',quantity: 3})
-      items.push({categorie:'Siège bébé',price:'1.96',quantity: 3})
+      items.push({categorie:'{{'baby_seat_option' | translate}}',price:'1.96',quantity: 3})
       this.resume_data.items = items*/
     }
     ngAfterViewInit() {

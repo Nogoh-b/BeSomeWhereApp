@@ -9,7 +9,7 @@
                 </div>
                 <div class="bg-white border border-3 border-primary">
                     <div class="border-0 modal-header pb-2">
-                        <h4 class="me-auto modal-title ms-auto pt-4" style="z-index: 3;">Ajout d'adresse</h4>
+                        <h4 class="me-auto modal-title ms-auto pt-4" style="z-index: 3;">{{'tell_us_where_are_you_from' | translate}}</h4>
                     </div>
                     <hr class="bg-primary border-1 border-primary border-top mb-0 me-3 ms-3  pb-0">
                     <div class="border-0 modal-body pb-0 pe-4 ps-4">
@@ -18,7 +18,7 @@
                             <div class="col d-flex form-floating g-0 justify-content-between " data-pg-dyn-id="did_107">
                               <!-- <i class="col-auto fa-lg fa-map-marker-alt fas mb-auto mt-auto p-0 text-primary"></i> -->
                               <input formControlName="country" (change)="countrySelected($event)" list="countrydatalistOptions" class="border-white form-control fs-6 mb-n1 text-truncate" id="county_input" placeholder="Pays">
-                              <label for="county_input" class="fs-5 fw-normal mt-n1  ps-2 text-start text-truncate w-100">Pays</label>
+                              <label for="county_input" class="fs-5 fw-normal mt-n1  ps-2 text-start text-truncate w-100">{{'country' | translate}}</label>
                               <datalist id="countrydatalistOptions">
                                 <option  *ngFor="let country of countries" [value]="country.translations.fr ? country.translations.fr : country.name">
                             </datalist>
@@ -31,7 +31,7 @@
                             <div class="col d-flex form-floating g-0 justify-content-between " data-pg-dyn-id="did_107">
                               <!-- <i class="col-auto fa-lg fa-map-marker-alt fas mb-auto mt-auto p-0 text-primary"></i> -->
                               <input formControlName="city"  (change)="citySelected($event)"   list="citydatalistOptions" class="border-white form-control fs-6 mb-n1 text-truncate" id="city_input" placeholder="Pays">
-                              <label for="city_input" class="fs-5 fw-normal mt-n1  ps-2 text-start text-truncate w-100">Ville</label>
+                              <label for="city_input" class="fs-5 fw-normal mt-n1  ps-2 text-start text-truncate w-100">{{'city' | translate}}</label>
                               <datalist id="citydatalistOptions">
                                 <option class="text-l" *ngFor="let city of getCities(currentCountry)" [value]="city.name">
                               </datalist>
@@ -52,7 +52,7 @@
                     <!-- <p>Form status: {{ addressForm.status | json }}</p> -->
                     <div class="border-0 d-flex justify-content-center modal-footer">
                       <button id="close_btn" class="btn btn-outline-primary border-dark text-dark" data-bs-dismiss="modal">Fermer</button>
-                      <app-button *ngIf="!saved" [loading]="loading"  bh='auto' btn_class="h-auto" text="Enregistrer"></app-button>
+                      <app-button *ngIf="!saved" [loading]="loading"  bh='auto' btn_class="h-auto" [text]="'save' | translate"></app-button>
                     </div>
                 </div>
             </div>

@@ -22,7 +22,7 @@ export class ModalEditFolderComponent {
   @Output() onFolderUpdated = new EventEmitter<File_Checklist>()
   @ViewChild('#newf') newfolderModal: ElementRef;
   loading =  false
-  title =  'Edition de la valise '
+  title =  'edit'
 
   opt_checklist = proposedChecklist_cat
   constructor(private fb: FormBuilder, private fileChecklistService: FileChecklistService) {
@@ -38,7 +38,7 @@ export class ModalEditFolderComponent {
 
   init( data){
     // this.createForm(data)
-    this.title = 'Edition  de la valise '
+    this.title = 'edit'
     this.cur_folder = data
     console.log(Number(this.cur_folder.isDefault).toString())
     this.folderForm.controls['name'].setValue(this.cur_folder.name)
@@ -91,6 +91,6 @@ export class ModalEditFolderComponent {
   reset(){
     this.folderForm.controls['name'].setValue('')
     this.folderForm.controls['is_default'].setValue('0')
-    this.title =  'Création de la valise '
+    this.title =  'start_checklist'
   }
 }

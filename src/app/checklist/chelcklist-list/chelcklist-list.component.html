@@ -29,15 +29,15 @@
             <div class="align-items-center bg-white d-flex flex-column mb-3 p-3 text-black-50">
                 <div class="d-flex justify-content-start w-100">
                     <button (click)="screen_archived(isArchived)"  type="button" class="btn btn-outline-primary me-1 rounded-pill">
-                        <i class="fa-file-archive fas pe-1"></i> {{isArchived ? 'Mes Checklists' : "Checklists Archivées"}}
+                        <i class="fa-file-archive fas pe-1"></i> {{(isArchived ? 'my_journeys' : "Archived_Journey" )| translate}}
                     </button>
                     <button routerLink="/checklist/creation" type="button" class="btn btn-outline-danger ms-1 rounded-pill  border-2 border-primary">
-                        <i class="fa-plus fas pe-1"></i>Ajouter&nbsp; une Cheklist
+                        <i class="fa-plus fas pe-1"></i>{{'Add_a_journey' | translate}}
                     </button>
                 </div>
             </div>
             <div class="align-items-center col container-fluid d-flex fs-5 fw-bold mb-xl-2 pb-2 pe-4 ps-4 pt-3 text-truncate text-wrap">
-              <p class="fs-4 pe-0">Mes Checklist Actives</p>
+              <p class="fs-4 pe-0">{{(isArchived ? 'archived_journeys' : "acive_checklists") | translate}}</p>
             </div>
             <div *ngFor="let checklist of checklists" class=" pb-lg-3 pointer" >
               <div class="border-b">

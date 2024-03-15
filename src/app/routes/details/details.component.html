@@ -23,7 +23,7 @@
                     </div>
                   </div>
                     <div class="border-b bg-white me-xl-0 ms-xl-0 pe-3 ps-3 pt-2 mb-5 pb-4">
-                        <p class="fs-4 fw-bold pb-2 ps-0 pt-3">Passager (s)</p>
+                        <p class="fs-4 fw-bold pb-2 ps-0 pt-3">{{'passenger' | translate}}</p>
                         <div class="gx-0 row">
                             <div *ngFor="let passenger of passengers let i = index" class="col-md-6 col-lg-6 p-1">
                                 <div class="border border-1 p-3 shadow-sm" style ="/* border-radius: 15px */">
@@ -31,7 +31,7 @@
                                         <p class="fs-5 fw-bold pb-1 text-body">{{passenger.first_name + ' '+passenger.last_name}}</p>
                                     </div>
                                     <span *ngIf="i === 0" class="fs-6 pt-2 text-muted"><i class="fa-birthday-cake fas pe-2 text-danger"></i>{{passenger.birthday | date}}</span>
-                                    <p class="fs-6 fw-normal text-black-50 text-start"><i class="fa-user fas pe-2 text-danger"></i>{{ passenger.gender === 0 ? 'Homme' : 'Femme' }}</p>
+                                    <p class="fs-6 fw-normal text-black-50 text-start"><i class="fa-user fas pe-2 text-danger"></i>{{ (passenger.gender === 0 ? 'man' : 'female') | translate}}</p>
                                     <p *ngIf="passenger.phone" class="fs-6 fw-normal text-black-50 text-start"><i class="fa-phone-alt fas pe-2 text-danger"></i>{{ passenger.phone }}</p>
                                     <p *ngIf="passenger.email" class="fs-6 fw-normal text-black-50 text-start"><i class="fa-envelope fas pe-2 text-danger"></i>{{ passenger.email }}</p>
                                     <p *ngIf="reservation.take_to_home_adr && i === 0 " class="fs-6 fw-normal text-black-50 text-start"><i class="fa-map-marker-alt fas pe-2 text-danger"></i>{{ reservation.take_to_home_adr }}</p>
@@ -45,7 +45,7 @@
 
 <!-- reservation -->
                     <div *ngIf="items" class="border-b bg-white  me-xl-0 ms-xl-0 p-2">
-                      <p class="fs-4 fw-bold pb-2 pl-3 ps-2 pt-3">Resumé de la commande</p>
+                      <p class="fs-4 fw-bold pb-2 pl-3 ps-2 pt-3">{{'order_summary' | translate}}</p>
 
                         <div class="accordion" id="panels1">
                             <div class="accordion-item border-0 show" data-pg-collapsed>
@@ -54,7 +54,7 @@
                                       <img src="assets/img/sandwich.png" width="50" height="50" class="">
                                       <div class="col w-25">
                                           <div class="align-items-center d-flex g-0 row row-cols-3">
-                                              <p class="col-6 fs-5 pe-2 ps-2 text-body text-start">Petits Plaisirs</p>
+                                              <p class="col-6 fs-5 pe-2 ps-2 text-body text-start">{{'snack_service_souvenirs' | translate}}</p>
                                               <p class="col-3 fs-5 fst-italic text-center text-muted pe-0">x{{total_meals()}}</p>
                                               <p class="col-3 fs-5 fw-bold text-body text-center pe-0">{{total_price_meals().toFixed(2)}} &euro;</p>
                                           </div>
@@ -93,7 +93,7 @@
                                 <img src="assets/img/map.png" class="col-auto pe-0 ps-0" width="50" height="50">
                                 <div class="col w-100">
                                     <div class="align-items-center d-flex g-0 row row-cols-3">
-                                        <p class="col-6 fs-5 pe-2 ps-2 text-body text-start">Venir à votre porte</p>
+                                        <p class="col-6 fs-5 pe-2 ps-2 text-body text-start">{{'come_to_my_door' | translate}}</p>
                                         <p class="col-3 fs-5 fst-italic text-center text-muted">{{reservation.take_at_home ? 'x'+total_take_at_homr() : 'x0'}}</p>
                                         <p class="col-3 fs-5 fw-bold text-body text-center">{{(take_at_home_price * total_take_at_homr()).toFixed(2)}} &euro;</p>
                                     </div>
@@ -107,7 +107,7 @@
                                     <img src="assets/img/baby-car-seat%20(1).png" class="col-auto pe-0 ps-0" width="50" height="50">
                                     <div class="col w-100">
                                         <div class="align-items-center d-flex g-0 row row-cols-3">
-                                            <p class="col-6 fs-5 pe-2 ps-2 text-body text-start">Siège bébé</p>
+                                            <p class="col-6 fs-5 pe-2 ps-2 text-body text-start">{{'baby_seat_option' | translate}}</p>
                                             <p class="col-3 fs-5 fst-italic text-center text-muted">x{{total_babyseats()}}</p>
                                             <p class="col-3 fs-5 fw-bold text-body text-center">{{  total_price_babyseats().toFixed(2)}}  &euro;</p>
                                         </div>
@@ -137,7 +137,7 @@
                                 <img src="assets/img/suitcases%20(2).png" class="col-auto pe-0 ps-0" width="50" height="50">
                                 <div class="col w-100">
                                     <div class="align-items-center d-flex g-0 row row-cols-3">
-                                        <p class="col-6 fs-5 pe-2 ps-2 text-body text-start">Valise supplémentaire</p>
+                                        <p class="col-6 fs-5 pe-2 ps-2 text-body text-start">{{'additional_suitcases' | translate}}</p>
                                         <p class="col-3 fs-5 fst-italic text-center text-muted"> x{{total_suitcase()}}</p>
                                         <p class="col-3 fs-5 fw-bold text-body text-center">{{total_price_suitcase().toFixed(2)}}  &euro;</p>
                                     </div>
@@ -148,7 +148,7 @@
                     <div class="align-items-center bg-light d-flex gx-0 p-3 row" data-pg-collapsed>
                         <div class="col w-100">
                             <div class="align-items-center d-flex g-0 row row-cols-2">
-                                <p class="fs-4 fw-bold pe-2 ps-2 text-body text-start">Total</p>
+                                <p class="fs-4 fw-bold pe-2 ps-2 text-body text-start">{{'total_price_included' | translate}}</p>
                                 <p class="fs-4 fw-bold text-end text-info">{{(total_price_meals() + total_price_suitcase() + total_price_passenger() + total_price_babyseats() + getTakeAtHomeOption()).toFixed(2)}} €</p>
                             </div>
                         </div>

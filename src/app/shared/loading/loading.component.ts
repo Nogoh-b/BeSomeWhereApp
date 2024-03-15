@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class LoadingComponent implements OnInit {
 
-  @Input() text = 'Recherche de Trajet...'
+  @Input() text = 'searching_shared_taxi'
   constructor() { }
 
   ngOnInit(): void {

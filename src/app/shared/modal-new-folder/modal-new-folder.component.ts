@@ -24,7 +24,7 @@ export class ModalNewFolderComponent implements OnInit {
   @Output() onFolderUpdated = new EventEmitter<File_Checklist>()
   @ViewChild('#newf') newfolderModal: ElementRef;
   loading =  false
-  title =  'Création de la valise '
+  title =  'start_checklist'
 
   opt_checklist = proposedChecklist_cat
   constructor(private fb: FormBuilder, private fileChecklistService: FileChecklistService) {
@@ -81,10 +81,10 @@ export class ModalNewFolderComponent implements OnInit {
     close_btn?.click()
     this.reset()
   }
-  reset(){
+  reset(folder? : any){
     this.folderForm.controls['name'].setValue('')
     this.folderForm.controls['is_default'].setValue('0')
-    this.title =  'Création de la valise '
+    this.title =  folder ? 'add_pocket' : 'start_checklist'
   }
 
 }

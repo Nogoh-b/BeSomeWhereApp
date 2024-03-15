@@ -87,7 +87,7 @@ export class ChecklistAddComponent implements OnInit {
     this.submitted = true
     let canSave = true
     if(this.checkListForm.invalid){
-      this.toast_c.open('Information','Remplissez les champs requis')
+      this.toast_c.open('information','FillInAllTheFields')
       return
     }
     // vérifier si les dates son conformes
@@ -102,7 +102,7 @@ export class ChecklistAddComponent implements OnInit {
 
     }
     if(!canSave){
-      this.toast_c.open('Information','Vérifiez que les dates  entrées sont valides et cohérente', 4000)
+      this.toast_c.open('information','inconsistent_encrypted_dates', 4000)
       console.log(this.valids_array)
       return
     }

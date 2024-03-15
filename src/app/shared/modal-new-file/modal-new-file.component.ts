@@ -21,7 +21,7 @@ export class ModalNewFileComponent implements OnInit {
   @Input() currentFileToEdit: File_Checklist
   @Input() cur_file : File_Checklist
   @ViewChild(ToastComponent) toast_c: ToastComponent
-  title =  'Création de l\'élément'
+  title =  'add_in_suitcase'
   loading = false
 
   constructor(private fb: FormBuilder, private fileChecklistService: FileChecklistService) { }
@@ -40,7 +40,7 @@ export class ModalNewFileComponent implements OnInit {
   }
 
   edit(data){
-    this.title = 'Edition de l\'élément'
+    this.title = 'edit'
     this.cur_file = data
     // console.log(Number(this.cur_file.isDefault).toString())
     this.fileForm.controls['name'].setValue(this.cur_file.name)
@@ -97,7 +97,7 @@ export class ModalNewFileComponent implements OnInit {
     this.fileForm.controls['name'].setValue('')
     this.fileForm.controls['total'].setValue('1')
     this.fileForm.controls['qty'].setValue('')
-    this.title =  'Création de l\'élément'
+    this.title =  'add_in_suitcase'
   }
   validateTotalGreaterThanQty(control: AbstractControl): { [key: string]: any } | null {
     const totalValue = control.get('total').value;

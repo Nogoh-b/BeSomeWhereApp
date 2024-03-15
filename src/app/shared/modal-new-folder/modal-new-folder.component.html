@@ -9,22 +9,22 @@
                 </div>
                 <div class="bg-white border border-3 border-primary">
                     <div class="border-0 modal-header pb-2">
-                        <h4 class="me-auto modal-title ms-auto pt-4" style="z-index: 3;">{{title}}</h4>
+                        <h4 class="me-auto modal-title ms-auto pt-4" style="z-index: 3;">{{title | translate}}</h4>
                     </div>
                     <hr class="bg-primary border-1 border-primary border-top mb-0 me-3 ms-3  pb-0">
                     <div class="border-0 modal-body pb-0 pe-4 ps-4">
                         <div *ngIf="isFirstLevel" class="btn-group pb-2" role="group" aria-label="Basic radio toggle button group">
                             <input formControlName = "is_default"  type="radio" class="btn-check" name="is_default" value="0"  id="groupradio1" autocomplete="off" checked>
-                            <label class="btn btn-outline-danger" for="groupradio1">Sac</label>
-                            <input formControlName = "is_default"  type="radio" class="btn-check" name="is_default" value="1"  id="groupradio2" autocomplete="off">
-                            <label  class="btn btn-outline-danger" for="groupradio2">Sac par défaut</label>
+                            <label class="btn btn-outline-danger" for="groupradio1">{{'bag' | translate}}</label>
+                            <!-- <input formControlName = "is_default"  type="radio" class="btn-check" name="is_default" value="1"  id="groupradio2" autocomplete="off"> -->
+                            <!-- <label  class="btn btn-outline-danger" for="groupradio2">Sac par défaut</label> -->
                         </div>
                         <div *ngIf="folderForm.controls['is_default'].value  !== '1'" class="d-flex flex-column mb-3">
-                            <label for="formInput104">Donner un nom à ma valise </label>
+                            <!-- <label for="formInput104">{{'suitcase_name' | translate}} </label> -->
                             <input formControlName = "name"  type="text" placeholder="ex: John Doe" class="border"/>
                         </div>
                         <div *ngIf="folderForm.controls['is_default'].value  == '1'" class="mb-3">
-                            <label for="formInput104">Nom du sac par défaut</label>
+                            <label for="formInput104"></label>
                             <select id="formInput104" formControlName = "name"   class="form-select" aria-label="Default select example">
                                 <option *ngFor="let item of proposedChecklist" [value]="item.name" selected="">{{item.name}}</option>
                             </select>
@@ -34,7 +34,7 @@
                     <!-- <p>Form status: {{ folderForm.valid | json }}</p> -->
                     <span id="close" data-bs-dismiss="modal"></span>
                     <div class="border-0 d-flex justify-content-center modal-footer">
-                      <app-button [disabled]="!folderForm.valid || isInvalid()" [loading] = "loading" class_="" btn_class="w-auto h-auto" [text]="cur_folder ? 'Enregistrer' : 'Créer'"></app-button>
+                      <app-button [disabled]="!folderForm.valid || isInvalid()" [loading] = "loading" class_="" btn_class="w-auto h-auto" [text]="(cur_folder ? 'save' : 'create') | translate"></app-button>
                       <!-- <button class="btn btn-primary text-light" data-bs-dismiss="modal">Enregistrer</button> -->
                     </div>
                 </div>

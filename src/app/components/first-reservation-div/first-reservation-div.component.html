@@ -1,7 +1,7 @@
 <div id="firt_res_div" [style.marginBottom]="marginBottomValue" *ngIf="is_first_reservation"  class="gx-0 row p-3 bg-white"  >
   <div *ngIf="after_reservation" class="alert alert-success">
       <i class="fa-check fa-lg fas pe-2"></i>
-      <b>Votre réservation a bien été pris en compte</b>
+      <b>{{'reservation_confirmation_message' | translate}}</b>
   </div>
   <p class="fs-5">
     {{'dearTraveler' | translate}}

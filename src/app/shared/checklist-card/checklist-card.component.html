@@ -150,10 +150,10 @@
     </div>
     <div>
         <button [routerLink]="['/edition-checklist', checklist.id]" routerLinkActive="router-link-active"  type="button" class="btn border-2 fw-bold btn-outline-primary me-1 rounded-pill">
-            <i class="fa-edit fas pe-1"></i>Editer
+            <i class="fa-edit fas pe-1"></i>{{'edit' | translate}}
         </button>
         <button (click)="wantDeleted()" data-bs-target="#deleteModal" data-bs-toggle="modal" type="button" class="btn border-2 fw-bold btn-outline-danger ms-1 rounded-pill">
-            <i class="fa-trash-alt fas pe-1"></i>Suprimer
+            <i class="fa-trash-alt fas pe-1"></i>{{'delete' | translate}}
         </button>
     </div>
   </div>
@@ -301,7 +301,7 @@
                     <p class="lead fs-6 text-muted">{{checklist.routes[checklist.routes.length - 1].starting_date | date:'mediumDate'}} - {{checklist.routes[checklist.routes.length - 1].arrival_date| date:'mediumDate'}}</p>
                   </div>
                   <div class="align-items-center col-12 col-sm-auto d-flex justify-content-end pt-2 text-muted tl-date">
-                      <p class="fs-6 pe-3">{{ checklist.with_baby ? 'Avec un bébé': 'Sans Bébé'}}</p>
+                      <p class="fs-6 pe-3">{{ (checklist.with_baby ? 'with_baby': 'without_baby' )| translate}}</p>
                   </div>
               </div>
           </div>

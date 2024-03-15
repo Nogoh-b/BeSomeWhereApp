@@ -43,7 +43,7 @@
           <div class="d-flex flex-column px-md-5 px-4 mb-4">
             <span>Name</span>
             <div class="inputWithIcon1">
-              <input formControlName="cardName" name="cardName" class="form-control text-capitalize" type="text" placeholder="Entrez votre nom">
+              <input formControlName="cardName" name="cardName" class="form-control text-capitalize" type="text" [placeholder]="'credit_card_surname' | translate">
               <span class="far fa-user"></span>
             </div>
           </div>
@@ -53,7 +53,7 @@
           <div class="d-flex flex-column px-md-5 px-4 mb-4">
             <span>Email</span>
             <div class="inputWithIcon1">
-              <input formControlName="cardEmail" name="cardEmail"  class="form-control" type="email" placeholder="Entrez votre email">
+              <input formControlName="cardEmail" name="cardEmail"  class="form-control" type="email" [placeholder]="'email_prompt' | translate"/>
               <span class="far fa-envellope"></span>
             </div>
           </div>
@@ -62,7 +62,7 @@
 
         <div class="col-12 px-md-5 px-4 mt-3">
           <!-- <button type="submit" class="btn btn-primary w-100">Payer {{price}}€</button> -->
-          <app-button [loading]="loading" [text] = "!loading ? 'Payer '+ price +'€' : 'En cours...' " class_="fa-lg fa-paypal1 fab pe-2"></app-button>
+          <app-button [loading]="loading" [text] = "!loading ? ('pay_button ' | translate) + price +'€' : '(in_progress | translate)...' " class_="fa-lg fa-paypal1 fab pe-2"></app-button>
 
         </div>
       </div>

@@ -518,7 +518,7 @@ export const proposedChecklist_items = [
 export const transport_mode = [
   {
     id:1,
-    name : 'Avion',
+    name : 'plane',
     src :'plane'
   },
   {
@@ -528,32 +528,32 @@ export const transport_mode = [
   },
   {
     id:3,
-    name : 'Bateau',
+    name : 'boat',
     src :'boat'
   },
   {
     id:5,
-    name : 'Marche',
+    name : 'walkin',
     src :'walk'
   },
   {
     id:6,
-    name : 'Vélo',
+    name : 'bike',
     src :'bicycle'
   },
   {
     id:7,
-    name : 'Train',
+    name : 'train',
     src :'train'
   },
   {
     id:8,
-    name : 'Moto',
+    name : 'moto',
     src :'scooter'
   },
   {
     id:9,
-    name : 'Voiture',
+    name : 'car',
     src :'taxi'
   },
 

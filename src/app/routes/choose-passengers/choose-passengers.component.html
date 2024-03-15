@@ -12,17 +12,17 @@
 
                 <div class="bg-white mt-4 p-3">
                   <div class="d-flex justify-content-between pe-0 pe-xl-5">
-                    <p class="fs-4 fw-bold ps-0 ps-xl-3">Passagers</p>
+                    <p class="fs-4 fw-bold ps-0 ps-xl-3">{{'passenger' | translate}}</p>
                     <div *ngIf="curRoute.for_disabled && false" class="align-items-center d-flex pe-0 pe-xl-3">
                         <img src="assets/img/disabled-people.png" width="25" height="25"/>
                         <div class="d-flex ps-2">
                             <div class="form-check  pe-3" data-pg-collapsed>
                                 <input class="form-check-input" type="radio" value="1" name="for_disabled" formControlName="for_disabled" id="flexRadioDefault1">
-                                <label class="form-check-label" for="flexRadioDefault1">Oui</label>
+                                <label class="form-check-label" for="flexRadioDefault1">{{'yes_option' | translate}}</label>
                             </div>
                             <div class="form-check" data-pg-collapsed>
                                 <input class="form-check-input" type="radio"  value="0" name="for_disabled" formControlName="for_disabled" id="flexRadioDefault2" checked>
-                                <label class="form-check-label" for="flexRadioDefault2">Non</label>
+                                <label class="form-check-label" for="flexRadioDefault2">{{'no_option' | translate}}</label>
                             </div>
                         </div>
                     </div>
@@ -33,16 +33,16 @@
                   <div class="g-0 row row-cols-1 row-cols-md-2">
                     <div data-pg-collapsed class="d-flex flex-column justify-content-evenly">
                       <div>
-                          <p>Point d&apos;origine</p>
+                          <p>{{'initial_meeting_point' | translate}}</p>
                           <span>{{curRoute.points[0].title}}</span>
                       </div>
                       <div>
-                          <p>Heure d&apos;origine</p>
+                          <p>{{'initial_pickup_dropoff_time' | translate}}</p>
                           <span>{{curRoute.starting_date | date:'shortTime'}}</span>
                       </div>
                   </div>
                       <div data-pg-collapsed>
-                          <!-- <p>Option venir à votre porte</p>
+                          <!-- <p>Option {{'enter_full_address' | translate}}</p>
                           <div class="pt-2 row">
                               <div class="input-group mb-3">
                                 <datalist id="adr1_datalist">
@@ -51,93 +51,90 @@
                                   <input id="take_to_home_adr" list="adr1_datalist" type="text" class="form-control" formControlName="take_to_home_adr" placeholder="Adfresse où il faut vous récupérer" aria-label="Username" aria-describedby="basic-addon1" [ngClass]="{ 'is-invalid': submitted && passengersForm.controls['take_to_home_adr'].errors }">
                               </div>
                           </div> -->
-                          <p>Heure de passage à votre porte</p>
-                          <span>L&apos;heure de passage est la même que l&apos;heure d&apos;origine avec +/- 30 minutes</span>
+                          <p>{{'time_at_your_address' | translate}}</p>
+                          <span>{{'time_same_as_initial' | translate}}</span>
                       </div>
                   </div>
-                  <p class="fw-normal mt-3">Je garantis sur l&rsquo;honneur que l&apos;adresse où je dois être récupéré est 5 moins de 5Km
-
-              du point de départ d&rsquo;origine. j&apos;accepte, que Besomewhere se réserve le droit de
-
-              refuser, toute adresse renseignée dont la distance est supérieure : 5Km, du point
-
-              d&rsquo;origine sans dédommagement possible. Vous devez nous fournir soit  un numéro local du pays de réservation, soit un numéro accessible par whattaps ,telegram ou signal, Vous pouvez nous contacter au numéro suivant : {{conf.phone_number}} </p>
-              </div>
+                  <span>{{'important_notice' | translate}}</span>
+                  <p class="fw-normal mt-3">{{'important_notice_content' | translate}} </p>
+            </div>
+            <!-- d&rsquo;origine sans dédommagement possible. Vous devez nous fournir soit  un numéro local du pays de réservation, soit un numéro accessible par whattaps ,telegram ou signal, Vous pouvez nous contacter au numéro suivant : {{conf.phone_number}} </p> -->
 
                 <!--------------------------------------- formulaire passager---------------------------------- -->
 
                     <div class="pe-0 pe-xl-5 ps-0 ps-xl-5">
                         <div *ngFor="let item of  passengers let i = index" class="border-2 border-bottom pb-4 pt-4">
-                            <p class="fw-bolder pb-3 pt-2 text-uppercase">PASSAGER N°{{i+1}}</p>
+                            <p class="fw-bolder pb-3 pt-2 text-uppercase">{{'passenger1' | translate | uppercase}} N°{{i+1}}</p>
                             <div class="d-flex justify-content-between pb-4">
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                     <input type="radio" class="btn-check"   [formControlName]="'gender'+ i" value="0" [name]="'gender'+ i" [id]="'groupradio' + i" autocomplete="off" checked >
-                                    <label class="btn btn-outline-danger" [for]="'groupradio' + i" >Homme</label>
+                                    <label class="btn btn-outline-danger" [for]="'groupradio' + i" >{{'man' | translate}}</label>
                                     <input type="radio" class="btn-check" [formControlName]="'gender'+ i"  value="1"  [name]="'gender'+ i" [id]="'groupradion' + i" autocomplete="off">
-                                    <label class="btn btn-outline-danger" [for]="'groupradion' + i" >Femme</label>
+                                    <label class="btn btn-outline-danger" [for]="'groupradion' + i" >{{'female' | translate}}</label>
                                 </div>
 
                                 <div *ngIf="i > 0 && reservation.take_at_home"  class="form-check align-items-center d-flex form-switch" data-pg-collapsed>
                                     <input  #in_take class="form-check-input" type="checkbox"  [formControlName]="'take_at_home'+ i" (change)="setRequiredField('date' + i,passengersForm.get('take_at_home'+ i).value)" value="1" [name]="'take_at_home'+ i"   [id]="'flexRadioDefault'+i">
-                                    <label class="form-check-label" [for]="'flexRadioDefault'+i">Venir à ma porte (+{{price_take_to_home}} €)</label>
+                                    <label class="form-check-label" [for]="'flexRadioDefault'+i">{{'come_to_my_door' | translate}}
+ (+{{price_take_to_home}} €)</label>
                                   </div>
                             </div>
                             <div class="d-flex gx-0  row row-cols-2 row-cols-xl-3">
                                 <div class=" p-1">
                                     <div class="form-floating mb-2" data-pg-dyn-id="did_107">
-                                        <input type="text" class="form-control" id="floatingInput" name="'first_name' + i" [formControlName]="'first_name' + i"  placeholder="nom" [ngClass]="{ 'is-invalid': submitted && passengersForm.controls['first_name' + i].errors }" >
-                                        <label for="floatingInput">Nom</label>
+                                        <input type="text" class="form-control" id="floatingInput" name="'first_name' + i" [formControlName]="'first_name' + i"  [placeholder]="'Surname' | translate" [ngClass]="{ 'is-invalid': submitted && passengersForm.controls['first_name' + i].errors }" >
+                                        <label for="floatingInput">{{'Surname' | translate}}</label>
                                     </div>
                                     <div *ngIf="submitted && passengersForm.controls['first_name'+ i].errors" class="invalid-form mb-3">
-                                        <div *ngIf="submitted && passengersForm.controls['first_name'+ i].errors['required']">Nom requit.</div>
+                                        <div *ngIf="submitted && passengersForm.controls['first_name'+ i].errors['required']">{{'mandatory_notice' | translate}}.</div>
                                   </div>
                                 </div>
                                 <div class=" p-1">
                                     <div class="form-floating mb-2" data-pg-dyn-id="did_107">
-                                        <input type="text" class="form-control" id="floatingInput" name="last_name" [formControlName]="'last_name'+ i"  placeholder="nom" [ngClass]="{ 'is-invalid': submitted && passengersForm.controls['last_name' + i].errors }">
-                                        <label for="floatingInput">Prénom</label>
+                                        <input type="text" class="form-control" id="floatingInput" name="last_name" [formControlName]="'last_name'+ i"  [placeholder]="'Surname' | translate" [ngClass]="{ 'is-invalid': submitted && passengersForm.controls['last_name' + i].errors }">
+                                        <label for="floatingInput">{{'name' | translate}}</label>
                                     </div>
                                     <div *ngIf="submitted && passengersForm.controls['last_name' + i].errors" class="invalid-form mb-3">
-                                      <div *ngIf="submitted && passengersForm.controls['last_name' + i].errors['required']">Prénom requit.</div>
+                                      <div *ngIf="submitted && passengersForm.controls['last_name' + i].errors['required']">{{'mandatory_notice' | translate}}.</div>
                                     </div>
                                 </div>
                                 <div *ngIf="i === 0" class=" p-1">
                                     <div class="form-floating mb-2" data-pg-dyn-id="did_107">
-                                        <input type="email" class="form-control" id="floatingInput" name="email" [formControlName]="'email'+ i"  placeholder="nom" [ngClass]="{ 'is-invalid': submitted && passengersForm.controls['email' + i].errors }">
+                                        <input type="email" class="form-control" id="floatingInput" name="email" [formControlName]="'email'+ i"  [placeholder]="'Surname' | translate" [ngClass]="{ 'is-invalid': submitted && passengersForm.controls['email' + i].errors }">
                                         <label for="floatingInput">Email</label>
                                     </div>
                                     <div *ngIf="submitted && passengersForm.controls['email' + i].errors" class="invalid-form mb-3">
-                                      <div *ngIf="submitted && passengersForm.controls['email' + i].errors['required']">Prénom requit.</div>
+                                      <div *ngIf="submitted && passengersForm.controls['email' + i].errors['required']">{{'mandatory_notice' | translate}}.</div>
                                     </div>
                                 </div>
                                 <div *ngIf="i === 0" class=" p-1">
                                     <div class="form-floating mb-2" data-pg-dyn-id="did_107">
-                                        <input type="text" class="form-control" id="floatingInput" name="phone" [formControlName]="'phone'+ i"  placeholder="nom" [ngClass]="{ 'is-invalid': submitted && passengersForm.controls['phone' + i].errors }">
-                                        <label for="floatingInput truncate">Numéro + code indicatif </label>
+                                        <input type="text" class="form-control" id="floatingInput" name="phone" [formControlName]="'phone'+ i"  [placeholder]="'Surname' | translate" [ngClass]="{ 'is-invalid': submitted && passengersForm.controls['phone' + i].errors }">
+                                        <label for="floatingInput truncate">{{'phone_number_with_country_code' | translate}} </label>
                                     </div>
                                     <div *ngIf="submitted && passengersForm.controls['phone' + i].errors" class="invalid-form mb-3">
-                                      <div *ngIf="submitted && passengersForm.controls['phone' + i].errors['required']">numéro de téléphone requit.</div>
+                                      <div *ngIf="submitted && passengersForm.controls['phone' + i].errors['required']">{{'mandatory_notice' | translate}}.</div>
                                     </div>
                                 </div>
                  
                                 <div  *ngIf="i === 0"  class=" p-1">
                                     <div class="form-floating mb-3 " data-pg-dyn-id="did_107">
-                                        <input  type="date" class="form-control" id="floatingInput" placeholder="nom" [formControlName]="'date' + i" [ngClass]="{ 'is-invalid': submitted && passengersForm.controls['date' + i].errors }">
-                                        <label for="floatingInput">Date de naissance</label>
+                                        <input  type="date" class="form-control" id="floatingInput" [placeholder]="'Surname' | translate" [formControlName]="'date' + i" [ngClass]="{ 'is-invalid': submitted && passengersForm.controls['date' + i].errors }">
+                                        <label for="floatingInput">{{'date_of_birth' | translate}}</label>
                                     </div>
                                     <div *ngIf="submitted && passengersForm.controls['date' + i].errors" class="invalid-form mb-3">
-                                      <div *ngIf="submitted && passengersForm.controls['date' + i].errors">{{i !== 0 ? 'Date invalide.' : 'Le premier passager doit avoir au moins 18 ans'}}</div>
+                                      <div *ngIf="submitted && passengersForm.controls['date' + i].errors">{{(i !== 0 ? 'invalid_date' : 'first_passenger_age_requirement') | translate}}</div>
                                     </div>
                                 </div>
                                 <!-- <div  class=" p-1"  *ngIf="i === 0" > 
-                                    <p>Venir à votre porte</p>
+                                    <p>{{'enter_full_address' | translate}}</p>
                                     <div class="pt-2 row1 form-floating mb-2">
                                         <div class="input-group mb-3">
                                           <datalist id="adr1_datalist">
                                             <option class="text-l" (input)="textInput($event)" *ngFor="let point of points let i = index" [value]="point.title">{{point.address.city}} - {{point.address.countryName}} </option>
                                           </datalist>
                                             <input id="take_to_home_adr" list="adr1_datalist" type="text" class="form-control" formControlName="take_to_home_adr" placeholder="Adfresse où il faut vous récupérer" aria-label="Username" aria-describedby="basic-addon1" [ngClass]="{ 'is-invalid': submitted && passengersForm.controls['take_to_home_adr'].errors }">
-                                            <label for="floatingInput truncate">Numéro + code indicatif </label>
+                                            <label for="floatingInput truncate">{{'phone_number_with_country_code' | translate}} </label>
                                         </div>
                                     </div>
                                 </div> -->
@@ -145,13 +142,14 @@
                                     <div *ngIf="i === 0" class=" p-1">
                                         <div class="form-floating mb-2" data-pg-dyn-id="did_107">
                                                 <input id="take_to_home_adr" list="adr1_datalist" type="text" class="form-control" formControlName="take_to_home_adr" placeholder="Adfresse où il faut vous récupérer" aria-label="Username" aria-describedby="basic-addon1" [ngClass]="{ 'is-invalid': submitted && passengersForm.controls['take_to_home_adr'].errors }">
-                                            <label for="floatingInput truncate">Venir à ma porte</label>
+                                            <label for="floatingInput truncate">{{'come_to_my_door' | translate}} (+{{conf.price_take_to_home}})
+</label>
                                         </div>
                                     </div>
                                     <div *ngIf="i > 0 && passengersForm.get('take_at_home' + i).value " >
                                         <div class="form-floating mb-3 " data-pg-dyn-id="did_107">
                                             <input  type="text" class="form-control" id="floatingInput" placeholder="ok" [formControlName]="'date' + i" [ngClass]="{ 'is-invalid': submitted && passengersForm.controls['date' + i].errors }">
-                                            <label for="floatingInput">Venir à votre porte</label>
+                                            <label for="floatingInput">{{'enter_full_address' | translate}}</label>
                                         </div>
                                     </div>
                                 </div>
@@ -173,19 +171,19 @@
                             <div class="d-flex gx-0  row row-cols-2 row-cols-xl-3">
                                 <div class=" p-1">
                                     <div class="form-floating mb-3" data-pg-dyn-id="did_107">
-                                        <input type="email" class="form-control" id="floatingInput" placeholder="nom">
-                                        <label for="floatingInput">Nom</label>
+                                        <input type="email" class="form-control" id="floatingInput" [placeholder]="'Surname' | translate">
+                                        <label for="floatingInput"{{'Surname' | translate}}/label>
                                     </div>
                                 </div>
                                 <div class=" ps-2">
                                     <div class="form-floating mb-3" data-pg-dyn-id="did_107">
-                                        <input type="email" class="form-control" id="floatingInput" placeholder="nom">
-                                        <label for="floatingInput">Prénom</label>
+                                        <input type="email" class="form-control" id="floatingInput" [placeholder]="'Surname' | translate">
+                                        <label for="floatingInput">{{'name' | translate}}</label>
                                     </div>
                                 </div>
                                 <div class=" pe-2">
                                     <div class="form-floating mb-3 " data-pg-dyn-id="did_107">
-                                        <input type="date" class="form-control" id="floatingInput" placeholder="nom">
+                                        <input type="date" class="form-control" id="floatingInput" [placeholder]="'Surname' | translate">
                                         <label for="floatingInput">Date</label>
                                     </div>
                                 </div>
@@ -200,9 +198,9 @@
                         <div class="d-flex justify-content-between pb-4">
                             <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                 <input type="radio" class="btn-check" name="3" id="8" autocomplete="off" checked>
-                                <label class="btn btn-outline-danger" for="8">Homme</label>
+                                <label class="btn btn-outline-danger" for="8">{{'man' | translate}}</label>
                                 <input type="radio" class="btn-check" name="3" id="9" autocomplete="off">
-                                <label class="btn btn-outline-danger" for="9">Femme</label>
+                                <label class="btn btn-outline-danger" for="9">{{'female' | translate}}</label>
                                 <input type="radio" class="btn-check" name="btnradio" id="10" autocomplete="off">
                             </div>
                             <input type="date" value="5555" class="border pe-2 ps-2"/>
@@ -215,17 +213,17 @@
                         <div class="d-flex">
                             <div class="col pe-2">
                                 <div class="border border-1 d-flex flex-column input-group input_search pb-2 pe-3 ps-3 pt-2">
-                                    <label class="fw-bold ps-2 text-uppercase">Nom</label>
+                                    <label class="fw-bold ps-2 text-uppercase">{{'Surname' | translate}}</label>
                                     <div class="align-items-center d-flex justify-content-center pe-2 row">
-                                        <input type="text" class="border-0 border-primary col form-control " placeholder="nom" aria-label="Username">
+                                        <input type="text" class="border-0 border-primary col form-control " [placeholder]="'Surname' | translate" aria-label="Username">
                                     </div>
                                 </div>
                             </div>
                             <div class="col ps-2">
                                 <div class="border border-1 d-flex flex-column input-group input_search pb-2 pe-3 ps-3 pt-2">
-                                    <label class="fw-bold ps-2 text-uppercase">prenom</label>
+                                    <label class="fw-bold ps-2 text-uppercase">{{'name' | translate}}</label>
                                     <div class="align-items-center d-flex justify-content-center pe-2 row">
-                                        <input type="text" class="border-0 border-primary col form-control " placeholder="nom" aria-label="Username">
+                                        <input type="text" class="border-0 border-primary col form-control " [placeholder]="'Surname' | translate" aria-label="Username">
                                     </div>
                                 </div>
                             </div>
@@ -233,7 +231,8 @@
                     </div>
                     <div class="container d-flex flex-row-reverse pb-3 pe-4 ps-4 pt-4">
                     <button (click)="checkValid('#take_to_home_adr')" type = "submit" class = "forsubmit" type="text" class="align-items-center btn btn-lg btn-outline-primary d-flex flex-row-reverse fs-5 fw-bold justify-content-center w-auto" style="height: 55px;">
-                        <i class="fa-arrow-right fas fw-bolder ps-0"></i>Continuer&nbsp;
+                        <i class="fa-arrow-right fas fw-bolder ps-0"></i>{{'continue_option' | translate}}
+&nbsp;
                     </button>
                     </div>
                 </div>

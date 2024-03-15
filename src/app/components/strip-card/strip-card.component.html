@@ -19,7 +19,7 @@
       <div class="d-flex flex-column">
   
         <div *ngFor="let item of resume_data.items" class="d-flex align-items-center justify-content-between text">
-          <span class="">{{item.categorie}}</span>
+          <span class="">{{item.categorie | translate}}</span>
           <span class="fas fa-euro-sign"><span class="ps-1">{{item.price}}</span></span>
         </div>
   
@@ -29,7 +29,7 @@
         </div>
   
         <div class="d-flex align-items-center justify-content-between text mb-4">
-          <span>Total</span>
+          <span>{{'total_price_included' | translate}}</span>
           <span class="fas fa-euro-sign"><span class="ps-1">{{resume_data.total_price}}</span></span>
         </div>
   
@@ -39,8 +39,8 @@
   
         <div class="d-flex align-items-center justify-content-between text mt-5">
           <div class="d-flex flex-column text">
-            <span>Customer Support:</span>
-            <span>{{contact_email}}</span>
+            <span>Information:</span>
+            <span>{{'booking_redirect_notice' | translate}}</span>
           </div>
           <div class="btn btn-primary rounded-circle text-white"><span class="fas fa-comment-alt"></span></div>
         </div>

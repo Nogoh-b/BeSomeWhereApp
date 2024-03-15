@@ -10,7 +10,7 @@
                 <b>Vous ne pouvez plus sélectionner des petits plaisirs . </b>
             </div>
               <div class=" bg-white border-2 border-primary border-start mt-0 mt-lg-4 p-2 p-lg-2 shadow-sm">
-                  <p class="fs-4 fw-bold ps-3">Options </p>
+                  <p class="fs-4 fw-bold ps-3">{{'dont_forget_option' | translate}} </p>
                   <div class="p-2">
                       <div disabled = "true" class="accordion " id="panels1">
 
@@ -23,9 +23,9 @@
                                       <img src="assets/img/sandwich.png" width="65" height="65" class="">
                                       <div class="ps-2 w-100">
                                           <div class="align-items-center d-flex justify-content-between ">
-                                              <p class="fs-5 fw-bold text-body">Petits Plaisirs</p>
+                                              <p class="fs-5 fw-bold text-body">{{'snack_service_souvenirs' | translate}}</p>
                                           </div>
-                                          <span class="fst-italic text-muted">( Possible pour réservation 4h à l&rsquo;avance )</span>
+                                          <span class="fst-italic text-muted">( {{'reservation_notice' | translate}})</span>
                                           <p class="fs-6 fw-bold pt-2 text-secondary">Total : {{total_meals()}} €</p>
                                       </div>
                                   </button>
@@ -84,9 +84,9 @@
                                       <img src="assets/img/suitcases%20(2).png" width="65" height="65" class="">
                                       <div class="ps-2">
                                           <div class="align-items-center d-flex justify-content-between ">
-                                              <p class="fs-5 fw-bold text-body">Valise supplémentaire</p>
+                                              <p class="fs-5 fw-bold text-body">{{'additional_suitcases' | translate}}</p>
                                           </div>
-                                          <span class="fst-italic text-muted text-wrap">( 1 Valise/P + 1 bagage cabine/P Gratuit. Voir politique Bagage)</span>
+                                          <span class="fst-italic text-muted text-wrap">( {{'free_baggage_notice' | translate}})</span>
                                           <p class="fs-6 fw-bold pt-2 text-secondary">Total : {{total_suitcase()}} €</p>
                                       </div>
                                   </button>
@@ -99,11 +99,11 @@
                                               <img src="assets/img/suitcases1.png" class="image-fit pe-0"/>
                                           </div>
                                           <div class="col d-flex flex-column  pe-0 ps-2">
-                                              <p class="d-flex flex-column-reverse fw-bold text-start">1 Valise/P + 1 bagage cabine/P </p>
+                                              <p class="d-flex flex-column-reverse fw-bold text-start">{{'free_baggage_notice' | translate}} </p>
                                               <p class="fst-italic text-muted">30kg H+L+l=158cm max | 10kg H+L+l = 115cm max</p>
                                           </div>
                                           <div class="align-items-center col-lg-12 col-xl-auto col-xxl-auto d-flex pb-2 pt-2">
-                                              <span class="badge bg-primary fs-6 p-2">Gratuit</span>
+                                              <span class="badge bg-primary fs-6 p-2">{{'free' | translate}}</span>
                                           </div>
                                       </div>
                                       <div class=" border-dark gx-2 pb-2 pe-2 ps-2 pt-3 row row_item">
@@ -111,7 +111,7 @@
                                               <img src="assets/img/suitcases1.png" class="image-fit pe-0"/>
                                           </div>
                                           <div class="col d-flex flex-column  pe-0 ps-2">
-                                              <p class="d-flex flex-column-reverse fw-bold text-start">Bagages supplémentaires</p>
+                                              <p class="d-flex flex-column-reverse fw-bold text-start">{{'extra_baggage' | translate}}</p>
                                               <p class="fst-italic text-muted">30kg H+L+l = 158 cm max </p>
                                           </div>
 
@@ -138,9 +138,9 @@
                                       <img src="assets/img/baby-car-seat%20(1).png" width="65" height="65" class="">
                                       <div class="ps-2 w-100">
                                           <div class="align-items-center d-flex justify-content-between pe-5">
-                                              <p class="fs-5 fw-bold text-body">Siège  bébé <span class="fs-6 text-muted"></span></p>
+                                              <p class="fs-5 fw-bold text-body">{{'baby_seat_option' | translate}}<span class="fs-6 text-muted"></span></p>
                                           </div>
-                                          <span class="fst-italic text-muted">Obligatoire pour enfant &lt;6 ans (possible pour réservation 4h à l’avance ) </span>
+                                          <span class="fst-italic text-muted">({{'reservation_notice' | translate}}) </span>
                                           <p class="fs-6 fw-bold pt-2 text-secondary">Total : {{total_babyseats()}} €</p>
                                       </div>
                                   </button>
@@ -150,12 +150,7 @@
                                       <div class="align-items-center bg-light border-light d-flex mb-3 p-3 rounded rounded-3">
                                           <i class="fa-2x fa-exclamation-circle fas pe-2"></i>
                                           <div>
-                                              <p style="text-align: justify;" class="text-muted">Nous mettons à dispositions des sièges pour enfant, le bon siège doit être sélectionné en fonction de la taille et du poids de l’enfant. La responsabilité du parent est engagée dans le bon choix du siège. Soucieux de nos clients et de nos Benjamins, notre sens des responsabilités ne nous permettra pas d’accepter à bord un enfant sans siège dédié, Aucun enfant dont un siège est requis ne sera autorisé à embarquer.
-                                              <br>
-                                              Vous ne savez pas quel type de siège choisir voici nos conseils <a [href]="'mailto:'+ email_admin">cliquez ici</a>.
-                                              </p>
-                                              <p class="pt-2 text-muted" style="text-align: justify;">Vous ne savez pas qu&rsquo;elle type de siège prendre  voici nos
-Conseil Cliquez ici.&nbsp;&nbsp;</p>
+{{'child_seat_policy' | translate}}
                                           </div>
                                       </div>
                                       <div *ngFor="let item of babySeats let i = index" class="border-bottom border-dark gx-2 p-2 pb-4 pe-2 ps-2 pt-4 row row_item">
@@ -172,7 +167,7 @@ Conseil Cliquez ici.&nbsp;&nbsp;</p>
 
                                               <p class="fs-5 fw-bold p-0 text-center text-secondary">{{(item.price * spiner_btnb1.value).toFixed(2)}} €</p>
                                           </div>
-                                          <p class="fst-italic pb-2 pe-2 ps-2 pt-3 text-end text-muted">Obligatoire Pour enfant &lt;1m10 en <span class="text-danger text-decoration-underline">savoir plus</span></p>
+                                          <p class="fst-italic pb-2 pe-2 ps-2 pt-3 text-end text-muted">{{'child_seat_mandatory' | translate}} <span class="text-danger text-decoration-underline"></span></p>
                                       </div>
 
                                   </div>
@@ -185,12 +180,13 @@ Conseil Cliquez ici.&nbsp;&nbsp;</p>
                   <div class="container d-flex flex-column-reverse pb-3 pe-4 ps-4 pt-3">
                       <button [disabled] = "total_babyseats() === '0.00' && !without_baby_checked && canSelectItems()" (click)="goToNextStep()" routerLinkActive="router-link-active"  type="text" class="align-items-center btn btn-lg btn-outline-primary d-flex flex-row-reverse fw-bold justify-content-center ms-auto w-auto" style="height: 55px;">
                         <i class="fa-arrow-right fas fw-bolder pb-1 ps-3"></i>
-                        Continuer&nbsp; ( {{   get_totals().toFixed(2)}} € )
+                        {{'continue_option' | translate}}
+&nbsp; ( {{   get_totals().toFixed(2)}} € )
                     </button>
-                    <span class="text-right">prix  options: </span><br>
+                    <span class="text-right">{{'selected_options_price' | translate}}: </span><br>
                       <div *ngIf="total_babyseats() === ('0.00') && canSelectItems()" class="mb-3 align-items-center d-flex form-check mb-3">
                           <input [(ngModel)]="without_baby_checked" type="checkbox" class="form-check-input" id="formInput869">
-                          <label class="form-check-label text-muted" for="formInput869">Je garantie sur l&rsquo;honneur que tout les mineurs font plus de 1m35. en savoir plus</label>
+                          <label class="form-check-label text-muted" for="formInput869">{{'minors_guarantee' | translate}}</label>
                       </div>
                   </div>
               </div>

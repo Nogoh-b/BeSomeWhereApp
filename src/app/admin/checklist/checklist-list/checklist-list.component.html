@@ -65,7 +65,7 @@
                     </td>
                     <td> {{checklist1.user.first_name}} {{checklist1.user.last_name}}</td>
                     <td> {{checklist1.title}}</td>
-                    <td><span class="ms-1">{{checklist1.with_baby ? "Avec Bébé" :"Sans Bébé"}}</span></td>
+                    <td><span class="ms-1">{{checklist1.with_baby ? "with_baby" :"without_baby" | translate}}</span></td>
                     <td><i class="fa fa-check-circle-o green"></i><span class="ms-1">{{checklist1.stats.total_files}}</span></td>
                     <td class="fw-bold text-end"><span class="fw-normal">{{checklist1.stats.total_folders}}</span> </td>
                     <td class="fw-bold text-end"><span class="fw-normal">{{checklist1.stats.qty+'/'+checklist1.stats.total_qty}}</span> </td>

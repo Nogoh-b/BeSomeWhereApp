@@ -70,12 +70,13 @@ export class ChecklistDetailsComponent implements OnInit {
   }
 
   folderDeleted(index){
-    this.toast_c.open("Be Somewhere", "Sac suprimé")
+    this.toast_c.open("Be Somewhere", "deleted_message")
+    // this.toast_c.open("Be Somewhere", "Sac suprimé")
     this.navigateToFolder(index)
   }
 
   fileDeleted(id){
-    this.toast_c.open("Be Somewhere", "Elément suprimé")
+    this.toast_c.open("Be Somewhere", "deleted_message")
     this.refresh(id)
   }
 

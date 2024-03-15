@@ -120,7 +120,7 @@ export class HomeSearch1Component implements AfterViewInit {
       return
     }
     if( date1.toISOString().split('T')[0] < date2.toISOString().split('T')[0]){
-      this.toast_c.open('Be Somewhere', 'La date est déja dépassée , sélectionez une autre', 3000)
+      this.toast_c.open('Be Somewhere', 'past_departure_date_message', 3000)
       return
     }
     if(!this.address || this.address === '' ){

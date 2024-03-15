@@ -10,18 +10,18 @@
                                           </li>
                                       </ol>
                                       <button *ngIf="files.length > 0"  data-bs-target="#editfolderModal" data-bs-toggle="modal" (click)="wantEdit_(files.length - 1)" type="button" class="btn btn-outline-primary ms-1 me-3 border-2 fw-bolder border-primary color-primary rounded-pill fs-6">
-                                        <i class="fa-edit fa-lg fas pe-2"></i>Editer ma valise
+                                        <i class="fa-edit fa-lg fas pe-2"></i>{{'edit' | translate}} ma valise
                                     </button>
                                   </nav>
                                   <div class="align-items-center d-flex flex-row-reverse justify-content-around">
                                     <div>
                                           <div class="align-items-center d-flex">
                                               <div style="width: 12px; height: 12px;" class="bg-primary"></div>
-                                              <p class="ps-2 fw-bold ">Choses Déjà dans ma valise : {{stats.qty}}</p>
+                                              <p class="ps-2 fw-bold ">{{'things_in_suitcase' | translate}} : {{stats.qty}}</p>
                                           </div>
                                           <div class="align-items-center d-flex">
                                               <div style="width: 12px; height: 12px;" class="bg-danger"></div>
-                                              <p class="ps-2 fw-bold ">Choses  à mettre dans ma valise : {{stats.total_qty}}</p>
+                                              <p class="ps-2 fw-bold ">{{'suitcase_additions' | translate}} : {{stats.total_qty}}</p>
                                           </div>
                                       </div>
                                       <circle-progress class="w-50" style="width: 70%;"

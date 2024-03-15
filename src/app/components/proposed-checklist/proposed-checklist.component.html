@@ -1,5 +1,5 @@
 <div class="align-items-center border-bottom border-dark d-flex justify-content-between pb-3 pe-2 ps-2 pt-2 text-warning " data-pg-collapsed>
-  <p class="fs-4 fw-bolder"> Checklist Proposée </p>
+  <p class="fs-4 fw-bolder"> {{'traveler_list' | translate}} </p>
   <i class="fa-2x fa-angle-down fas"></i>
 </div>
 <div id="proposed-checklist">
@@ -23,13 +23,13 @@
             <div class="accordion-body border-white pe-2 ps-2 pt-0">
                 <div *ngFor="let item of getItems(checlist.id)" class="border-bottom gx-0 pb-3 pe-2 ps-2 pt-3 row row_item">
                     <div class="align-items-center col-auto d-flex pe-0">
-                        <button [disabled]="spinner.value <= 0 || !file " (click)="addItem(item)" type="button" class="btn btn-light btn-outline-primary  border-2 border-primary">Transférer vers ma valise </button>
+                        <button [disabled]="spinner.value <= 0 || !file " (click)="addItem(item)" type="button" class="btn btn-light btn-outline-primary  border-2 border-primary">{{'transfer_to_suitcase' | translate}} </button>
                     </div>
                     <div class="align-items-center col d-flex ps-2">
                         <p class="fw-bold  pe-0 text-start">{{item.name}}</p>
                     </div>
                     <div class="align-items-lg-center col-12 col-lg-auto d-flex d-lg-flex justify-content-end ps-0">
-                      <app-spinner-bouton (value_changed)="item.total = $event" #spinner [max_value]="100" [label]="'Quantité'" ></app-spinner-bouton>
+                      <app-spinner-bouton (value_changed)="item.total = $event" #spinner [max_value]="100" [label]="'quantity' | translate" ></app-spinner-bouton>
                         <!-- <form id="number-spinner-horizontal" class="col-auto ps-3 t-neutral">
                             <fieldset class="l-contain--medium me-n2 spinner spinner--horizontal">
                                 <button class="align-items-center bg-dark border-0 d-flex fw-bolder js-spinner-horizontal-subtract justify-content-center spinner__button spinner__button--left text-light" data-type="subtract" title="Subtract 1" aria-controls="spinner-input">- </button>

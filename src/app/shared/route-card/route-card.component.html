@@ -7,7 +7,7 @@
                   <div *ngIf="globals.TrajetCardStatus.ChooseSchedules != curStatus" class=" tl-content">
                     <p *ngIf="!isISameDay()" class="fs-5 date fw-bold  text-center">{{(route.starting_date | date).toUpperCase()}}</p>
                     <div class="fw-bolder text-info text-center" [ngClass]="{'fs-5': isISameDay(), 'fs-6': !isISameDay()}">{{route.starting_date | date:'shortTime'}}</div>
-                    <div class="text-center fs-7 text-danger fw-bold">Point de rendez-vous</div>
+                    <div class="text-center fs-7 text-danger fw-bold">{{'departure_point' | translate}}</div>
                   </div>
                   <div class="b-primary mt-2 tl-dot"></div>
                   <div class="tl-content w-100">
@@ -26,7 +26,7 @@
                     <div *ngIf="globals.TrajetCardStatus.ChooseSchedules != curStatus"  class=" tl-content">
                       <p *ngIf="!isISameDay()" class="fs-5 date fw-bold  text-center">{{(route.arrival_date | date).toUpperCase()}}</p>
                       <div class="fw-bold text-info text-center" [ngClass]="{'fs-5': isISameDay(), 'fs-6': !isISameDay()}">{{route.arrival_date  | date:'shortTime'}}</div>
-                      <div class="text-center fs-7 text-danger fw-bold">Point d’arrivé </div>
+                      <div class="text-center fs-7 text-danger fw-bold">{{'arrival_point' | translate}} </div>
                   </div>
                     <div class="b-primary  tl-dot"></div>
                     <div class="tl-content w-100">

@@ -151,7 +151,7 @@ export class DetailsComponent implements OnInit {
   }
 
   reservationdeleted(){
-    this.toast_c.open("Be Somewhere", 'Reservation annulée')
+    this.toast_c.open("Be Somewhere", 'booking_canceled')
     setTimeout(() => {
       this.router.navigateByUrl('/')
     }, 2500);

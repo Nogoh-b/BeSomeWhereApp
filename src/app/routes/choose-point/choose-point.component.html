@@ -7,7 +7,7 @@
             </div>
 
             <div *ngIf="selected_adr && showContent" class="details_point content">
-              <p class="p_title ">Points aux allentours<span style="cursor: pointer; color: white !important; text-decoration: underline; font-size: 15px;" (click)="closeContent()"> Voir dans le plan</span> </p>
+              <p class="p_title ">{{'important_information' | translate}}<span style="cursor: pointer; color: white !important; text-decoration: underline; font-size: 15px;" (click)="closeContent()"> {{'see_on_map_link' | translate}}</span> </p>
               <!-- <i class="fas fa-times""></i>  -->
               <div class="details_point1" >
                 <p class="pt-2 p_details" [innerHTML]="selected_adr && selected_adr.description"></p>
@@ -35,7 +35,7 @@
           </div>
 
             <div class="bg-white container-fluid mb-1 mt-2 p-4 div-propostion">
-                <p *ngIf="this.address && this.address"  class="fs-5 pb-0 text-muted">Proposition d’adresse où on peut vous récupérer :</p>
+                <p *ngIf="this.address && this.address"  class="fs-5 pb-0 text-muted">{{'select_stop_prompt' | translate}}:</p>
                 <!-- <p *ngIf="this.address && this.address"  class="fs-5 pb-0 text-muted">Liste des points les plus proches de {{address && address.address}}:</p> -->
                 <div class="pb-0">
                   <div class="list-group overflow-auto" style="height: 250px;">
@@ -52,7 +52,8 @@
                 <div class="d-flex ">
                   <button class="open_content mt-4" (click)="openContent()" *ngIf="!showContent"><i class="fas fa-eye"></i> </button>
                   <button *ngIf="selected_adr" (click)="getRoute(home_search.switched)" routerLinkActive="router-link-active"  type="text" class="btn-search align-items-center btn btn-lg btn-outline-primary d-flex flex-row-reverse fw-bold justify-content-center ms-auto ms-sm-auto mt-4 mt-sm-4  w-50">
-                      <i class="fa-arrow-right fas fw-bolder pb-1 ps-3"></i>Continuer
+                      <i class="fa-arrow-right fas fw-bolder pb-1 ps-3"></i>{{'continue_option' | translate}}
+
                   </button>
                 </div>
             </div>
@@ -80,7 +81,8 @@
 
               </div>
               <button (click)="getRoute()" routerLinkActive="router-link-active"  type="text" class="align-items-center btn btn-lg btn-outline-primary d-flex flex-row-reverse fw-bold justify-content-center ms-auto ms-sm-auto mt-4 mt-sm-4  w-50">
-                  <i class="fa-arrow-right fas fw-bolder pb-1 ps-3"></i>Continuer
+                  <i class="fa-arrow-right fas fw-bolder pb-1 ps-3"></i>{{'continue_option' | translate}}
+
               </button>
           </div>
       </div>

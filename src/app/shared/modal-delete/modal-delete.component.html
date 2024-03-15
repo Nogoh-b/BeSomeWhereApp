@@ -7,21 +7,21 @@
               </div>
               <div class="bg-white border border-3 border-primary">
                   <div class="border-0 modal-header pb-2">
-                      <h4 class="me-auto modal-title ms-auto pt-4" style="z-index: 3;">Suppression </h4>
+                      <h4 class="me-auto modal-title ms-auto pt-4" style="z-index: 3;">{{'cancel_action' | translate}} </h4>
                   </div> 
                   <hr class="bg-primary border-1 border-primary border-top mb-0 me-3 ms-3  pb-0">
                   <div class="border-0 modal-body pb-0 pe-4 ps-4 w-100">
-                      <p *ngIf="currentFolder && !currentFile" class="text-wrap w-100">Voulez vous supprimer le Sac de <b>{{currentFolder && currentFolder.name}}</b> , ainsi que tous son contenu ? </p>
-                      <p *ngIf="currentFile" class="text-wrap w-100">Voulez vous supprimer l'élement <b>{{currentFile && currentFile.name}} ? </b> </p>
-                      <p *ngIf="checklist && !currentFolder && !currentFile" class="text-wrap w-100">Voulez vous supprimer la checklist <b>{{checklist && checklist.title}} ?</b> </p>
-                      <p *ngIf="reservation && !currentFolder && !currentFile" class="text-wrap w-100 text-center">Voulez vous annuler cette reservation ? Toute annulation et irréversible. Vous devrez contacter le service client <b>besomewhere.contact&#64;gmail.com</b> afin de demander remboursement </p>
+                      <p *ngIf="currentFolder && !currentFile" class="text-wrap w-100 text-center">{{'delete_suitcase_confirmation' | translate: { var1: currentFolder.name} }}  </p>
+                      <p *ngIf="currentFile" class="text-wrap w-100 text-center">{{'delete_confirmation' | translate}} <b>{{currentFile && currentFile.name}} ? </b> </p>
+                      <p *ngIf="checklist && !currentFolder && !currentFile" class="text-wrap w-100 text-center">{{'delete_checklist_confirmation' | translate: { var1: checklist && checklist.title} }}  </p>
+                      <p *ngIf="reservation && !currentFolder && !currentFile" class="text-wrap w-100 text-center">{{'cancellation_policy_en' | translate}} </p>
                       <!-- <p *ngIf="reservation && !currentFolder && !currentFile" class="text-wrap w-100">Voulez vous annuler cette reservation ? </p> -->
                       <p *ngIf="user && !currentFolder && !currentFile" class="text-wrap w-100">Voulez vous suprimer votre compte. Cela sera irreverssible? </p>
                   </div>
                   <div class="border-0 d-flex justify-content-center modal-footer">
-                      <button type="button" class="border border-2 btn btn-light" data-bs-dismiss="modal">Non</button>
+                      <button type="button" class="border border-2 btn btn-light" data-bs-dismiss="modal">{{'no_option' | translate}}</button>
                       <button (click)="deleteFolderOrChecklist('5')" type="button" class="btn btn-primary ps-2 text-light" data-bs-dismiss="modal">
-                          <i class="fa-trash-alt fas pe-2"></i>Oui
+                          <i class="fa-trash-alt fas pe-2"></i>{{'yes_option' | translate}}
                       </button>
                   </div>
               </div>

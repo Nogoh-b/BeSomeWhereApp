@@ -14,7 +14,7 @@ import { Component, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { catchError } from 'rxjs';
-import { addSecondsToDate, ecart } from 'src/global';
+import { addSecondsToDate, ecart, removeSubstring } from 'src/global';
 import { Payment } from 'src/app/model/Model/Payment';
 import { DatePipe } from '@angular/common';
 import { Inject, LOCALE_ID } from '@angular/core';
@@ -137,7 +137,11 @@ export class ArticleDetailsComponent implements OnInit {
   }
 
   afficherTexteAvecEntitiesHTML(texte: string): SafeHtml {
-    return this.sanitizer.bypassSecurityTrustHtml(texte);
+    
+    return  removeSubstring(this.replacePrivéNbsp(texte), 'Privé :')//this.sanitizer.bypassSecurityTrustHtml(removeSubstring(texte, 'Privé&nbsp;: ') );
+  }
+  replacePrivéNbsp(inputString: string): string {
+    return inputString.replace(/<Privé&nbsp;:/g, '<Privé :');
   }
   getLocalaHour(dateStr: string): string {
     // Convertir la chaîne en objet Date

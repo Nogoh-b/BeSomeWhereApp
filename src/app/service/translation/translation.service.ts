@@ -46,7 +46,7 @@ export class TranslationService {
 
   private loadTranslations(): void {
     
-    const langFile = `./assets/i18n/${this.currentLanguage}.json`;
+    const langFile = `./assets/i18n/${this.currentLanguage}-v1.1.json`;
     this.http.get(langFile).subscribe(
       (translations: { [key: string]: string }) => {
         console.log('translations111 ', translations)

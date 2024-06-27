@@ -47,7 +47,7 @@
 
                         <div class="bg-white mt-4 p-3  mt-5 mt-lg-0">
                           <div class="align-items-center border-bottom border-dark d-flex justify-content-between pb-3 pe-2 ps-2 pt-2 text-warning" data-pg-collapsed>
-                            <p class="fw-bold h3 text-capitalize">{{'suitcase_checklist1' | translate}}</p>
+                            <p class="fw-bold h3 text-uppercase">{{'suitcase_checklist1' | translate}}</p>
                             <i class="fa-2x fa-angle-down fas"></i>
                           </div>
                             <div class="align-items-center container d-flex flex-column gx-0 justify-content-center pb-2 pt-3 row">
@@ -73,13 +73,13 @@
                                             <button *ngIf="folders.length > 0" data-bs-target="#deleteModal" data-bs-toggle="modal" (click)="delete_modal.want_delete_folder(getCurrentFolder())" type="button" class="btn fs-6 btn-outline-danger ms-1 me-3 border-2 fw-bolder border-danger color-danger rounded-pill">
                                               <i class="fa-trash-alt fa-lg fas pe-2"></i>{{'delete' | translate}}
                                             </button>
-                                            <button (click)="folder_modal.reset(getCurrentFolder())" *ngIf="folders.length > -1"  data-bs-target="#newfolderModal" data-bs-toggle="modal" (click)="delete_modal.want_delete_folder(getCurrentFolder())" type="button" class="btn fs-6 btn-outline-danger ms-1 me-3 border-2 fw-bolder border-danger color-danger rounded-pill">
+                                            <button (click)="folder_modal.reset(getCurrentFolder())" *ngIf="folders.length > -1"  data-bs-target="#newfolderModal" data-bs-toggle="modal" (click)="delete_modal.want_delete_folder(getCurrentFolder())" type="button" class="btn fs-6 btn-outline-primary ms-1 me-3 border-2 fw-bolder border-primary color-primary rounded-pill">
                                               <i [ngClass]="{'fa-suitcase':  folders.length === 0 , 'fa-plus':  folders.length > 0  }" class="fa-suitcase fa-lg fas pe-2"></i>{{ (folders.length > 0 ? 'add_pocket' : 'start_click_checklist') | translate}}
                                             </button>
                                           </p>
                                       </div>
                                       <button *ngIf="folders.length > 0" (click)="file_modal.reset()" data-bs-toggle="modal"  data-bs-target="#newfileModal" type="button" class="btn border-2 fw-bold btn-outline-primary ms-1 rounded-pill m-3  fs-6">
-                                        <i class="fa-file fa-lg fas pe-2"></i>{{'suitcase_additions' | translate}}
+                                        <i class="fa-file fa-lg fas pe-2"></i>{{'add_in_suitcase' | translate}}
                                     </button>
                                       <div class="gx-0 p-2 row row-cols-3 row-cols-lg-4 row-cols-md-6 row-cols-sm-5 row-cols-xl-4" data-pg-collapsed>
                                           <div (click)="getFiles(file, checklist.id)" *ngFor="let file of getFolders()" class="align-items-center d-flex div-suitcase gx-0 justify-content-center pb-2 pointer row-cols-2">

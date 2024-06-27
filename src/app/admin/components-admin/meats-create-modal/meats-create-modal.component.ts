@@ -45,12 +45,12 @@ export class MeatsCreateModalComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.createForm()
-    this.httpClient.get<any>('./assets/conf/config.json').subscribe(res=>{
-      console.log(res)
+    this.httpClient.get<any>('./assets/conf/config-v1.json').subscribe(res=>{
+      console.log('res1 ', res.small_pleasures_type)
       localStorage.setItem("conf", JSON.stringify(res))
       this.small_pleasures_type =  res.small_pleasures_type
     });
+    this.createForm()
 
   }
 
@@ -62,9 +62,9 @@ export class MeatsCreateModalComponent implements OnInit {
     this.formMeats.addControl('quantity', new FormControl(meal ? meal.quantity: ''));
     this.formMeats.addControl('price', new FormControl(meal ? meal.price: '', Validators.required));
     this.formMeats.addControl('category', new FormControl(meal ? meal.category :'0', Validators.required));
-    this.formMeats.addControl('sub_category', new FormControl(meal ? meal.sub_category :'0', Validators.required));
+    this.formMeats.addControl('sub_category', new FormControl(meal ? meal.sub_category : "0" , Validators.required));
     this.formMeats.addControl('src', new FormControl(meal ? meal.src: '', Validators.required));
-    this.formMeats.addControl('description', new FormControl(meal ? meal.description: '', Validators.required));
+    this.formMeats.addControl('description', new FormControl(meal ? meal.description: 'k'));
     // this.attach_ad = {file_name : ad && ad.image}
     if(this.upload_c){
       this.upload_c.uploads_datas = meal && [{file_name : meal && SERVER_FOR_UPLOAD + meal.src}]
@@ -75,6 +75,10 @@ export class MeatsCreateModalComponent implements OnInit {
     this.formMeats.addControl('is_station', new FormControl(false));
     this.formMeats.addControl('type', new FormControl('0'));
   }
+  trackByFn(index: number, item: any): number {
+    return index; // Ou toute autre logique unique pour suivre les éléments
+  }
+  
   onSumit(){
     console.log(this.formMeats.value)
     // return

@@ -11,6 +11,8 @@ import { RouteStatus } from 'src/app/model/Model/Route';
 import { HomeSearch1Component } from 'src/app/components/home-search1/home-search1.component';
 import { MapService } from 'src/app/service/map/map.service';
 import { SharedService } from 'src/app/service/shared/shared.service';
+import { MapboxService } from 'src/app/service/mapbox.service';
+import * as mapboxgl from 'mapbox-gl';
 const H = window['H'];
 
 @Component({
@@ -31,11 +33,16 @@ export class ChoosePointComponent implements AfterViewInit {
   selected_adr: Point ;
   selected_index: number ;
 
+
+  center: [number, number] = [4.35121, 50.8551];
+  circleRadius: number = 1000; // Rayon du cercle en mètres
+  circleData: any;
+  circlePaint: any;
   // station = {"id":3,"title":"Boutique d","description":"description du point","image":"https://www.tunisianet.com.tn/178823-large/imprimante-tout-en-un-hp-couleur-deskjet-2710-wifi.jpg","country":"Tunisie","city":"Tunis","address":"04 jbal bargou bab bhar","code":null,"longitude":10.18519,"lattitude":36.79482,"type":"0","parent":0,"created_at":"2021-10-21 00:30:19","updated_at":"2021-10-21 20:15:12"}
   station_:Point //= {"id":3,"title":"Boutique d","description":"description du point","image":"https://www.tunisianet.com.tn/178823-large/imprimante-tout-en-un-hp-couleur-deskjet-2710-wifi.jpg","country":"Tunisie","city":"Tunis","address":"04 jbal bargou bab bhar","code":null,"longitude":10.18519,"lattitude":36.79482,"type":"0","parent":new Point(),"created_at":"2021-10-21 00:30:19","updated_at":"2021-10-21 20:15:12"}
   address: Point
   loading = false;
-  showContent: boolean = true;
+  showContent: boolean = false;
   isLoadingMap: boolean = true;
 
   openContent() {
@@ -47,6 +54,7 @@ export class ChoosePointComponent implements AfterViewInit {
   }
   constructor(private router: Router,
     private route: ActivatedRoute,
+    private mapboxService: MapboxService,
     private mapService: MapService,
     private pointService: PointService ,
     private sharedService : SharedService,
@@ -61,6 +69,15 @@ export class ChoosePointComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
 
+
+      // Ajouter une icône personnalisée
+    mapboxgl.Map.prototype.on('load', function() {
+      // this.addImage('custom-marker', '/assets/img/map_point.png');
+    });
+
+    this.center = this.mapboxService.getCenter();
+    this.circlePaint = this.mapboxService.getCirclePaint();
+
     if(!this.extra.station){
       this.aroundPoints = []
     }
@@ -71,20 +88,20 @@ export class ChoosePointComponent implements AfterViewInit {
       // alert(JSON.stringify(this.station_))
       setTimeout(() => {
         this.search_c && this.search_c.init(this.station_)
-        this.map = this.initializeMap();
-        this.addClickEventListenerToMap(this.map)
+        // this.map = this.initializeMap();
+        // this.addClickEventListenerToMap(this.map)
         this.addAroundPoints()
         this.mapService.search({q: this.extra.address}).subscribe(result =>{
-          console.log(result)
-          if(result.items.length === 0 && this.extra.station){
+          console.log('init()=>choosePoint() ', result)
+          if(this.mapService.transformResponse(result).items.length === 0 && this.extra.station){
           this.toast_c.open('Be Somewhere', 'Addresse non valide', 3000)
           // return
           }
           if(this.extra && this.extra.station){
             let point = new Point()
             point.address = this.extra.address
-            point.lattitude = result.items[0].position.lat
-            point.longitude = result.items[0].position.lng
+            point.lattitude = this.mapService.transformResponse(result).items[0].position.lat
+            point.longitude = this.mapService.transformResponse(result).items[0].position.lng
             this.address = point
             // alert(this.extra)
             this.search_c && this.search_c.searchAroundPoints(this.address, this.station_)
@@ -113,13 +130,16 @@ export class ChoosePointComponent implements AfterViewInit {
       this.toast_c.open('Aucun point aux alentours de votre adresse !')
     }
     this.aroundPoints = points
+    console.log(' choosepoint() => Point  ', points);
     // this.map.center = this.h.switched ? this.h.pointB.longitude+','+this.h.pointB.lattitude : this.h.pointA.longitude+','+this.h.pointA.lattitude
     const centerPoint = /*this.h.switched ? this.h.pointB : */this.aroundPoints.length > 0 ? this.aroundPoints[0] : this.address
     this.setCenter(centerPoint)
-    console.log(this.map.i.center, ' tttttt ', centerPoint);
+    // console.log(this.map.i.center, ' tttttt ', centerPoint);
     // this.addMarker({lat : centerPoint.lattitude, lng: centerPoint.longitude}, centerPoint.address + ', '+centerPoint.city+ ', '+centerPoint.country)
 
-    this.addCircleToMap(this.map,centerPoint);
+    // this.addCircleToMap(this.map,centerPoint);
+    this.circleData = this.mapboxService.getCircleData(centerPoint);
+    this.circlePaint = this.mapboxService.getCirclePaint();
     // this.aroundPoints.forEach(point => {
     //   // this.addMarker({lat : point.lattitude, lng: point.longitude}, point.address + ', '+point.city+ ', '+point.country)
     // });
@@ -139,6 +159,7 @@ export class ChoosePointComponent implements AfterViewInit {
     this.address.address = adr
   }
   setPoint(i, d){
+    console.log(this.selected_index);
     this.markOrUnMark(i)
     setTimeout(() => {
       this.sharedService.scroll(d,-100)
@@ -172,7 +193,15 @@ export class ChoosePointComponent implements AfterViewInit {
     return map;
   }
 
+  convertSeconds(seconds: number): string {
+    return globals.convertSeconds(seconds)
+  }
+
   addMarker(coord, adr){
+
+    // this.circleData = this.mapboxService.getCircleData();
+    // this.circlePaint = this.mapboxService.getCirclePaint();
+    return
     //Create the svg mark-up
     var svgMarkup = '<svg width="5em" height="5em" viewBox="0 0 24 24"  xmlns="http://www.w3.org/2000/svg">' +
     '<g>'+
@@ -207,7 +236,22 @@ export class ChoosePointComponent implements AfterViewInit {
   }
 
   setCenter(point: Point){
-    this.map.setCenter({lat: point.lattitude, lng: point.longitude});
+    this.center = [point.longitude, point.lattitude];
+
+    // this.map.setCenter({lat: point.lattitude, lng: point.longitude});
+  }
+  getMarkerData(): any {
+    return {
+      'type': 'FeatureCollection',
+      'features': [{
+        'type': 'Feature',
+        'geometry': {
+          'type': 'Point',
+          'coordinates': this.center
+        },
+        'properties': {}
+      }]
+    };
   }
   addClickEventListenerToMap(map) {
     // add 'tap' listener
@@ -255,7 +299,7 @@ export class ChoosePointComponent implements AfterViewInit {
   markOrUnMark(index){
     console.log(this.aroundPoints[index], ' ', this.h.date)
 
-    this.removeMarker(this.mapObjects)
+    // this.removeMarker(this.mapObjects)
     // return
     var logContainer = document.createElement('div');
     var divParent = document.getElementsByClassName('H_imprint')
@@ -263,6 +307,7 @@ export class ChoosePointComponent implements AfterViewInit {
     this.selected_index = index
     this.addMarker({lat : this.selected_adr.lattitude, lng: this.selected_adr.longitude}, this.selected_adr.address + ', '+this.selected_adr.city+ ', '+this.selected_adr.country)
     this.setCenter(this.selected_adr )
+
     /*let loisirs = this.selected_adr.arround
 
     let data = '';
@@ -305,8 +350,8 @@ export class ChoosePointComponent implements AfterViewInit {
     this.routeService.get(queryParams).subscribe(result =>{
         setTimeout(() => {
         this.loading = false
-        const desc = result.length >0  ? 'Le trajet à été teouvé' : 'Aucun traje n\'a été trouvé ! vous pouvez modifier vos informations pour trouver le trajet adéquat'
-        this.toast_c.open('Be SomeWhere',desc,2000)
+        const desc = result.length >0  ? 'Le trajet à été teouvé' : 'NoSharedTaxi'
+        this.toast_c.open('Be SomeWhere',desc,10000)
         if(result.length > 0){
           this.router.navigate(['trajets/creation/2'], {queryParams} )
         }

@@ -40,7 +40,7 @@
   </div>
   <p [routerLink]="['/mes-trajets']" [queryParams] = "{archived: false}" *ngIf="LastReservation && reservations && FutureReservations.length > 1" class="ps-5 text-start text-warning pointer">+{{FutureReservations.length - 1}} trajet(s)...</p>
 
-  <app-empty-page [title] = "'Aucun_Trajet_reserve' " *ngIf="!LastReservation" title_class="fs-6"></app-empty-page>
+  <app-empty-page [title] = "'No_Journey_Created' " *ngIf="!LastReservation" title_class="fs-6"></app-empty-page>
   <div [routerLink]="['/trajets/creation/1']" routerLinkActive="router-link-active"  class="card mb-2 p-3 shadow-none">
     <button class="btn btn-lg btn-outline-primary fs-5 fw-bolder rounded1 rounded-01 w-auto border-2 border-primary" type="text" style="height: 50px;">
         <i class="fa-clipboard-check fa-lg fas pe-2"></i>{{'AddATrip' | translate}}

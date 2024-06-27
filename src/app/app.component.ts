@@ -2,7 +2,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { ConfServiceAdmin } from './admin/service/conf-admin/conf.service';
 import { UserServiceFireBase } from './service/core/user.service';
 import { UserService } from 'src/app/service/user/user.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ConfService } from './service/conf/conf.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
@@ -15,7 +15,7 @@ import { EmailService } from './service/email/email.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'BeSomeWhere';
   private afAuth: AngularFireAuth
   isAdmin = false
@@ -108,7 +108,22 @@ export class AppComponent {
       }
     })
   }
+  ngOnInit() {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      this.onRouteChange(event.urlAfterRedirects);
+    });
+  }
 
+  private onRouteChange(url: string) {
+    if (url === '/conditions-de-vente') {
+      const modalBackdrop = document.querySelector('.modal-backdrop');
+      if (modalBackdrop) {
+        modalBackdrop.remove();
+      }
+    }
+  }
 
   sendSignInLinkToEmail(email){
     return new Promise<any>((resolve, reject) => {

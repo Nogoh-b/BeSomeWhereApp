@@ -28,6 +28,7 @@ export class OrderComponent implements OnInit {
   email_admin = JSON.parse(localStorage.getItem("conf")).contact_email
   private dialog = inject(DialogService);
   private title = 'Paiement';
+  text_mail_for_reservation = '<p><strong>Dear passenger, <br /><br /> Welcome to the BESOMEWHERE community you are ready to embark to an incredible adventure with our platform that will assists you throughout your entire journey.<br /> From your departure to your return commitment is our motto.<br /> Bienvenue dans communaut&eacute; Besomewhere, vous &ecirc;tes pr&ecirc;t &agrave; commencer une aventure incroyable gr&acirc;ce &agrave; notre plateforme qui vous assiste durant toute la dur&eacute;e de votre voyage. De votre d&eacute;part, &agrave; votre retour, engagement est notre mot d&rsquo;ordre.</strong></p><p><strong>Start by booking your ride to the airport by <a href="https://besomewhereapp.com/#/trajets/creation/1" target="_blank">clicking here</a>.<br /> Commencer par r&eacute;server votre trajet vers l\'a&eacute;roport en <a href="https://besomewhereapp.com/#/trajets/creation/1" target="_blank">cliquant ici</a>.<br /><br /></strong><strong>But that\'s not all; don\'t rush too quickly. Besomewhere also helps you prepare and organize your suitcases through the free suitcase preparation assistance service accessible <u>by <a href="https://besomewhereapp.com/#/checklist/creation" target="_blank">clicking here</a></u></strong><u>.<br /></u><strong>Ce n\'est pas tout ne partez pas trop vite Besomewhere vous aide &eacute;galement &agrave; pr&eacute;parer et organiser vos valises via le service gratuit d\'aide &agrave; la pr&eacute;paration de valise accessible en <a href="https://besomewhereapp.com/#/checklist/creation" target="_blank">cliquant ici</a></strong></p><p><strong>This way, you can travel in peace while reading our travel tips based on your destination, during your journey, in the articles section accessible here."<br /> Vous pourriez ainsi voyager en paix tout en lisant nos conseils de voyage en fonction de votre destination, pendant votre trajet, dans la rubrique articles accessible ici.</strong></p><p><strong><em>For any questions, please contact"<br /></em>Pour toute question adressez-vous &agrave; <br /></strong><a href="mailto:Besomewhere.contact@gmail.com"><strong>Besomewhere.contact@gmail.com</strong></a></p><p><strong><br /></strong><strong>Wherever you are, Besomewhere is with you</strong><strong><br /> Partout o&ugrave; vous &ecirc;tes il y&rsquo;a Besomewhere avec vous </strong></p><p><strong>Besomewhere </strong></p>'
   resume_data : DataResumeProps = {total_price : 0, items : []}
 
   constructor(public route : Router, 
@@ -44,6 +45,9 @@ export class OrderComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.reservation)
+        this.emailService.sendMail({ "email": ' bsomkwe@gmail.com',
+    "subject": "Commande / Order",
+    "content": this.text_mail_for_reservation}).subscribe(r => {})
   }
   takeAtHomeCount(passengers, take_at_home){
     return globals.total_take_at_homr(passengers, take_at_home)

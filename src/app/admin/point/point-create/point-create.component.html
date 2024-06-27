@@ -49,7 +49,7 @@
                                     <!-- <input class="fs-6"  type="checkbox"  class="form-control fs-6"  placeholder="Ville"> -->
                                     <label for="formDatalists451" class="ps-2">Le point est une Station ?</label>
                                   </div>
-                                  <div class="gx-0 mb-3 mt-3 row row-cols-2">
+                                  <!-- <div class="gx-0 mb-3 mt-3 row row-cols-2">
                                       <div class=" form-floating  pe-2">
                                         <input class="fs-6"  #input_  formControlName="country" name="country"    (change)="countrySelected($event)" [ngClass]="{'is-invalid' : !countryIsvalid}" class=" form-control fs-6" list="countrydatalistOptions" id="floatingInput" placeholder="Pays">
                                         <datalist id="countrydatalistOptions">
@@ -71,12 +71,13 @@
                                         Choisissez une ville parmis celles proposés
                                       </div>
                                     </div>
-                                  </div>
+                                  </div> -->
                                   <div class="gx-0 row">
                                       <div  class="pe-1 ps-1 form-floating">
-                                        <input class="fs-6" [readOnly]=" !currentCity" formControlName="address" name="address"  (change)="addressSelected($event)" (input)="textInput($event)"    [ngClass]="{'is-invalid' : !addressIsvalid}"  class="form-control fs-6" list="adressdatalistOptions" id="formDatalists45" placeholder="Ville">
+                                        <input class="fs-6" [readOnly]=" false" formControlName="address" name="address"  (change)="addressSelected($event)" (input)="textInput($event)"    [ngClass]="{'is-invalid' : !addressIsvalid}"  class="form-control fs-6" list="adressdatalistOptions" id="formDatalists45" placeholder="Ville">
+                                        <!-- <input class="fs-6" [readOnly]=" !currentCity" formControlName="address" name="address"  (change)="addressSelected($event)" (input)="textInput($event)"    [ngClass]="{'is-invalid' : !addressIsvalid}"  class="form-control fs-6" list="adressdatalistOptions" id="formDatalists45" placeholder="Ville"> -->
                                         <datalist id="adressdatalistOptions">
-                                          <option class="text-l" *ngFor="let point of points let i = index" [value]="point.title">{{point.address.city}} - {{point.address.countryName}} </option>
+                                          <option class="text-l" *ngFor="let point of points let i = index" [value]="point.address.label">{{point.address.city}} - {{point.address.countryName}} </option>
                                             <!-- <option [value]="points && points.length">gabes</option> -->
                                         </datalist>
                                         <label for="formDatalists45">Adresse</label>

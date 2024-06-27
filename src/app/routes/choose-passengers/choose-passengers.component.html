@@ -31,7 +31,7 @@
 
                 <div *ngIf="reservation.take_at_home" class="div-take-at-home p-0 pt-5">
                   <div class="g-0 row row-cols-1 row-cols-md-2">
-                    <div data-pg-collapsed class="d-flex flex-column justify-content-evenly">
+                    <div data-pg-collapsed class="d-flex flex-column justify-content-evenly pe-5">
                       <div>
                           <p>{{'initial_meeting_point' | translate}}</p>
                           <span>{{curRoute.points[0].title}}</span>
@@ -41,22 +41,23 @@
                           <span>{{curRoute.starting_date | date:'shortTime'}}</span>
                       </div>
                   </div>
-                      <div data-pg-collapsed>
-                          <!-- <p>Option {{'enter_full_address' | translate}}</p>
-                          <div class="pt-2 row">
-                              <div class="input-group mb-3">
-                                <datalist id="adr1_datalist">
-                                  <option class="text-l" (input)="textInput($event)" *ngFor="let point of points let i = index" [value]="point.title">{{point.address.city}} - {{point.address.countryName}} </option>
-                                </datalist>
-                                  <input id="take_to_home_adr" list="adr1_datalist" type="text" class="form-control" formControlName="take_to_home_adr" placeholder="Adfresse où il faut vous récupérer" aria-label="Username" aria-describedby="basic-addon1" [ngClass]="{ 'is-invalid': submitted && passengersForm.controls['take_to_home_adr'].errors }">
-                              </div>
-                          </div> -->
-                          <p>{{'time_at_your_address' | translate}}</p>
-                          <span>{{'time_same_as_initial' | translate}}</span>
-                      </div>
+                    <div data-pg-collapsed class="ps-5">
+                        <!-- <p>Option {{'enter_full_address' | translate}}</p>
+                        <div class="pt-2 row">
+                            <div class="input-group mb-3">
+                            <datalist id="adr1_datalist">
+                                <option class="text-l" (input)="textInput($event)" *ngFor="let point of points let i = index" [value]="point.title">{{point.address.city}} - {{point.address.countryName}} </option>
+                            </datalist>
+                                <input id="take_to_home_adr" list="adr1_datalist" type="text" class="form-control" formControlName="take_to_home_adr" placeholder="Adfresse où il faut vous récupérer" aria-label="Username" aria-describedby="basic-addon1" [ngClass]="{ 'is-invalid': submitted && passengersForm.controls['take_to_home_adr'].errors }">
+                            </div>
+                        </div> -->
+                        <p>{{'time_at_your_address' | translate}}</p>
+                        <span>{{'time_same_as_initial' | translate}}</span>
+                    </div>
                   </div>
-                  <span>{{'important_notice' | translate}}</span>
-                  <p class="fw-normal mt-3">{{'important_notice_content' | translate}} </p>
+                  <br>
+                  <span style="text-decoration: underline; color: red;" [innerHTML]="'important_notice' | translate"></span>
+                  <p class="fw-normal mt-3" [innerHTML]="'important_notice_content' | translate" > </p>
             </div>
             <!-- d&rsquo;origine sans dédommagement possible. Vous devez nous fournir soit  un numéro local du pays de réservation, soit un numéro accessible par whattaps ,telegram ou signal, Vous pouvez nous contacter au numéro suivant : {{conf.phone_number}} </p> -->
 
@@ -76,10 +77,10 @@
                                 <div *ngIf="i > 0 && reservation.take_at_home"  class="form-check align-items-center d-flex form-switch" data-pg-collapsed>
                                     <input  #in_take class="form-check-input" type="checkbox"  [formControlName]="'take_at_home'+ i" (change)="setRequiredField('date' + i,passengersForm.get('take_at_home'+ i).value)" value="1" [name]="'take_at_home'+ i"   [id]="'flexRadioDefault'+i">
                                     <label class="form-check-label" [for]="'flexRadioDefault'+i">{{'come_to_my_door' | translate}}
- (+{{price_take_to_home}} €)</label>
+                                        (+{{price_take_to_home}} €)</label>
                                   </div>
                             </div>
-                            <div class="d-flex gx-0  row row-cols-2 row-cols-xl-3">
+                            <div class="d-flex gx-0  row row-cols-1  row-cols-lg-1 row-cols-xl-2">
                                 <div class=" p-1">
                                     <div class="form-floating mb-2" data-pg-dyn-id="did_107">
                                         <input type="text" class="form-control" id="floatingInput" name="'first_name' + i" [formControlName]="'first_name' + i"  [placeholder]="'Surname' | translate" [ngClass]="{ 'is-invalid': submitted && passengersForm.controls['first_name' + i].errors }" >
@@ -142,7 +143,7 @@
                                     <div *ngIf="i === 0" class=" p-1">
                                         <div class="form-floating mb-2" data-pg-dyn-id="did_107">
                                                 <input id="take_to_home_adr" list="adr1_datalist" type="text" class="form-control" formControlName="take_to_home_adr" placeholder="Adfresse où il faut vous récupérer" aria-label="Username" aria-describedby="basic-addon1" [ngClass]="{ 'is-invalid': submitted && passengersForm.controls['take_to_home_adr'].errors }">
-                                            <label for="floatingInput truncate">{{'come_to_my_door' | translate}} (+{{conf.price_take_to_home}})
+                                            <label for="floatingInput truncate">{{'enter_full_address' | translate}}
 </label>
                                         </div>
                                     </div>

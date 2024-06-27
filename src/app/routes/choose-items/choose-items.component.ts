@@ -25,12 +25,12 @@ export class ChooseItemsComponent implements OnInit {
   meals :Item_Drive[] = []
   suitcase = globals.suitcase
   babySeats :Item_Drive[] = []//= globals.babySeats
-  curCategory = 0
   search_string = ''
   without_baby_checked = 0
   server = SERVER_FOR_UPLOAD
   email_admin = email_admin
   proposed_items_type : string[] = JSON.parse(localStorage.getItem("conf")).small_pleasures_type
+  curCategory = this.proposed_items_type.length - 1
   reservation : Reservation = localStorage.getItem('reservation') && JSON.parse(localStorage.getItem('reservation'));
   constructor(private router: Router,
     private route: ActivatedRoute,

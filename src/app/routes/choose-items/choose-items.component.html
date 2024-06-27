@@ -39,20 +39,19 @@
                                               <input [(ngModel)]="search_string"   type="search" class="form-control" aria-label="Text input with dropdown button">
                                           </div>
                                           <div class="mb-3 w-25">
-                                              <select [(ngModel)]="curCategory" (change)="cateryChanged(curCategory)" id="formInput794" class="form-select" aria-label="Default select example">
-                                                  <option [selected]=" i === 0" *ngFor="let item_t of proposed_items_type let i = index" [value]="i">{{item_t}} </option>
-                                                  <!-- <option selected value="0">La Viennoiserie </option>
-                                                  <option value="1">Sandwich </option>
-                                                  <option value="2">Boisson</option>
-                                                  <option value="3">Tout</option> -->
-                                              </select>
+                                            <select [(ngModel)]="curCategory" (change)="cateryChanged(curCategory)" id="formInput794" class="form-select" aria-label="Default select example">
+                                                <ng-container *ngFor="let item_t of proposed_items_type; let i = index">
+                                                    <option *ngIf="item_t.trim() !== ''" [selected]="i === 0" [value]="i">{{ item_t | translate }}</option>
+                                                </ng-container>
+                                            </select>
+                                            
                                           </div>
                                       </div>
 
                                       <div *ngFor="let item of meals let i = index" >
                                         <div *ngIf="itemsc(item) " class="border-bottom border-dark gx-2 pb-3 pe-2 ps-2 pt-3 row row_item">
                                             <div  class="align-items-center col-auto d-flex pe-0">
-                                                <app-preloader-img [src]="server + item.src" [class]="['image-fit', 'pe-0']"  width_="30px" height_="30px" [objectFit]="'contain'"></app-preloader-img>
+                                                <app-preloader-img [src]="server + item.src" [class]="['image-fit', 'pe-0']"  width_="65px" height_="65px" [objectFit]="'cover'"></app-preloader-img>
                                                 <!-- <img [src]="server + item.src" style="    object-fit: contain;" class="image-fit pe-0"/> -->
                                             </div>
                                             <div class="col pe-0 ps-2">

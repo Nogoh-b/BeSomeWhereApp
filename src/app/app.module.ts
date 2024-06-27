@@ -39,6 +39,7 @@ import { TranslationService } from './service/translation/translation.service';
 import { ConditionsOfSaleComponent } from './pages_utils/conditions-of-sale/conditions-of-sale.component';
 import { LastCommunicationComponent } from './pages_utils/last-communication/last-communication.component';
 import { TermsOfUseAndPrivacypolicyComponent } from './pages_utils/terms-of-use-and-privacypolicy/terms-of-use-and-privacypolicy.component';
+import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 // import { NgxStripeModule } from 'ngx-stripe';
 // import {JpImagePreloadModule} from 'ng-image-preload';
 // NgxStripeModule.forRoot('***your-stripe-publishable-key***'),
@@ -64,6 +65,9 @@ import { TermsOfUseAndPrivacypolicyComponent } from './pages_utils/terms-of-use-
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    NgxMapboxGLModule.withConfig({
+      accessToken: 'pk.eyJ1Ijoibmlsb2JvYnkiLCJhIjoiY2t0bTY4ZWFzMG5pMDJubWp1dTQzaGo5NyJ9.AMsPtdLuutboBJivusJ9yA' // Remplacez par votre propre token
+    }),
     // JpImagePreloadModule.forRoot(),
     // AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule,

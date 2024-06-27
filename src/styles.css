@@ -702,3 +702,17 @@ circle-progress {
   cursor: auto;
 
 }
+.text-black{
+  color : black !important;
+}
+.font-bolder{
+  font-weight: 700!important;
+}
+
+.mapboxgl-control-container{
+  display:  none;
+}
+.btn-custom {
+    background-color: transparent;
+    color: #ffd15c!important;
+}

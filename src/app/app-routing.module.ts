@@ -91,7 +91,7 @@ const routes: Routes = [
  }
 ,
  {
-  path: 'dernieres-news', component:     LastCommunicationComponent,
+  path: 'served-routes', component:     LastCommunicationComponent,
  }
 ,
  {

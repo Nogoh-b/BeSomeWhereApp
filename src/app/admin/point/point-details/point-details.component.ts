@@ -69,7 +69,7 @@ export class PointDetailsComponent implements OnInit {
     const routeParams = this.route.snapshot.paramMap;
     this.id = routeParams.get('id');
     this.pointService.getPoint(this.id, {all: true}).subscribe(point =>{
-      console.log(point)
+      console.log('mon point ',point)
       this.point = point
       this.currentAddress = point
       this.currentAddress.position = {lat : point.lattitude, lng: point.longitude}
@@ -167,8 +167,9 @@ export class PointDetailsComponent implements OnInit {
   textInput(e){
     setTimeout(() => {
       this.mapService.search({q:e.target.value + ' '+ this.formPoint.value.city}).subscribe(points =>{
-        this.points = points.items
-        console.log(points.items)
+        this.points = this.mapService.transformResponse(points).items
+        console.log(        this.points = this.mapService.transformResponse(points).items
+      )
       })
     }, 1000);
   }
@@ -180,11 +181,15 @@ export class PointDetailsComponent implements OnInit {
     // alert('this.points[c]')
     // return
     let adrs= this.points.filter(result =>{
-      return result.title.toLowerCase()  === c.target.value.toLowerCase()
+      return result?.address?.label?.toLowerCase()  === c.target.value.toLowerCase()
     })
+    console.log('okkkkkk11 ',adrs)
+
     this.addressIsvalid = adrs.length > 0
     if(adrs.length > 0){
       this.currentAddress = adrs[0]
+      this.currentCity = 'city'
+      this.currentCountry = 'country'
     }
     else{
     }
@@ -194,8 +199,8 @@ export class PointDetailsComponent implements OnInit {
     this.formPoint = this.fb.group({});
     this.formPoint.addControl('title', new FormControl(this.point ? this.point.title : 'd'));
     this.formPoint.addControl('description', new FormControl(this.point ? this.point.description : 'd'));
-    this.formPoint.addControl('country', new FormControl(this.point ? this.point.country : '', Validators.required));
-    this.formPoint.addControl('city', new FormControl(this.point ? this.point.city : '', Validators.required));
+    this.formPoint.addControl('country', new FormControl(this.point ? this.point.country : 'C', Validators.required));
+    this.formPoint.addControl('city', new FormControl(this.point ? this.point.city : 'C', Validators.required));
     this.formPoint.addControl('address', new FormControl(this.point ? this.point.address : '', Validators.required));
     this.formPoint.addControl('type', new FormControl(this.point ? this.point.type : '', Validators.required));
     this.formPoint.addControl('is_station', new FormControl(this.point ? this.point.is_station : '', Validators.required));
@@ -208,7 +213,7 @@ export class PointDetailsComponent implements OnInit {
   }
   onSumit(){
     console.log(this.currentCountry +' && '+ this.currentCity +' && '+ this.currentAddress)
-    if(this.currentCountry && this.currentCity && this.addressIsvalid){
+    if(this.addressIsvalid){
       this.loading1 = true
       let point: Point = this.formPoint.value
       let adr: string = this.formPoint.value.address
@@ -233,7 +238,7 @@ export class PointDetailsComponent implements OnInit {
     }
   }
   onSumit1(){
-    if(this.currentCountry && this.currentCity && this.currentAddress){
+    if( this.currentAddress){
       this.loading2 = true
       let point: Point = this.formPointAround.value
       point.city = this.point.city

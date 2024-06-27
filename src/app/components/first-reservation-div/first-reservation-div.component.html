@@ -3,7 +3,7 @@
       <i class="fa-check fa-lg fas pe-2"></i>
       <b>{{'reservation_confirmation_message' | translate}}</b>
   </div>
-  <p class="fs-5">
+  <p class="fs-5 fw-bold" style="font-weight: 900!important;">
     {{'dearTraveler' | translate}}
 </p>
   <div *ngIf="!is_always_saved && user" class="align-items-center d-flex justify-content-center">
@@ -55,3 +55,4 @@
 </div>
 
 <app-modal-add-address></app-modal-add-address>
+

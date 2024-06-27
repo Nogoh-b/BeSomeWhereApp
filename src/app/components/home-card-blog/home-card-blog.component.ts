@@ -5,7 +5,7 @@ import { Article } from 'src/app/model/Model/Article';
 import { User } from 'src/app/model/Model/Utilisateur';
 import { UserServiceFireBase } from 'src/app/service/core/user.service';
 import { PaymentsService } from 'src/app/service/payments/payments.service';
-import { addSecondsToDate, ecart } from 'src/global';
+import { addSecondsToDate, ecart, removeSubstring } from 'src/global';
 
 @Component({
   selector: 'app-home-card-blog',
@@ -78,6 +78,9 @@ export class HomeCardBlogComponent implements OnInit {
     },
     margin: 0,
     nav: false
+  }
+  removeSubstring(mainString: string, subString: string): string {
+    return removeSubstring(mainString, subString);
   }
   isMobileDevice(): boolean {
     const mobileWidthThreshold = 414; // Valeur seuil pour la largeur mobile

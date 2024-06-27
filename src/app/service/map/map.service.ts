@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import * as globals from '../../../global'
 import {Drive}from '../../model/Model/Drive'
 import { PointMap } from 'src/app/model/map/point';
+import { MapboxService } from '../mapbox.service';
 declare let H: any;
 
 @Injectable({
@@ -13,7 +14,7 @@ export class MapService {
   apiKey = 'iQXmtS5NDoiQC8cT-STdItKFmcLcNQBo8oBXhsKYbxw';
 
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private mapboxService: MapboxService) { }
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
   initializeMap(center: PointMap,zoom: number,lg: string) {
@@ -413,12 +414,13 @@ export class MapService {
     if(data){
       params = params.append('lang', 'fr');
       params = params.append('q', data.q);
+      params = params.append('in', 'countryCode:TUN');
       params = params.append('apiKey', this.apiKey);
 
     }
 
     console.log('requête : '+ URL_SCHEMA,' ', params );
-    return this.httpClient.get<any>(URL_SCHEMA ,{params});
+    return this.mapboxService.searchAddress(data.q); //this.httpClient.get<any>(URL_SCHEMA ,{params});
   }
 
   getMatrix(data?: any): Observable<any>{
@@ -448,6 +450,62 @@ export class MapService {
     }
 
     console.log('requête : '+ URL_SCHEMA,' ', params );
-    return this.httpClient.get<any>(URL_SCHEMA ,{params});
+    return this.mapboxService.getMatrix(data.start0, data.destinations) //this.httpClient.get<any>(URL_SCHEMA ,{params});
+  }
+
+  public transformResponse(response: any): any {
+    console.log('transformReponse ', response)
+    return {
+      items: response.features.map(feature => ({
+        title: feature.text,
+        id: feature.id,
+        politicalView: "", // Add appropriate data if available
+        resultType: feature.place_type[0], // Adjust if necessary
+        houseNumberType: "MPA", // Placeholder value, adjust if necessary
+        addressBlockType: "block", // Placeholder value, adjust if necessary
+        localityType: "city", // Placeholder value, adjust if necessary
+        administrativeAreaType: "country", // Placeholder value, adjust if necessary
+        address: {
+          label: feature.place_name,
+          countryCode: feature.context && feature.context.find(c => c.id.startsWith('country'))?.short_code || "",
+          countryName: feature.context && feature.context.find(c => c.id.startsWith('country'))?.text || "",
+          stateCode: feature.context && feature.context.find(c => c.id.startsWith('region'))?.short_code || "",
+          state: feature.context && feature.context.find(c => c.id.startsWith('region'))?.text || "",
+          countyCode: "", // Placeholder value, adjust if necessary
+          county: "", // Placeholder value, adjust if necessary
+          city: feature.context && feature.context.find(c => c.id.startsWith('place'))?.text || "",
+          district: feature.context && feature.context.find(c => c.id.startsWith('neighborhood'))?.text || "",
+          subdistrict: "", // Placeholder value, adjust if necessary
+          street: feature.properties.address || "",
+          streets: [], // Placeholder value, adjust if necessary
+          block: "", // Placeholder value, adjust if necessary
+          subblock: "", // Placeholder value, adjust if necessary
+          postalCode: feature.context && feature.context.find(c => c.id.startsWith('postcode'))?.text || "",
+          houseNumber: "", // Placeholder value, adjust if necessary
+          building: "", // Placeholder value, adjust if necessary
+          unit: "" // Placeholder value, adjust if necessary
+        },
+        postalCodeDetails: [], // Placeholder value, adjust if necessary
+        position: {
+          lat: feature.geometry.coordinates[1],
+          lng: feature.geometry.coordinates[0]
+        },
+        access: [], // Placeholder value, adjust if necessary
+        distance: 0, // Placeholder value, adjust if necessary
+        mapView: {}, // Placeholder value, adjust if necessary
+        categories: feature.properties.category ? [feature.properties.category] : [],
+        foodTypes: [], // Placeholder value, adjust if necessary
+        houseNumberFallback: true,
+        estimatedPointAddress: true,
+        timeZone: {}, // Placeholder value, adjust if necessary
+        scoring: {}, // Placeholder value, adjust if necessary
+        parsing: {}, // Placeholder value, adjust if necessary
+        streetInfo: [], // Placeholder value, adjust if necessary
+        countryInfo: {}, // Placeholder value, adjust if necessary
+        translations: {}, // Placeholder value, adjust if necessary
+        mapReferences: {}, // Placeholder value, adjust if necessary
+        related: [] // Placeholder value, adjust if necessary
+      }))
+    };
   }
 }

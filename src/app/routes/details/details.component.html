@@ -18,7 +18,7 @@
                             <i class="fa-file-archive fas pe-1"></i> Modifier
                         </button> -->
                         <button  (click)="modal_del.want_delete_reservation(reservation)"  data-bs-target="#deleteModal" data-bs-toggle="modal"  type="button" class="btn btn-outline-danger ms-1 rounded-pill">
-                            <i class="fa-trash fas pe-1"></i>Annuler
+                            <i class="fa-trash fas pe-1"></i>{{'cancel_action' | translate}}
                         </button>
                     </div>
                   </div>
@@ -83,7 +83,7 @@
                                 <img src="assets/img/route.png" class="col-auto pe-0 ps-0" width="50" height="50">
                                 <div class="col w-100">
                                     <div class="align-items-center d-flex g-0 row row-cols-3">
-                                        <p class="col-6 fs-5 pe-2 ps-2 text-body text-start">Siège</p>
+                                        <p class="col-6 fs-5 pe-2 ps-2 text-body text-start">{{'reserved_seats' | translate}}</p>
                                         <p class="col-3 fs-5 fst-italic text-center text-muted">x{{total_passenger()}}</p>
                                         <p class="col-3 fs-5 fw-bold text-body text-center">{{total_price_passenger().toFixed(2)}} &euro;</p>
                                     </div>

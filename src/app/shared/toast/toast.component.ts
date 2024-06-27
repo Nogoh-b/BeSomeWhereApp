@@ -26,7 +26,7 @@ export class ToastComponent implements OnInit {
 
   @Input() title = 'Be SomeWhere'
   @Input() status = 'close'
-  @Input() desc = 'Aucun traje n&apos;a été trouvé ! vous pouvez modifier vos informations pour trouver le trajet adéquat'
+  @Input() desc = 'NoSharedTaxi'
   time : number = 2500
   opened : boolean = false
   // @Input() desc = 'Be SomeWhere'

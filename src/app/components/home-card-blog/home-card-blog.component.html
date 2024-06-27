@@ -72,7 +72,7 @@ Fashion Week Styles
                 </div>
                     <div class="text-box-wrapper">
                         <div class="text-box">
-                            <h4 [innerHTML]="(article.title.rendered)  | shorten: 20 : '...'"></h4>
+                            <h4 [innerHTML]="removeSubstring(article.title.rendered, 'Privé&nbsp;: ')  | shorten: 20 : '...'"></h4>
                         </div>
                     </div>
                     <div class="button-wrapper">

@@ -18,15 +18,19 @@ export class InputSearchAdressComponent implements OnInit {
   }
 
   updateAdress(e){
+    console.log('updateAdress')
     this.addressChange.emit(e.target.value)
   }
   textInput(e){
     setTimeout(() => {
       this.mapService.search({q:e.target.value}).subscribe(points =>{
-        this.points = points.items
-        console.log(points.items)
+        console.log(points.features)
+        this.points = this.mapService.transformResponse(points).items
+        console.log(this.mapService.transformResponse(points))
       })
     }, 1000);
   }
+
+
 
 }

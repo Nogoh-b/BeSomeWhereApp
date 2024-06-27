@@ -1,5 +1,5 @@
 <div class="fade modal" id="deleteModal" tabindex="-1" role="dialog" aria-hidden="true" data-bs-keyboard="false" data-pg-collapsed>
-  <div class="modal-dialog modal-dialog-centered modal-sm">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content" style="background-color: rgba(255, 255, 255, 0);">
           <div class="align-items-center d-flex flex-column">
               <div class="bg-white border-5 border-end border-primary border-top d-flex justify-content-center mb-n5" style="width: 85px; height: 85px; border-radius: 50%; z-index: 1;">
@@ -14,7 +14,7 @@
                       <p *ngIf="currentFolder && !currentFile" class="text-wrap w-100 text-center">{{'delete_suitcase_confirmation' | translate: { var1: currentFolder.name} }}  </p>
                       <p *ngIf="currentFile" class="text-wrap w-100 text-center">{{'delete_confirmation' | translate}} <b>{{currentFile && currentFile.name}} ? </b> </p>
                       <p *ngIf="checklist && !currentFolder && !currentFile" class="text-wrap w-100 text-center">{{'delete_checklist_confirmation' | translate: { var1: checklist && checklist.title} }}  </p>
-                      <p *ngIf="reservation && !currentFolder && !currentFile" class="text-wrap w-100 text-center">{{'cancellation_policy_en' | translate}} </p>
+                      <p [innerHTML]="'cancellation_policy' | translate"  *ngIf="reservation && !currentFolder && !currentFile" class="text-wrap w-100 text-center d-flex align-items-center justify-content-center flex-column-reverse" > </p>
                       <!-- <p *ngIf="reservation && !currentFolder && !currentFile" class="text-wrap w-100">Voulez vous annuler cette reservation ? </p> -->
                       <p *ngIf="user && !currentFolder && !currentFile" class="text-wrap w-100">Voulez vous suprimer votre compte. Cela sera irreverssible? </p>
                   </div>

@@ -3,7 +3,7 @@ import { ArticleService } from './../../service/article/article.service';
 import { Article } from 'src/app/model/Model/Article';
 import { ArticleCategory } from './../../model/Model/Article_Categorie';
 import { CategoryService } from './../../service/category-article/category.service';
-import { addSecondsToDate, ecart } from 'src/global';
+import { addSecondsToDate, ecart, removeSubstring } from 'src/global';
 import { PaymentsService } from 'src/app/service/payments/payments.service';
 import { User } from 'src/app/model/Model/Utilisateur';
 import { UserServiceFireBase } from 'src/app/service/core/user.service';
@@ -61,7 +61,9 @@ export class ArticleListComponent implements OnInit {
 
     // })
   }
-
+  removeSubstring(mainString: string, subString: string): string {
+    return removeSubstring(mainString, subString);
+  }
   categoryChange(e){
   	// alert(e.target.value)
   	this.articles = null

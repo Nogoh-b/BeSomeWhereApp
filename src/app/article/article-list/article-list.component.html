@@ -33,7 +33,7 @@
                                 <!-- <img [src]="article._embedded['wp:featuredmedia'] ?  article._embedded['wp:featuredmedia'][0] && article._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url : ''" width="700" height="480"> -->
                               </a>
 		                            <div class="p-3">
-		                                <a [routerLink]="['/article', article.id]" class="text-dark text-decoration-none"><h3 class="fw-bold h5 mb-1" [innerHTML]="(article.title.rendered)"></h3></a>
+		                                <a [routerLink]="['/article', article.id]" class="text-dark text-decoration-none"><h3 class="fw-bold h5 mb-1" [innerHTML]="removeSubstring(article.title.rendered, 'Privé&nbsp;: ') "></h3></a>
                                         <h4 class="fw-bold h6 mb-1 text-secondary">{{article._embedded['wp:term'] ?  article._embedded['wp:term'][0] && article._embedded['wp:term'][0][0].name : 'Pas de ctégorie'}}</h4>
                                         <p class="mb-0 text-dark">{{article.modified | date}}</p>
 	<!-- 	                                <div class="align-items-center d-flex justify-content-between small">

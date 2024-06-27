@@ -4,7 +4,12 @@
           <div class="col d-flex form-floating g-0 justify-content-between " data-pg-dyn-id="did_107">
               <i class="col-auto fa-lg fa-map-marker-alt fas mb-auto mt-auto p-0 text-primary"></i>
               <datalist id="adr_datalist">
-                <option class="text-l" *ngFor="let point of points let i = index" [value]="point.title">{{point.address.city}} - {{point.address.countryName}} </option>
+                <!-- <option value="belgique">belgique</option> -->
+                <!-- <option value="belgique">belgique</option> -->
+                <!-- <option value="belgique">belgique</option> -->
+                <!-- <option value="25">50</option> -->
+                <option class="text-l" *ngFor="let point of points let i = index" [value]="point.address.label"> </option>
+                <!-- <option class="text-l" *ngFor="let point of points let i = index" [value]="point.address.label">{{point.address.city}} - {{point.address.countryName}} </option> -->
               </datalist>
               <input list="adr_datalist" (change)="updateAdress($event)" (input)="textInput($event)" [(ngModel)]="address" type="text" class="border-white form-control fs-6 mb-n1 text-truncate" id="floatingInput" placeholder="Addresse">
               <label for="floatingInput" class="fs-5 fw-normal mt-n1  ps-4 text-start text-truncate w-100">{{'YourFullAddress' | translate}} </label>

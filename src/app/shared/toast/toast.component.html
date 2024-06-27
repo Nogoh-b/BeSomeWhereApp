@@ -10,7 +10,7 @@
           <strong class="me-auto">{{title | translate}}</strong>
           <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
       </div>
-      <div class="toast-body">{{desc | translate}}</div>
+      <div class="toast-body" [innerHTML]="desc | translate" ></div>
   </div>
 
 

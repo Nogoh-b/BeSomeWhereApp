@@ -87,7 +87,8 @@ export class HomeSearch1Component implements AfterViewInit {
   searchDrive(){
      let start0 = this.switched ? this.pointB.longitude+','+this.pointB.lattitude : this.pointA.longitude+','+this.pointA.lattitude
      this.pointService.get({status: 0}).subscribe(points =>{
-       console.log('points ', points)
+       console.log('pointsAuxAllentours ', points)
+       console.log('startPoint ', start0)
        let destinations: string[] = [];
        points.forEach(point => {
          destinations.push(point.longitude+','+point.lattitude)
@@ -138,15 +139,15 @@ export class HomeSearch1Component implements AfterViewInit {
     // console.log('point A and B ', this.pointA.id, this.pointB.id)
     this.mapService.search({q: this.address}).subscribe(result =>{
       console.log(result)
-      if(result.items.length === 0){
+      if(this.mapService.transformResponse(result).items.length === 0){
       this.toast_c.open('Be Somewhere', 'Addresse non valide', 3000)
       return
       }
       let point = new Point()
       point.address = this.address
-      point.lattitude = result.items[0].position.lat
-      point.longitude = result.items[0].position.lng
-      point.country = result.items[0].address.countryName
+      point.lattitude = this.mapService.transformResponse(result).items[0].position.lat
+      point.longitude = this.mapService.transformResponse(result).items[0].position.lng
+      point.country = this.mapService.transformResponse(result).items[0].address.countryName
       this.on_search.emit(this.address)
       this.searchAroundPoints(point, this.station)
     })
@@ -181,29 +182,39 @@ export class HomeSearch1Component implements AfterViewInit {
   }
 
   searchAroundPoints(pointA: Point, pointB: Point){
+    console.log('searchAroundPoints')
     if(!pointA || !pointB)
       return
     if(this.route.url.includes('/trajet')){
       // let start0 = this.switched ? pointB.longitude+','+pointB.lattitude : pointA.longitude+','+pointA.lattitude
-      let start0 = pointA.lattitude  +','+pointA.longitude
+      let start0 = [pointA.longitude ,pointA.lattitude]
 
 
 
       this.pointService.get({ all: true, status: 0}).subscribe(points =>{
-        let destinations: string[] = [];
-        console.log('points ', points,' dest ',destinations)
-        points.forEach(point => {
-          destinations.push(point.lattitude+','+point.longitude)
+        let destinations: [number, number][] = [];
+       console.log('pointsAuxAllentours ', points)
+      //  destinations.push([points[0].longitude,points[0].lattitude])
+       console.log('startPoint ', start0, ' ')
+       points.forEach(point => {
+          destinations.push([point.longitude,point.lattitude])
         });
         console.log('points ', points,' dest ',destinations)
-       this.mapService.getMatrix({start0,destinations}).subscribe(result =>{
-         console.log('Matrix ',result.response.matrixEntry);
+       this.mapService.getMatrix({start0,destinations}).subscribe(result1 =>{
+          console.log('Matrix ',result1);
+          
+          const durations = result1.durations[0]
+          const result = result1.destinations
+          console.log('Matrix_Durations ', durations);
          let arroundPoints: Point[]  = [];
-         for (let index = 0; index < points.length; index++) {
-           let point = points[index]
-           if(result.response.matrixEntry[index].summary && result.response.matrixEntry[index].summary.distance  >= 0 && result.response.matrixEntry[index].summary.distance  <  1000000){
-             point.distance = result.response.matrixEntry[index].summary.distance / 1000  ;
+         for (let index = 1; index < points.length; index++) {
+           let point = points[index - 1]
+           if(durations[index] != null){
+            //  point.distance = result[index].distance   ;
+             point.distance = durations[index]   ;
              arroundPoints.push(point);
+            console.log('Durations ',durations[index],' ', point.title );
+
            }
          }
          console.log('Points ',arroundPoints);

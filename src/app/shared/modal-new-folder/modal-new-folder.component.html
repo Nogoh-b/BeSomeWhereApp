@@ -20,11 +20,11 @@
                             <!-- <label  class="btn btn-outline-danger" for="groupradio2">Sac par défaut</label> -->
                         </div>
                         <div *ngIf="folderForm.controls['is_default'].value  !== '1'" class="d-flex flex-column mb-3">
-                            <!-- <label for="formInput104">{{'suitcase_name' | translate}} </label> -->
+                            <label *ngIf="!isFirstLevel"  for="formInput104">{{'give_suitcase_name' | translate}}</label>
                             <input formControlName = "name"  type="text" placeholder="ex: John Doe" class="border"/>
                         </div>
                         <div *ngIf="folderForm.controls['is_default'].value  == '1'" class="mb-3">
-                            <label for="formInput104"></label>
+                            <label *ngIf="isFirstLevel" for="formInput104">{{'give_suitcase_name' | translate}}</label>
                             <select id="formInput104" formControlName = "name"   class="form-select" aria-label="Default select example">
                                 <option *ngFor="let item of proposedChecklist" [value]="item.name" selected="">{{item.name}}</option>
                             </select>

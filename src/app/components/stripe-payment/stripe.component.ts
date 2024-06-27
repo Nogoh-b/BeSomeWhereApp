@@ -142,7 +142,7 @@ export class StripeComponent implements AfterViewInit, OnDestroy {
   }
 
   async onSubmit() {
-    this.loading = true
+    // this.loading = true
     console.log('Form submitted:', this.checkoutForm.value);
     var displayError = document.getElementById('card-errors');
 
@@ -169,7 +169,7 @@ export class StripeComponent implements AfterViewInit, OnDestroy {
         res => {
           console.log(res)
           this.loading = false
-          this.onSuccess.emit(true)
+          // this.onSuccess.emit(true)
         }
       )
     }

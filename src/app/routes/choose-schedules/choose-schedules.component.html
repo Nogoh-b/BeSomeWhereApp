@@ -8,9 +8,9 @@
 
           <div class="container pe-0 pe-xl-5 ps-0 ps-xl-5">
               <div class="bg-white mt-4 p-2">
-                  <p class="fs-3 fw-bold pb-4 pe-auto ps-4 pt-3">{{'timetable' | translate}}<span class="fs-5">({{'warning_traffic' | translate}}
+                  <p class="fs-3 fw-bold pb-4 pe-auto ps-4 pt-3">{{'timetable' | translate}}<span class="fs-4">({{'warning_traffic' | translate}}
 )</span></p>
-                  <div class="pe-5 ps-5" *ngFor="let route of routes let i = index">
+                  <div class="pe-0 ps-0 pe-md-4 ps-md-4" *ngFor="let route of routes let i = index">
                       <div class="border-1 border-bottom border-dark border-top g-0 p-2 row row-cols-2 row_shedulde">
                           <!-- <div class="align-items-center border-dark d-flex pb-2 pt-2">
                               <i class="fa-clock fa-lg fas pe-2 text-secondary"></i>
@@ -24,7 +24,7 @@
                                 <p class="fs-5 fw-bolder text-center">{{(route.starting_date | date).toUpperCase()}}</p>
                                 <p class="fs-6 fw-bold text-info text-center">{{route.starting_date | date:'shortTime'}}</p>
                               </div>
-                              <p class="pe-2 ps-2">-</p>
+                              <p class="pe-21 ps-21">-</p>
                               <div class="gx-0 p-1 w-auto" data-pg-collapsed>
                                 <p class="display-6 fs-6 pb-2 text-black-50 text-center">{{'arrival' | translate}}
                                 </p>
@@ -52,8 +52,9 @@
                           <div class="d-flex justify-content-end mb-3">
                             <div [ngClass]="{disabled: spiner_btn.value <= 0}" class="form-check align-items-center d-flex form-switch" data-pg-collapsed>
                               <input  #in_take class="form-check-input" type="checkbox" value="1" [name]="'for_disabled'+ i" [(ngModel)]="reservation.take_at_home" (change)="changeTakeToHome(in_take.checked )"  [id]="'flexRadioDefault'+i">
-                              <label class="form-check-label" [for]="'flexRadioDefault'+i">{{'come_to_my_door' | translate}}
- (+{{price_take_to_home}} €)</label>
+                              <label class="form-check-label" style ="font-size: 1.0rem" [for]="'flexRadioDefault'+i">{{'come_to_my_door_option' | translate}}
+ <!-- (+{{price_take_to_home}} €) -->
+                            </label>
                             </div>
                           </div>
 

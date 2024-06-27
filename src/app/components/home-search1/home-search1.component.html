@@ -11,14 +11,14 @@
           </div>
           <div class="gx-0 row">
               <div class="input-group mb-3 pe-0 ps-0">
-                <p class="pb-2 w-100 text-end">{{'YourDepartureAdress' | translate}} </p>
+                <p class="pb-2 w-100 text-end text-black font-bolder">{{'YourDepartureAdress' | translate}} </p>
                 <div class="w-100">
                   <app-input-search-adress [address] = "address" (addressChange)="addressChoose($event)"  *ngIf="!switched"></app-input-search-adress>
                   <app-input-search-station [station] = "station" (onStationChoose)="stationChoose($event)"  *ngIf="switched"></app-input-search-station>
                 </div>
                 <app-switch [class]="'w-100'" #switch (onSwitched) = " switch_($event)" class="bg-white border-0 border-dark input-group-text me-auto me-lg-0 ms-auto ms-lg-0 pb-3 pt-3"></app-switch>
                 <div class="w-100">
-                  <p class="col-12 pb-2 text-end w-100">{{'SelectDestination' | translate}}</p>
+                  <p class="col-12 pb-2 text-end w-100  text-black font-bolder">{{'SelectDestination' | translate}}</p>
                   <app-input-search-adress [address] = "address"  (addressChange)="addressChoose($event)" *ngIf="switched"></app-input-search-adress>
                   <app-input-search-station [station] = "station"  (onStationChoose)="stationChoose($event)" *ngIf="!switched"></app-input-search-station>
                 </div>

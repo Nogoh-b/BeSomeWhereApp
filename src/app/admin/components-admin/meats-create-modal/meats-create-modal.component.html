@@ -67,17 +67,13 @@
                                   </select>
                                 </div>
                                 <div *ngIf="can_screen_sub() " class="bg-white container p-3 ">
-                                  <select style="height: 50px ;" formControlName="sub_category" class="form-control">
-                                  <!-- <select formControlName="title" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.title.errors }"> -->
-                                    <!-- <option value="Categorie">Catégorie</option> -->
-                                    <option *ngFor="let small_pleasure of small_pleasures_type let i = index" [value]="i">{{small_pleasure}}</option>
-                                    <!-- <option *ngFor="let small_pleasure of small_pleasures_type" [value]="small_pleasure">{{small_pleasure}}</option> -->
-
-                                    <!-- <option [value]="typeMeals.Viennoiserie">Viennoiserie</option>
-                                    <option [value]="typeMeals.Sandwich">Sandwich</option>
-                                    <option [value]="typeMeals.Boisson">Boisson</option>
-                                    <option [value]="typeMeals.All">All</option> -->
+                                  <select style="height: 50px;" formControlName="sub_category" class="form-control">
+                                    <ng-container *ngFor="let small_pleasure of small_pleasures_type; let i = index; trackBy: trackByFn">
+                                      <option *ngIf="small_pleasure.trim() !== ''" [ngValue]="i">{{ small_pleasure | translate }}</option>
+                                    </ng-container>
                                   </select>
+                                  
+                                  
                                 </div>
                                 <div class="bg-white container p-0 ">
                                   <app-upload   (fileDeleted)="file_deleted($event)" (fileUploaded)="file_uploaded($event)" [just_for_file]="true"></app-upload>

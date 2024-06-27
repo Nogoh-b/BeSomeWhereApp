@@ -69,7 +69,8 @@ export class HomeSearchComponent implements AfterViewInit {
   searchDrive(){
      let start0 = this.switched ? this.pointB.longitude+','+this.pointB.lattitude : this.pointA.longitude+','+this.pointA.lattitude
      this.pointService.get().subscribe(points =>{
-       console.log('points ', points)
+       console.log('pointsAuxAllentours ', points)
+       console.log('startPoint ', start0)
        let destinations: string[] = [];
        points.forEach(point => {
          destinations.push(point.longitude+','+point.lattitude)

@@ -17,7 +17,7 @@
               </div>
               <app-home-search1></app-home-search1>
               <div class="d-xl-none p-2">
-                <h3 class="fs-4 fw-bold mb-2 ps-4 ps-lg-0 pt-4  pt-lg-4 text-uppercase" >Mes checklists</h3>
+                <h3 class="fs-4 fw-bold mb-2 ps-4 ps-lg-0 pt-4  pt-lg-4 text-uppercase" >{{'Help_for_packing_your_suitcase' | translate}}</h3>
                 <app-home-checklist (wantCreateChecklist)="openCreateChecklist('#checklistAdd')" [screen_all]="false" class="" [checklists]="checklists"></app-home-checklist>
               </div>
               <app-home-visit [users]="users && users.length"></app-home-visit>

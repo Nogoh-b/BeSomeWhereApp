@@ -14,7 +14,7 @@ export const stripe_pk = DEV ?
 export const KEY_FOR_PUSH_MESSAGING= 'AAAAla-ImJY:APA91bEaEwecDU3ku6hZ-ODRQb3U3zOa9mjmM_CNRMyg0sJQ9Pyn1riezr7msKn9zOmPPpEeJR_NYpFeueQQz01GjEnJoR-6916uEIam-rTloHIPM0E8ndDlMvk8BUa8DSu9QaPz_ZlR';
 export const LOGIN='nogoh:Lionelbrice123@';
 export const SERVER = /*'http://bisooft.com/'//'https://polydor-btsh.com/'// */ 'https://besomewhereapp.com/';
-export const stripe_url = DEV ? 'http://localhost:3000' : 'http://back.besomewhereapp.com';
+export const stripe_url = DEV ? 'http://localhost:3000' : 'https://back.besomewhereapp.com';
 // export const SERVER = /*'http://bisooft.com/'//'https://polydor-btsh.com/'// */ 'http://localhost/';
 //  export const SERVER = 'http://localhost/'//'https://polydor-btsh.com/'// 'http://testanna.bnbsoftservice.com/';
 //export const SERVER_LOCAL = 'http://localhost/'//'http://testanna.bnbsoftservice.com/';
@@ -736,4 +736,31 @@ export function select(elt: any, data?: any[]){
 export function unseclect(index:number, data: any[]){
   return  data.splice(index,1)
 
+}
+
+export function  convertSeconds(seconds: number): string {
+  const days = Math.floor(seconds / (3600 * 24));
+  const hours = Math.floor((seconds % (3600 * 24)) / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+
+  const result = [];
+
+  if (days > 0) {
+    result.push(`${days} J${days > 1 ? '' : ''}`);
+  }
+  if (hours > 0) {
+    result.push(`${hours} h${hours > 1 ? '' : ''}`);
+  }
+  if (minutes > 0) {
+    result.push(`${minutes} min${minutes > 1 ? '' : ''}`);
+  }
+  if (minutes === 0 && (days <=0  && hours <= 0) ) {
+    result.push(`${minutes} min${minutes > 1 ? '' : ''}`);
+  }
+
+  return result.join(', ');
+}
+
+export function removeSubstring(mainString: string, subString: string): string {
+  return mainString.split(subString).join('');
 }

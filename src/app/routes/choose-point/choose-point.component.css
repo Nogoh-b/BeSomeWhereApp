@@ -1,7 +1,10 @@
 input {
   height: 50px;
 }
-
+mgl-map {
+  height: 100%;
+  width: 100%;
+}
 a.list-group-item {
   height: 70px;
 }

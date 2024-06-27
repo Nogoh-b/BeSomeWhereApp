@@ -661,7 +661,7 @@ input[type="checkbox"] {
 
 .div-take-at-home p {
   margin-bottom: 0;
-  text-align: justify;
+  // text-align: justify;
   font-weight: 900;
 }
 
@@ -684,6 +684,7 @@ input[type="checkbox"] {
 }
 .details_point ol{
   margin: 0!important;
+  z-index: 50!important;
 }
 
 .modal-content{
@@ -704,7 +705,7 @@ button:focus:not(:focus-visible) {
   padding-top: 80px;
 }
 .btn, .form-select, .form-control{
-  font-size: 1.3rem;
+  font-size: 1.0rem;
 }
 circle-progress {
   width: 65%;
@@ -775,3 +776,28 @@ span.icon-next.carousel-control-next-icon:after {
   cursor: auto;
   display: none;
 }
+.text-black{
+  color : black !important;
+}
+.font-bolder{
+  font-weight: 700!important;
+}
+
+.mapboxgl-control-container{
+  display:  none;
+}
+.btn-custom {
+    background-color: transparent!important;
+    color: #ffd15c!important;
+
+}
+.btn-custom1 {
+  background-color: transparent!important;
+  color: #dc3545 !important
+
+}
+
+.ngneat-dialog-content {
+  overflow: scroll !important;
+}
+

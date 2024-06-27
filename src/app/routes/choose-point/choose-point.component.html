@@ -1,13 +1,180 @@
+
+<div class="w-100 h-100 d-none">
+  <mgl-map
+  [style]="'mapbox://styles/mapbox/streets-v11'"
+  [zoom]="[12]"
+  [center]="center"
+  [interactive]="true"
+  [attributionControl]="true"
+  [scrollZoom]="true"
+  [doubleClickZoom]="true"
+  [touchZoomRotate]="true"
+  [keyboard]="true"
+  [dragRotate]="true"
+  [touchPitch]="true"
+  [pitchWithRotate]="true"
+  [dragPan]="true"
+  [maxZoom]="22"
+  [minZoom]="0"
+  [antialias]="true"
+  [locale]="{
+    'en': 'English',
+    'fr': 'French'
+  }"
+>
+  <!-- Point spécifique -->
+  <mgl-geojson-source
+    id="marker-data"
+    [data]="getMarkerData()"
+  >
+  </mgl-geojson-source>
+
+  <!-- Cercle -->
+  <mgl-geojson-source
+    id="circle-data"
+    [data]="circleData"
+  >
+  </mgl-geojson-source>
+
+  <mgl-layer
+    id="circle"
+    type="circle"
+    source="circle-data"
+    [paint]="circlePaint"
+  >
+  </mgl-layer>
+</mgl-map>
+
+</div>
+
+
+
 <!-- <section *ngIf="station_"> -->
-<section *ngIf="station_" >
+<section *ngIf="station_" class="d-none1" >
   <div class="d-flex d-lg-flex flex-column-reverse flex-lg-row-reverse g-0 row" style="min-height: 100%; height: 100%;">
       <div class="col-lg-8 pe-0 ps-0">
           <div style="width: 100%" class="h-100 map_container">
-            <div #map id="map" class="map h-100" width="100%" height="600"  >
-            </div>
+            <!-- <div #map id="map" class="map h-100" width="100%" height="600"  > -->
+              <mgl-map class="d-none"
+              [style]="'mapbox://styles/mapbox/streets-v11'"
+              [zoom]="[12]"
+              [center]="center"
+              [interactive]="true"
+              [attributionControl]="true"
+              [scrollZoom]="true"
+              [doubleClickZoom]="true"
+              [touchZoomRotate]="true"
+              [keyboard]="true"
+              [dragRotate]="true"
+              [touchPitch]="true"
+              [pitchWithRotate]="true"
+              [dragPan]="true"
+              [maxZoom]="22"
+              [minZoom]="0"
+              [antialias]="true"
+              [locale]="{
+                'en': 'English',
+                'fr': 'French'
+              }"
+            >
+              <!-- Cercle -->
+              <mgl-geojson-source
+                id="circle-data"
+                [data]="circleData"
+              >
+              </mgl-geojson-source>
+            
+              <mgl-layer
+                id="circle"
+                type="circle"
+                source="circle-data"
+                [paint]="circlePaint"
+              >
+              </mgl-layer>
+            
+              <!-- Point spécifique -->
+              <mgl-geojson-source
+                id="marker-data"
+                [data]="getMarkerData()"
+              >
+              </mgl-geojson-source>
+            
+              <mgl-marker
+              [lngLat]="center"
+              [anchor]="'center'"
+            >
+              <img src="assets/img/map_point.png" alt="Custom Marker" style="width: 50px; height: 50px;" />
+            </mgl-marker>
+            </mgl-map>
+
+            <mgl-map
+  [style]="'mapbox://styles/mapbox/streets-v11'"
+  [zoom]="[12]"
+  [center]="center"
+  [interactive]="true"
+  [attributionControl]="true"
+  [scrollZoom]="true"
+  [doubleClickZoom]="true"
+  [touchZoomRotate]="true"
+  [keyboard]="true"
+  [dragRotate]="true"
+  [touchPitch]="true"
+  [pitchWithRotate]="true"
+  [dragPan]="true"
+  [maxZoom]="22"
+  [minZoom]="0"
+  [antialias]="true"
+  [locale]="{
+    'en': 'English',
+    'fr': 'French'
+  }"
+>
+  <!-- Cercle -->
+  <mgl-geojson-source
+    id="circle-data"
+    [data]="circleData"
+  >
+  </mgl-geojson-source>
+
+  <!-- <mgl-layer
+    id="circle"
+    type="circle"
+    source="circle-data"
+    [paint]="circlePaint"
+  >
+  </mgl-layer> -->
+
+  <!-- Point spécifique -->
+  <mgl-geojson-source
+    id="marker-data"
+    [data]="getMarkerData()"
+  >
+  </mgl-geojson-source>
+
+  <mgl-layer
+    id="marker"
+    type="symbol"
+    source="marker-data"
+    [layout]="{
+      'icon-image': 'marker-11',
+      'icon-size': 8.5
+    }"
+  >
+  <img src="assets/img/map_point.png" alt="Custom Marker" style="width: 50px; height: 50px;" />
+
+  </mgl-layer>
+</mgl-map>
+
+            
+            <!-- </div> -->
 
             <div *ngIf="selected_adr && showContent" class="details_point content">
-              <p class="p_title ">{{'important_information' | translate}}<span style="cursor: pointer; color: white !important; text-decoration: underline; font-size: 15px;" (click)="closeContent()"> {{'see_on_map_link' | translate}}</span> </p>
+              <!-- <p class="p_title "><span style="cursor: pointer; color: white !important; text-decoration: underline; font-size: 15px;" (click)="closeContent()"> {{'see_on_map_link' | translate}}</span> </p> -->
+              <div class="d-flex justify-content-end">
+
+                <app-button  (click)="openContent()"  [loading]="loading" class_="" btn_class=" p_title w-auto border-warning btn-custom text-warning"  (click)="closeContent()" [text]="'see_on_map_link' | translate"></app-button>
+              </div>
+              <!-- <p class="p_title ">{{'important_information' | translate}}<span style="cursor: pointer; color: white !important; text-decoration: underline; font-size: 15px;" (click)="closeContent()"> {{'see_on_map_link' | translate}}</span> </p> -->
               <!-- <i class="fas fa-times""></i>  -->
               <div class="details_point1" >
                 <p class="pt-2 p_details" [innerHTML]="selected_adr && selected_adr.description"></p>
@@ -34,8 +201,8 @@
 
           </div>
 
-            <div class="bg-white container-fluid mb-1 mt-2 p-4 div-propostion">
-                <p *ngIf="this.address && this.address"  class="fs-5 pb-0 text-muted">{{'select_stop_prompt' | translate}}:</p>
+            <div class="bg-white container-fluid mb-1 mt-2 p-4 div-propostion" style="z-index: 250;">
+                <p *ngIf="this.address && this.address"  class="fs-5 pb-0 text-muted1 text-black font-bolder">{{'select_stop_prompt' | translate}}:</p>
                 <!-- <p *ngIf="this.address && this.address"  class="fs-5 pb-0 text-muted">Liste des points les plus proches de {{address && address.address}}:</p> -->
                 <div class="pb-0">
                   <div class="list-group overflow-auto" style="height: 250px;">
@@ -44,14 +211,22 @@
                             <div class="d-flex justify-content-between w-100">
                                   <i class="fa-map-marker-alt fas pe-0 text-danger mt-auto mb-auto mr-2" style="font-size: 1.3rem; margin-right: 5px;"></i>
                                   <h5 class="text-truncate fw-bold mt-2">{{point.title != '' ? point.title : point.address + ', '+point.city+ ', '+point.country}}</h5>
-                                  <small class="mb-auto mt-auto text-danger">{{point.distance}} km</small>
+                                  <!-- <h5 class="text-truncate fw-bold mt-2">{{point.longitude+ ', '+point.lattitude}}</h5> -->
+                                   <div>
+                                     <img src="./assets/img/walk.png" style="width: 18px; height:18px;" width="25" height="25" alt="">
+                                     <small class="mb-auto mt-auto text-danger">{{convertSeconds(point.distance)}}</small>
+                                   </div>
                               </div>
                           </a>
                   </div>
                 </div>
-                <div class="d-flex ">
-                  <button class="open_content mt-4" (click)="openContent()" *ngIf="!showContent"><i class="fas fa-eye"></i> </button>
-                  <button *ngIf="selected_adr" (click)="getRoute(home_search.switched)" routerLinkActive="router-link-active"  type="text" class="btn-search align-items-center btn btn-lg btn-outline-primary d-flex flex-row-reverse fw-bold justify-content-center ms-auto ms-sm-auto mt-4 mt-sm-4  w-50">
+                <div class="d-flex align-items-center pt-3 ">
+                  <!-- <button class="open_content mt-4" (click)="openContent()" *ngIf="!showContent"><i class="fas fa-eye">{{'important_information' | translate}}</i> </button> -->
+                  <!-- <p *ngIf="!showContent && selected_adr" class="p_title pb-1 ps-3"><span style="cursor: pointer; color: black !important; text-decoration: underline; font-size: 15px;" (click)="openContent()"> {{'important_information' | translate}}</span> </p> -->
+                  <app-button  (click)="openContent()" *ngIf="!showContent && selected_adr" [loading]="loading" class_="" btn_class=" open_content w-auto border-danger btn-custom1 text-danger z-3" [text]="'important_information' | translate"></app-button>
+
+                  <!-- <p *ngIf="!showContent && selected_adr" class="p_title pb-1 ps-3"><span style="cursor: pointer; color: black !important; text-decoration: underline; font-size: 15px;" (click)="openContent()"> {{'important_information' | translate}} {{showContent}}</span> </p> -->
+                  <button *ngIf="selected_adr" (click)="getRoute(home_search.switched)" routerLinkActive="router-link-active"  type="text" class="btn-search align-items-center btn btn-lg btn-outline-primary d-flex flex-row-reverse fw-bold justify-content-center ms-auto ms-sm-auto mt-0 mt-sm-0  w-50">
                       <i class="fa-arrow-right fas fw-bolder pb-1 ps-3"></i>{{'continue_option' | translate}}
 
                   </button>

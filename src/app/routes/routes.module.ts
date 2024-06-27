@@ -12,6 +12,7 @@ import { ChooseItemsComponent } from './choose-items/choose-items.component';
 import { OrderComponent } from './order/order.component';
 import { ListComponent } from './list/list.component';
 import { DetailsComponent } from './details/details.component';
+import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 
 
 @NgModule({
@@ -30,7 +31,10 @@ import { DetailsComponent } from './details/details.component';
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    ComponentsModule
+    ComponentsModule,
+    NgxMapboxGLModule.withConfig({
+      accessToken: 'pk.eyJ1Ijoibmlsb2JvYnkiLCJhIjoiY2t0bTY4ZWFzMG5pMDJubWp1dTQzaGo5NyJ9.AMsPtdLuutboBJivusJ9yA' // Remplacez par votre propre token
+    })
   ]
 })
 export class RoutesModule { }

@@ -29,8 +29,9 @@ export class ChecklistListComponent implements OnInit {
 
   ngOnInit(): void {
     this.checklistService.get({status: '0', with_user: '1'}).subscribe(checklist =>{
-      this.checklists = checklist
-      this.results = checklist
+      this.checklists = checklist.filter( checklist =>{return checklist.user})
+      
+      this.results = checklist.filter( checklist =>{return checklist.user})
       console.log ( 'checklist111 ', checklist)
 
       let a: number = Number((this.getChecklists().length/per_page))
@@ -51,14 +52,16 @@ export class ChecklistListComponent implements OnInit {
   }
 
   getChecklists(){
-    const checklists0 = this.checklists &&  this.checklists.slice(this.currentPage*per_page, (this.currentPage+1)*per_page)
     let checklists = []
+    const checklists0 = this.checklists &&  this.checklists.slice(this.currentPage*per_page, (this.currentPage+1)*per_page)
     for (const checklist of this.checklists) {
       if(checklist.user)
         checklists.push(checklist)
     }
+    console.log('checklists0 ', checklists0) 
+    console.log('checklists1 ', checklists) 
     // console.log('checklist  ',this.currentPage, '=== ',this.pagination.length - 1,' ', this.currentPage === this.pagination.length - 1)
-    return checklists
+    return checklists0
   }
   searchData(e){
     // alert(e.target.value)
@@ -70,6 +73,7 @@ export class ChecklistListComponent implements OnInit {
       }
     ];
     this.checklists = filterData(this.results, searchConditions);
+    this.checklists = this.checklists.filter( checklist =>{return checklist.user});
     let a: number = Number((this.checklists.length/per_page))
     //  alert(a)
     this.pagination = new Array(Math.ceil(a));

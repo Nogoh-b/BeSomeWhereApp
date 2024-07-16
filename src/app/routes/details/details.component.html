@@ -148,8 +148,8 @@
                     <div class="align-items-center bg-light d-flex gx-0 p-3 row" data-pg-collapsed>
                         <div class="col w-100">
                             <div class="align-items-center d-flex g-0 row row-cols-2">
-                                <p class="fs-4 fw-bold pe-2 ps-2 text-body text-start">{{'total_price_included' | translate}}</p>
-                                <p class="fs-4 fw-bold text-end text-info">{{(total_price_meals() + total_price_suitcase() + total_price_passenger() + total_price_babyseats() + getTakeAtHomeOption()).toFixed(2)}} €</p>
+                                <p class="fs-5 fw-bold pe-2 ps-2 text-body text-start">{{'total_price_included' | translate }} {{ reservation.status ? '( +'+ 5 +'€)' : ''}} </p>
+                                <p class="fs-4 fw-bold text-end text-info">{{(total_price_meals() + total_price_suitcase() + total_price_passenger() + suplement_payment() + total_price_babyseats() + getTakeAtHomeOption()).toFixed(2)}} €</p>
                             </div>
                         </div>
                     </div>

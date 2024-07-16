@@ -140,8 +140,8 @@ export class RouteCardComponent implements OnInit {
     var tah =  this.take_at_home ? JSON.parse(localStorage.getItem("conf")).price_take_to_home : 0
     var passengers_price = /*this.passengers > 1 ?*/ (this.route.price )* this.passengers + globals.total_take_at_homr(this.passengers_array,this.take_at_home) * tah//: this.route.price
     var items_price = this.items && this.curStatus > globals.TrajetCardStatus.ChooseItems  ?  this.total_price_babyseats()+ this.total_price_meals()+ this.total_price_suitcase() : 0
-    // var price_total = this.passengers > 1
-    return  passengers_price + items_price //this.passengers ? (passengers_price + items_price ).toFixed(2) : this.route.price + tah
+    var price_plus = this.route.status ?  5 :  0
+    return  passengers_price + items_price + price_plus //this.passengers ? (passengers_price + items_price ).toFixed(2) : this.route.price + tah
   }
   isISameDay(){
     return this.route && this.route.starting_date && this.route.starting_date.split(' ')[0] === this.route.arrival_date.split(' ')[0]

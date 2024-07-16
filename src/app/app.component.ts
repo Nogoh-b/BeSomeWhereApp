@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
   private afAuth: AngularFireAuth
   isAdmin = false
   want_back_office = false
+  want_see_reservation = false
 
   constructor(private userServiceFireBase: UserServiceFireBase,
     private paymentsService: PaymentsService,
@@ -71,14 +72,20 @@ export class AppComponent implements OnInit {
         router.events.pipe(filter(event => event instanceof NavigationEnd))
           .subscribe(event => {
             this.want_back_office = false
+            this.want_see_reservation = false
+            console.log('emails_admin ', router.url.indexOf('reservations_par_trajets-1') != -1)
             if(router.url.indexOf('back-office') != -1){
               this.want_back_office = true
               confServiceAdmin.getConf().subscribe(r =>{
                 console.log('emails_admin ',r.emails_admin)
                 r.emails_admin.forEach(element => {
-                  if(element === user.email)
+                  if((user && element === user.email))
                     this.isAdmin =true
                 });
+                if(router.url.indexOf('reservations_par_trajets-1') != -1 || router.url.indexOf('reservations-1') != -1){
+                  this.want_see_reservation = true
+                  return
+                }
                 if(!this.isAdmin)
                   this.router.navigateByUrl('/')
                 console.log(event);

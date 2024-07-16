@@ -20,6 +20,8 @@ export class RoutedetailsComponent implements OnInit {
   @Input() total_passengers: number
   @Input() price_passengers: number
   @Input() total_take_at_home: number
+  @Input() cash_total: number
+  @Input() hasPriceDetails: boolean = true
   @Input() drive: Drive
   @Input() route: Route
   @Input() reservation: Reservation
@@ -132,6 +134,14 @@ export class RoutedetailsComponent implements OnInit {
     return this.route ? g.length * this.route.price : g.length * this.reservation.price
   }
   total_passenger(){
+    if(this.total_passengers)
+      return this.total_passengers
+    let somme = 0
+    let g: Passenger[] = this.passengers
+    return g.length
+
+  }
+  total_cash(){
     if(this.total_passengers)
       return this.total_passengers
     let somme = 0

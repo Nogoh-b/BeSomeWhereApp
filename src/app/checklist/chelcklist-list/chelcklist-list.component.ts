@@ -18,7 +18,7 @@ export class ChelcklistListComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router:Router, private userServiceFireBase: UserServiceFireBase,private checklistService: ChecklistService) {
     this.user = this.userServiceFireBase.getCurrentUser()
       route.queryParams.subscribe(params=>{
-        this.isArchived = JSON.parse(params['archived'])
+        this.isArchived = params['archived'] ? JSON.parse(params['archived']) : false
         this.getData({user_id:this.user.id, archived: this.isArchived })
         return;
         if(this.isArchived){

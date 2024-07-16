@@ -163,5 +163,8 @@ export class DetailsComponent implements OnInit {
   total_take_at_homr(){
     return total_take_at_homr(this.reservation.passengers, this.reservation.take_at_home)
   }
+  suplement_payment(){
+    return this.reservation.status ? 5 : 0
+  }
 
 }

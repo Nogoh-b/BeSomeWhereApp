@@ -160,7 +160,9 @@ export class ChecklistAddComponent implements OnInit {
         this.loading = false
         this.toast_c.open('BeSomewhere','Checklist crée')
         setTimeout(() => {
-          window.location.reload()
+          // window.location.reload()
+          this.router.navigate(['/mes-checklists'])
+
           // this.router.navigateByUrl('/')
         }, 1500);
       })

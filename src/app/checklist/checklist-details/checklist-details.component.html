@@ -5,13 +5,13 @@
 /* padding-right: 250px !important */" data-pg-collapsed>
     <section class="h-100 bg-transparent">
         <div class="gx-0 h-100 row bg-transparent">
-          <div class="col-lg-3 pe-2 pe-xl-4 ps-2 pt-4">
+          <div class="col-lg-3 pe-2 pe-xl-4 ps-2 pt-4 d-none d-lg-block">
             <div class="h-auto position-sticky  top-0">
                 <app-home-ads></app-home-ads>
             </div>
           </div>
 
-            <div class="col-12 col-lg-5 pe-lg-0 pe-xl-5 ps-lg-2 ps-xl-5 pt-4">
+            <div class="col-12 col-lg-5 pe-lg-0 pe-xl-5 ps-lg-2 ps-xl-5 pt-0 pt-lg-4">
               <div class="">
                 <app-checklist-card
                 (onWantDeleted)="delete_modal.want_delete_cheklist(checklist)"
@@ -69,7 +69,7 @@
                                 <div class="border mt-2 ">
                                   <div *ngIf="checklist.stats.total_folders != -1">
                                       <div>
-                                          <p class="align-items-center bg-light border-bottom d-flex  h5 justify-content-between pb-2 ps-3 pt-2 text-black-50">{{'suitcases' | translate}}{{ folders.length > 0 ?' : '+ folders[folders.length -1].name :''}}
+                                          <p class="align-items-center bg-light border-bottom d-flex  h6 justify-content-between pb-2 ps-3 pt-2 text-black-50">{{'suitcases' | translate}}{{ folders.length > 0 ?' : '+ folders[folders.length -1].name :''}}
                                             <button *ngIf="folders.length > 0" data-bs-target="#deleteModal" data-bs-toggle="modal" (click)="delete_modal.want_delete_folder(getCurrentFolder())" type="button" class="btn fs-6 btn-outline-danger ms-1 me-3 border-2 fw-bolder border-danger color-danger rounded-pill">
                                               <i class="fa-trash-alt fa-lg fas pe-2"></i>{{'delete' | translate}}
                                             </button>
@@ -85,7 +85,7 @@
                                           <div (click)="getFiles(file, checklist.id)" *ngFor="let file of getFolders()" class="align-items-center d-flex div-suitcase gx-0 justify-content-center pb-2 pointer row-cols-2">
                                               <div  class="align-items-center col-3 d-flex flex-column justify-content-center  w-100" style="transition: all 55555 ease-in;">
                                                   <img src="assets/img/travel-bag.png" width="80%" height="80%"/>
-                                                  <span class="badge bg-primary border mb-2 rounded-pill">{{file.name}}</span>
+                                                  <span class="badge bg-primary border mb-2 rounded-pill">{{file.name | shorten: 8 :''  }}</span>
                                                   <div class="d-none text-danger">
                                                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" class="col-auto fa-edit fas mb-2 mt-auto pe-2 text-primary">
                                                           <g>

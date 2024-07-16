@@ -50,8 +50,8 @@
                             </div>
                             </div>
                           <div class="d-flex justify-content-end mb-3">
-                            <div [ngClass]="{disabled: spiner_btn.value <= 0}" class="form-check align-items-center d-flex form-switch" data-pg-collapsed>
-                              <input  #in_take class="form-check-input" type="checkbox" value="1" [name]="'for_disabled'+ i" [(ngModel)]="reservation.take_at_home" (change)="changeTakeToHome(in_take.checked )"  [id]="'flexRadioDefault'+i">
+                            <div [ngClass]="{disabled: spiner_btn.value <= 0 && false}" class="form-check align-items-center d-flex form-switch" data-pg-collapsed>
+                              <input [ngClass]="{active_: spiner_btn.value >= 0, inactive_: spiner_btn.value == 0}"  #in_take class="form-check-input" type="checkbox" value="1" [name]="'for_disabled'+ i" [(ngModel)]="take_at_homes[i]" (change)="changeTakeToHome(in_take.checked )"  [id]="'flexRadioDefault'+i">
                               <label class="form-check-label" style ="font-size: 1.0rem" [for]="'flexRadioDefault'+i">{{'come_to_my_door_option' | translate}}
  <!-- (+{{price_take_to_home}} €) -->
                             </label>
@@ -82,9 +82,9 @@
                     </div> -->
                       <div class="align-items-sm-center align-items-start d-flex d-sm-flex flex-column flex-sm-row justify-content-sm-end justify-content-start">
                           <app-spinner-bouton [value]="reservation && reservation.passengers ? reservation.passengers.length : 0" #spiner_btn [max_value] = "route.places"></app-spinner-bouton>
-                          <button [disabled]="spiner_btn.value <= 0" (click)="goToNextStep(route, spiner_btn.value)" routerLinkActive="router-link-active"  type="text" class="align-items-center btn btn-lg btn-outline-danger d-flex flex-row-reverse float-end fw-bold justify-content-center mt-3 mb-3" style="height: 55px;">
+                          <button [disabled]="spiner_btn.value <= 0" (click)="goToNextStep(route, spiner_btn.value,i)" routerLinkActive="router-link-active"  type="text" class="align-items-center btn btn-lg btn-outline-danger d-flex flex-row-reverse float-end fw-bold justify-content-center mt-3 mb-3" style="height: 55px;">
                               <i class="fa-arrow-right fas fw-bolder pb-1 ps-3 "></i>{{'continue_option' | translate}}
- ( {{reservation.take_at_home ? (route.price )* spiner_btn.value + price_take_to_home : route.price * spiner_btn.value }} € )
+ ( {{take_at_homes[i] ? (route.price )* spiner_btn.value + price_take_to_home : route.price * spiner_btn.value }} € )
                           </button>
                       </div>
                   </div>

@@ -31,6 +31,8 @@ export class NavBarComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    document.addEventListener('click', this.handleClickOutside);
+
     this.isConnected = this.userServiceFireBase.getCurrentUser() != undefined
     this.user = this.userServiceFireBase.getCurrentUser();
     this.confService.getConf().subscribe(r =>{
@@ -56,10 +58,13 @@ export class NavBarComponent implements OnInit {
     return this.userServiceFireBase.getCurrentUser();
   }
   navigate(route: string, params?: any){
+    const navbarToggler = document.getElementById('navbarToggler2');
+    navbarToggler.classList.remove('show');
+
     if(!this.user){
       document.getElementById("login_btn")?.click()
       return
-    }
+      }
     this.router.navigate([route],{queryParams:params})
   }
 
@@ -85,6 +90,24 @@ export class NavBarComponent implements OnInit {
     var dropdownMenu = document.getElementById("myDropdown");
     dropdownMenu.classList.toggle("show");
   }
-  
+  ngOnDestroy() {
+    document.removeEventListener('click', this.handleClickOutside);
+  }
+
+  handleClickOutside = (event: MouseEvent = null ) => {
+    const target = event.target as HTMLElement;
+    const navbarToggler = document.getElementById('navbarToggler2');
+    const isClickInside = navbarToggler.contains(target);
+
+    if (!isClickInside && navbarToggler.classList.contains('show')) {
+      navbarToggler.classList.remove('show');
+    }
+  };
+
+  // Optionally, add a method to toggle the navbar for better control
+  toggleNavbar() {
+    const navbarToggler = document.getElementById('navbarToggler2');
+    navbarToggler.classList.toggle('show');
+  }
 
 }

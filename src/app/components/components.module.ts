@@ -51,6 +51,7 @@ import { StripeFormComponent } from './stripe-form/stripe-form.component';
 import { StripCardComponent } from './strip-card/strip-card.component';
 import { StripeComponent } from './stripe-payment/stripe.component';
 import { LanguageSelectorComponent } from './language-selector/language-selector.component';
+import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 
 
 @NgModule({
@@ -99,6 +100,9 @@ import { LanguageSelectorComponent } from './language-selector/language-selector
   imports: [
     CommonModule,
     // CarouselModule,
+    NgxMapboxGLModule.withConfig({
+      accessToken: 'pk.eyJ1Ijoibmlsb2JvYnkiLCJhIjoiY2t0bTY4ZWFzMG5pMDJubWp1dTQzaGo5NyJ9.AMsPtdLuutboBJivusJ9yA' // Remplacez par votre propre token
+    }),
     ComponentsRoutingModule,
     CarouselModule.forRoot(),
     NgPipesModule,

@@ -6,7 +6,7 @@
                                               <a  target="_pg_blank" class="fs-6 a" (click)="onClick(-1)">{{title}}</a>
                                           </li>
                                           <li (click)="i !== files.length - 1 && onClick(i)" *ngFor="let file of files let i = index" class="active breadcrumb-item" aria-current="page">
-                                            <span  [ngClass]="{'a': i !== files.length - 1 }" target="_pg_blank" class="fs-6">{{file.name}}</span>
+                                            <span  [ngClass]="{'a': i !== files.length - 1 }" target="_pg_blank" class="fs-6">{{file.name | shorten: 8 :''}}</span>
                                           </li>
                                       </ol>
                                       <button *ngIf="files.length > 0"  data-bs-target="#editfolderModal" data-bs-toggle="modal" (click)="wantEdit_(files.length - 1)" type="button" class="btn btn-outline-primary ms-1 me-3 border-2 fw-bolder border-primary color-primary rounded-pill fs-6">

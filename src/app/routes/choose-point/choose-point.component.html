@@ -170,7 +170,7 @@
 
             <div *ngIf="selected_adr && showContent" class="details_point content">
               <!-- <p class="p_title "><span style="cursor: pointer; color: white !important; text-decoration: underline; font-size: 15px;" (click)="closeContent()"> {{'see_on_map_link' | translate}}</span> </p> -->
-              <div class="d-flex justify-content-end">
+              <div class="d-flex justify-content-end p_title">
 
                 <app-button  (click)="openContent()"  [loading]="loading" class_="" btn_class=" p_title w-auto border-warning btn-custom text-warning"  (click)="closeContent()" [text]="'see_on_map_link' | translate"></app-button>
               </div>
@@ -220,16 +220,21 @@
                           </a>
                   </div>
                 </div>
+      
                 <div class="d-flex align-items-center pt-3 ">
                   <!-- <button class="open_content mt-4" (click)="openContent()" *ngIf="!showContent"><i class="fas fa-eye">{{'important_information' | translate}}</i> </button> -->
                   <!-- <p *ngIf="!showContent && selected_adr" class="p_title pb-1 ps-3"><span style="cursor: pointer; color: black !important; text-decoration: underline; font-size: 15px;" (click)="openContent()"> {{'important_information' | translate}}</span> </p> -->
                   <app-button  (click)="openContent()" *ngIf="!showContent && selected_adr" [loading]="loading" class_="" btn_class=" open_content w-auto border-danger btn-custom1 text-danger z-3" [text]="'important_information' | translate"></app-button>
 
                   <!-- <p *ngIf="!showContent && selected_adr" class="p_title pb-1 ps-3"><span style="cursor: pointer; color: black !important; text-decoration: underline; font-size: 15px;" (click)="openContent()"> {{'important_information' | translate}} {{showContent}}</span> </p> -->
-                  <button *ngIf="selected_adr" (click)="getRoute(home_search.switched)" routerLinkActive="router-link-active"  type="text" class="btn-search align-items-center btn btn-lg btn-outline-primary d-flex flex-row-reverse fw-bold justify-content-center ms-auto ms-sm-auto mt-0 mt-sm-0  w-50">
+                  <button [disabled]="!informationReaded" *ngIf="selected_adr" (click)="getRoute(home_search.switched)" routerLinkActive="router-link-active"  type="text" class="btn-search align-items-center btn btn-lg btn-outline-primary d-flex flex-row-reverse fw-bold justify-content-center ms-auto ms-sm-auto mt-0 mt-sm-0  w-50">
                       <i class="fa-arrow-right fas fw-bolder pb-1 ps-3"></i>{{'continue_option' | translate}}
 
                   </button>
+                </div>
+                <div *ngIf="selected_adr" class="d-flex align-items-center">
+                  <p [innerHTML]="'IReadTheRoute' | translate" class="pe-3" ></p>
+                  <input type="checkbox" [(ngModel)]="informationReaded" name=""id="">
                 </div>
             </div>
         </div>

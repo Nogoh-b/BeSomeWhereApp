@@ -31,7 +31,7 @@ export class DetailsComponent implements OnInit {
   passengers: Passenger[]
   items: Item_Drive[]
   globals  = TrajetCardStatus.Created
-
+  total_cash_pay =  0
   formGroupRoute : FormGroup
   formGroupDrive : FormGroup
   data_to_del: any
@@ -173,15 +173,138 @@ export class DetailsComponent implements OnInit {
     this.loading2 = true
     this.driveService.update(this.formGroupDrive.value, this.drive.id).subscribe(drive =>{
       this.drive = (drive)
-      this.loading2 = false
-      this.toast_c.open("Be Somewhere ", "Horraire Mise à jour")
-      console.log(drive)
+      if(this.routes){
+        this.routes.forEach((route, index) => {
+          console.log(this.adjustDates(route, drive.date, drive.to_station))
+          route = this.adjustDates(route, drive.date, drive.to_station)
+          this.routeService.update(route, route.id).subscribe(route1 =>{
+            this.routes[index] = route
+            console.log('routeeeeeeee ',route)
+            if(index == this.routes.length - 1){
+              this.loading2 = false
+              this.toast_c.open("Be Somewhere ", "Horraire Mise à jour")
+              console.log(drive)
+            }
+          })
+        });
+      }
+
     })
   }
+
+  isSameDay(dateTimeStr1: string, dateTimeStr2: string): boolean {
+    const d1 = new Date(dateTimeStr1);
+    const d2 = new Date(dateTimeStr2);
+  
+    return d1.getFullYear() === d2.getFullYear() &&
+           d1.getMonth() === d2.getMonth() &&
+           d1.getDate() === d2.getDate();
+  }
+  calculateDateDifference(dateStr1: string, dateStr2: string): number {
+    const date1 = new Date(dateStr1);
+    const date2 = new Date(dateStr2);
+  
+    // Calculer la différence en millisecondes
+    const differenceMs = Math.abs(date2.getTime() - date1.getTime());
+  
+    // Convertir en jours et retourner
+    const differenceDays = Math.ceil(differenceMs / (1000 * 3600 * 24));
+  
+    return differenceDays;
+  }
+  adjustDates(data: Route, referenceDateStr: string, to_station: boolean): any {
+    const referenceDate = new Date(referenceDateStr);
+    const startingDate = new Date(data.starting_date);
+    const arrivalDate = new Date(data.arrival_date);
+  
+    let newStartingDateStr, newArrivalDateStr;
+  
+    // Calculer l'écart initial en jours entre les dates
+    const dayDifference = this.isSameDay(data.starting_date , data.arrival_date) ? 0 : 1 ;
+  
+    if (to_station) {
+      // Si to_station est vrai, mettre à jour la date d'arrivée avec la date de référence
+      newArrivalDateStr = this.replaceDateOnly(data.arrival_date, referenceDateStr);
+      newStartingDateStr = this.replaceDateOnly(data.starting_date, referenceDateStr);
+      console.log('dayDifference ', newStartingDateStr, ' ',data.starting_date ,' ', data.arrival_date , ' ', dayDifference)
+  
+      // Calculer la nouvelle date de départ en fonction de l'écart initial
+      let newStartingDate = new Date(newStartingDateStr);
+      newStartingDate.setDate(referenceDate.getDate() - dayDifference);
+      // newStartingDate = new Date(referenceDate.getTime() - (dayDifference * 24 * 60 * 60 * 1000));
+
+      newStartingDateStr = this.formatDate(newStartingDate);
+    } else {
+      // Si to_station est faux, mettre à jour la date de départ avec la date de référence
+      newStartingDateStr = this.replaceDateOnly(data.starting_date, referenceDateStr);
+      newArrivalDateStr = this.replaceDateOnly(data.arrival_date, referenceDateStr);
+      console.log('dayDifference ', newArrivalDateStr , ' ',data.starting_date ,' ', data.arrival_date, ' ', dayDifference)
+  
+      // Calculer la nouvelle date d'arrivée en fonction de l'écart initial
+      const newArrivalDate = new Date(newArrivalDateStr);
+      newArrivalDate.setDate(referenceDate.getDate() + dayDifference);
+  
+      newArrivalDateStr = this.formatDate(newArrivalDate);
+    }
+
+    return {
+      ...data,
+      starting_date: newStartingDateStr,
+      arrival_date: newArrivalDateStr
+    };
+  }
+
+  calculateNewDate(originalDateStr: string, dayDifference: number): Date {
+    const originalDate = new Date(originalDateStr);
+  
+    // Convertir le nombre de jours en millisecondes
+    const dayDifferenceMs = dayDifference * 24 * 60 * 60 * 1000;
+  
+    // Calculer la nouvelle date en déduisant le nombre de jours en millisecondes
+    const newDateMs = originalDate.getTime() - dayDifferenceMs;
+    const newDate = new Date(newDateMs);
+  
+    // Conserver l'heure de la date d'origine
+    newDate.setHours(originalDate.getHours());
+    newDate.setMinutes(originalDate.getMinutes());
+    newDate.setSeconds(originalDate.getSeconds());
+  
+    return newDate;
+  }
+
+
+  replaceDateOnly(originalDateStr: string, newDateStr: string): string {
+    const originalDate = new Date(originalDateStr);
+    const newDate = new Date(newDateStr);
+  
+    // Conserver l'heure de la date d'origine
+    const hours = originalDate.getHours();
+    const minutes = originalDate.getMinutes();
+    const seconds = originalDate.getSeconds();
+  
+    // Appliquer la nouvelle date avec l'heure conservée
+    const updatedDate = new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate(), hours, minutes, seconds);
+    console.log('tempsssss ',originalDateStr ,newDate.getFullYear(), newDate.getMonth(), newDate.getDate(), hours, minutes, seconds ,' ', this.formatDate(updatedDate))
+    return this.formatDate(updatedDate);
+  }
+  
+  // Formater la date en string (par exemple, en format 'YYYY-MM-DD HH:mm:ss')
+  formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const seconds = date.getSeconds().toString().padStart(2, '0');
+  
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  }
+  
 
   getReservations(route){
     const route_id = route.id
     this.currentRoute = route
+    this.total_cash_pay = 0
     if(route_id){
       this.reservationService.get({route_id, all_: true}).subscribe(reservations =>{
         this.items = []
@@ -192,11 +315,13 @@ export class DetailsComponent implements OnInit {
           this.total_take_at_home_total += this.getTakeAtHomeOption(reservation)
           console.log('reservations : ' ,this.total_take_at_home_total)
           this.passengers = this.passengers.concat(reservation.passengers);
+          this.total_cash_pay += reservation.status ? 1 : 0;
         }
         console.log(this.items)
       })
     }
   }
+
 
 
   ngOnInit(): void {

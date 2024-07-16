@@ -14,8 +14,9 @@ import { User } from "./Utilisateur"
   updated_at: string
   starting_date: string
   take_to_home_adr: string
+  id_car: string
   arrival_date: string
-  status: ReservationStatus
+  status: number;//ReservationStatus
   customer: User
   for_disabled: boolean
   route: Route

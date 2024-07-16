@@ -142,7 +142,8 @@ export class StripeComponent implements AfterViewInit, OnDestroy {
   }
 
   async onSubmit() {
-    // this.loading = true
+    this.loading = true
+    this.onSuccess.emit(true)
     console.log('Form submitted:', this.checkoutForm.value);
     var displayError = document.getElementById('card-errors');
 

@@ -1,7 +1,7 @@
 import { ToastComponent } from 'src/app/shared/toast/toast.component';
 import { RouteService } from 'src/app/service/route/route.service';
 import { Reservation } from 'src/app/model/Model/Reservation';
-import { ReservationService } from './../../service/reservation/reservation.service';
+import { ReservationService } from '../../service/reservation/reservation.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ItemCategory, Item_Drive } from '../../model/Model/Item_Drive';
@@ -10,11 +10,11 @@ import { DataType, meals, total_take_at_homr } from 'src/global';
 import { Route } from '../../model/Model/Route';
 
 @Component({
-  selector: 'app-reservations',
+  selector: 'app-reservations1',
   templateUrl: './reservations.component.html',
   styleUrls: ['./reservations.component.css']
 })
-export class ReservationsComponent implements OnInit {
+export class ReservationsComponent1 implements OnInit {
 
   reservations : Reservation[]
   route : Route

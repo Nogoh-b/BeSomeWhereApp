@@ -1,3 +1,16 @@
+
+mgl-map {
+  width: 100%;
+  height: 100%;
+  height: 90%;
+}
+.mapboxgl-canvas-container.mapboxgl-interactive.mapboxgl-touch-drag-pan.mapboxgl-touch-zoom-rotate {
+  height: 100%;
+}
+.card{
+  margin-bottom: 0!important;
+}
+
 @media screen and (max-width:991px) {
   #firt_res_div{
     padding-bottom: 50px!important;
@@ -5,8 +18,19 @@
   }
 
   }
-@media screen and (max-width:991px) {
+@media screen and (max-width:911px) {
   .user_list{
     /* margin-top: 120px!important;   */
+    margin-top: 3%;
+
   }
   }
+@media screen and (max-width:543px) {
+  .user_list{
+    /* margin-top: 120px!important;   */
+    margin-top: 15%;
+
+  }
+  }
+
+

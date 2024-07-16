@@ -16,7 +16,7 @@
                           <tr class="bg-light">
                               <th scope="col" width="5%" class="text-center">#</th>
                               <th class="text-center">Client</th>
-                              <th class="text-center">prix</th>
+                              <!-- <th class="text-center">prix</th> -->
                               <th class="text-center">items</th>
                               <th class="text-center">passagers</th>
                               <th class="text-center">date</th>
@@ -27,17 +27,17 @@
                           <tr (click)="setCurrentReservation(i) " *ngFor="let reservation of reservations let i = index" class="pointer" [ngClass]="{'table-active': i === currentIndex}">
                               <td class="align-middle d-table-cell">{{reservation.id}}</td>
                               <td class="align-middle d-table-cell text-center">{{reservation?.customer?.first_name +' '+reservation?.customer?.last_name}}</td>
-                              <td>
+                              <!-- <td>
                                 <p class="align-middle d-table-cell text-black-50">{{(total_price_meals(reservation) + total_price_suitcase(reservation) + total_price_passenger(reservation) +  total_cash(reservation) * 5 + total_price_babyseats(reservation) + getTakeAtHomeOption(reservation)).toFixed(2)}} €</p>
-                              </td>
+                              </td> -->
                               <td class="align-middle d-table-cell fw-bold text-center"><span class="fw-normal">{{total_meals(reservation) + total_suitcase(reservation)  + total_babyseats(reservation)}}</span> </td>
                               <td class="align-middle d-table-cell fw-bold text-center"><span class="fw-normal">{{total_passenger(reservation)}}</span> </td>
                               <td class="align-middle d-table-cell text-center">{{reservation.starting_date | date }} <p class="hours">( {{reservation.starting_date | date : 'shortTime'}} - {{reservation.arrival_date | date : 'shortTime'}} ) </p> </td>
                               <td class="align-middle d-table-cell text-center">
 
-                                <button  (click)="modal_del.setData([reservation],dataType)" data-bs-target="#deleteModal" data-bs-toggle="modal"  type="button" class="btn btn-outline-danger ms-1 rounded-pill">
+                                <!-- <button    (click)="modal_del.setData([reservation],dataType)" data-bs-target="#deleteModal" data-bs-toggle="modal"  type="button" class="btn btn-outline-danger ms-1 rounded-pill">
                                   <i class="fa-trash fas pe-1"></i>Annuler
-                              </button>
+                              </button> -->
 
                               </td>
                           </tr>
@@ -47,11 +47,11 @@
 
               </div>
           </div>
-          <app-routedetails *ngIf="totals_passengers && totals_passengers.length > 0 " [cash_total]="cash_total" title="Détails du trajet"  [total_take_at_home] = "total_take_at_home"  [passengersVisible] = "false" [items] = "totals_items"   [passengers]="totals_passengers" [reservation]="reservations.length> 0 && reservations[0] "  ></app-routedetails>
+          <app-routedetails  [hasPriceDetails] = "false"  *ngIf="totals_passengers && totals_passengers.length > 0 " [cash_total]="cash_total" title="Détails du trajet"  [total_take_at_home] = "total_take_at_home"  [passengersVisible] = "false" [items] = "totals_items"   [passengers]="totals_passengers" [reservation]="reservations.length> 0 && reservations[0] "  ></app-routedetails>
 
       </div>
       <div class="col-6">
-        <app-routedetails *ngIf="currentReservation "  [cash_total]="currentReservation.status  ? 1 : 0 "    [title]="'Reservation #' + currentReservation.id"   [total_take_at_home] = "getTakeAtHomeOption(currentReservation)"   [passengersVisible] = "true" [items] = "currentReservation && currentReservation.items" [passengers]="currentReservation && currentReservation.passengers" [reservation]="currentReservation" ></app-routedetails>
+        <app-routedetails  [hasPriceDetails] = "false"  *ngIf="currentReservation "  [cash_total]="currentReservation.status  ? 1 : 0 "    [title]="'Reservation #' + currentReservation.id"   [total_take_at_home] = "getTakeAtHomeOption(currentReservation)"   [passengersVisible] = "true" [items] = "currentReservation && currentReservation.items" [passengers]="currentReservation && currentReservation.passengers" [reservation]="currentReservation" ></app-routedetails>
       </div>
   </div>
 </div>

@@ -7,6 +7,7 @@ import { Drive_Base } from './../../../model/Model/Drive_Base';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DataType, per_page } from 'src/global';
+import { RouteService } from 'src/app/service/route/route.service';
 
 @Component({
   selector: 'app-point-shedludes-list',
@@ -33,6 +34,7 @@ export class PointShedludesListComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private driveBaseService: DriveBaseService,
+    private routeService : RouteService,
     private router: Router ,
     private route:ActivatedRoute) {
 
@@ -143,16 +145,33 @@ export class PointShedludesListComponent implements OnInit {
 
   onDuplicated(e:any){
   }
+  
   duplicate(e:Drive_Base){
     this.loading_d = true
     var d = new Drive_Base()
     d = e
-    // d.id_car = "No name"
-    this.driveBaseService.post(d).subscribe(drive =>{
-      this.loading_d =false
-      this.toast_c.open("Be Somewhere ", "Horraire Dupliqué")
-      console.log(drive)
-      this.projectAdded(drive)
+    this.routeService.get({drive_id: d.id}).subscribe(routes =>{
+      console.log('routeeeeeeee ',routes)
+      this.driveBaseService.post(d).subscribe(drive =>{
+        routes.forEach((element, index) => {
+          element.drive_id = drive.id
+          element.point = !Boolean(drive.to_station) ? element.points[0].id  :  element.points[0].id 
+          // console.log('routeeeeeeee ',element , ' ', Boolean(drive.to_station) )
+
+          this.routeService.post(element).subscribe(route =>{
+            this.loading_d =false
+            this.toast_c.open("Be Somewhere ", "Horraire Dupliqué")
+            console.log(drive)
+            if(index === routes.length - 1)
+              this.projectAdded(drive)
+          })
+        });
+
+      })
+
     })
+    return
+    // d.id_car = "No name"
+
   }
 }

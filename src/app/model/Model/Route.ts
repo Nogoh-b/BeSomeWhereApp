@@ -19,6 +19,7 @@ import { Point } from "./Point";
   to_station: boolean;
   updated_at: string;
   created_at: string;
+  drive_id: String | undefined;
 }
 
 export  enum RouteStatus {

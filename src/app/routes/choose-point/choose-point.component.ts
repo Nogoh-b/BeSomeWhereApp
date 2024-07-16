@@ -44,6 +44,7 @@ export class ChoosePointComponent implements AfterViewInit {
   loading = false;
   showContent: boolean = false;
   isLoadingMap: boolean = true;
+  informationReaded: boolean = false;
 
   openContent() {
     this.showContent = true;
@@ -160,6 +161,7 @@ export class ChoosePointComponent implements AfterViewInit {
   }
   setPoint(i, d){
     console.log(this.selected_index);
+    // this.openContent()
     this.markOrUnMark(i)
     setTimeout(() => {
       this.sharedService.scroll(d,-100)
@@ -331,6 +333,12 @@ export class ChoosePointComponent implements AfterViewInit {
 
 
   getRoute(switched){
+
+    if(!this.informationReaded){
+      // this.toast_c.open(vous devez)
+      return
+    }
+
     console.log('station/gare ', this.h.station)
     console.log('adresse ', this.selected_adr)
     let pointA : Point = this.h.switched ? this.h.station : this.selected_adr
@@ -350,8 +358,10 @@ export class ChoosePointComponent implements AfterViewInit {
     this.routeService.get(queryParams).subscribe(result =>{
         setTimeout(() => {
         this.loading = false
-        const desc = result.length >0  ? 'Le trajet à été teouvé' : 'NoSharedTaxi'
-        this.toast_c.open('Be SomeWhere',desc,10000)
+        const desc = result.length >0  ? '' : 'NoSharedTaxi'
+        // const desc = result.length >0  ? 'Le trajet à été touvé' : 'NoSharedTaxi'
+        if(result.length === 0)
+          this.toast_c.open('Be SomeWhere',desc,30000)
         if(result.length > 0){
           this.router.navigate(['trajets/creation/2'], {queryParams} )
         }

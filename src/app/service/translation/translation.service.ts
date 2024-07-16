@@ -32,7 +32,9 @@ export class TranslationService {
   }
 
   translate(key: string, variables?: { [key: string]: string }): string {
-    let translation = this.translations[this.currentLanguage][key] || key;
+    let translation = ''
+    if(this.translations && this.translations[this.currentLanguage] )
+      translation = this.translations[this.currentLanguage][key] || key;
 
     if (variables) {
       // Remplace les variables dans la traduction
@@ -46,14 +48,14 @@ export class TranslationService {
 
   private loadTranslations(): void {
     
-    const langFile = `./assets/i18n/${this.currentLanguage}-v1.1.json`;
+    const langFile = `./assets/i18n/${this.currentLanguage}-v1.4.json`;
     this.http.get(langFile).subscribe(
       (translations: { [key: string]: string }) => {
         console.log('translations111 ', translations)
         this.translations[this.currentLanguage] = translations;
         console.log(translations)
       },
-      (error) => {
+      (error) => {  
         console.error(`Error loading translation file (${langFile}):`, error);
       }
     );

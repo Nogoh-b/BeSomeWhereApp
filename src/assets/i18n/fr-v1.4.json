@@ -130,7 +130,7 @@
         "more_info_option": "plus d'infos",
         "continue_option": "Continuer",
         "past_departure_date_message": "La date de départ est déjà dépassée, sélectionnez une autre date",
-        "important_information": "Plus d’info à Lire !!!",
+        "important_information": "Information indispensable",
         "see_on_map_link": "Cliquez pour voir sur la carte",
         "no_shared_taxi_message": "No shared taxi found between this starting point and destination.<br>- Check that this trip exists by clicking <a here <br>- Else that no trip is planned for this date",
         "searching_shared_taxi": "Recherche d’un taxi partagé",
@@ -149,7 +149,7 @@
         "date_of_birth": "Date de Naissance",
         "passenger": "Passager(s)",
         "passenger1": "Passager",
-        "phone_number_with_country_code": "Numéro avec Code du pays",
+        "phone_number_with_country_code": "numéro de téléphone",
         "timetable": "Horaires",
         "warning_traffic": "Besomewhere n’est pas maitre de la circulation prenez suffisamment de marge avec l’heure de départ et d’atterrissage  de l’avion",
         "available_seat": "Places disponibles",
@@ -178,7 +178,7 @@
     "time_same_as_initial": "L'heure à votre adresse est le même que l'heure initial avec +/- 30 minutes",
     "important_notice": "Important",
     "important_notice_content": "Option « Me prendre à ma porte » sélectionné. Valide si chaque adresse est  à moins de 2.5 km du point de rendez-vous initial.Vous serez contacté par Besomewhere au moment du passage. Le numéro de contact fourni doit être valide.<br>Ceci doit être un numéro de téléphone local, ou un numéro accessible par whattaps ,telegram ou signal. <br><br>-Si votre adresse  est à plus de 2.5 km, essayez un autre point de départ ou contacter Besomewhere  afin de valider.<br>*contact whattaps ,telegram ou signal +32 466 336 159  Email : besomewhere.contact@gmail.com",
-    "enter_full_address": "Entrer l’adresse de rendez-vous / dépôt complète",
+    "enter_full_address": "Adresse de prise en charge ou dépôt (avec ville)",
     "come_to_my_door_option": "Venir jusqu’à ma porte",
     "first_passenger_age_requirement": "Le premier passager doit avoir au moins 18 ans",
     "mandatory_notice": "Obligatoire",
@@ -187,7 +187,7 @@
     "current_trip": "Mes trajets en cours",
 
     "cancel_action": "Annuler",
-    "cancellation_policy": "En cas d’annulation Remboursement selon les <a href='/#/conditions-de-vente'>Conditions générales de vente</a> <table><thead><tr><th>Délai avant départ</th><th>Remboursement</th></tr></thead><tbody><tr><td>Inférieur à 24h</td><td>25%</td></tr><tr><td>Entre 24h et 48h</td><td>50%</td></tr><tr><td>Entre 48h et 72h</td><td>75%</td></tr><tr><td>Supérieur  à 72h</td><td>100%</td></tr></tbody></table> Remboursement 9 jours ouvrés Si Modification utiliser l’email de contact client besomewhere.contact@gmail.com",
+    "cancellation_policy": "Remboursement 9 jours ouvrés Si Modification utiliser l’email de contact client besomewhere.contact@gmail.com <table><thead><tr><th>Délai avant départ</th><th>Remboursement</th></tr></thead><tbody><tr><td>Inférieur à 24h</td><td>25%</td></tr><tr><td>Entre 24h et 48h</td><td>50%</td></tr><tr><td>Entre 48h et 72h</td><td>75%</td></tr><tr><td>Supérieur  à 72h</td><td>100%</td></tr></tbody></table> En cas d’annulation Remboursement selon les <a href='/#/conditions-de-vente'>Conditions générales de vente</a> ",
     "booking_canceled": "Réservation Annulée",
     "tell_us_where_are_you_from": "Dis-nous d'où viens-tu",
     "close_action": "Fermer",
@@ -336,12 +336,22 @@
         "Beverage": "Boissons",
         "Souvenirs": "Souvenirs",
         "Services": "Services",
-        "All": "Tout"
+        "All": "Tout",
 
-       
-        
-    
+        "CrediCard": "Carte de crédit",
+        "PayInCash": "Payer en cash",
+        "MakeATransfert": "Effectuer dans l’heure le virement sur le compte ci-dessous et envoyer la preuve du virement sur l’email <br> besomewhere.reservation@gmail.com ",
+        "WithReservationName": "En Indiquant le nom de la réservation et la capture (preuve) du virement effectué",
+        "YouMustDoIt": "Vous devez le faire dans un délai de maximum une heure, sous  peine de voir votre réservation annulé",
+        "PaymentInfos": "Nom du compte: KAPANGALA<br>IBAN: BE63 9501 1486 5008<br>BIC : CTBKBEBX <br>Montant: {{price}}€",
 
+                
+        "MakeATransfertCash": "Si vous décidez de payer en cash faites nous dans l’heure un message sur l’email  <br> besomewhere.reservation@gmail.com  ",
+        "WithReservationNameCash": "En Indiquant le nom de la réservation  avec la mention  «  je paie en cash » ",
+        "YouMustDoItCash": "Vous devez le faire dans un délai de maximum une heure , sous  peine de voir votre réservation annulé ",
+        "PaymentInfosCash": "Le payement cash est majoré de  5€ <br> Montant: <b style =\"color : red ;\"> €{{price}}<b>",
+        "IAprove": "Je Valide",
+        "IReadTheRoute": "Avez-vous lu les information indispensable avant de cliquer sur continuer "
 }
 
 

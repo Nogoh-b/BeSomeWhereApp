@@ -33,8 +33,8 @@ export class PreloaderImgComponent implements OnInit {
     return {
       position: 'relative',
       display: this.isLoading ? 'block' : 'none',
-      width: this.width_,
-      height: this.height_,
+      width: this.width_ + '!important',
+      height: this.height_ + '!important',
       paddingBottom: '56.25%' // Aspect ratio of 16:9
     };
   }
@@ -42,9 +42,9 @@ export class PreloaderImgComponent implements OnInit {
   get imageStyle() {
     return {
       display: !this.isLoading ? 'block' : 'none',
-      width: this.width_,
+      width: this.width_ ,
       objectFit: this.objectFit,
-      height: this.height_,
+      height: this.height_ ,
     };
   }
   

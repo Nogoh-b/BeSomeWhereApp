@@ -57,3 +57,17 @@
     height: 35px;
     object-fit: contain;
   }
+
+  img {
+    height: 300px;
+    object-fit: cover;
+    width: 100%;
+  }
+  
+  @media screen and (max-width:991px) {
+    img {
+      height: 150px;//!important;
+      object-fit: cover;
+      width: 100%;
+    }
+  }

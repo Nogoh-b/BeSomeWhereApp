@@ -66,8 +66,8 @@
                     <div class="pe-0 pe-xl-5 ps-0 ps-xl-5">
                         <div *ngFor="let item of  passengers let i = index" class="border-2 border-bottom pb-4 pt-4">
                             <p class="fw-bolder pb-3 pt-2 text-uppercase">{{'passenger1' | translate | uppercase}} N°{{i+1}}</p>
-                            <div class="d-flex justify-content-between pb-4">
-                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                            <div class="d-flex justify-content-between pb-4 align-items-center">
+                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group " style="width: fit-content!important;">
                                     <input type="radio" class="btn-check"   [formControlName]="'gender'+ i" value="0" [name]="'gender'+ i" [id]="'groupradio' + i" autocomplete="off" checked >
                                     <label class="btn btn-outline-danger" [for]="'groupradio' + i" >{{'man' | translate}}</label>
                                     <input type="radio" class="btn-check" [formControlName]="'gender'+ i"  value="1"  [name]="'gender'+ i" [id]="'groupradion' + i" autocomplete="off">

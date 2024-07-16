@@ -2,7 +2,7 @@ import { FormControl } from '@angular/forms';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { RouteService } from 'src/app/service/route/route.service';
 import { Reservation } from 'src/app/model/Model/Reservation';
-import { ReservationService } from './../../service/reservation/reservation.service';
+import { ReservationService } from '../../service/reservation/reservation.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ItemCategory, Item_Drive } from '../../model/Model/Item_Drive';
@@ -12,11 +12,11 @@ import { Route } from '../../model/Model/Route';
 import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-reservation-by-route',
+  selector: 'app-reservation-by-route1',
   templateUrl: './reservation-by-route.component.html',
   styleUrls: ['./reservation-by-route.component.css']
 })
-export class ReservationByRouteComponent implements OnInit {
+export class ReservationByRouteComponent1 implements OnInit {
 
   reservations = []
   route : Route
@@ -57,12 +57,12 @@ export class ReservationByRouteComponent implements OnInit {
     this.total_price_passenger_ = 0
     this.total_take_at_home = 0
     this.total_items = []
-    this.cash_total = 0
     // this.reservations = null
   }
   getData(route_id){
     this.loading =true
       console.log('enter!!!')
+      this.cash_total = 0
 
     this.reset()
     this.reservationService.get({ all_: true, "status":0,"group_by":"route_id","from":this.formFilter.get('from').value,"to":this.formFilter.get('to').value}).subscribe(reservations =>{
@@ -73,13 +73,11 @@ export class ReservationByRouteComponent implements OnInit {
           // this.reservations.push({key : value})
             //totals
             let total_price = 0
-            let cash_total = 0
             for (const res of reservations[key]) {
               total_price += this.total_price_babyseats(res) + this.total_price_meals(res) + this.total_price_passenger(res)+ this.total_price_suitcase(res) + this.getTakeAtHomeOption(res)
               this.total_passenger_ += this.total_passenger(res)
               this.total_price_passenger_ += this.total_price_passenger(res)
               this.total_take_at_home += this.getTakeAtHomeOption(res)
-              cash_total += res.status ? 1 : 0
               this.cash_total += res.status ? 1 : 0
               console.log('res.status ' , res.status )
               
@@ -103,7 +101,6 @@ export class ReservationByRouteComponent implements OnInit {
               transport : reservations[key][0] && reservations[key][0].id_car,
               starting_date : reservations[key][0].starting_date,
               arrival_date : reservations[key][0].arrival_date,
-              cash_total : cash_total,
               pointB : reservations[key][0].points[1] && reservations[key][0].points[1].address,  })
         });
         console.log('element.quantity ', this.total_items1)
@@ -217,7 +214,7 @@ export class ReservationByRouteComponent implements OnInit {
   }
 
   setCurrentReservation(id){
-    this.route_.navigate(['back-office/reservations'], {queryParams:{trajet : id}})
+    this.route_.navigate(['back-office/reservations-1'], {queryParams:{trajet : id}})
   }
     view(id){
   }

@@ -194,10 +194,12 @@ export class HomeSearch1Component implements AfterViewInit {
       this.pointService.get({ all: true, status: 0}).subscribe(points =>{
         let destinations: [number, number][] = [];
        console.log('pointsAuxAllentours ', points)
+       points = points.filter(point => {return !point.is_station})
+
       //  destinations.push([points[0].longitude,points[0].lattitude])
        console.log('startPoint ', start0, ' ')
        points.forEach(point => {
-          destinations.push([point.longitude,point.lattitude])
+            destinations.push([point.longitude,point.lattitude])
         });
         console.log('points ', points,' dest ',destinations)
        this.mapService.getMatrix({start0,destinations}).subscribe(result1 =>{

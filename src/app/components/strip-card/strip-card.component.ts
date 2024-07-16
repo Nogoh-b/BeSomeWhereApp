@@ -15,13 +15,23 @@ import { stripe_pk } from 'src/global';
 })
 
 export class StripCardComponent {
+parseFloat(arg0: string) {
+  return parseFloat(arg0)
+throw new Error('Method not implemented.');
+}
 
  
   @Input() resume_data : DataResumeProps = {total_price : 0, items : []}
   @Input() p_key = stripe_pk
   contact_email = ''
   ref: DialogRef<Data, boolean> = inject(DialogRef);
+  selectedTab: string = 'creditCard'; // Onglet par défaut
 
+  selectTab(tab: string): void {
+    this.selectedTab = tab;
+    localStorage.setItem('reservation_payment_type', tab === 'creditCard' ? '0' : '1')
+    console.log(localStorage.getItem('reservation_payment_type'))
+  }
   constructor(
     private cd: ChangeDetectorRef,
     private http: HttpClient,

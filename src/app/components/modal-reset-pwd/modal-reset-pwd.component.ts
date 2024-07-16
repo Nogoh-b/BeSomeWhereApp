@@ -20,16 +20,27 @@ export class ModalResetPwdComponent implements OnInit {
     // console.log()
   }
 
-  sendMail(email){
-    this.loading = true
-    console.log(this.email_)
-     this.authService.resetPassword(email).then(response => {
-      this.loading = false
-      this.toast_c.open('Be Somewhere', "Message envoyé, vérifiez votre boîte mail")
+  sendMail(email) {
+    this.loading = true;
+    console.log(this.email_);
+    this.authService.resetPassword(email).then(response => {
+      this.loading = false;
+      this.toast_c.open('Be Somewhere', "Message envoyé, vérifiez votre boîte mail");
       setTimeout(() => {
-        document.getElementById('close_btn')?.click()
+        document.getElementById('close_btn')?.click();
       }, 3000);
-    })
+    }).catch(error => {
+      this.loading = false;
+      console.error("Erreur lors de l'envoi de l'e-mail :", error);
+      
+      if (error.message.includes('auth/user-not-found')) {
+        this.toast_c.open('Erreur', "Aucun utilisateur ne correspond à cet identifiant. L'utilisateur a peut-être été supprimé.");
+      } else {
+        this.toast_c.open('Erreur', "Une erreur s'est produite, veuillez réessayer.");
+      }
+    });
   }
+  
+  
 
 }

@@ -1,58 +1,115 @@
-<div id="firt_res_div" [style.marginBottom]="marginBottomValue" *ngIf="is_first_reservation"  class="gx-0 row p-3 bg-white"  >
-  <div *ngIf="after_reservation" class="alert alert-success">
+<div id="firt_res_div" [style.marginBottom]="marginBottomValue" *ngIf="is_first_reservation" class="gx-0 row p-3 bg-white">
+    <div *ngIf="after_reservation" class="alert alert-success">
       <i class="fa-check fa-lg fas pe-2"></i>
       <b>{{'reservation_confirmation_message' | translate}}</b>
-  </div>
-  <p class="fs-5 fw-bold" style="font-weight: 900!important;">
-    {{'dearTraveler' | translate}}
-</p>
-  <div *ngIf="!is_always_saved && user" class="align-items-center d-flex justify-content-center">
+    </div>
+    <p class="fs-5 fw-bold" style="font-weight: 900!important;">
+      {{'dearTraveler' | translate}}
+    </p>
+    <div *ngIf="!is_always_saved && user" class="align-items-center d-flex justify-content-center">
       <button type="button" class="btn btn-primary text-white w-auto" data-bs-target="#addressModal" data-bs-toggle="modal">Go</button>
-      <p *ngIf="after_reservation"  (click)="setFirstresrvation()" class="fst-italic ps-3 text-decoration-underline text-primary pointer">Non merci</p>
-  </div>
+      <p *ngIf="after_reservation" (click)="setFirstresrvation()" class="fst-italic ps-3 text-decoration-underline text-primary pointer">Non merci</p>
+    </div>
     <div class="gx-0 pb-3 pt-3 row" [style.height]="height">
-      <div class="col-lg-8" [style.height]="height">
-        <div #map id="map" class="map h-1000" [style.height]="'80%'" width="100%" height="150"  ></div>
+      <div class="col-lg-8" [style.height]="'89%'">
+        <!-- <div #map id="map" class="map h-1000" [style.height]="'80%'" width="100%" height="150"></div> -->
+
+            <mgl-map
+            [style]="'mapbox://styles/mapbox/streets-v11'"
+            [zoom]="[zoom]"
+            [center]="center"
+            [interactive]="true"
+            [attributionControl]="true"
+            [scrollZoom]="true"
+            [doubleClickZoom]="true"
+            [touchZoomRotate]="true"
+            [keyboard]="true"
+            [dragRotate]="true"
+            [touchPitch]="true"
+            [pitchWithRotate]="true"
+            [dragPan]="true"
+            [maxZoom]="22"
+            [minZoom]="0"
+            [antialias]="true"
+            [locale]="{
+              'en': 'English',
+              'fr': 'French'
+            }"
+            >
+            <!-- <mgl-marker
+              [lngLat]="markerPosition"
+              [draggable]="false"
+            >
+            </mgl-marker> -->
+          </mgl-map>
+
+
+
+
         <div class="bg-white pt-0" [style.height]="'20%'">
-            <div class="gx-0 p-2 row">
-                <div class="col-auto p-1">
-                    <span (click)="onClickOnContinent({lat:0, lng:0},0, 2)" [ngClass]="{'text-black-50': currentIndex !== 0, 'text-white': currentIndex === 0, 'bg-primary': currentIndex == 0 }" class="badge   border border-2  col-auto fs-5 rounded-pill  pointer">Tout</span>
-                </div>
-                <div class="col-auto p-1">
-                    <span (click)="onClickOnContinent({lat:9.1021, lng:18.2812},1)" [ngClass]="{'text-black-50': currentIndex !== 1, 'text-white': currentIndex === 1, 'bg-primary': currentIndex == 1 }"  class="badge  border border-2 col-auto fs-5 rounded-pill  pointer">Afrique</span>
-                </div>
-                <div class="col-auto p-1">
-                    <span (click)="onClickOnContinent({lat:54.526, lng:15.2551},2)" [ngClass]="{'text-black-50': currentIndex !== 2, 'text-white': currentIndex === 2, 'bg-primary': currentIndex == 2 }"  class="badge  border border-2 col-auto fs-5 rounded-pill  pointer">Europe</span>
-                </div>
-                <div class="col-auto p-1">
-                    <span (click)="onClickOnContinent({lat:34.0479, lng:100.6197},3)" [ngClass]="{'text-black-50': currentIndex !== 3, 'text-white': currentIndex === 3, 'bg-primary': currentIndex == 3 }"  class="badge  border border-2 col-auto fs-5 rounded-pill  pointer">Asie</span>
-                </div>
-                <div class="col-auto p-1">
-                    <span (click)="onClickOnContinent({lat:37.090240, lng:-95.712891},4)" [ngClass]="{'text-black-50': currentIndex !== 4, 'text-white': currentIndex === 4, 'bg-primary': currentIndex == 4 }"  class="badge  border border-2 col-auto fs-5 rounded-pill  pointer">Amérique</span>
-                </div>
-                <div class="col-auto p-1">
-                    <span (click)="onClickOnContinent({lat:-22.7359, lng:140.0187},5)" [ngClass]="{'text-black-50': currentIndex !== 5, 'text-white': currentIndex === 5, 'bg-primary': currentIndex == 5 }"  class="badge  border border-2 col-auto fs-5 rounded-pill  pointer">Océanie</span>
-                </div>
-                <div class="col-auto p-2"></div>
-                <div class="col-auto p-2"></div>
+          <div class="gx-0 p-2 row">
+            <div class="col-auto p-1">
+              <span (click)="onClickOnContinent({lat: 0, lng: 0}, 0, 2)" [ngClass]="{'text-black-50': currentIndex !== 0, 'text-white': currentIndex === 0, 'bg-primary': currentIndex == 0}" class="badge border border-2 col-auto fs-5 rounded-pill pointer">Tout</span>
             </div>
+            <div class="col-auto p-1">
+              <span (click)="onClickOnContinent({lat: 9.1021, lng: 18.2812}, 1)" [ngClass]="{'text-black-50': currentIndex !== 1, 'text-white': currentIndex === 1, 'bg-primary': currentIndex == 1}" class="badge border border-2 col-auto fs-5 rounded-pill pointer">Afrique</span>
+            </div>
+            <div class="col-auto p-1">
+              <span (click)="onClickOnContinent({lat: 54.526, lng: 15.2551}, 2)" [ngClass]="{'text-black-50': currentIndex !== 2, 'text-white': currentIndex === 2, 'bg-primary': currentIndex == 2}" class="badge border border-2 col-auto fs-5 rounded-pill pointer">Europe</span>
+            </div>
+            <div class="col-auto p-1">
+              <span (click)="onClickOnContinent({lat: 34.0479, lng: 100.6197}, 3)" [ngClass]="{'text-black-50': currentIndex !== 3, 'text-white': currentIndex === 3, 'bg-primary': currentIndex == 3}" class="badge border border-2 col-auto fs-5 rounded-pill pointer">Asie</span>
+            </div>
+            <div class="col-auto p-1">
+              <span (click)="onClickOnContinent({lat: 37.090240, lng: -95.712891}, 4)" [ngClass]="{'text-black-50': currentIndex !== 4, 'text-white': currentIndex === 4, 'bg-primary': currentIndex == 4}" class="badge border border-2 col-auto fs-5 rounded-pill pointer">Amérique</span>
+            </div>
+            <div class="col-auto p-1">
+              <span (click)="onClickOnContinent({lat: -22.7359, lng: 140.0187}, 5)" [ngClass]="{'text-black-50': currentIndex !== 5, 'text-white': currentIndex === 5, 'bg-primary': currentIndex == 5}" class="badge border border-2 col-auto fs-5 rounded-pill pointer">Océanie</span>
+            </div>
+            <div class="col-auto p-2"></div>
+            <div class="col-auto p-2"></div>
+          </div>
         </div>
       </div>
-      <div class="user_list bg-white col-lg-4 p-40" style="min-height: 100%; overflow: auto;  background-color:#dee2e66b!important;" [style.height]="height">
-          <div (click)="centerOnUser(user)" *ngFor="let user of users" class="gx-0 pe-2 ps-2 pt-3 row pointer">
-              <div  class="col-auto w-auto">
-                <app-preloader-img [src]="user.image ? user.image :'../../../assets/img/empty_profil.jpg'"  [class]="['rounded-circle', 'avatar-lg', 'img-thumbnail', 'rounded']" width_="40px" height_="40px"></app-preloader-img>
-                <!-- <img [src]="user.image ? user.image :'../../../assets/img/empty_profil.jpg'" class="rounded-circle avatar-lg img-thumbnail" class="rounded-circle avatar-lg img-thumbnail" width="40" height="40" style="height: 40px; border-radius: 50%;"/> -->
+      <div class="user_list bg-white col-lg-4 p-40" style="min-height: 100%; overflow: auto; background-color:white!important;" [style.height]="height">
+        
+        <div class="accordion" id="accordionExample">
+          <div *ngFor="let country of getCountryKeys(); let i = index"    (click)="indexCountry = i"  class="card">
+            <div class="card-header" id="heading{{i}}">
+              <button class="btn btn-link" type="button" data-toggle="collapse" [attr.data-target]="'#collapse'+i" aria-expanded="true" [attr.aria-controls]="'collapse'+i">
+                {{ country }} ( {{usersByCountry[country].length}} )
+              </button>
+
+            </div>
+            <div [id]="'collapse'+i" class="collapse" [ngClass]="{'show': i === indexCountry}" [attr.aria-labelledby]="'heading'+i" data-parent="#accordionExample">
+              <div class="card-body">
+                <div (click)="centerOnUser(user)" *ngFor="let user of usersByCountry[country]" class="gx-0 pe-2 ps-2 pt-31 row pointer d-none1">
+                  <div class="col-auto w-auto" [style]="'height : 40px; width:40px'">
+                    <app-preloader-img [src]="user.image ? user.image : '../../../assets/img/empty_profil.jpg'" [class]="['rounded-circle', 'avatar-lg', 'img-thumbnail', 'rounded']" width_="40px" height_="40px"></app-preloader-img>
+                  </div>
+                  <div class="col d-flex flex-column justify-content-center ps-2">
+                    <p class="fs-5 fw-bold">{{user.name}}</p>
+                    <p class="text-muted">{{ user.city }} {{ user.country }}</p>
+                  </div>
+                </div>
               </div>
-              <div class="col d-flex flex-column justify-content-center ps-2">
-                  <p class="fs-5 fw-bold">{{user.name}}</p>
-                  <p class="text-muted">{{ user.city }} {{ user.country }}</p>
-              </div>
+            </div>
           </div>
+        </div>
+
+        
+        <div (click)="centerOnUser(user)" *ngFor="let user of users" class="gx-0 pe-2 ps-2 pt-3 row pointer d-none">
+          <div class="col-auto w-auto">
+            <app-preloader-img [src]="user.image ? user.image : '../../../assets/img/empty_profil.jpg'" [class]="['rounded-circle', 'avatar-lg', 'img-thumbnail', 'rounded']" width_="40px" height_="40px"></app-preloader-img>
+          </div>
+          <div class="col d-flex flex-column justify-content-center ps-2">
+            <p class="fs-5 fw-bold">{{user.name}}</p>
+            <p class="text-muted">{{ user.city }} {{ user.country }}</p>
+          </div>
+        </div>
       </div>
     </div>
-
-</div>
-
-<app-modal-add-address></app-modal-add-address>
-
+  </div>
+  
+  <app-modal-add-address></app-modal-add-address>
+  

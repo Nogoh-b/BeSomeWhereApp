@@ -20,6 +20,7 @@ import { LoadingPageComponent } from './loading-page/loading-page.component';
 import { UploadComponent } from './upload/upload.component';
 import { ModalEditFolderComponent } from './modal-edit-folder/modal-edit-folder.component';
 import { TranslatePipe } from '../pipe/translation/translation.pipe';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -49,7 +50,9 @@ import { TranslatePipe } from '../pipe/translation/translation.pipe';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    ToastrModule.forRoot(), // ToastrModule added
+
   ],
   exports:[
     LoadingPageComponent,

@@ -21,7 +21,7 @@
 </div>
 
 
-<div *ngIf="want_back_office && isAdmin">
+<div *ngIf="(want_back_office && isAdmin) || want_see_reservation">
   <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow" data-pg-collapsed>
     <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="" target="_pg_blank">BESOMEWHERE</a>
     <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,7 +38,7 @@
   </header>
   <div class="container-fluid" data-pg-collapsed>
     <div class="row">
-      <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light p-0 sidebar collapse" data-pg-collapsed>
+      <nav *ngIf="!want_see_reservation" id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light p-0 sidebar collapse" data-pg-collapsed>
         <app-nav-bar-admin></app-nav-bar-admin>
       </nav>
       <main class="col-lg-10 col-md-9 ms-sm-auto px-md-4">

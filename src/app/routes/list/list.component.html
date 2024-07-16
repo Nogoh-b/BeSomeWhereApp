@@ -8,9 +8,11 @@
             <app-home-ads></app-home-ads>
           </div>
         </div>
-
+          
           <div class="col-xs-4 col-lg col-xl-6 column_center pe-0 pe-lg-5 pe-xl-3 ps-0 ps-lg-5 ps-xl-3">
-              <div class="align-items-center bg-white d-flex flex-column mb-3 p-3 text-black-50">
+              <div class="w-100 bg-light mb-3  d-lg-none" style="height: 35px; " ></div>
+
+              <div class="align-items-center bg-white d-flex flex-column   mb-sm-0 mb-lg-3  p-sm-2 p-lg-3 text-black-50">
                 <div class="d-flex justify-content-center w-100">
                     <button (click)="screen_archived(isArchived)"  type="button" class="btn btn-outline-primary me-1 rounded-pill">
                         <i class="fa-file-archive fas pe-1"></i> {{(isArchived ? 'My_trips' : "Archived_trips") | translate}}

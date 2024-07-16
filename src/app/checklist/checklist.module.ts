@@ -8,6 +8,7 @@ import { ChecklistAddComponent } from './checklist-add/checklist-add.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgPipesModule } from 'ngx-pipes';
 
 
 
@@ -20,6 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     ComponentsModule,
     SharedModule,
+    NgPipesModule,
     RouterModule,
     CommonModule,
             // Specify ng-circle-progress as an import

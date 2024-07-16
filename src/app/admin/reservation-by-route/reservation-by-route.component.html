@@ -43,7 +43,7 @@
                               <td class="align-middle d-table-cell">{{reservation.id}}</td>
                               <td class="align-middle d-table-cell text-center">{{reservation.pointA +' - '+ reservation.pointB}}<br> Transport :  {{reservation.transport}}</td>
                               <td>
-                                <p class="align-middle d-table-cell text-black-50">{{reservation.total_price.toFixed(2)}} €</p>
+                                <p class="align-middle d-table-cell text-black-50">{{(reservation.total_price + reservation.cash_total *5).toFixed(2)}} €</p>
                               </td>
                               <!-- <td class="align-middle d-table-cell fw-bold text-center"><span class="fw-normal">{{reservation}</span> </td> -->
                               <!-- <td class="align-middle d-table-cell text-center">{{reservation.strating_date | date}}</td> -->
@@ -57,7 +57,7 @@
           </div>
       </div>
       <div class="col-5">
-        <app-routedetails [total_take_at_home] = "total_take_at_home" [total_passengers]="total_passenger_" [price_passengers] = "total_price_passenger_" *ngIf="reservations.length > 0 && !loading" [passengersVisible] = "true" [items] = " total_items1" [passengers]="[]" [reservation]="reservations && reservations[0]" ></app-routedetails>
+        <app-routedetails  [cash_total] = "cash_total"  [total_take_at_home] = "total_take_at_home" [total_passengers]="total_passenger_" [price_passengers] = "total_price_passenger_" *ngIf="reservations.length > 0 && !loading" [passengersVisible] = "true" [items] = " total_items1" [passengers]="[]" [reservation]="reservations && reservations[0]" ></app-routedetails>
       </div>
   </div>
 </div>

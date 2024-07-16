@@ -21,7 +21,8 @@ export class ChooseSchedulesComponent implements OnInit {
   statusCard = globals.TrajetCardStatus.ChooseSchedules
   reservation = localStorage.getItem('reservation') ? JSON.parse(localStorage.getItem('reservation')) : {route_id:'', user_id:''};
   @ViewChild(ToastComponent) toast_c: ToastComponent
-  take_at_home = false
+  take_at_homes :boolean[] = []
+  take_at_home : boolean = false
   price_take_to_home = JSON.parse(localStorage.getItem("conf")).price_take_to_home
 
 
@@ -43,7 +44,10 @@ export class ChooseSchedulesComponent implements OnInit {
               this.curRoute = this.routes[0]
               this.curRoute.points = this.invertIfSwitched(this.curRoute.points, params['to_station'], params['point_a'], params['point_b'])
             }
-            this.take_at_home = this.reservation && this.reservation.tatake_at_home
+            for (const route of result) {
+              this.take_at_homes.push(false)
+            }
+            this.take_at_home = this.reservation && this.reservation.take_at_home
       })
     }
   );
@@ -75,12 +79,13 @@ export class ChooseSchedulesComponent implements OnInit {
     // alert(this.take_at_home)
   }
 
-  goToNextStep(route: Route, nbr_passengers: number){
+  goToNextStep(route: Route, nbr_passengers: number, index: number){
     if(!this.userServiceFireBase.getCurrentUser()){
       this.toast_c.open("Be Sommewhere", "Vous devez être connecté avant de continuer")
       return
     }
     this.reservation.route_id = route.id
+    this.reservation.take_at_home = this.take_at_homes[index]
     this.reservation.user_id = this.userServiceFireBase.getCurrentUser().id
     // this.reservation.take_at_home = this.take_at_home
     this.reservation.passengers = [];

@@ -1,11 +1,11 @@
 
 
     <form   [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" class="checkout">
-      <div class="row">
+      <div class="row d-none">
         <div id="card-info" #cardInfo></div>
         <div class="col-12">
           <div class="d-flex flex-column px-md-5 px-4 mb-4">
-            <span>Credit Card</span>
+            <span>Credit Card1</span>
             <div class="inputWithIcon">
               <div id="card-number" ></div>
               
@@ -62,9 +62,9 @@
 
         <div class="col-12 px-md-5 px-4 mt-3">
           <!-- <button type="submit" class="btn btn-primary w-100">Payer {{price}}€</button> -->
-          <app-button [loading]="loading" [text] = "(!loading ? 'pay_button1' : 'in_progress') | translate : { var1: price.toString()}  " class_="fa-lg fa-paypal1 fab pe-2"></app-button>
-
+          
         </div>
-      </div>
+        </div>
+        <app-button [loading]="loading" [text] = "(!loading ? 'IAprove' : 'in_progress') | translate : { var1: price.toString()}  " class_="fa-lg fa-paypal1 fab pe-2 pb-3"></app-button>
     </form>
 

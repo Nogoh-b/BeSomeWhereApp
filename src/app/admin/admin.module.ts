@@ -34,6 +34,8 @@ import { AdsListComponent } from './ads/ads-list/ads-list.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
 
 import { CKEditorModule } from 'ngx-ckeditor';
+import { ReservationsComponent1 } from './reservations1/reservations.component';
+import { ReservationByRouteComponent1 } from './reservation-by-route1/reservation-by-route.component';
 
 @NgModule({
   declarations: [
@@ -51,10 +53,12 @@ import { CKEditorModule } from 'ngx-ckeditor';
     ItemsChecklistListComponent,
     ItemsChecklistDetailsComponent,
     ReservationByRouteComponent,
+    ReservationByRouteComponent1,
     DetailsComponent,
     PaymentComponent,
     AdsListComponent,
-    ReservationsComponent
+    ReservationsComponent,
+    ReservationsComponent1
 
   ],
   imports: [

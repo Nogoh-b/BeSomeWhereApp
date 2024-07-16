@@ -1,6 +1,18 @@
 @import '~quill/dist/quill.core.css';
 @import '~quill/dist/quill.bubble.css';
 @import '~quill/dist/quill.snow.css';
+
+// regular style toast
+@import 'ngx-toastr/toastr';
+
+// bootstrap style toast
+// or import a bootstrap 4 alert styled design (SASS ONLY)
+// should be after your bootstrap imports, it uses bs4 variables, mixins, functions
+
+// if you'd like to use it without importing all of bootstrap it requires
+// bootstrap 4
+// boostrap 5
+
 .carousel-indicators{
     display: none!important;
 }
@@ -259,6 +271,7 @@ cursor {
 @media screen and (max-width:991px) {
   section {
       background-color: #ffffff !important;
+
   }
 
   body {
@@ -306,7 +319,8 @@ cursor {
 
 @media screen and (max-width:991px) {
   .column_center {
-      background-color: #f8f9fa!important;
+    background-color: transparent;
+    padding-top: 0;
   }
 }
 
@@ -701,8 +715,10 @@ button:focus:not(:focus-visible) {
   width: 0;
   position: fixed;
 }
-.position-sticky{
-  padding-top: 80px;
+@media only screen and (min-width: 992px) {
+  .position-sticky{
+    padding-top: 80px;
+  }
 }
 .btn, .form-select, .form-control{
   font-size: 1.0rem;

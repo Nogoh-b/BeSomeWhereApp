@@ -31,6 +31,10 @@ export class AppComponent implements OnInit {
      private userService: UserService){
       
 
+      /*this.emailService.sendMail({ "email": 'nogohbrice@gmail.com',
+        "subject": "Commande / Order",
+        "content": 'admin_email_content'}).subscribe(r => {})*/
+
           // Écoute des changements de route
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {

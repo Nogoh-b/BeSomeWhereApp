@@ -12,6 +12,7 @@ export class PreloaderImgComponent implements OnInit {
   @Input() width_ = '100%'
   @Input() class: string[] = [] 
   @Input() objectFit = 'cover'
+  @Input() class_img = ''
   /*onImageLoad() {
     var preloader = document.querySelector('.preloader') as HTMLElement;
     preloader.style.display = 'none';

@@ -15,7 +15,7 @@ export class TranslationService {
   languageChanged: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private http: HttpClient) {
-    this.currentLanguage = localStorage.getItem(LANG_STORAGE_KEY) || 'fr';
+    this.currentLanguage = localStorage.getItem(LANG_STORAGE_KEY) || 'en';
     this.loadTranslations(); // Charger les nouvelles traductions après le changement de langue
 
   }
@@ -28,7 +28,7 @@ export class TranslationService {
   }
 
   getLanguage(): string {
-    return localStorage.getItem(LANG_STORAGE_KEY) || 'fr';
+    return localStorage.getItem(LANG_STORAGE_KEY) || 'en';
   }
 
   translate(key: string, variables?: { [key: string]: string }): string {
@@ -48,7 +48,7 @@ export class TranslationService {
 
   private loadTranslations(): void {
     
-    const langFile = `./assets/i18n/${this.currentLanguage}-v1.4.json`;
+    const langFile = `./assets/i18n/${this.currentLanguage}-v1.7.json`;
     this.http.get(langFile).subscribe(
       (translations: { [key: string]: string }) => {
         console.log('translations111 ', translations)

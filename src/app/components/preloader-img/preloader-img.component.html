@@ -6,4 +6,4 @@
   <div [ngStyle]="preloaderStyle">
     <div class="spinner"></div>
   </div>
-  <img [src]="imageSrc" (load)="onImageLoad()" [ngStyle]="imageStyle"  [ngClass]="class"/>
+  <img [src]="imageSrc" [class]="class_img" (load)="onImageLoad()" [ngStyle]="imageStyle"/>

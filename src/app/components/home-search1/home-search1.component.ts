@@ -86,9 +86,11 @@ export class HomeSearch1Component implements AfterViewInit {
 
   searchDrive(){
      let start0 = this.switched ? this.pointB.longitude+','+this.pointB.lattitude : this.pointA.longitude+','+this.pointA.lattitude
+     let origin = this.switched ? {longitude:this.pointB.longitude, lattitude:this.pointB.lattitude} : {longitude:this.pointA.longitude, lattitude:this.pointA.lattitude} 
      this.pointService.get({status: 0}).subscribe(points =>{
        console.log('pointsAuxAllentours ', points)
-       console.log('startPoint ', start0)
+
+      //  console.log('startPoint ', start0)
        let destinations: string[] = [];
        points.forEach(point => {
          destinations.push(point.longitude+','+point.lattitude)
@@ -195,7 +197,10 @@ export class HomeSearch1Component implements AfterViewInit {
         let destinations: [number, number][] = [];
        console.log('pointsAuxAllentours ', points)
        points = points.filter(point => {return !point.is_station})
+       console.log('pointsAuxAllentours1 ', points)
+       points = this.getClosestPoints(points,origin,25)
 
+       console.log('startPointb',points)
       //  destinations.push([points[0].longitude,points[0].lattitude])
        console.log('startPoint ', start0, ' ')
        points.forEach(point => {
@@ -209,13 +214,13 @@ export class HomeSearch1Component implements AfterViewInit {
           const result = result1.destinations
           console.log('Matrix_Durations ', durations);
          let arroundPoints: Point[]  = [];
-         for (let index = 1; index < points.length; index++) {
+         for (let index = 1; index < points.length + 1 ; index++) {
            let point = points[index - 1]
+           console.log('Durations ',durations[index],' ', point.title );
            if(durations[index] != null){
             //  point.distance = result[index].distance   ;
              point.distance = durations[index]   ;
              arroundPoints.push(point);
-            console.log('Durations ',durations[index],' ', point.title );
 
            }
          }
@@ -265,4 +270,36 @@ change(val){
     console.log(point)
     this.station = point
   }
+
+
+  toRadians(degrees: number): number {
+    return degrees * (Math.PI / 180);
 }
+
+  haversineDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
+    const R = 6371; // Radius of the Earth in kilometers
+    const dLat = this.toRadians(lat2 - lat1);
+    const dLon = this.toRadians(lon2 - lon1);
+    const a = 
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(this.toRadians(lat1)) * Math.cos(this.toRadians(lat2)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const d = R * c; // Distance in kilometers
+    return d;
+}
+
+  getClosestPoints(points: Point[], origin: any, count: number = 25): Point[] {
+    const distances = points.map(point => ({
+        point,
+        distance: this.haversineDistance(origin.lattitude, origin.longitude, point.lattitude, point.longitude)
+    }));
+
+    distances.sort((a, b) => a.distance - b.distance);
+
+    return distances.slice(0, count).map(item => item.point);
+}
+
+
+}
+

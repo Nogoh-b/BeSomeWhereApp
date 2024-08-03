@@ -6,7 +6,7 @@
       <p class="fs-5 text-muted" style="text-align: justify;">{{ads.description | shorten : 150 : "..."}}</p>
       <div class="d-none div_img_pub pg-empty-placeholder"></div>
       <!-- <img [src]="ads.image"/> -->
-      <app-preloader-img [src]="ads.image" [height_]="'300px'"></app-preloader-img>
+      <app-preloader-img class_img="img_preloader" [src]="ads.image" [height_]="'300px'"></app-preloader-img>
   </div>
 </div>
 

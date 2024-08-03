@@ -65,8 +65,8 @@
   }
   
   @media screen and (max-width:991px) {
-    img {
-      height: 150px;//!important;
+    .img_preloader {
+      height: 150px!important;
       object-fit: cover;
       width: 100%;
     }

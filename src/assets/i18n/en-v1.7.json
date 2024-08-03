@@ -169,7 +169,7 @@
         "additional_suitcases1": "Additional Suitcases",
         "baby_seat": "Baby seat",
         "total_price_included": "Total price option included",
-        "booking_redirect_notice": "By clicking on \"Réserver\" (Book), you will be redirected to a payment link. By making the purchase on the website, you thereby accept our <a href='/#/conditions-de-vente'>general terms and Conditions of Sale</a> in their entirety. The user declares to be of legal age and to have the necessary legal capacity. You will receive a confirmation email at the email address provided during your account creation. Thank you for your trust. BESOMEWHERE.",
+        "booking_redirect_notice": "By clicking on \"Réserver\" (Book), you will be redirected to a payment link. By making the purchase on the website, you thereby accept our  <a href='/#/conditions-de-vente'>general terms and Conditions of Sale</a> in their entirety. The user declares to be of legal age and to have the necessary legal capacity. You will receive a confirmation email at the email address provided during your account creation. If you don’t see any email , <b> <u>remember to check your spam or junk mail folder </u></b>.<br> Thank you for your trust. BESOMEWHERE.",
         "child_seat_policy": "Concerned about our customers and our little ones, our sense of responsibility does not allow us to accept a child on board without a dedicated seat; no child requiring a seat will be allowed to board without one. Mandatory for children <1m10. The parent is responsible for choosing the seat.",
         "child_seat_mandatory": "Mandatory for children <1m10",
         "credit_card_surname": "Surname on the credit card",
@@ -357,6 +357,7 @@
         "YouMustDoItCash": "You must do it within a maximum of one hour, otherwise your reservation may be canceled.",
         "PaymentInfosCash": "Cash payments incur an additional fee of €5 <br> Total amount: <b style =\"color : red ;\"> {{price}}€<b>",
         "IAprove": "I approve",
+        "NoticeNumber": "*Phone number should include country code (+32, +39,+34…..). If you have selected \"come to my door\" option your address should include the street and <b> exact city </b>. Besomewhere cannot be responsible for missing and no precise information.",
         "IReadTheRoute": "Have you read the  Imperative information before clicking continue"
 
 

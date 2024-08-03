@@ -42,7 +42,7 @@ img {
 }
 
 .text-box-wrapper {
-    padding: 20px;
+    padding: 8px;
     padding-bottom: 5px;
 }
 
@@ -72,7 +72,7 @@ img {
 
 .button {
     display: inline-block;
-    margin-left: 10px;
+    margin-left: 0;
     padding: 5px 10px;
     font-family: 'Poppins';
     font-size: 12px;

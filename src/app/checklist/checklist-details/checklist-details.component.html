@@ -69,7 +69,7 @@
                                 <div class="border mt-2 ">
                                   <div *ngIf="checklist.stats.total_folders != -1">
                                       <div>
-                                          <p class="align-items-center bg-light border-bottom d-flex  h6 justify-content-between pb-2 ps-3 pt-2 text-black-50">{{'suitcases' | translate}}{{ folders.length > 0 ?' : '+ folders[folders.length -1].name :''}}
+                                          <p class="align-items-center bg-light border-bottom d-flex  h6 justify-content-between pb-2 ps-3 pt-2 text-black-50">{{'suitcases' | translate }}{{ folders.length <= 0 ? '': ' : '+ folders[folders.length -1].name  |  shorten: 15}}
                                             <button *ngIf="folders.length > 0" data-bs-target="#deleteModal" data-bs-toggle="modal" (click)="delete_modal.want_delete_folder(getCurrentFolder())" type="button" class="btn fs-6 btn-outline-danger ms-1 me-3 border-2 fw-bolder border-danger color-danger rounded-pill">
                                               <i class="fa-trash-alt fa-lg fas pe-2"></i>{{'delete' | translate}}
                                             </button>
@@ -85,7 +85,7 @@
                                           <div (click)="getFiles(file, checklist.id)" *ngFor="let file of getFolders()" class="align-items-center d-flex div-suitcase gx-0 justify-content-center pb-2 pointer row-cols-2">
                                               <div  class="align-items-center col-3 d-flex flex-column justify-content-center  w-100" style="transition: all 55555 ease-in;">
                                                   <img src="assets/img/travel-bag.png" width="80%" height="80%"/>
-                                                  <span class="badge bg-primary border mb-2 rounded-pill">{{file.name | shorten: 8 :''  }}</span>
+                                                  <span class="badge bg-primary border mb-2 rounded-pill">{{file.name | shorten: 12 :''  }}</span>
                                                   <div class="d-none text-danger">
                                                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" class="col-auto fa-edit fas mb-2 mt-auto pe-2 text-primary">
                                                           <g>
@@ -106,7 +106,7 @@
 
                                   <div *ngIf="haveElement() && checklist.stats.total_files != 0" data-pg-collapsed>
                                       <div class="">
-                                          <p class="bg-light border-bottom border-top h5 pb-2 ps-3 pt-2 text-black-50">{{'suitcase_contents' | translate}} {{ folders.length > 0 ?' : '+ folders[folders.length -1].name :''}}</p>
+                                          <p class="bg-light border-bottom border-top h5 pb-2 ps-3 pt-2 text-black-50">{{'suitcase_contents' | translate | shorten : 12}} {{ folders.length <= 0 ?'' : ' : '+ folders[folders.length -1].name    |  shorten: 12}}</p>
                                       </div>
                                       <div class="pe-3 ps-3 pt-2">
                                           <table class=" table table-hover">

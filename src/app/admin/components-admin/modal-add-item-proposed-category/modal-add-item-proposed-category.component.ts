@@ -55,6 +55,7 @@ export class ModalAddItemProposedCategoryComponent implements OnInit {
     this.itemCategories =itemCategory
     this.formItemCategories = this.fb.group({});
     this.formItemCategories.addControl('name', new FormControl(itemCategory ? itemCategory.name: ''));
+    this.formItemCategories.addControl('name_en', new FormControl(itemCategory && itemCategory.name_en ? itemCategory.name_en: ''));
     this.formItemCategories.addControl('src', new FormControl(itemCategory ? itemCategory.src: '', Validators.required));
     // this.attach_ad = {file_name : ad && ad.image}
     if(this.upload_c){

@@ -42,7 +42,7 @@ const routes: Routes = [
  },
  {
   path: 'checklist/creation', component: ChecklistAddComponent,
-  canActivate : [AuthGuard]
+  // canActivate : [AuthGuard]
  },
  {
   path: 'mes-checklists', component: ChelcklistListComponent,

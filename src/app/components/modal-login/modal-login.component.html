@@ -21,7 +21,7 @@
                           </div>
                           <h1 class="fw-bolder mb-4 text-center text-dark text-lg-start" style="z-index: 4;">{{"login" | translate}}</h1>
                           <p class="fs-6 mb-5 text-black-50 text-center text-lg-start">{{'connect_before_continue' | translate}}</p>
-                          <form (submit)="tryLogin(loginForm.value)" [ngClass]="{'was-validated': submited && loginForm.valid}" [formGroup]="loginForm" class="pb-3 pb-lg-0 needs-validation">
+                          <form (submit)="tryLogin(loginForm.value)" [ngClass]="{'was-validated': submited && loginForm.valid && isLogged}" [formGroup]="loginForm" class="pb-3 pb-lg-0 needs-validation">
                               <div class="mb-3">
                                   <div class="border border-1 border-primary input-group text-primary" [ngClass]="{'border-danger': submited && !loginForm.get('email').valid}">
                                       <span class="bg-white border-0 input-group-text" id="addon-wrapping1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" class="border-1 border-primary text-primary">

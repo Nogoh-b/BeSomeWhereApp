@@ -15,11 +15,11 @@ export class User {
     /**
      *
      */
-    id: string;
+    id: string | number;
     /**
      *
      */
-    username: string;
+    username?: string;
     /**
      *
      */
@@ -37,12 +37,13 @@ export class User {
      *
      */
     birthday: string;
-    birthay: string;
+    birthay?: string;
     /**
      *
      */
     phone: string;
     lattitude: any;
+    cur_country: string;
     longitude: any;
     name: string;
     token: string;

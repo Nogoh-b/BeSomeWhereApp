@@ -1,8 +1,17 @@
 
-<select id="languageSelect" [(ngModel)]="selectedLanguage" (change)="changeLanguage()">
+<select id="languageSelect" [(ngModel)]="selectedLanguage" (change)="changeLanguage(selectedLanguage)">
   <option value="fr">Français</option>
   <option value="en">English</option>
 </select>
+
+<!-- <div class="language-select">
+  <button *ngFor="let lang of languages" (click)="changeLanguage(lang.value)" [class.active]="selectedLanguage === lang.value" class="lang-btn">
+    <span [class]="'fi fi-' + lang.flagClass"></span> 
+  </button>
+</div> -->
+
+
+
 
 <!-- {{ 'WelcomeText' | translate }} -->
 

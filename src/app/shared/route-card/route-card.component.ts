@@ -21,6 +21,7 @@ export class RouteCardComponent implements OnInit {
   @Input() route_css = 'pe-0 pe-xl-5 ps-xl-5' ;
   //@ts-ignore
   @Input() curStatus : number
+  @Input() statusCard = globals.TrajetCardStatus
   @Input() screen_tah = true
   @Input() globals = globals;
   @Input() take_at_home = false;
@@ -34,19 +35,39 @@ export class RouteCardComponent implements OnInit {
     console.log('Route ' , this.route)
 
   }
-
+  filterMeals(items: Item_Drive[]){
+    return items.filter(item => item.sub_category === 1 || item.sub_category === 3 )
+  }
+  filterServices(items: Item_Drive[]){
+    return items.filter(item => item.sub_category === 4 || item.sub_category === 5 )
+  }
   total_meals(){
     if(!this.items)
       return '-'
     let somme = 0
     let items: Item_Drive[] = this.items
-    for (let item of items) {
+    for (let item of globals.filterMeals(items)) {
       if(item.category === ItemCategory.Meal){
         somme += item.quantity
       }
     }
     return 'x'+ somme
   }
+
+  total_services(){
+    if(!this.items)
+      return '-'
+    let somme = 0
+    let items: Item_Drive[] = this.items
+    for (let item of this.filterServices(items)) {
+      if(item.category === ItemCategory.Meal){
+        somme += item.quantity
+      }
+    }
+    return 'x'+ somme
+  }
+
+
   total_suitcase(){
     if(!this.items)
       return '-'
@@ -104,6 +125,8 @@ export class RouteCardComponent implements OnInit {
     return  g.length * this.route.price
   }
   total_price_babyseats(){
+        if(!this.items)
+      return 0
     let somme = 0
     let items: Item_Drive[] = this.items
     for (let item of items) {
@@ -114,20 +137,37 @@ export class RouteCardComponent implements OnInit {
     return somme
   }
   total_price_meals(){
+    if(!this.items)
+      return 0
     let somme = 0
     let items: Item_Drive[] = this.items
-    for (let item of items) {
+    for (let item of  globals.filterMeals(items)) {
         if(item.category === globals.ItemCategory.Meal){
           somme += item.quantity * item.price
+          // console.log('MealT_ ', item)
         }
     }
     return somme
   }
   total_price_suitcase(){
+    if(!this.items)
+      return 0
     let somme = 0
     let items: Item_Drive[] = this.items
     for (let item of items) {
         if(item.category === globals.ItemCategory.Suitcase){
+          somme += item.quantity * item.price
+        }
+    }
+    return somme
+  }
+  total_price_services(){
+    if(!this.items)
+      return 0
+    let somme = 0
+    let items: Item_Drive[] = this.items
+    for (let item of globals.filterServices(items)) {
+        if(item.category === ItemCategory.Meal){
           somme += item.quantity * item.price
         }
     }
@@ -139,8 +179,12 @@ export class RouteCardComponent implements OnInit {
     //@ts-ignore
     var tah =  this.take_at_home ? JSON.parse(localStorage.getItem("conf")).price_take_to_home : 0
     var passengers_price = /*this.passengers > 1 ?*/ (this.route.price )* this.passengers + globals.total_take_at_homr(this.passengers_array,this.take_at_home) * tah//: this.route.price
-    var items_price = this.items && this.curStatus > globals.TrajetCardStatus.ChooseItems  ?  this.total_price_babyseats()+ this.total_price_meals()+ this.total_price_suitcase() : 0
+    var items_price = this.items && this.curStatus > globals.TrajetCardStatus.ChooseItems  ?  this.total_price_babyseats()+ this.total_price_meals()+ this.total_price_suitcase() + this.total_price_services(): 0
     var price_plus = this.route.status ?  5 :  0
+    // console.log('infos prix ',this.total_price_babyseats(),' ',
+    //   this.total_price_meals(),' ',
+    //   this.total_price_suitcase(),' ',
+    //   this.total_price_services())
     return  passengers_price + items_price + price_plus //this.passengers ? (passengers_price + items_price ).toFixed(2) : this.route.price + tah
   }
   isISameDay(){

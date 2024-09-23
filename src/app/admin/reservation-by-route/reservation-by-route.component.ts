@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ItemCategory, Item_Drive } from '../../model/Model/Item_Drive';
 import { Passenger } from '../../model/Model/Passenger';
-import { meals, total_take_at_homr } from 'src/global';
+import { convertDateTimeZone, filterMeals, filterServices, isMeal, isService, meals, total_take_at_homr } from 'src/global';
 import { Route } from '../../model/Model/Route';
 import { DatePipe } from '@angular/common';
 
@@ -75,7 +75,7 @@ export class ReservationByRouteComponent implements OnInit {
             let total_price = 0
             let cash_total = 0
             for (const res of reservations[key]) {
-              total_price += this.total_price_babyseats(res) + this.total_price_meals(res) + this.total_price_passenger(res)+ this.total_price_suitcase(res) + this.getTakeAtHomeOption(res)
+              total_price += this.total_price_babyseats(res) + this.total_price_meals(res) + this.total_price_passenger(res)+ this.total_price_suitcase(res) + this.total_price_services(res) + this.getTakeAtHomeOption(res)
               this.total_passenger_ += this.total_passenger(res)
               this.total_price_passenger_ += this.total_price_passenger(res)
               this.total_take_at_home += this.getTakeAtHomeOption(res)
@@ -101,11 +101,27 @@ export class ReservationByRouteComponent implements OnInit {
               total_reservation: reservations[key].length,
               pointA : reservations[key][0].points[0] && reservations[key][0].points[0].address,
               transport : reservations[key][0] && reservations[key][0].id_car,
-              starting_date : reservations[key][0].starting_date,
-              arrival_date : reservations[key][0].arrival_date,
+              starting_date : convertDateTimeZone(reservations[key][0].starting_date),
+              arrival_date : convertDateTimeZone(reservations[key][0].arrival_date),
               cash_total : cash_total,
               pointB : reservations[key][0].points[1] && reservations[key][0].points[1].address,  })
         });
+        this.reservations.sort((a, b) => {
+          const dateA = new Date(a.starting_date);
+          const dateB = new Date(b.starting_date);
+      
+          // Vérifier si les deux dates sont valides
+          if (isNaN(dateA.getTime()) || isNaN(dateB.getTime())) {
+              return 0; // ou gérer l'erreur comme vous le souhaitez
+          }
+      
+          return dateA.getTime() - dateB.getTime();
+      });
+      
+      const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      console.log(userTimeZone); // Affiche quelque chose comme "America/New_York"
+
+
         console.log('element.quantity ', this.total_items1)
         // this.total_items = this.total_items1
         this.loading =false
@@ -124,7 +140,10 @@ export class ReservationByRouteComponent implements OnInit {
     this.formFilter.addControl('to', new FormControl(this.datepipe.transform(new Date(), 'yyyy-MM-dd')))
   }
   isMeal(item){
-    return item.category === ItemCategory.Meal
+    return isMeal(item)
+  }
+  isService(item){
+    return isService(item)
   }
   //@ts-ignore
   getPicMeal(name){
@@ -137,7 +156,7 @@ export class ReservationByRouteComponent implements OnInit {
   total_meals(reservation: Reservation){
     let somme = 0
     let items: Item_Drive[] = reservation.items
-    for (let item of items) {
+    for (let item of filterMeals(items)) {
       if(item.category === ItemCategory.Meal){
         somme += item.quantity
       }
@@ -148,7 +167,18 @@ export class ReservationByRouteComponent implements OnInit {
     let somme = 0
     let items: Item_Drive[] = reservation.items
     console.log('reservation.items ', reservation.items)
-    for (let item of items) {
+    for (let item of filterMeals(items)) {
+        if(item.category === ItemCategory.Meal){
+          somme += item.quantity * item.price
+        }
+    }
+    return somme
+  }
+  total_price_services(reservation: Reservation){
+    let somme = 0
+    let items: Item_Drive[] = reservation.items
+    console.log('reservation.items ', reservation.items)
+    for (let item of filterServices(items)) {
         if(item.category === ItemCategory.Meal){
           somme += item.quantity * item.price
         }
@@ -180,7 +210,7 @@ export class ReservationByRouteComponent implements OnInit {
   total_price_babyseats(reservation: Reservation){
     let somme = 0
     let items: Item_Drive[] = reservation.items
-    for (let item of items) {
+    for (let item of (items)) {
       if(item.category === ItemCategory.BabySeats){
         somme += item.quantity * item.price
       }

@@ -1,7 +1,7 @@
 
 
 <div >
-    <div [ngClass]="{'border-4': screen_all, 'border-primary': screen_all }"  class="pointer block   border-top mb-0 pb-0 pt-3 shadow-none timeline">
+    <div [ngClass]="{'border-4': screen_all, 'border-primary': screen_all }"  class="pointer block   border-top mb-0 pb-0  pt-3 shadow-none timeline">
 
 
                 <div *ngIf="screen_all" class="gx-0 pe-3 ps-3 pt-3 row">
@@ -10,7 +10,44 @@
                     <i class="col-auto fa-angle-down fa-lg fas m-auto pe-4 text-muted"></i>
                     <hr class="mt-4">
                 </div>
-                <app-empty-page [title] = "'Aucun_Trajet_reserve' | translate" *ngIf="!lastChecklist" title_class="fs-5"></app-empty-page>
+                <!-- <app-empty-page [title] = "'No_Journey_Created' | translate" *ngIf="!lastChecklist" title_class="fs-5"></app-empty-page> -->
+
+              <form  *ngIf="!lastChecklist" (ngSubmit)="onSubmit()" [formGroup]="checkListForm" class="p-2">
+                <div  class="d-flex gx-0 row row-cols-2 row-cols-xl-2">
+
+                      <div class=" pe-2">
+                          <div class="form-floating mb-3 " data-pg-dyn-id="did_107">
+                              <input type="date" formControlName="begindate0"   class="form-control" id="begindate0" [placeholder]="'Surname' | translate">
+                              <label for="begindate0">{{ 'departure_date' |translate}}</label>
+                          </div>
+                      </div>
+                      <div class=" pe-2">
+                          <div class="form-floating mb-3 " data-pg-dyn-id="did_107">
+                              <input type="date" class="form-control" formControlName="enddate0"   id="enddate0" [placeholder]="'Surname' | translate">
+                              <label for="enddate0">{{ 'return_date' |translate}}</label>
+                          </div>
+                      </div>
+                      <div class=" pe-2">
+                        <div class="form-floating mb-3" data-pg-dyn-id="did_107">
+                            <input list="countrydatalistOptions"   type="email" class="form-control  text-capitalize"  formControlName="country0" id="country0" [placeholder]="'Surname' | translate" value>
+                            <!-- <input list="countrydatalistOptions"   (change)="countrySelected($event)" type="email" class="form-control  text-capitalize"  formControlName="country0" id="country0" [placeholder]="'Surname' | translate" value> -->
+                            <label for="country0">{{'country' | translate | titlecase}}</label>
+                            <!-- <datalist id="countrydatalistOptions">
+                              <option  *ngFor="let country of countries" [value]="country.translations.fr ? country.translations.fr : country.name">
+                          </datalist> -->
+                        </div>
+                    </div>
+                    <div class=" pe-2">
+                        <div class="form-floating mb-3" data-pg-dyn-id="did_107">
+                            <input list="citydatalistOptions" type="email"  formControlName="city0" class="form-control text-capitalize" id="city0" [placeholder]="'Surname' | translate">
+                            <label for="city0">{{'city' | translate | titlecase}}</label>
+                            <!-- <datalist id="citydatalistOptions">
+                              <option class="text-l" *ngFor="let city of getCities(currentCountry)" [value]="city.name">
+                          </datalist> -->
+                        </div>
+                    </div>
+                  </div>
+                          </form>
     </div>
 
     <div routerLinkActive="router-link-active"  *ngIf="lastChecklist" class="pointer block  mb-0 pb-0 pt-3 shadow-none timeline">
@@ -41,7 +78,7 @@
           </div>
           <p *ngIf="lastChecklist && FutureChecklists.length > 1" [routerLink]="['/mes-checklists']" routerLinkActive="router-link-active" [queryParams] = "{archived: false}"  class="ps-4 text-start text-warning pointer">+{{FutureChecklists.length - 1}} {{'Voyage' | translate}}...</p>
     </div>
-        <div (click)="wantCreateChecklist.emit()"  routerLinkActive="router-link-active"  class=" d-flex align-items-center card mb-2 p-3 shadow-none">
+        <div (click)="onSubmit()"  routerLinkActive="router-link-active"  class=" d-flex align-items-center card mb-2 p-3 shadow-none">
         <!-- <div [routerLink]="['/checklist/creation']" routerLinkActive="router-link-active"  class="card mb-2 p-3 shadow-none"> -->
           <button class="btn btn-lg btn-outline-primary fs-5 fw-bolder rounded1 rounded-01  border-2 border-primary w-auto" type="text" style="height: 50px;">
               <i class="fa-clipboard-check fa-lg fas pe-2"></i>{{'Add_a_journey' | translate}}

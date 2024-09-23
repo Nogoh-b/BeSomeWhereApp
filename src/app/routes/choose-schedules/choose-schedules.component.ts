@@ -36,6 +36,7 @@ export class ChooseSchedulesComponent implements OnInit {
       console.log(this.route_params); // popular
       this.routeService.get(this.route_params).subscribe(result =>{
             // console.log(result);
+            console.log('route.points1 ', result)
             for (const route of result) {
               console.log('route.points ', route)
             }
@@ -81,10 +82,17 @@ export class ChooseSchedulesComponent implements OnInit {
 
   goToNextStep(route: Route, nbr_passengers: number, index: number){
     if(!this.userServiceFireBase.getCurrentUser()){
-      this.toast_c.open("Be Sommewhere", "Vous devez être connecté avant de continuer")
+      this.toast_c.open("Be Somewhere", "HaveToConnected")
       return
     }
     this.reservation.route_id = route.id
+    this.reservation.points = route.points
+    this.reservation.arrival_date = route.arrival_date
+    this.reservation.to_station = route.to_station
+    this.reservation.total_places = route.total_places
+    this.reservation.price = route.price
+    this.reservation.total_places = route.total_places
+    this.reservation.starting_date = route.starting_date
     this.reservation.take_at_home = this.take_at_homes[index]
     this.reservation.user_id = this.userServiceFireBase.getCurrentUser().id
     // this.reservation.take_at_home = this.take_at_home

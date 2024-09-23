@@ -32,6 +32,33 @@ export class PointShedludesListComponent implements OnInit {
   // formPoint: FormGroup
   @ViewChild(ToastComponent) toast_c: ToastComponent;
 
+   // Limite du nombre de pages à afficher dans la pagination
+   maxVisiblePages: number = 5;
+
+
+ 
+   showFirstPage() {
+     return this.currentPage > Math.floor(this.maxVisiblePages / 2);
+   }
+ 
+   showLeftEllipsis() {
+     return this.currentPage > Math.floor(this.maxVisiblePages / 2);
+   }
+ 
+   getMiddlePages() {
+     const start = Math.max(0, this.currentPage - Math.floor(this.maxVisiblePages / 2));
+     const end = Math.min(this.pagination.length, start + this.maxVisiblePages);
+     return Array.from({ length: end - start }, (_, i) => start + i);
+   }
+ 
+   showRightEllipsis() {
+     return this.currentPage < this.pagination.length - Math.ceil(this.maxVisiblePages / 2) - 1;
+   }
+ 
+   showLastPage() {
+     return this.currentPage < this.pagination.length - Math.ceil(this.maxVisiblePages / 2) - 1;
+   }
+
   constructor(private fb: FormBuilder,
     private driveBaseService: DriveBaseService,
     private routeService : RouteService,
@@ -41,8 +68,8 @@ export class PointShedludesListComponent implements OnInit {
       const routeParams = this.route.snapshot.paramMap;
       this.id = routeParams.get('id');
       this.driveBaseService.get({station: this.id}).subscribe(drive_base =>{
-        this.drive_base = drive_base
-        this.results = drive_base
+        this.drive_base = this.sortByDateDescending(drive_base)
+        this.results = this.sortByDateDescending(drive_base)
         console.log ( 'drive_base111 ', drive_base)
 
         let a: number = Number((drive_base.length/per_page))
@@ -55,7 +82,10 @@ export class PointShedludesListComponent implements OnInit {
     change(){
       console.log(this.sort_option)
     }
-
+    sortByDateDescending(dataArray: Drive_Base[]) {
+      return dataArray.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    }
+  
     navigateToPage(i){
       if(i === ( this.pagination && this.pagination.length) || i < 0  )
         return
@@ -140,6 +170,7 @@ export class PointShedludesListComponent implements OnInit {
     this.toast_c.open('Be Somewhere', 'Point(s) ajouté (s)')
     if(this.results.filter(r => r.id === drive.id).length === 0)
     this.results.push(drive)
+    this.sortByDateDescending(this.results)
     console.log(this.results)
   }
 
@@ -151,15 +182,18 @@ export class PointShedludesListComponent implements OnInit {
     var d = new Drive_Base()
     d = e
     this.routeService.get({drive_id: d.id}).subscribe(routes =>{
-      console.log('routeeeeeeee ',routes)
+      console.log('routeeeeeeees ',routes)
       this.driveBaseService.post(d).subscribe(drive =>{
         routes.forEach((element, index) => {
           element.drive_id = drive.id
-          element.point = !Boolean(drive.to_station) ? element.points[0].id  :  element.points[0].id 
+          element.point = !Boolean(drive.to_station) ? element.points[1].id  :  element.points[0].id 
+          // element.to_station = drive.to_station
           // console.log('routeeeeeeee ',element , ' ', Boolean(drive.to_station) )
 
           this.routeService.post(element).subscribe(route =>{
             this.loading_d =false
+            console.log('routeeeeeeee dupliqué ',routes)
+
             this.toast_c.open("Be Somewhere ", "Horraire Dupliqué")
             console.log(drive)
             if(index === routes.length - 1)

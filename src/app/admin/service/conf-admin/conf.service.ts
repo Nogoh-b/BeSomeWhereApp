@@ -9,6 +9,6 @@ export class ConfServiceAdmin {
 
   constructor(private httpClient: HttpClient) { }
     getConf(){
-      return this.httpClient.get<any>('./assets/conf/config-v1.json')
+      return this.httpClient.get<any>('./assets/conf/config-v1.0.json')
   }
 }

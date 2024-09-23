@@ -112,8 +112,8 @@
                                           <table class=" table table-hover">
                                               <thead class="">
                                                   <tr class="">
-                                                      <th scope="col" class="text-center">Status</th>
-                                                      <th scope="col">Description</th>
+                                                      <!-- <th scope="col" class="text-center">Status</th> -->
+                                                      <th scope="col" style="width: 33%;">Description</th>
                                                       <th scope="col" class="text-center">{{'things_to_add' | translate}}</th>
                                                       <th scope="col" class="text-center">{{'added_in' | translate}} </th>
                                                       <th></th>
@@ -121,9 +121,9 @@
                                               </thead>
                                               <tbody class="">
                                                   <tr *ngFor="let file of getElements()">
-                                                        <th scope="row" class="text-center"><i *ngIf="file.total === file.qty" class="fa-check-circle far text-success"></i></th>
-                                                        <td><p>{{file.name}}</p></td>
-                                                        <td class="text-center">{{file.total}}</td>
+                                                        <!-- <th scope="row" class="text-center"><i *ngIf="file.total === file.qty" class="fa-check-circle far text-success"></i></th> -->
+                                                        <td><p [innerHTML]="getLanguage() === 'fr' || !file.name_en ? file.name : file.name_en"></p></td>
+                                                        <td class="text-center">{{file.total}}</td> 
                                                         <td class="text-center">{{file.qty}}</td>
                                                         <td>
                                                             <div>

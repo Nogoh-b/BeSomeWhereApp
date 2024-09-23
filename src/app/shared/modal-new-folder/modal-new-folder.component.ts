@@ -56,7 +56,7 @@ export class ModalNewFolderComponent implements OnInit {
   }
   isInvalid(){
       let elts = this.proposedChecklist.filter(r => r.name === this.folderForm.controls['name'].value)
-      console.log(Number(this.folderForm.controls['is_default'].value) === 1,  elts)
+      // console.log(Number(this.folderForm.controls['is_default'].value) === 1,  elts)
       return Number(this.folderForm.controls['is_default'].value) === 1 && elts.length === 0
   }
   onSubmit(){

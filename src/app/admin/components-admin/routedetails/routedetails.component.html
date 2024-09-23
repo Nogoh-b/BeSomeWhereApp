@@ -30,6 +30,7 @@
                     <p *ngIf="passenger.phone" class="fs-6 fw-normal text-black-50 text-start"><i class="fa-phone-alt fas pe-2 text-danger"></i>{{ passenger.phone }}</p>
                     <p *ngIf="passenger.email" class="fs-6 fw-normal text-black-50 text-start"><i class="fa-envelope fas pe-2 text-danger"></i>{{ passenger.email }}</p>
                     <p *ngIf="reservation.take_to_home_adr && i === 0 " class="fs-6 fw-normal text-black-50 text-start"><i class="fa-map-marker-alt fas pe-2 text-danger"></i>{{ reservation.take_to_home_adr }}</p>
+                    <p *ngIf="passenger.flight_number " class="fs-6 fw-normal text-black-50 text-start"><i class="fa-map-marker-alt fas pe-2 text-danger"></i>{{ passenger.flight_number }}</p>
                     <p *ngIf="i > 0 && passenger.birthday && passenger.birthday.length > 0" class="fs-6 fw-normal text-black-50 text-start"><i class="fa-map-marker-alt fas pe-2 text-danger"></i>{{ passenger.birthday  }}</p>
                 </div>
             </div>
@@ -69,6 +70,17 @@
                                 </div>
                             </div>
 
+                        </div>
+                    </div>
+                </div>
+
+                <div class="align-items-center border-bottom d-flex gx-2 p-3 row">
+                    <img src="assets/img/prestations-de-service_.png" class="col-auto pe-0 ps-0" width="50" height="50">
+                    <div class="col w-100">
+                        <div class="align-items-center d-flex g-0 row row-cols-3">
+                            <p class="col-6 fs-5 pe-2 ps-2 text-body text-start">{{'service_souvenirs1' | translate}}</p>
+                            <p class="col-3 fs-5 fst-italic text-end text-muted">x{{total_services().toFixed(0)}}</p>
+                            <p  *ngIf="hasPriceDetails" class="col-3 fs-5 fw-bold text-body text-end">{{total_price_services().toFixed(2)}} €</p>
                         </div>
                     </div>
                 </div>
@@ -161,7 +173,7 @@
             <div class="col w-100">
                 <div class="align-items-center d-flex g-0 row row-cols-2">
                     <p class="fs-4 fw-bold pe-2 ps-2 text-body text-start">Total</p>
-                    <p class="fs-4 fw-bold text-end text-info">{{(total_price_meals()+ total_take_at_home + total_price_suitcase() + total_price_passenger() + cash_total * 5 + total_price_babyseats()).toFixed(2)}} €</p>
+                    <p class="fs-4 fw-bold text-end text-info">{{(total_price_meals()+ total_take_at_home + total_price_suitcase() + total_price_passenger() + cash_total * 5 + total_price_babyseats() + total_price_services()).toFixed(2)}} €</p>
                 </div>
             </div>
         </div>

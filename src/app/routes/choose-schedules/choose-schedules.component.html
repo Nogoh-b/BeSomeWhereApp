@@ -8,10 +8,9 @@
 
           <div class="container pe-0 pe-xl-5 ps-0 ps-xl-5">
               <div class="bg-white mt-4 p-2">
-                  <p class="fs-3 fw-bold pb-4 pe-auto ps-4 pt-3">{{'timetable' | translate}}<span class="fs-4">({{'warning_traffic' | translate}}
-)</span></p>
+                  <p class="fs-3 fw-bold pb-4 pe-auto ps-4 pt-3">{{'timetable' | translate}} <span  class="fs-6 text-danger1">(</span><span [innerHTML]="'warning_traffic' | translate" class="fs-6  text-danger"></span><span  class="fs-6  text-danger1">)</span></p>
                   <div class="pe-0 ps-0 pe-md-4 ps-md-4" *ngFor="let route of routes let i = index">
-                      <div class="border-1 border-bottom border-dark border-top g-0 p-2 row row-cols-2 row_shedulde">
+                      <div class="border-1 border-bottom1 border-dark border-top g-0 p-2 row row-cols-2 row_shedulde">
                           <!-- <div class="align-items-center border-dark d-flex pb-2 pt-2">
                               <i class="fa-clock fa-lg fas pe-2 text-secondary"></i>
                               <p class="fs-5 fw-bold text-secondary">{{route.starting_date | date:'shortTime'}} - {{route.arrival_date | date:'shortTime'}}</p>
@@ -80,9 +79,9 @@
                             </div>
                         </div>
                     </div> -->
-                      <div class="align-items-sm-center align-items-start d-flex d-sm-flex flex-column flex-sm-row justify-content-sm-end justify-content-start">
+                      <div class="align-items-sm-center align-items-start d-flex d-sm-flex flex-column1 flex-sm-row justify-content-sm-end justify-content-around">
                           <app-spinner-bouton [value]="reservation && reservation.passengers ? reservation.passengers.length : 0" #spiner_btn [max_value] = "route.places"></app-spinner-bouton>
-                          <button [disabled]="spiner_btn.value <= 0" (click)="goToNextStep(route, spiner_btn.value,i)" routerLinkActive="router-link-active"  type="text" class="align-items-center btn btn-lg btn-outline-danger d-flex flex-row-reverse float-end fw-bold justify-content-center mt-3 mb-3" style="height: 55px;">
+                          <button [disabled]="spiner_btn.value <= 0" (click)="goToNextStep(route, spiner_btn.value,i)" routerLinkActive="router-link-active"  type="text" class="align-items-center btn btn-lg btn-outline-danger d-flex flex-row-reverse float-end fw-bold justify-content-center mt-3 mb-3 p-2" style="height: 55px;">
                               <i class="fa-arrow-right fas fw-bolder pb-1 ps-3 "></i>{{'continue_option' | translate}}
  ( {{take_at_homes[i] ? (route.price )* spiner_btn.value + price_take_to_home : route.price * spiner_btn.value }} € )
                           </button>

@@ -148,8 +148,8 @@ export class PointCreateComponent implements OnInit {
     this.formPoint = this.fb.group({});
     this.formPoint.addControl('title', new FormControl(''));
     this.formPoint.addControl('description', new FormControl(''));
-    this.formPoint.addControl('country', new FormControl('C', Validators.required));
-    this.formPoint.addControl('city', new FormControl('C', Validators.required));
+    this.formPoint.addControl('country', new FormControl('', Validators.required));
+    this.formPoint.addControl('city', new FormControl('', Validators.required));
     this.formPoint.addControl('address', new FormControl('', Validators.required));
     this.formPoint.addControl('is_station', new FormControl(false, Validators.required));
     this.formPoint.addControl('type', new FormControl('0', Validators.required));

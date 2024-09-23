@@ -3,7 +3,7 @@ import { Drive_Base } from './../../../model/Model/Drive_Base';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { RouteService } from 'src/app/service/route/route.service';
 import { DataType, TrajetCardStatus, total_take_at_homr } from './../../../../global';
-import { Item_Drive, ItemCategory } from './../../../model/Model/Item_Drive';
+import { Item_Drive } from './../../../model/Model/Item_Drive';
 import { PassengerService } from './../../../service/passenger/passenger.service';
 import { ReservationService } from './../../../service/reservation/reservation.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -132,12 +132,15 @@ export class DetailsComponent implements OnInit {
     let i = '14:10'
     let d_s = new Date(this.formGroupRoute.value.date)
     let d_a = this.drive.date//new Date(this.drive.date)
-    d_s.setHours(this.formGroupRoute.value.date_time.split(':')[0],this.formGroupRoute.value.date_time.split(':')[1])
+    /*d_s.setHours(this.formGroupRoute.value.date_time.split(':')[0],this.formGroupRoute.value.date_time.split(':')[1])*/
     // d_a.setHours(this.formGroupRoute.value.arrival_time.split(':')[0],this.formGroupRoute.value.arrival_time.split(':')[1])
-    d_s.setHours(d_s.getHours() + 1)
+    
+    /*d_s.setHours(d_s.getHours() + 1)*/
+
     // d_a.setHours(d_a.getHours() + 1)
-    var d_string = d_s.toISOString().replace('T',' ')
-    d_string = d_string.replace('.000Z','')
+    /*var d_string = d_s.toISOString().replace('T',' ')
+    d_string = d_string.replace('.000Z','')*/
+    var d_string = d_s.toISOString()
     d.starting_date = this.drive.to_station ? d_string : d_a
     d.arrival_date = !this.drive.to_station ? d_string : d_a
     if(new Date(d.starting_date) > new Date(d.arrival_date) ){

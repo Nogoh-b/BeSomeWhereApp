@@ -12,7 +12,7 @@ export class ChecklistListComponent implements OnInit {
 
   checklists: Checklist[]
   results: Checklist[]
-  pagination
+  pagination 
   currentPage: number =  0
   per_page: number = per_page;
   sort_option: string
@@ -34,9 +34,9 @@ export class ChecklistListComponent implements OnInit {
       this.results = checklist.filter( checklist =>{return checklist.user})
       console.log ( 'checklist111 ', checklist)
 
-      let a: number = Number((this.getChecklists().length/per_page))
+      let a: number = Number((this.checklists.length/per_page))
       // this.checks_table = init_selection(checklist)
-      //  alert(a)
+      //  alert(a+ ' '+this.getChecklists().length)
       this.pagination = new Array(Math.ceil(a));
       this.init_selection(this.getChecklists())
     })

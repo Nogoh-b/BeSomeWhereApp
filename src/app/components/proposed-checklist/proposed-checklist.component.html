@@ -14,7 +14,8 @@
                 </div>
                 <div class="ps-2 w-100">
                     <div class="align-items-center d-flex justify-content-between ">
-                        <p class="fs-5 fw-bold text-dark">{{checlist.name}}</p>
+                        <p [innerHTML]="getLanguage() === 'fr' || !checlist.name_en ? checlist.name : checlist.name_en" class="fs-5 fw-bold text-dark">{{checlist.name}}</p>
+                        
                     </div>
                 </div>
             </button>
@@ -22,21 +23,18 @@
         <div id="bodyitem{{i}}" class="accordion-collapse border-white collapse" aria-labelledby="collapse1" data-bs-parent="#panels1">
             <div class="accordion-body border-white pe-2 ps-2 pt-0">
                 <div *ngFor="let item of getItems(checlist.id)" class="border-bottom gx-0 pb-3 pe-2 ps-2 pt-3 row row_item">
-                    <div class="align-items-center col-auto d-flex pe-0">
-                        <button [disabled]="spinner.value <= 0 || !file " (click)="addItem(item)" type="button" class="btn btn-light btn-outline-primary  border-2 border-primary">{{'transfer_to_suitcase' | translate}} </button>
+                    <div class="align-items-center col-auto d-flex d-flex ps-2">
+                        <p [innerHTML]="getLanguage() === 'fr' || !item.name_en ? item.name : item.name_en" class="fw-bold  pe-0 text-start"></p>
+                        <!-- <p  class="fw-bold  pe-0 text-start">{{item.name_en | json}}</p> -->
+                        <!-- <p  class="fw-bold  pe-0 text-start">{{getLanguage()}}</p> -->
                     </div>
-                    <div class="align-items-center col d-flex ps-2">
-                        <p class="fw-bold  pe-0 text-start">{{item.name}}</p>
-                    </div>
-                    <div class="align-items-lg-center col-12 col-lg-auto d-flex d-lg-flex justify-content-end ps-0">
-                      <app-spinner-bouton (value_changed)="item.total = $event" #spinner [max_value]="100" [label]="'quantity' | translate" ></app-spinner-bouton>
-                        <!-- <form id="number-spinner-horizontal" class="col-auto ps-3 t-neutral">
-                            <fieldset class="l-contain--medium me-n2 spinner spinner--horizontal">
-                                <button class="align-items-center bg-dark border-0 d-flex fw-bolder js-spinner-horizontal-subtract justify-content-center spinner__button spinner__button--left text-light" data-type="subtract" title="Subtract 1" aria-controls="spinner-input">- </button>
-                                <input type="number" class="align-items-center d-flex js-spinner-input-horizontal justify-content-center spinner__input" id="spinner-input" value="0" min="0" max="20" step="1" pattern="[0-9]*" role="alert" aria-live="assertlive" style="width: 25px;"/>
-                                <button data-type="add" class="align-items-center bg-dark border-0 d-flex fw-bolder js-spinner-horizontal-add justify-content-center spinner__button spinner__button--right text-light" title="Add 1" aria-controls="spinner-input">+ </button>
-                            </fieldset>
-                        </form> -->
+                    <div class="d-flex align-items-center justify-content-around">
+                        <div class="align-items-center pt-4 pe-0">
+                            <button [disabled]="spinner.value <= 0 || !file " (click)="addItem(item)" type="button" class="btn btn-light btn-outline-primary  border-2 border-primary">{{'transfer_to_suitcase' | translate}} </button>
+                        </div>
+                        <div class="align-items-lg-center  col-lg-auto d-flex d-lg-flex justify-content-end ps-0">
+                        <app-spinner-bouton (value_changed)="item.total = $event" #spinner [max_value]="100" [label]="'quantity' | translate" ></app-spinner-bouton>
+                        </div>
                     </div>
                 </div>
             </div>

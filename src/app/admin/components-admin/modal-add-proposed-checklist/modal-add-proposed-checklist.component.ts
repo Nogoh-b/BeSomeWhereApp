@@ -5,7 +5,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router';
 import { MapService } from './../../../service/map/map.service';
 import { CountriesService } from './../../../service/countries/countries.service';
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { ToastComponent } from 'src/app/shared/toast/toast.component';
 import { ItemProposedService } from 'src/app/service/item_proposed/item-proposed.service';
 import { Item_Proposed } from 'src/app/model/Model/Item_Proposed';
@@ -16,7 +16,7 @@ import { Item_Checklist_Categorie } from 'src/app/model/Model/Item_Checklist_Cat
   templateUrl: './modal-add-proposed-checklist.component.html',
   styleUrls: ['./modal-add-proposed-checklist.component.css']
 })
-export class ModalAddProposedChecklistComponent implements OnInit {
+export class ModalAddProposedChecklistComponent implements OnInit, AfterViewInit {
 
   id:string
   item: Item_Proposed
@@ -32,6 +32,9 @@ export class ModalAddProposedChecklistComponent implements OnInit {
   formItem_Proposed: FormGroup
   constructor(private fb: FormBuilder, private itemCatService: ItemChecklistCategoryService, private itemService: ItemProposedService  ,private countriesService: CountriesService, private mapService: MapService, private route:ActivatedRoute) {
 
+
+  }
+  ngAfterViewInit(): void {
 
   }
 
@@ -51,6 +54,7 @@ export class ModalAddProposedChecklistComponent implements OnInit {
     this.item = item
     this.formItem_Proposed = this.fb.group({});
     this.formItem_Proposed.addControl('name', new FormControl(item ? item.name :''));
+    this.formItem_Proposed.addControl('name_en', new FormControl(item && item.name_en  ? item.name_en :''));
     this.formItem_Proposed.addControl('category_id', new FormControl(item ? item.category_id : this.categories[0] && this.categories[0].id));
   }
   onSumit(){

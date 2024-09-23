@@ -9,11 +9,17 @@ import { TranslationService } from 'src/app/service/translation/translation.serv
 export class LanguageSelectorComponent {
   selectedLanguage: string;
 
+  languages = [
+    { value: 'fr', label: 'Français', flagClass: 'fr' },
+    { value: 'en', label: 'English', flagClass: 'gb' },
+  ];
   constructor(private translationService: TranslationService) {
     this.selectedLanguage = translationService.getLanguage();
   }
 
-  changeLanguage(): void {
+
+  changeLanguage(lang = 'en'): void {
+    this.selectedLanguage  = lang
     this.translationService.setLanguage(this.selectedLanguage);
   }
 }

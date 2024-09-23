@@ -103,20 +103,22 @@ export class ChoosePassengersComponent implements OnInit {
       psg.first_name =   data['first_name' + index]
       psg.last_name =   data['last_name' + index]
       psg.gender =   data['gender' + index]
+      psg.flight_number =   data['flight_number' + index]
       psg.phone =   data['phone' + index]
       psg.email =   data['email' + index]
       psg.id =   data['id' + index]
       psg.take_at_home =   data['take_at_home' + index]
-      psg.birthday = psg.take_at_home && index > 0 || this.reservation.take_at_home && index === 0  ?  data['date' + index] : ''
+      psg.birthday =  psg.take_at_home && index > 0 ||  index === 0  ?  data['date' + index] : ''
+      // psg.birthday = psg.take_at_home && index > 0 || this.reservation.take_at_home && index === 0  ?  data['date' + index] : ''
       psgs.push(psg);
     }
 
     //update reseravation data
     let reservation = this.reservation//JSON.parse(localStorage.getItem('reservation'))
     reservation.take_to_home_adr = data.take_to_home_adr
-    // console.log(reservation)
     // return
     reservation.passengers = psgs
+    console.log(reservation)
     reservation.for_disabled = data.for_disabled
     localStorage.setItem('reservation', JSON.stringify(reservation));
     console.log(JSON.parse(localStorage.getItem('reservation')))
@@ -149,6 +151,7 @@ export class ChoosePassengersComponent implements OnInit {
       // d.setFullYear(d.getFullYear() - y);
       this.passengersForm.addControl('first_name'+i, new FormControl(user  && user.first_name ? user.first_name : '', Validators.required));
       this.passengersForm.addControl('last_name'+i, new FormControl(user   && user.last_name ? user.last_name : '', Validators.required));
+      this.passengersForm.addControl('flight_number'+i, new FormControl(user   && user.flight_number ? user.flight_number : '', null));
       const date = i > 0 ? user.birthday : this.datepipe.transform(user.birthday, 'yyyy-MM-dd')
       this.passengersForm.addControl('date'+i, new FormControl(user   && user.birthday ? date  : '', i === 0 ? [Validators.required,ValidateDate(d)] : null));
       this.passengersForm.addControl('gender'+i, new FormControl(user   && user.gender ? user.gender : '0'));

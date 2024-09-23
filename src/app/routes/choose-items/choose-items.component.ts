@@ -30,7 +30,7 @@ export class ChooseItemsComponent implements OnInit {
   server = SERVER_FOR_UPLOAD
   email_admin = email_admin
   proposed_items_type : string[] = JSON.parse(localStorage.getItem("conf")).small_pleasures_type
-  curCategory = this.proposed_items_type.length - 1
+  curCategory = 7
   reservation : Reservation = localStorage.getItem('reservation') && JSON.parse(localStorage.getItem('reservation'));
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -161,7 +161,8 @@ export class ChooseItemsComponent implements OnInit {
         }
       }
     }
-    return  isInSearch && (item.sub_category.toString() === this.curCategory.toString() ||  (isInSearch && this.curCategory == this.proposed_items_type.length - 1))
+    return  isInSearch && (item.sub_category.toString() === this.curCategory.toString() )
+    // return  isInSearch && (item.sub_category.toString() === this.curCategory.toString() ||  (isInSearch && this.curCategory == this.proposed_items_type.length - 1))
      console.log(item.category.toString() +'=== '+this.curCategory.toString())
   }
 
@@ -178,6 +179,7 @@ export class ChooseItemsComponent implements OnInit {
     })
     items = items.concat(meals_choosed).concat(babySeats_choosed);
     console.log(items);
+    // return
 
     //update reseravatio data
     // if(items.length > 0 ){
@@ -187,9 +189,12 @@ export class ChooseItemsComponent implements OnInit {
     // }
     console.log(localStorage.getItem('reservation'))
 
-    this.router.navigate(['trajets/creation/5'])
+    this.router.navigate(['trajets/creation/4_2'], {state: {route_id: this.curRoute.id }, queryParams:{route_id: this.curRoute.id }})
+    // this.router.navigate(['trajets/creation/5'])
   }
-
+  filterItems(items: Item_Drive[]){
+    return items.filter(item => item.sub_category === 1 || item.sub_category === 3 )
+  }
   qty_meal_changed(index, value){
     this.meals[index].quantity = value;
     console.log(this.meals, ' ',value )
@@ -205,7 +210,7 @@ export class ChooseItemsComponent implements OnInit {
 
   total_meals(){
     let somme = 0
-    for (const meal of this.meals) {
+    for (const meal of globals.filterMeals(this.meals)) {
       somme += meal.quantity * meal.price
     }
     return somme.toFixed(2);
@@ -223,7 +228,7 @@ export class ChooseItemsComponent implements OnInit {
     return somme.toFixed(2);
   }
   get_totals(){
-    return Number(this.total_meals()) + Number(this.total_babyseats()) + Number(this.total_suitcase())
+    return Number(this.total_meals()) //+ Number(this.total_babyseats()) + Number(this.total_suitcase())
   }
 
   canSelectItems(){

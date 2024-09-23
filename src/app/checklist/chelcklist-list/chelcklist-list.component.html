@@ -60,5 +60,5 @@
 <app-preloader-checklist-list *ngIf="!checklists"></app-preloader-checklist-list>
 
 <div *ngIf="checklists && checklists.length === 0"  class="vh-100">
-  <app-empty-page [btn2_text]="(isArchived ? 'my_journeys' : 'Archived_Journey') | translate" (btn2_clicked)="screen_archived(isArchived)" route_btn1="checklist/creation" [btn1_text]="'Add_a_journey'" [title] = "'Aucun_Trajet_reserve'"  *ngIf="checklists && checklists.length === 0" title_class="fs-5"></app-empty-page>
+  <app-empty-page [btn2_text]="(isArchived ? 'my_journeys' : 'Archived_Journey') | translate" (btn2_clicked)="screen_archived(isArchived)" route_btn1="checklist/creation" [btn1_text]="'Add_a_journey'" [title] = "'No_Journey_Created'"  *ngIf="checklists && checklists.length === 0" title_class="fs-5"></app-empty-page>
 </div>

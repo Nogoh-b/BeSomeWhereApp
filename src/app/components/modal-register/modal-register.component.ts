@@ -104,22 +104,22 @@ export class ModalRegisterComponent implements OnInit {
     this.error = ''
     if(!this.registerForm.valid){
       console.log("Be Somewhere", "Des champs sont mals remplis ou vides")
-      this.toast_c.open("Be Somewhere", "Des champs sont mals remplis ou vides")
-      this.error = 'Des champs sont mals remplis ou vides'
+      this.toast_c.open("Be Somewhere", "NotFilled")
+      this.error = 'NotFilled'
       return
     }
     const indexName = this.users.findIndex(user => user.name === value.name);
     if (indexName !== -1) {
-        this.toast_c.open("Be Somewhere", "Nom d'utilisateur déja pris");
-      this.error = 'Nom d\'utilisateur déja pris'
-      console.log("Be Somewhere", "Nom d'utilisateur déja pris");
+        this.toast_c.open("Be Somewhere", "UserTaken");
+      this.error = 'UserTaken'
+      console.log("Be Somewhere", "UserTaken");
         return;
     }
 
     const indexEmail = this.users.findIndex(user => user.email === value.email);
     if (indexEmail !== -1) {
-        this.toast_c.open("Be Somewhere", "Email déja pris");
-      this.error = 'Email déja pris'
+        this.toast_c.open("Be Somewhere", "EmailTaken");
+      this.error = 'EmailTaken'
       console.log("Be Somewhere", "Email déja pris", this.users[indexEmail].email ,'=== ',value.email, ' ', indexEmail);
         console.log(this.users);
         return;
@@ -154,7 +154,7 @@ export class ModalRegisterComponent implements OnInit {
       })
     }, err => {
       this.isLoading = false
-      this.toast_c.open("Be Somewhere",err);
+      this.toast_c.open("Be Somewhere",err.code);
     })
   }
 

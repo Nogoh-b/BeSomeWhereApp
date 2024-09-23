@@ -5,9 +5,9 @@ import { AuthGuard } from './guards/auth.guard';
 import { UserServiceFireBase } from './service/core/user.service';
 import { AuthService } from './service/core/auth.service';
 import { ComponentsModule } from './components/components.module';
-import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { LocationStrategy, PathLocationStrategy, HashLocationStrategy } from '@angular/common';
+import { LocationStrategy, PathLocationStrategy, HashLocationStrategy, registerLocaleData } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -40,12 +40,15 @@ import { ConditionsOfSaleComponent } from './pages_utils/conditions-of-sale/cond
 import { LastCommunicationComponent } from './pages_utils/last-communication/last-communication.component';
 import { TermsOfUseAndPrivacypolicyComponent } from './pages_utils/terms-of-use-and-privacypolicy/terms-of-use-and-privacypolicy.component';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
+import localeFr from '@angular/common/locales/fr';
 // import { NgxStripeModule } from 'ngx-stripe';
 // import {JpImagePreloadModule} from 'ng-image-preload';
 // NgxStripeModule.forRoot('***your-stripe-publishable-key***'),
 // function initializeApp(translationService: TranslationService) {
 //   return () => translationService.setLanguage('fr'); // Définissez la langue initiale ici
 // }
+registerLocaleData(localeFr, 'fr');
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -95,7 +98,7 @@ import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
   exports:[ 
   ]
 ,
-    providers: [TranslationService, AuthService,{ provide: LocationStrategy, useClass: HashLocationStrategy }, UserServiceFireBase, DatePipe, AuthGuard],
+    providers: [TranslationService, AuthService,{ provide: LocationStrategy, useClass: HashLocationStrategy },{ provide: LOCALE_ID, useValue: 'fr' }, UserServiceFireBase, DatePipe, AuthGuard],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

@@ -203,7 +203,7 @@
 
             <div class="bg-white container-fluid mb-1 mt-2 p-4 div-propostion" style="z-index: 250;">
                 <p *ngIf="this.address && this.address"  class="fs-5 pb-0 text-muted1 text-black font-bolder">{{'select_stop_prompt' | translate}}:</p>
-                <!-- <p *ngIf="this.address && this.address"  class="fs-5 pb-0 text-muted">Liste des points les plus proches de {{address && address.address}}:</p> -->
+                <p *ngIf="this.address && this.address"  class="fs-6  lh-base text-danger  spanb-0 text-muted1"> {{'select_stop_promptDetails' | translate}}:</p>
                 <div class="pb-0">
                   <div class="list-group overflow-auto" style="height: 250px;">
                           <app-loading-page class="h-100" *ngIf="!aroundPoints"></app-loading-page>

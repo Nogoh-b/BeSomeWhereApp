@@ -199,8 +199,8 @@ export class PointDetailsComponent implements OnInit {
     this.formPoint = this.fb.group({});
     this.formPoint.addControl('title', new FormControl(this.point ? this.point.title : 'd'));
     this.formPoint.addControl('description', new FormControl(this.point ? this.point.description : 'd'));
-    this.formPoint.addControl('country', new FormControl(this.point ? this.point.country : 'C', Validators.required));
-    this.formPoint.addControl('city', new FormControl(this.point ? this.point.city : 'C', Validators.required));
+    this.formPoint.addControl('country', new FormControl(this.point ? this.point.country : 'Belgique', Validators.required));
+    this.formPoint.addControl('city', new FormControl(this.point ? this.point.city : 'Bruxelles', Validators.required));
     this.formPoint.addControl('address', new FormControl(this.point ? this.point.address : '', Validators.required));
     this.formPoint.addControl('type', new FormControl(this.point ? this.point.type : '', Validators.required));
     this.formPoint.addControl('is_station', new FormControl(this.point ? this.point.is_station : '', Validators.required));

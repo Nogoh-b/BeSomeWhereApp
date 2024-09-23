@@ -47,6 +47,8 @@
                     <th scope="col" width="20%">Date de creation</th>
                     <th>Image</th>
                     <th>Nom</th>
+                    <th>Country</th>
+                    <th>City</th>
                     <th>Adresse</th>
                     <!-- <th class="text-end">Pays</th> -->
                     <th class="text-end">Telephone</th>
@@ -66,7 +68,9 @@
                         <!-- <img [src]="user.image" width="25"> -->
                     </td>
                     <td ><i class="fa fa-check-circle-o green"></i><span class="ms-1">{{user.first_name + ' '+user.last_name}}</span></td>
-                    <td ><span class="ms-1">{{user.country ? user.country +'-'+user.city : "Non Renseigné"}}</span></td>
+                    <td ><span class="ms-1">{{!user.country || user.country === '' ? user.cur_country : user.country}}</span></td>
+                    <td ><span class="ms-1">{{user.city ? user.city : 'Non Spécifiée' }}</span></td>
+                    <td ><span class="ms-1">{{user.address ? user.address : 'Non Spécifiée' }}</span></td>
                     <td  class="fw-bold text-end"><span class="fw-normal">{{user.phone}}</span> </td>
                     <td  class="fw-bold text-end"><span class="fw-normal">{{user.email }}</span> </td>
                     <td  class="text-end"><span class="fw-normal">

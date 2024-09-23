@@ -59,6 +59,13 @@ export class UserListComponent implements OnInit {
     // console.log('users  ',this.currentPage, '=== ',this.pagination.length - 1,' ', this.currentPage === this.pagination.length - 1)
     return users
   }
+  getAddress(user:User){
+    let address = user.cur_country
+    if(user.country && !user.address)
+      address = user.country
+    if(user.address)
+      address = user.address
+  }
   searchData(e){
     // alert(e.target.value)
     const searchConditions = [

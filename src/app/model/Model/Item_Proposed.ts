@@ -7,6 +7,7 @@ import { MealCategory } from "src/global"
 
   id: number
   name: string
+  name_en: string
   category_id: number
   price: number
   category: Category

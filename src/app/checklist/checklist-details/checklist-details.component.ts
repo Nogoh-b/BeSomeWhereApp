@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Checklist } from 'src/app/model/Model/Checklist';
 import { FileChecklistService } from 'src/app/service/file_checklist/file-checklist.service';
+import { TranslationService } from 'src/app/service/translation/translation.service';
 
 @Component({
   selector: 'app-checklist-details',
@@ -18,15 +19,19 @@ export class ChecklistDetailsComponent implements OnInit {
   folders : Array<File_Checklist> = []
   @ViewChild(ToastComponent) toast_c: ToastComponent
   checklist : Checklist //= {"id":1,"title":"Visite Cameroun","with_baby":false,"user_id":1,"created_at":"2021-10-07 19:48:03","updated_at":"2021-11-09 01:41:03","stats":{"total_files":8,folders: {id:1},files: {id:1},"total_folders":5,"total_qty":280,"qty":83},"transports":[{"id":99,"transport_id":1,"checklist_id":1,"created_at":"2021-11-09 01:41:03","updated_at":"2021-11-09 01:41:03"},{"id":100,"transport_id":2,"checklist_id":1,"created_at":"2021-11-09 01:41:03","updated_at":"2021-11-09 01:41:03"},{"id":101,"transport_id":4,"checklist_id":1,"created_at":"2021-11-09 01:41:03","updated_at":"2021-11-09 01:41:03"}],"routes":[{"id":9,"country":"France","city":"Paris","checklist_id":1,"starting_date":"2021-11-08 00:00:00","arrival_date":"2011-11-28 00:00:00","created_at":"2021-11-08 18:29:20","updated_at":"2021-11-09 01:41:03"}]}
+  language = 'en'
   constructor(public route: ActivatedRoute,
-    private router: Router,
+    private router: Router, private translationService: TranslationService ,
+    
     private checklistService: ChecklistService,
     private fileChecklistService: FileChecklistService) {
 
     const routeParams = this.route.snapshot.paramMap;
     this.id = routeParams.get('id');
   }
-
+  getLanguage(){
+    return  this.translationService.getLanguage()
+  }
   getFiles(file: File_Checklist,id, for_back?: boolean){
     this.fileChecklistService.get({parent: file.id , checklist_id: id }).subscribe(result =>{
       console.log('fichier ', result,' ',{parent: file.id , checklist_id: id } )
@@ -45,6 +50,13 @@ export class ChecklistDetailsComponent implements OnInit {
     this.checklistService.getCheckList(this.id).subscribe(result => {
       console.log(result)
       this.checklist = result;
+
+      let utcDate = new Date(result.created_at.replace(" ", "T") + "Z");
+
+      // Cette opération convertit automatiquement l'heure en heure locale
+      let localDate = utcDate.toLocaleString();  // Cela retourne la date et l'heure locale
+
+console.log('Heure locale:', localDate);  
       let file = new File_Checklist()
       file.id = 0
       this.getFiles(file,this.checklist.id);

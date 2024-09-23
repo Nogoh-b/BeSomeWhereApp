@@ -16,7 +16,11 @@
 .carousel-indicators{
     display: none!important;
 }
-
+input:disabled {
+  background-color: #f3f4f6; /* couleur de fond gris clair */
+  color: #9ca3af; /* couleur du texte gris */
+  cursor: not-allowed; /* montre que le champ est désactivé */
+}
 .error-p{
   color: red;
   font-size: small;

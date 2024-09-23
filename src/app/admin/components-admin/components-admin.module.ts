@@ -17,7 +17,7 @@ import { ModalAddItemProposedCategoryComponent } from './modal-add-item-proposed
 import { ModalAdsCUComponent } from './modal-ads-c-u/modal-ads-c-u.component';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { UploadComponent } from './upload/upload.component';
-
+import { QuillModule } from 'ngx-quill';
 
 
 @NgModule({
@@ -42,7 +42,7 @@ import { UploadComponent } from './upload/upload.component';
     CommonModule,
     SharedModule,
     FormsModule,
-    ReactiveFormsModule,
+    QuillModule.forRoot(),ReactiveFormsModule,
     RouterModule,
     ComponentsModule
   ],

@@ -19,6 +19,7 @@ import { UserDetailsComponent } from './user/user-details/user-details.component
 import { UserListComponent } from './user/user-list/user-list.component';
 import { ReservationsComponent1 } from './reservations1/reservations.component';
 import { ReservationByRouteComponent1 } from './reservation-by-route1/reservation-by-route.component';
+import { ModalAddProposedChecklistComponent } from './components-admin/modal-add-proposed-checklist/modal-add-proposed-checklist.component';
 
 const routes: Routes = [
   {
@@ -56,6 +57,9 @@ const routes: Routes = [
   },
   {
   path: 'items-checklists', component: ItemsChecklistListComponent
+  },
+  {
+  path: 'items-checklists/c', component: ModalAddProposedChecklistComponent
   },
   {
   path: 'item-checklist/:id', component: ItemsChecklistDetailsComponent

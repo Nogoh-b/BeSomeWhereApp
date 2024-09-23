@@ -1,0 +1,4 @@
+.modal-content .ql-container {
+    min-height: 150px;
+    z-index: 1050; /* Adjust to ensure visibility */
+  }

@@ -19,7 +19,7 @@ import { User } from "./Utilisateur"
   status: number;//ReservationStatus
   customer: User
   for_disabled: boolean
-  route: Route
+  route?: Route
   items: Item_Drive[]
   price: number
   take_at_home: boolean

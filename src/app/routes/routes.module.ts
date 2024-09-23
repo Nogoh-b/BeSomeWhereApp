@@ -13,6 +13,7 @@ import { OrderComponent } from './order/order.component';
 import { ListComponent } from './list/list.component';
 import { DetailsComponent } from './details/details.component';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
+import { ChooseServicesComponent } from './choose-services/choose-services.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
     ChooseItemsComponent,
     OrderComponent,
     ListComponent,
-    DetailsComponent
+    DetailsComponent, 
+    ChooseServicesComponent
   ],
   imports: [
     CommonModule,

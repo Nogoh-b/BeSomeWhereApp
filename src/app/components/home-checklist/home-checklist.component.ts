@@ -1,5 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { Checklist } from 'src/app/model/Model/Checklist';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home-checklist',
@@ -10,13 +12,38 @@ export class HomeChecklistComponent implements OnInit {
   @Input() checklists: Array<Checklist> = []
   lastChecklist : Checklist
   FutureChecklists : Checklist []
-  constructor() { }
+  checkListForm : FormGroup
+  constructor(private router: Router,private fb: FormBuilder) { }
   @Output() wantCreateChecklist = new EventEmitter<any>()
   @Input() screen_all = true
   ngOnInit(): void {
     this.lastChecklist =this.getLastChecklist()
     this.FutureChecklists = this.getFutureChecklists()
+    this.createForm();
+
   }
+
+  createForm(checklist?: Checklist) {
+
+    console.log(checklist);
+    this.checkListForm = this.fb.group({});
+    // this.checkListForm.addControl('for_disabled', new FormControl('0', Validators.required));
+      const nbr = 0//this.destinaions.length - 1
+
+      this.checkListForm.addControl('title', new FormControl(checklist ? checklist.title : '', Validators.required));
+      this.checkListForm.addControl('with_baby', new FormControl(checklist ? checklist.with_baby : false));
+      this.checkListForm.addControl('country0', new FormControl(checklist ? checklist.routes[0].country : '', Validators.required));
+      this.checkListForm.addControl('city0', new FormControl(checklist ? checklist.routes[0].city : '', Validators.required));
+      this.checkListForm.addControl('begindate0', new FormControl('', [Validators.required]));
+      this.checkListForm.addControl('begindate0', new FormControl('', [Validators.required]));
+      this.checkListForm.addControl('enddate0', new FormControl('', [Validators.required]));
+      this.checkListForm.addControl('id0', new FormControl('0', Validators.required));
+
+
+
+  }
+
+
   getLastChecklist(checklists: Checklist[] = this.checklists): Checklist | null {
     // Supposons que "checklists" soit votre tableau d'objets de checklists
   
@@ -69,6 +96,16 @@ export class HomeChecklistComponent implements OnInit {
     );
 
     return futureChecklists;
+}
+onSubmit(){
+  if(this.checkListForm.invalid){
+    // this.toast_c.open('information','FillInAllTheFields')
+    localStorage.setItem('incoming_checklist', JSON.stringify(this.checkListForm.value))
+
+    this.router.navigate(['checklist/creation'],{queryParams: this.checkListForm.value})
+    return
+  }
+  this.wantCreateChecklist.emit()
 }
 
   

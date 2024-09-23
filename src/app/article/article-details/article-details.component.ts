@@ -66,14 +66,15 @@ export class ArticleDetailsComponent implements OnInit {
     margin: 0,
     nav: false
   }
+  sanitizedContent: SafeHtml;
 
   constructor(private articleService : ArticleService, private activatedRoute : ActivatedRoute,
     private userServiceFireBase: UserServiceFireBase,
+    private sanitizer: DomSanitizer,
     @Inject(LOCALE_ID) private locale: string,
     private articleCommentCommentsService : ArticleCommentCommentsService,
     private datePipe: DatePipe,
     private paymentsService: PaymentsService,
-    private sanitizer: DomSanitizer
     ) {
 
       const routeParams = this.activatedRoute.snapshot.paramMap;
@@ -103,7 +104,8 @@ export class ArticleDetailsComponent implements OnInit {
         //alert("ee")
         this.article = a
         this.getRelated(a.categories[0])
-        console.log(this.article)
+        console.log('article.title.rendered '+ this.article.content.rendered)
+        this.sanitizedContent = this.sanitizer.bypassSecurityTrustHtml(this.article.content.rendered);
       })
       this.articleCommentCommentsService.get({status: 'approve', post : this.id}).subscribe(c =>{
         //alert("ee")

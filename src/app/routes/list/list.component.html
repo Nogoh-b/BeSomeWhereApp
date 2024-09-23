@@ -14,10 +14,10 @@
 
               <div class="align-items-center bg-white d-flex flex-column   mb-sm-0 mb-lg-3  p-sm-2 p-lg-3 text-black-50">
                 <div class="d-flex justify-content-center w-100">
-                    <button (click)="screen_archived(isArchived)"  type="button" class="btn btn-outline-primary me-1 rounded-pill">
+                    <button (click)="screen_archived(isArchived)"  type="button" class="btn btn-outline-success me-1 rounded-pill">
                         <i class="fa-file-archive fas pe-1"></i> {{(isArchived ? 'My_trips' : "Archived_trips") | translate}}
                     </button>
-                    <button routerLink="/trajets/creation/1" type="button" class="btn btn-outline-danger ms-1 rounded-pill border-1 border-danger">
+                    <button routerLink="/trajets/creation/1" type="button" class="btn btn-outline-primary ms-1 rounded-pill border-1 border-danger1">
                         <i class="fa-plus fas pe-1"></i>{{'AddATrip' | translate}}
                     </button>
                 </div>
@@ -41,5 +41,5 @@
 
 <app-preloader-route-list *ngIf="!reservations"></app-preloader-route-list>
 <div  *ngIf="reservations && reservations.length === 0" class="vh-100">
-  <app-empty-page (btn2_clicked)="screen_archived(isArchived)" route_btn1="trajets/creation/1" btn1_text="AddATrip" [btn2_text]="isArchived ? 'My_trips' : 'Archived_trips'" title = "No_Journey_Created"  title_class="fs-5"></app-empty-page>
+  <app-empty-page (btn2_clicked)="screen_archived(isArchived)" route_btn1="trajets/creation/1" btn1_text="AddATrip" [btn2_text]="isArchived ? 'My_trips' : 'Archived_trips'" title = "Aucun_Trajet_reserve"  title_class="fs-5"></app-empty-page>
 </div>

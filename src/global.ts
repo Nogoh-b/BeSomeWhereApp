@@ -1,7 +1,7 @@
 'use strict';
 // import { scrollIntoView } from 'seamless-scroll-polyfill';
 
-import {Observable} from "rxjs";
+import { Item_Drive } from "./app/model/Model/Item_Drive";
 const DEV =  false
 export const email_admin = /*'nogohbrice@yahoo.fr';nyassokelydiane@gmail.com//*/'besomewhere.contact@gmail.com';
 // export const stripe_url = DEV ? 'http://localhost:3000' : 'https://seed-misty-bonobo.glitch.me';
@@ -44,6 +44,39 @@ export enum Scheduldes{
 
 // export const ecart =  15*24*60*60
 export const ecart =  24*60*60 
+
+export function convertDateTimeZone(date){
+      const utcDate = new Date(date); // Date en UTC
+    const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+    // Convertir en fuseau horaire de l'utilisateur
+    const formattedDate = new Intl.DateTimeFormat('en-US', {
+      timeZone: userTimeZone,
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+    }).format(utcDate);
+
+    console.log(formattedDate); // Affiche la date et l'heure dans le fuseau horaire de l'utilisateur
+    console.log(date); // Affiche la date et l'heure dans le fuseau horaire de l'utilisateur
+    return formattedDate
+}
+export function   convertUtcToLocal(dateString: string): string {
+  // Remplacer l'espace par un 'T' pour le format ISO
+  const isoString = dateString.replace(' ', 'T') + 'Z'; // Ajoute 'Z' pour indiquer que c'est UTC
+
+  // Créer l'objet Date
+  const date = new Date(isoString);
+
+  // Vérification de la validité de la date
+  if (isNaN(date.getTime())) {
+    throw new Error("Date invalide");
+  }
+
+  return date.;
+}
 
 export function total_take_at_homr(passengers, take_at_home ){
   let reservation_t = 0
@@ -198,6 +231,12 @@ export const babySeats =  [
     "src2":"./assets/img/item/v1.png"
   },
 ]
+export function filterServices(items: Item_Drive[]){
+  return items.filter(item => item.sub_category === 4 || item.sub_category === 5 )
+}
+export function   filterMeals(items: Item_Drive[]){
+  return items.filter(item => item.sub_category === 1 || item.sub_category === 3 || item.sub_category == 7 || item.sub_category == 8 )
+}
 export enum DataType{
   Point = 0,
   Route = 1,
@@ -214,6 +253,12 @@ export enum DataType{
   Payment = 12,
   Contact = 13,
   Item_Category = 14
+}
+export function isMeal(item){
+  return item.category === ItemCategory.Meal && (item.sub_category === 1 || item.sub_category === 3 || item.sub_category == 7 || item.sub_category == 8 )
+}
+export function isService(item){
+  return item.category === ItemCategory.Meal && (item.sub_category === 4 || item.sub_category === 5 )
 }
 export const meals = [
 

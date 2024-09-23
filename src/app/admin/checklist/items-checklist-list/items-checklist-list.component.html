@@ -57,8 +57,8 @@
                         
                         <!-- <img width="30" height="25" alt=""> -->
                     </td>
-                      <td > {{item_category.name}}
-                      <!-- <td > {{item_category.category.name}} -->
+                        <td [innerHTML]="item_category.name" > 
+                          <!-- <td > {{item_category.category.name}} -->
                       </td>
                       <td  class="text-end"><span class="fw-normal">
                         <a (click)="modalItCat.createForm(item_category)"  data-bs-toggle="modal" data-bs-target="#modalItemCat" class="checklister pe-2 pointer">Editer</a>
@@ -68,20 +68,45 @@
 
               </tbody>
           </table>
-          <div class="d-flex">
-              <ul class="ms-auto pagination">
-                  <li (click)="navigateToPage1(currentPage1 === 0 ? 0 : currentPage1 - 1)" class="page-item"  [ngClass]="{'disable': currentPage1 === 0, 'checklister': currentPage1 > 0}">
-                      <a class="page-link" >Précedent</a>
-                  </li>
-                  <li (click)="navigateToPage1(i)" *ngFor="let checklist of  pagination1 let i = index" class="page-item" [ngClass]="{'active': currentPage1 === i, 'checklister': currentPage1 !== i}">
-                      <a  class="page-link " >{{i+1}}</a>
-                  </li>
-
-                  <li (click)="navigateToPage1(currentPage1 === pagination1 && pagination1.length - 1 ? currentPage1 : currentPage1 + 1)" class="page-item" [ngClass]="{'disable': currentPage1 === pagination1 && pagination1.length - 1, 'checklister': !(currentPage1 < pagination1 && pagination1.length - 1)}">
-                      <a class="page-link" >Suivant</a>
-                  </li>
-              </ul>
-          </div>
+<!-- Pagination 1 -->
+<div class="d-flex">
+    <ul class="ms-auto pagination">
+      <!-- Previous Button -->
+      <li (click)="navigateToPage1(currentPage1 === 0 ? 0 : currentPage1 - 1)" class="page-item" [ngClass]="{'disable': currentPage1 === 0, 'checklister': currentPage1 > 0}">
+        <a class="page-link">Précédent</a>
+      </li>
+  
+      <!-- First Page -->
+      <li *ngIf="showFirstPage1()" (click)="navigateToPage1(0)" class="page-item" [ngClass]="{'active': currentPage1 === 0, 'checklister': currentPage1 !== 0}">
+        <a class="page-link">1</a>
+      </li>
+  
+      <!-- Left Ellipsis -->
+      <li *ngIf="showLeftEllipsis1()" class="page-item disabled">
+        <a class="page-link">...</a>
+      </li>
+  
+      <!-- Middle Pages -->
+      <li *ngFor="let i of getMiddlePages1()" (click)="navigateToPage1(i)" class="page-item" [ngClass]="{'active': currentPage1 === i, 'checklister': currentPage1 !== i}">
+        <a class="page-link">{{ i + 1 }}</a>
+      </li>
+  
+      <!-- Right Ellipsis -->
+      <li *ngIf="showRightEllipsis1()" class="page-item disabled">
+        <a class="page-link">...</a>
+      </li>
+  
+      <!-- Last Page -->
+      <li *ngIf="showLastPage1()" (click)="navigateToPage1(pagination1.length - 1)" class="page-item" [ngClass]="{'active': currentPage1 === pagination1.length - 1, 'checklister': currentPage1 !== pagination1.length - 1}">
+        <a class="page-link">{{ pagination1.length }}</a>
+      </li>
+  
+      <!-- Next Button -->
+      <li (click)="navigateToPage1(currentPage1 === pagination1.length - 1 ? currentPage1 : currentPage1 + 1)" class="page-item" [ngClass]="{'disable': currentPage1 === pagination1.length - 1, 'checklister': currentPage1 < pagination1.length - 1}">
+        <a class="page-link">Suivant</a>
+      </li>
+    </ul>
+  </div>
       </div>
     </div>
   </div>
@@ -142,7 +167,7 @@
                       </th>
                       <td >{{item_proposed.id}}</td>
                       <td >{{item_proposed.updated_at |date}}</td>
-                      <td > {{item_proposed.name}}
+                      <td [innerHTML]="item_proposed.name" > 
                       <td > {{item_proposed.category.name}}
                       </td>
                       <td  class="text-end"><span class="fw-normal">
@@ -153,20 +178,45 @@
 
               </tbody>
           </table>
-          <div class="d-flex">
-              <ul class="ms-auto pagination">
-                  <li (click)="navigateToPage(currentPage === 0 ? 0 : currentPage - 1)" class="page-item"  [ngClass]="{'disable': currentPage === 0, 'checklister': currentPage > 0}">
-                      <a class="page-link" >Précedent</a>
-                  </li>
-                  <li (click)="navigateToPage(i)" *ngFor="let checklist of  pagination let i = index" class="page-item" [ngClass]="{'active': currentPage === i, 'checklister': currentPage !== i}">
-                      <a  class="page-link " >{{i+1}}</a>
-                  </li>
-
-                  <li (click)="navigateToPage(currentPage === pagination && pagination.length - 1 ? currentPage : currentPage + 1)" class="page-item" [ngClass]="{'disable': currentPage === pagination && pagination.length - 1, 'checklister': !(currentPage < pagination && pagination.length - 1)}">
-                      <a class="page-link" >Suivant</a>
-                  </li>
-              </ul>
-          </div>
+<!-- Pagination 2 -->
+<div class="d-flex">
+    <ul class="ms-auto pagination">
+      <!-- Previous Button -->
+      <li (click)="navigateToPage(currentPage === 0 ? 0 : currentPage - 1)" class="page-item" [ngClass]="{'disable': currentPage === 0, 'checklister': currentPage > 0}">
+        <a class="page-link">Précédent</a>
+      </li>
+  
+      <!-- First Page -->
+      <li *ngIf="showFirstPage()" (click)="navigateToPage(0)" class="page-item" [ngClass]="{'active': currentPage === 0, 'checklister': currentPage !== 0}">
+        <a class="page-link">1</a>
+      </li>
+  
+      <!-- Left Ellipsis -->
+      <li *ngIf="showLeftEllipsis()" class="page-item disabled">
+        <a class="page-link">...</a>
+      </li>
+  
+      <!-- Middle Pages -->
+      <li *ngFor="let i of getMiddlePages()" (click)="navigateToPage(i)" class="page-item" [ngClass]="{'active': currentPage === i, 'checklister': currentPage !== i}">
+        <a class="page-link">{{ i + 1 }}</a>
+      </li>
+  
+      <!-- Right Ellipsis -->
+      <li *ngIf="showRightEllipsis()" class="page-item disabled">
+        <a class="page-link">...</a>
+      </li>
+  
+      <!-- Last Page -->
+      <li *ngIf="showLastPage()" (click)="navigateToPage(pagination.length - 1)" class="page-item" [ngClass]="{'active': currentPage === pagination.length - 1, 'checklister': currentPage !== pagination.length - 1}">
+        <a class="page-link">{{ pagination.length }}</a>
+      </li>
+  
+      <!-- Next Button -->
+      <li (click)="navigateToPage(currentPage === pagination.length - 1 ? currentPage : currentPage + 1)" class="page-item" [ngClass]="{'disable': currentPage === pagination.length - 1, 'checklister': currentPage < pagination.length - 1}">
+        <a class="page-link">Suivant</a>
+      </li>
+    </ul>
+  </div>
       </div>
     </div>
   </div>

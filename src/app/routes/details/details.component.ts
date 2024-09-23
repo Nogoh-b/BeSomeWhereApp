@@ -1,6 +1,6 @@
 import { ToastComponent } from 'src/app/shared/toast/toast.component';
 import { DatePipe } from '@angular/common';
-import { TrajetCardStatus, take_at_home_price, SERVER, SERVER_URL, SERVER_FOR_UPLOAD, total_take_at_homr } from './../../../global';
+import { TrajetCardStatus, take_at_home_price, SERVER, SERVER_URL, SERVER_FOR_UPLOAD, total_take_at_homr, filterServices, filterMeals } from './../../../global';
 import { ItemsService } from './../../service/items/items.service';
 import { Item_Drive, ItemCategory } from './../../model/Model/Item_Drive';
 import { PassengerService } from './../../service/passenger/passenger.service';
@@ -56,7 +56,10 @@ export class DetailsComponent implements OnInit {
     return total_take_at_homr(passengers, take_at_home)
   }
   isMeal(item){
-    return item.category === ItemCategory.Meal
+    return item.category === ItemCategory.Meal && (item.sub_category === 1 || item.sub_category === 3 || item.sub_category == 7 || item.sub_category == 8 )
+  }
+  isService(item){
+    return item.category === ItemCategory.Meal && (item.sub_category === 4 || item.sub_category === 5 )
   }
   isBabySeat(item){
     return item.category === ItemCategory.BabySeats
@@ -68,11 +71,30 @@ export class DetailsComponent implements OnInit {
       return meal.src
     }
   }
-
+  total_services(){
+    let somme = 0
+    let items: Item_Drive[] = this.reservation.items
+    for (let item of filterServices(items)) {
+      if(item.category === ItemCategory.Meal){
+        somme += item.quantity
+      }
+    }
+    return somme
+  }
+  total_price_services(){
+    let somme = 0
+    let items: Item_Drive[] = this.reservation.items
+    for (let item of filterServices(items)) {
+        if(item.category === ItemCategory.Meal){
+          somme += item.quantity * item.price
+        }
+    }
+    return somme
+  }
   total_meals(){
     let somme = 0
     let items: Item_Drive[] = this.reservation.items
-    for (let item of items) {
+    for (let item of filterMeals(items)) {
       if(item.category === ItemCategory.Meal){
         somme += item.quantity
       }
@@ -82,7 +104,7 @@ export class DetailsComponent implements OnInit {
   total_price_meals(){
     let somme = 0
     let items: Item_Drive[] = this.reservation.items
-    for (let item of items) {
+    for (let item of filterMeals(items)) {
         if(item.category === ItemCategory.Meal){
           somme += item.quantity * item.price
         }

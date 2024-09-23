@@ -11,13 +11,13 @@
       country: string
       city: string
       address: string
-      code: number
+      code: number | string
       longitude?: number
       lattitude?: number
       is_station?: boolean
       class?: PointType
       type: string
-      parent?: Point
+      parent?: Point | number
       arround?: Point[]
       PointType?: PointType
       distance?: number

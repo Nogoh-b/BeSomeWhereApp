@@ -7,6 +7,7 @@ import { ChoosePointComponent } from './choose-point/choose-point.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../guards/auth.guard';
+import { ChooseServicesComponent } from './choose-services/choose-services.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   },
   {
   path: 'creation/4', component: ChooseItemsComponent,
+  canActivate : [AuthGuard]
+  },
+  {
+  path: 'creation/4_2', component: ChooseServicesComponent,
   canActivate : [AuthGuard]
   },
   {

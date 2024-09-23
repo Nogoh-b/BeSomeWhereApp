@@ -1,11 +1,9 @@
 import { DriveBaseService } from './../../../service/drive-base.service';
 import { Drive_Base } from './../../../model/Model/Drive_Base';
-import { DriveService } from './../../../service/drive/drive.service';
 import { PointService } from 'src/app/service/point/point.service';
 import { Component, OnInit, Output, ViewChild, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Point } from 'src/app/model/Model/Point';
-import { Drive } from 'src/app/model/Model/Drive';
 import { ToastComponent } from 'src/app/shared/toast/toast.component';
 
 @Component({
@@ -64,7 +62,7 @@ export class ModalCreateDriveComponent implements OnInit {
     this.loading =true
     this.formGroupDrive.value.places = this.formGroupDrive.value.total_places
     let d_s = new Date(this.formGroupDrive.value.date)
-
+    this.formGroupDrive.get('date').setValue(d_s.toISOString())
     // console.log(this.formGroupDrive.value);
 
     // console.log(d_s.toLocaleDateString());

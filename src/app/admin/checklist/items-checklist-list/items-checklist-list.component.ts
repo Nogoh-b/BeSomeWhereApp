@@ -236,4 +236,61 @@ export class ItemsChecklistListComponent implements OnInit {
   }
 
 
+
+  // Pagination 2
+
+  // Limite du nombre de pages à afficher dans la pagination
+  maxVisiblePages: number = 5;
+
+
+
+  // Méthodes pour Pagination 1
+  showFirstPage1() {
+    return this.currentPage1 > Math.floor(this.maxVisiblePages / 2);
+  }
+
+  showLeftEllipsis1() {
+    return this.currentPage1 > Math.floor(this.maxVisiblePages / 2);
+  }
+
+  getMiddlePages1() {
+    const start = Math.max(0, this.currentPage1 - Math.floor(this.maxVisiblePages / 2));
+    const end = Math.min(this.pagination1.length, start + this.maxVisiblePages);
+    return Array.from({ length: end - start }, (_, i) => start + i);
+  }
+
+  showRightEllipsis1() {
+    return this.currentPage1 < this.pagination1.length - Math.ceil(this.maxVisiblePages / 2) - 1;
+  }
+
+  showLastPage1() {
+    return this.currentPage1 < this.pagination1.length - Math.ceil(this.maxVisiblePages / 2) - 1;
+  }
+
+
+
+  // Méthodes pour Pagination 2
+  showFirstPage() {
+    return this.currentPage > Math.floor(this.maxVisiblePages / 2);
+  }
+
+  showLeftEllipsis() {
+    return this.currentPage > Math.floor(this.maxVisiblePages / 2);
+  }
+
+  getMiddlePages() {
+    const start = Math.max(0, this.currentPage - Math.floor(this.maxVisiblePages / 2));
+    const end = Math.min(this.pagination.length, start + this.maxVisiblePages);
+    return Array.from({ length: end - start }, (_, i) => start + i);
+  }
+
+  showRightEllipsis() {
+    return this.currentPage < this.pagination.length - Math.ceil(this.maxVisiblePages / 2) - 1;
+  }
+
+  showLastPage() {
+    return this.currentPage < this.pagination.length - Math.ceil(this.maxVisiblePages / 2) - 1;
+  }
+
+
 }

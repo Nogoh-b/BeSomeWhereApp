@@ -61,10 +61,13 @@ export class NavBarComponent implements OnInit {
     const navbarToggler = document.getElementById('navbarToggler2');
     navbarToggler.classList.remove('show');
 
-    if(!this.user){
-      document.getElementById("login_btn")?.click()
+    if(!this.user ){
+      if(route === 'mes-checklists'){
+        this.router.navigate(['checklist/creation'])
+      }else
+        document.getElementById("login_btn")?.click()
       return
-      }
+    }
     this.router.navigate([route],{queryParams:params})
   }
 

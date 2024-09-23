@@ -14,7 +14,13 @@
 
   <app-modal-login></app-modal-login>
   <app-modal-register></app-modal-register>
-
+  <!-- <p [innerHTML]="email"></p>
+  <p [innerHTML]="'sdsdsdsdsddsdsdsdsdsdsd'"></p>
+  <p [innerHTML]="'sdsdsdsdsddsdsdsdsdsdsd'"></p>
+  <p [innerHTML]="'sdsdsdsdsddsdsdsdsdsdsd'"></p>
+  <p [innerHTML]="'sdsdsdsdsddsdsdsdsdsdsd'"></p>
+  <p [innerHTML]="'sdsdsdsdsddsdsdsdsdsdsd'"></p>
+  <p [innerHTML]="emailCMD"></p> -->
 
   <app-toast></app-toast>
 
@@ -41,8 +47,10 @@
       <nav *ngIf="!want_see_reservation" id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light p-0 sidebar collapse" data-pg-collapsed>
         <app-nav-bar-admin></app-nav-bar-admin>
       </nav>
+      
       <main class="col-lg-10 col-md-9 ms-sm-auto px-md-4">
         <router-outlet></router-outlet>
+
       </main>
     </div>
   </div>

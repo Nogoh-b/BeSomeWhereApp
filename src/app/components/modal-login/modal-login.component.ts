@@ -14,6 +14,7 @@ import { ToastComponent } from 'src/app/shared/toast/toast.component';
 export class ModalLoginComponent implements OnInit {
   loginForm: FormGroup
   isLoading = false
+  isLogged = false
   submited = false
   @ViewChild('btn_close') btn_close: ElementRef;
   @ViewChild(ToastComponent) toast_c : ToastComponent
@@ -70,7 +71,7 @@ export class ModalLoginComponent implements OnInit {
   tryLogin(value){
     this.submited = true
      if(!this.loginForm.valid){
-       this.toast_c.open("Be Somewhere", "Des champs sont mals remplis ou vides")
+       this.toast_c.open("Be Somewhere", "NotFilled")
        return
      }
     this.isLoading = true
@@ -79,14 +80,15 @@ export class ModalLoginComponent implements OnInit {
     //   return
     this.authService.doLogin(value)
     .then(res => {
+      this.isLogged = true
       // this.router.navigate(['/user']);
       this.getUser(value)
       console.log('connexion réussi', res)
 
     }, err => {
-      console.log(err);
+      console.log(err.code);
       this.isLoading = false
-      this.toast_c.open("Be Somewhere",err);
+      this.toast_c.open("Be Somewhere",err.code);
     })
   }
 

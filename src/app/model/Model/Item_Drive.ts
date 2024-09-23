@@ -8,10 +8,10 @@ import { MealCategory } from "src/global"
   id: number
   name: string
   quantity: number
-  quantity_max: number
+  quantity_max?: number
   price: number
   category: ItemCategory
-  sub_category: MealCategory
+  sub_category: number//MealCategory
   description?: string
   item_id: number
   reservation_id: number

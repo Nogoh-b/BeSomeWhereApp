@@ -18,6 +18,7 @@ export class ModalUserDetailsComponent implements OnInit {
     private reservationService: ReservationService) { }
   init(user: User){
     this.user = user
+    console.log(user)
     this.checklistService.get({user_id:this.user.id}).subscribe(result =>{
       console.log(result)
       this.checklists = result

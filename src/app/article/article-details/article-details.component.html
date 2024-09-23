@@ -23,8 +23,8 @@
               <p class="align-items-center d-flex justify-content-start text-muted text-start fs-6"><i class="fa-lg fa-user fas pe-2"></i>{{article._embedded['wp:term'] ?  article._embedded['wp:term'][0] && article._embedded['wp:term'][0][0].name : 'Pas de ctégorie'}}</p>
               <p class="align-items-center d-flex justify-content-start ps-4 text-muted text-start fs-6"><i class="fa-business-time fa-lg fas pe-2"></i>{{article.modified | date}}</p>
               </div>
-              <p [ngClass]="{mask: (!have_to_suscribe || !user) && article.status === 'private'}" [innerHtml]="article.content.rendered"></p>
-
+              <div [ngClass]="{mask: (!have_to_suscribe || !user) && article.status === 'private'}" [innerHtml]="sanitizedContent"></div>
+ 
 
               <div *ngIf="(!have_to_suscribe || !user) && article.status === 'private' " class="d-flex fixed-top flex-column-reverse position-relative" style="z-index: 0; position: absolute; height: 350px; top: -100px; background-color: rgba(255, 255, 255, 0.88);">
                 <div style="height: 80%;" class="bg-primary d-inline-flex flex-column justify-content-around p-5">

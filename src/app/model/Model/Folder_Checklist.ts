@@ -5,6 +5,7 @@
  export class File_Checklist {
   id: number;
   name: string;
+  name_en: string;
   parent: number;
   isFolder: boolean;
   isDefault: boolean;

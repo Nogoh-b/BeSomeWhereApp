@@ -1,5 +1,5 @@
 {
-  "small_pleasures_type" : ["","Snacks","", "Beverage","Souvenirs","Services" ,"All"],
+  "small_pleasures_type" : ["","Snacks","", "Drink","Gift","Services" ,"All", "Breakfast", "Fruit"],
   "suit_case_price" : 5,
   "price_take_to_home" : 10,
   "price_article_souscription" : 2,

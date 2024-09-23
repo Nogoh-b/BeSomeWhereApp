@@ -1,4 +1,4 @@
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { ConfServiceAdmin } from './admin/service/conf-admin/conf.service';
 import { UserServiceFireBase } from './service/core/user.service';
 import { UserService } from 'src/app/service/user/user.service';
@@ -21,6 +21,8 @@ export class AppComponent implements OnInit {
   isAdmin = false
   want_back_office = false
   want_see_reservation = false
+  emailCMD = ''
+  email = ''
 
   constructor(private userServiceFireBase: UserServiceFireBase,
     private paymentsService: PaymentsService,
@@ -29,11 +31,19 @@ export class AppComponent implements OnInit {
     private emailService: EmailService,
     private router: Router,
      private userService: UserService){
-      
-
+      // localStorage.removeItem('reservation')
+      this.email = emailService.getAdminTextFOrReservation('---lun 2 mars 2025---','---Departure adress---','---lun 2 mars 2025---','---Destination adress---','---15.05---','---TAK adress---',false, '-----title1----', '-----title2----')
+      this.emailCMD = emailService.getAdminTextFOrReservationComeToMyDoor('---lun 2 mars 2025---','---Departure adress---','---lun 2 mars 2025---','---Destination adress---','---15.05---','---TAK adress---', '-----title1----', '-----title2----')
       /*this.emailService.sendMail({ "email": 'nogohbrice@gmail.com',
         "subject": "Commande / Order",
         "content": 'admin_email_content'}).subscribe(r => {})*/
+
+        // this.emailService.sendMail({ "email": 'nogohbrice@gmail.com',
+        //   "subject": "Commande / Order",
+        //   "content": this.email}).subscribe(r => {})
+        /*this.emailService.sendMail({ "email": 'nogohbrice@gmail.com',
+          "subject": "Commande / Order",
+          "content": this.emailCMD}).subscribe(r => {})*/
 
           // Écoute des changements de route
     this.router.events.subscribe(event => {
@@ -43,8 +53,22 @@ export class AppComponent implements OnInit {
         
         // Modification du style du body
         document.body.classList.add('overflow-auto');
+        
       }
     });
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        if (event.restoredState) {
+          // Cette condition est vraie si nous effectuons un retour en arrière
+          console.log('Retour en arrière détecté');
+        } else {
+          window.scrollTo(0, 0);
+
+          console.log('Navigation normale');
+        }
+      }
+    }); 
 
 
       // emailService.sendMail({ "email": 'nogohbrice@gmail.com',

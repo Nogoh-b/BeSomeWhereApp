@@ -1,8 +1,8 @@
 import { Router } from '@angular/router';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Route } from 'src/app/model/Model/Route';
-import { per_page } from 'src/global';
 import { filterData, SearchType } from 'filter-data';
+import { convertUtcToLocal } from 'src/global';
 @Component({
   selector: 'app-routelist',
   templateUrl: './routelist.component.html',
@@ -23,7 +23,9 @@ export class RoutelistComponent implements OnInit {
   @Output() wantEdit = new EventEmitter<Route>()
 
   constructor(private router: Router) { }
-
+  convertUtcToLocal(UTCdate){
+    return convertUtcToLocal(UTCdate)
+  }
   ngOnInit(): void {
     let a: number = Number((this.routes.length/this.per_page))
     //  alert(a)

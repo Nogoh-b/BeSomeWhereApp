@@ -45,7 +45,7 @@ export class MeatsCreateModalComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.httpClient.get<any>('./assets/conf/config-v1.json').subscribe(res=>{
+    this.httpClient.get<any>('./assets/conf/config-v1.0.json').subscribe(res=>{
       console.log('res1 ', res.small_pleasures_type)
       localStorage.setItem("conf", JSON.stringify(res))
       this.small_pleasures_type =  res.small_pleasures_type

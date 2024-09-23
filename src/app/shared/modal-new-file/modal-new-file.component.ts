@@ -1,6 +1,6 @@
 import { File_Checklist } from 'src/app/model/Model/Folder_Checklist';
 import { FileChecklistService } from './../../service/file_checklist/file-checklist.service';
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
 import * as $ from 'jquery';
 import { ToastComponent } from '../toast/toast.component';
@@ -24,7 +24,7 @@ export class ModalNewFileComponent implements OnInit {
   title =  'add_in_suitcase'
   loading = false
 
-  constructor(private fb: FormBuilder, private fileChecklistService: FileChecklistService) { }
+  constructor(private fb: FormBuilder, private fileChecklistService: FileChecklistService, private renderer: Renderer2) { }
 
   ngOnInit(): void {
     this.createForm();
@@ -43,11 +43,15 @@ export class ModalNewFileComponent implements OnInit {
     this.title = 'edit'
     this.cur_file = data
     // console.log(Number(this.cur_file.isDefault).toString())
-    this.fileForm.controls['name'].setValue(this.cur_file.name)
+    this.fileForm.controls['name'].setValue(this.getPlainText(this.cur_file.name))
     this.fileForm.controls['total'].setValue(this.cur_file.total)
     this.fileForm.controls['qty'].setValue((this.cur_file.qty))
   }
-
+  getPlainText(html: string): string {
+    const div = this.renderer.createElement('div');
+    this.renderer.setProperty(div, 'innerHTML', html);
+    return div.innerText || div.textContent;
+  }
   createForm() {
     this.fileForm = this.fb.group({});
     // this.fileForm.addControl('for_disabled', new FormControl('0', Validators.required));
@@ -61,7 +65,7 @@ export class ModalNewFileComponent implements OnInit {
     let folder = new File_Checklist
 
     folder.isFolder = false
-    folder.name = this.fileForm.controls['name'].value
+    folder.name = this.getPlainText(this.fileForm.controls['name'].value)
     folder.isDefault = false
     folder.checklist_id = this.cheklist_id
     folder.parent = this.folder_id

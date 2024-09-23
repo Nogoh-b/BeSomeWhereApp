@@ -1,4 +1,4 @@
-import { SERVER_FOR_UPLOAD, total_take_at_homr } from './../../../../global';
+import { filterMeals, filterServices, isMeal, SERVER_FOR_UPLOAD, total_take_at_homr } from './../../../../global';
 import { Reservation } from 'src/app/model/Model/Reservation';
 import { Component, Input, OnInit } from '@angular/core';
 import { Drive } from 'src/app/model/Model/Drive';
@@ -54,7 +54,7 @@ export class RoutedetailsComponent implements OnInit {
   }
 
   isMeal(item){
-    return item.category === ItemCategory.Meal
+    return  isMeal(item)
   }
   //@ts-ignore
   getPicMeal(name){
@@ -67,7 +67,7 @@ export class RoutedetailsComponent implements OnInit {
   total_meals(){
     let somme = 0
     let items: Item_Drive[] = this.items
-    for (let item of items) {
+    for (let item of filterMeals(items)) {
       if(item.category === ItemCategory.Meal){
         somme += item.quantity
       }
@@ -77,14 +77,33 @@ export class RoutedetailsComponent implements OnInit {
   total_price_meals(){
     let somme = 0
     let items: Item_Drive[] = this.items
-    for (let item of this.items) {
+    for (let item of filterMeals(items)) {
         if(item.category === ItemCategory.Meal){
           somme += item.quantity * item.price
         }
     }
     return somme
   }
-
+  total_services(){
+    let somme = 0
+    let items: Item_Drive[] = this.items
+    for (let item of filterServices(items)) {
+      if(item.category === ItemCategory.Meal){
+        somme += item.quantity
+      }
+    }
+    return somme
+  }
+  total_price_services(){
+    let somme = 0
+    let items: Item_Drive[] = this.items
+    for (let item of filterServices(items)) {
+        if(item.category === ItemCategory.Meal){
+          somme += item.quantity * item.price
+        }
+    }
+    return somme
+  }
   total_price_suitcase(){
     let somme = 0
     let items: Item_Drive[] = this.items

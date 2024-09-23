@@ -29,14 +29,14 @@
                         <i class="fa-clock fa-lg fas pe-2 text-info"></i>
                         <div class="gx-0 p-1" data-pg-collapsed>
                             <p class="display-6 fs-6 pb-2 text-black-50 text-center">Départ</p>
-                            <p class="fs-5 fw-bolder text-center">{{(route.starting_date | date).toUpperCase()}}</p>
-                            <p class="fs-6 fw-bold text-info text-center">{{route.starting_date | date:'shortTime'}}</p>
+                            <p class="fs-5 fw-bolder text-center">{{(convertUtcToLocal(route.starting_date) | date).toUpperCase()}}</p>
+                            <p class="fs-6 fw-bold text-info text-center">{{convertUtcToLocal(route.starting_date) | date:'shortTime'}}</p>
                           </div>
                           <p class="pe-2 ps-2">-</p>
                           <div class="gx-0 p-1 w-auto" data-pg-collapsed>
                             <p class="display-6 fs-6 pb-2 text-black-50 text-center">Arrivée</p>
-                            <p class="fs-5 fw-bold  text-center">{{(route.arrival_date | date).toUpperCase()}}</p>
-                          <p class="fs-6 fw-bold text-info text-center">{{route.arrival_date | date:'shortTime'}}</p>
+                            <p class="fs-5 fw-bold  text-center">{{(convertUtcToLocal(route.arrival_date) | date).toUpperCase()}}</p>
+                          <p class="fs-6 fw-bold text-info text-center">{{convertUtcToLocal(route.arrival_date) | date:'shortTime'}}</p>
                       </div>
                         <!-- <div class="gx-0  p-1">
                             <p class="fs-6 text-black-50 text-center">Arrivée</p>

@@ -4,7 +4,7 @@
 </div>
       <div class="col-12 col-lg-6  pe-xl-5 ps-xl-5 pt-4">
 
-          <app-route-card *ngIf="curRoute" [curStatus]= "statusCard" [route]="curRoute" [take_at_home]="reservation.take_at_home" [passengers]="reservation.passengers.length"></app-route-card>
+          <app-route-card *ngIf="curRoute" [curStatus]= "statusCard" [route]="reservation" [take_at_home]="reservation.take_at_home" [passengers]="reservation.passengers.length"></app-route-card>
 
           <div class="container-fluid mt-lg-4 pb-0 pb-lg-4 pe-0 pe-lg-5 ps-0 ps-lg-5">
 
@@ -41,7 +41,7 @@
                           <span>{{curRoute.starting_date | date:'shortTime'}}</span>
                       </div>
                   </div>
-                    <div data-pg-collapsed class="ps-5">
+                    <div data-pg-collapsed class="ps-0 ps-md-5">
                         <!-- <p>Option {{'enter_full_address' | translate}}</p>
                         <div class="pt-2 row">
                             <div class="input-group mb-3">
@@ -101,7 +101,7 @@
                                 </div>
                                 <div *ngIf="i === 0" class=" p-1">
                                     <div class="form-floating mb-2" data-pg-dyn-id="did_107">
-                                        <input type="email" class="form-control" id="floatingInput" name="email" [formControlName]="'email'+ i"  [placeholder]="'Surname' | translate" [ngClass]="{ 'is-invalid': submitted && passengersForm.controls['email' + i].errors }">
+                                        <input type="email" [disabled]="true" class="form-control  bg-light text-muted disabled" id="floatingInput" name="email" [formControlName]="'email'+ i"  [placeholder]="'Surname' | translate" [ngClass]="{ 'is-invalid': submitted && passengersForm.controls['email' + i].errors }">
                                         <label for="floatingInput">Email</label>
                                     </div>
                                     <div *ngIf="submitted && passengersForm.controls['email' + i].errors" class="invalid-form mb-3">
@@ -139,18 +139,27 @@
                                         </div>
                                     </div>
                                 </div> -->
+                                <div *ngIf="i === 0" class=" p-1">
+                                    <div class="form-floating mb-2" data-pg-dyn-id="did_107">
+                                        <input type="text" class="form-control" id="floatingInput" name="flight_number" [formControlName]="'flight_number'+ i"  [placeholder]="'Surname' | translate" [ngClass]="{ 'is-invalid': submitted && passengersForm.controls['flight_number' + i].errors }">
+                                        <label for="floatingInput">{{'flight_number' | translate}}</label>
+                                    </div>
+                                    <div *ngIf="submitted && passengersForm.controls['flight_number' + i].errors" class="invalid-form mb-3">
+                                      <div *ngIf="submitted && passengersForm.controls['flight_number' + i].errors['required']">{{'mandatory_notice' | translate}}.</div>
+                                    </div>
+                                </div>
                                 <div *ngIf="reservation.take_at_home">
                                     <div *ngIf="i === 0" class=" p-1">
                                         <div class="form-floating mb-2" data-pg-dyn-id="did_107">
                                                 <input id="take_to_home_adr" list="adr1_datalist" type="text" class="form-control" formControlName="take_to_home_adr" placeholder="Adfresse où il faut vous récupérer" aria-label="Username" aria-describedby="basic-addon1" [ngClass]="{ 'is-invalid': submitted && passengersForm.controls['take_to_home_adr'].errors }">
-                                            <label for="floatingInput truncate">{{'enter_full_address' | translate}}
+                                            <label for="floatingInput truncate" class="fs-5" >{{'enter_full_address' | translate}}
 </label>
                                         </div>
                                     </div>
                                     <div *ngIf="i > 0 && passengersForm.get('take_at_home' + i).value " >
                                         <div class="form-floating mb-3 " data-pg-dyn-id="did_107">
                                             <input  type="text" class="form-control" id="floatingInput" placeholder="ok" [formControlName]="'date' + i" [ngClass]="{ 'is-invalid': submitted && passengersForm.controls['date' + i].errors }">
-                                            <label for="floatingInput">{{'enter_full_address' | translate}}</label>
+                                            <label for="floatingInput" class="fs-5" >{{'enter_full_address' | translate}}</label>
                                         </div>
                                     </div>
                                 </div>
@@ -248,7 +257,7 @@
 </div>
 </div>
 </section>
-
+    
 <div *ngIf="!curRoute" class="bg-white" style="height: 95vh;">
   <app-loading-page class="h-100"></app-loading-page>
 </div>

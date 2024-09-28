@@ -35,6 +35,7 @@
                                     <p *ngIf="passenger.phone" class="fs-6 fw-normal text-black-50 text-start"><i class="fa-phone-alt fas pe-2 text-danger"></i>{{ passenger.phone }}</p>
                                     <p *ngIf="passenger.email" class="fs-6 fw-normal text-black-50 text-start"><i class="fa-envelope fas pe-2 text-danger"></i>{{ passenger.email }}</p>
                                     <p *ngIf="reservation.take_to_home_adr && i === 0 " class="fs-6 fw-normal text-black-50 text-start"><i class="fa-map-marker-alt fas pe-2 text-danger"></i>{{ reservation.take_to_home_adr }}</p>
+                                    <span *ngIf="passenger.flight_number" class="fs-6 pt-2 text-muted"><i class="fa-plane fas pe-2 text-danger"></i>{{passenger.flight_number}}</span>
                                     <p *ngIf="i > 0 && passenger.birthday && passenger.birthday.length > 0" class="fs-6 fw-normal text-black-50 text-start"><i class="fa-map-marker-alt fas pe-2 text-danger"></i>{{ passenger.birthday  }}</p>
                                     <!-- <p *ngIf="reservation.take_to_home_adr" class="fs-6 fa-lg fa-map-marker-alt fas text-danger pe-2">{{ reservation.take_to_home_adr }}</p> -->
                                 </div>

@@ -9,8 +9,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import * as globals from 'src/global';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Route } from 'src/app/model/Model/Route';
-import { DatePipe, formatDate } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { UserServiceFireBase } from 'src/app/service/core/user.service';
 import { ValidateDate } from 'src/app/validators/date.validator';
 import { EmailService } from 'src/app/service/email/email.service';
@@ -148,7 +147,7 @@ routeParams
       }
     }
     if(selected_trans.length === 0){
-      this.toast_c.open('Information','Vous devez selecionner au moins un mode de transport')
+      this.toast_c.open('Information','Vous devez selecionner au moins un mode de transport_')
       return
     }
 
@@ -157,8 +156,8 @@ routeParams
       let route = new RouteChecklist()
       route.country = this.checkListForm.value['country'+index]
       route.city = this.checkListForm.value['city'+index]
-      route.starting_date = this.checkListForm.value['begindate'+index]
-      route.arrival_date = this.checkListForm.value['enddate'+index]
+      route.starting_date = new Date(this.checkListForm.value['begindate'+index]).toISOString()
+      route.arrival_date = new Date(this.checkListForm.value['enddate'+index]).toISOString()
       route.id = this.checkListForm.value['id'+index]
       selected_routes.push(route)
     }
@@ -199,7 +198,7 @@ routeParams
           const user : User = JSON.parse(localStorage.getItem('user'))
           for (const route of result.routes) {
             this.emailService.sendMailScheduleEmail({ "email": user.email,
-              "subject": "Commande / Order",
+              "subject": "Préparation de la valise / Packing the suitcase",
               "send_at" : this.getPreviousDay(route.starting_date),
               "content": this.schedulesMails}).subscribe(r => {console.log(r)})
             

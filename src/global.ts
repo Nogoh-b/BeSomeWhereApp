@@ -63,7 +63,9 @@ export function convertDateTimeZone(date){
     console.log(date); // Affiche la date et l'heure dans le fuseau horaire de l'utilisateur
     return formattedDate
 }
-export function   convertUtcToLocal(dateString: string): string {
+export function   convertUtcToLocal(dateString: string): Date {
+  return new Date(dateString);
+
   // Remplacer l'espace par un 'T' pour le format ISO
   const isoString = dateString.replace(' ', 'T') + 'Z'; // Ajoute 'Z' pour indiquer que c'est UTC
 
@@ -75,7 +77,7 @@ export function   convertUtcToLocal(dateString: string): string {
     throw new Error("Date invalide");
   }
 
-  return date.;
+  return date;
 }
 
 export function total_take_at_homr(passengers, take_at_home ){

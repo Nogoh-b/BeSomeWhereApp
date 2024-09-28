@@ -2,7 +2,6 @@
 
 import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 
 const LANG_STORAGE_KEY = 'selectedLanguage';
 
@@ -48,7 +47,7 @@ export class TranslationService {
 
   private loadTranslations(): void {
     
-    const langFile = `./assets/i18n/${this.currentLanguage}-v1.0.8.json`;
+    const langFile = `./assets/i18n/${this.currentLanguage}-v1.0.9.json`;
     this.http.get(langFile).subscribe(
       (translations: { [key: string]: string }) => {
         console.log('translations111 ', translations)

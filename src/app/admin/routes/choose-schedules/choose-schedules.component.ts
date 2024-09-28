@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Route } from 'src/app/model/Model/Route';
 import { RouteService } from 'src/app/service/route/route.service';
@@ -26,7 +26,7 @@ export class ChooseSchedulesComponent implements OnInit {
       this.route_params = params;
       console.log(this.route_params); // popular
       this.routeService.get(this.route_params).subscribe(result =>{
-            console.log(result);
+            console.log('result ', result);
             this.routes =  result;
             if(this.routes.length > 0){
               this.curRoute = this.routes[0]

@@ -62,7 +62,7 @@ export class ModalCreateDriveComponent implements OnInit {
     this.loading =true
     this.formGroupDrive.value.places = this.formGroupDrive.value.total_places
     let d_s = new Date(this.formGroupDrive.value.date)
-    this.formGroupDrive.get('date').setValue(d_s.toISOString())
+    // this.formGroupDrive.get('date').setValue(d_s.toISOString())
     // console.log(this.formGroupDrive.value);
 
     // console.log(d_s.toLocaleDateString());

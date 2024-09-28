@@ -5,7 +5,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Route } from 'src/app/model/Model/Route';
 import { RouteService } from 'src/app/service/route/route.service';
 import * as globals from 'src/global';
-import { Reservation } from 'src/app/model/Model/Reservation';
 import { Point } from 'src/app/model/Model/Point';
 
 @Component({
@@ -40,12 +39,12 @@ export class ChooseSchedulesComponent implements OnInit {
             for (const route of result) {
               console.log('route.points ', route)
             }
-            this.routes =  result;
+            this.routes =  this.filterElements(result);
             if(this.routes.length > 0){
               this.curRoute = this.routes[0]
               this.curRoute.points = this.invertIfSwitched(this.curRoute.points, params['to_station'], params['point_a'], params['point_b'])
             }
-            for (const route of result) {
+            for (const route of this.routes ) {
               this.take_at_homes.push(false)
             }
             this.take_at_home = this.reservation && this.reservation.take_at_home
@@ -54,6 +53,18 @@ export class ChooseSchedulesComponent implements OnInit {
   );
 
   }
+
+    // Méthode pour filtrer les éléments ayant au moins 3 heures d'écart avec la date actuelle
+    filterElements(elements: Array<Route>): Array<Route> {
+      // return elements
+      const threeHoursInMillis = 3 * 60 * 60 * 1000; // 3 heures en millisecondes
+      const now = new Date(); // Date actuelle
+  
+      return elements.filter(element => {
+        const startingDate = new Date(element.starting_date);
+        return Math.abs(startingDate.getTime() - now.getTime()) >= threeHoursInMillis;
+      });
+    }
   takeAtHomeCount(passengers, take_at_home){
     return globals.total_take_at_homr(passengers, take_at_home)
   }

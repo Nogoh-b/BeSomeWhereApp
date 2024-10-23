@@ -1,12 +1,10 @@
 import { PointService } from 'src/app/service/point/point.service';
-import { DriveService } from './../../service/drive/drive.service';
 import { ToastComponent } from './../../shared/toast/toast.component';
 import { RouteService } from './../../service/route/route.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { Point } from 'src/app/model/Model/Point';
-import * as globals  from 'src/global';
-import { HomeSearchComponent } from 'src/app/components/home-search/home-search.component';
+import * as globals from 'src/global';
 import { RouteStatus } from 'src/app/model/Model/Route';
 import { HomeSearch1Component } from 'src/app/components/home-search1/home-search1.component';
 import { MapService } from 'src/app/service/map/map.service';
@@ -339,6 +337,24 @@ export class ChoosePointComponent implements AfterViewInit {
       return
     }
 
+    // Convertir la date en string à un objet Date
+    const dateString: string = this.h.date; // ex: "2024-11-05" (format YYYY-MM-DD)
+    const inputDate: Date = new Date(dateString);
+
+    // Définir les bornes de l'intervalle
+    const startDate: Date = new Date('2024-11-01'); // 01-11-2024
+    const endDate: Date = new Date('2024-11-11'); // 11-11-2024
+
+    // Vérifier si la date est dans l'intervalle
+    if (inputDate >= startDate && inputDate <= endDate) {
+      console.log('La date est dans l\'intervalle.');
+      this.toast_c.open('BeSomeWhere','routeInteruption',30000)
+      return
+    } else {
+      console.log('La date n\'est pas dans l\'intervalle.');
+    }
+
+
     console.log('station/gare ', this.h.station)
     console.log('adresse ', this.selected_adr)
     let pointA : Point = this.h.switched ? this.h.station : this.selected_adr
@@ -361,7 +377,7 @@ export class ChoosePointComponent implements AfterViewInit {
         const desc = result.length >0  ? '' : 'NoSharedTaxi'
         // const desc = result.length >0  ? 'Le trajet à été touvé' : 'NoSharedTaxi'
         if(result.length === 0)
-          this.toast_c.open('Be SomeWhere',desc,30000)
+          this.toast_c.open('BeSomeWhere',desc,30000)
         if(result.length > 0){
           this.router.navigate(['trajets/creation/2'], {queryParams} )
         }

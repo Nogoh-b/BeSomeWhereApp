@@ -151,7 +151,7 @@ export class ChoosePassengersComponent implements OnInit {
       // d.setFullYear(d.getFullYear() - y);
       this.passengersForm.addControl('first_name'+i, new FormControl(user  && user.first_name ? user.first_name : '', Validators.required));
       this.passengersForm.addControl('last_name'+i, new FormControl(user   && user.last_name ? user.last_name : '', Validators.required));
-      this.passengersForm.addControl('flight_number'+i, new FormControl(user   && user.flight_number ? user.flight_number : '', null));
+      this.passengersForm.addControl('flight_number'+i, new FormControl(user   && user.flight_number ? user.flight_number : '', i == 0 ? Validators.required : null));
       const date = i > 0 ? user.birthday : this.datepipe.transform(user.birthday, 'yyyy-MM-dd')
       this.passengersForm.addControl('date'+i, new FormControl(user   && user.birthday ? date  : '', i === 0 ? [Validators.required,ValidateDate(d)] : null));
       this.passengersForm.addControl('gender'+i, new FormControl(user   && user.gender ? user.gender : '0'));

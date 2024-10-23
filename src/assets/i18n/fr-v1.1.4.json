@@ -161,7 +161,7 @@
     "free": "Gratuit",
     "extra_baggage": "Bagages supplémentaires",
     "extra_option": "Option supplémentaire ",
-    "come_to_my_door": "Option venir à ma porte (+10 €)",
+    "come_to_my_door": "Ajouter une adresse différente (+10 €)",
     "flight_number": "Heure et numéro de vol",
     "paymentMethode": "Methodes de paiement",
     "order_summary": "Résumé de la commande",
@@ -186,7 +186,7 @@
 "time_at_your_address": "Heure à votre adresse",
 "time_same_as_initial": "L'heure à votre adresse est le même que l'heure initial avec +/- 15 minutes",
 "important_notice": "Important",
-"important_notice_content": "Option « Me prendre à ma porte » sélectionné. Valide si chaque adresse est à moins de 2.5 km du point de rendez-vous initial. Vous serez contacté par Besomewhere jusqu’à 15 minute avant le passage. L’adresse et le numéro de contact fourni doit être valide et sans erreur. Ceci doit être un numéro de téléphone local, ou un numéro accessible par whattaps ,telegram ou signal. <br><br>-Si votre adresse est à plus de 2.5 km, essayez un autre point de départ ou <b>contacter Besomewhere afin de personnaliser votre réservation.</b> <br> Email besomewhere.reservation@gmail.com",
+"important_notice_content": "Option « Venir jusqu’à ma porte » sélectionné. Valide si chaque adresse est à moins de 2.5 km du point de rendez-vous initial. Vous serez contacté par Besomewhere jusqu’à 15 minute avant le passage. L’adresse et le numéro de contact fourni doit être valide et sans erreur. Ceci doit être un numéro de téléphone local, ou un numéro accessible par whattaps ,telegram ou signal. <br><br>-Si votre adresse est à plus de 2.5 km, essayez un autre point de départ ou <b>contacter Besomewhere afin de personnaliser votre réservation.</b> <br> Email besomewhere.reservation@gmail.com",
 "enter_full_address": "Adresse de prise en charge ou dépôt (avec ville)",
 "come_to_my_door_option": "Venir jusqu’à ma porte",
 "first_passenger_age_requirement": "Le premier passager doit avoir au moins 18 ans",
@@ -290,7 +290,7 @@
     "travel_destination_preferences": "Vos préférences de destination de voyage",
     "personal_data_collected_when_booking_trip": "Lorsque vous réservez un trajet en ligne, il se peut que nous collections :",
     "account_login_details": "Account login details such as a username.",
-
+    "routeInteruption": "Cher passager, dans le but d'améliorer nos services, le service de navette Besomewhere sera interrompu du 31 octobre au 10 novembre 2024. Nous vous invitons à sélectionner d'autres dates pour vos réservations. ",
 
 
 
@@ -383,7 +383,11 @@
     "auth/invalid-action-code": "Le code d'action est invalide ou a expiré.",
     "auth/account-exists-with-different-credential": "Un compte existe déjà avec la même adresse email mais avec des informations d'identification différentes.",
     "NotFilled": "Veuillez remplir correctement le formulaire.",
-    "connexion_réussi": "Connexion réussie"
+    "connexion_réussi": "Connexion réussie",
+    "You_must_fill_date" : "vous devez remplir une de date",
+    "You_must_fill_address" : "vous devez remplir votre adresse",
+    "You_must_fill_station" : "vous devez choisir une station",
+    "invalid_address" : "Addresse non valide"
 }
 
 

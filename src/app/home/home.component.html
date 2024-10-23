@@ -15,7 +15,11 @@
               <div class="mt-4">
                 <app-first-reservation-div height="380px" *ngIf="is_first_reservation"></app-first-reservation-div>
               </div>
+
+              
+
               <app-home-search1></app-home-search1>
+
               <div class="d-xl-none p-2">
                 <h3 class="fs-4 fw-bold mb-2 ps-4 ps-lg-0 pt-4  pt-lg-4 text-uppercase" >{{'Help_for_packing_your_suitcase' | translate}}</h3>
                 <app-home-checklist (wantCreateChecklist)="openCreateChecklist('#checklistAdd')" [screen_all]="false" class="" [checklists]="checklists"></app-home-checklist>

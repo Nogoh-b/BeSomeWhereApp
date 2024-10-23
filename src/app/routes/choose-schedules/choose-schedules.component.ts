@@ -30,7 +30,14 @@ export class ChooseSchedulesComponent implements OnInit {
     this.route.queryParams
     .subscribe(params => {
       console.log(params); // { order: "popular" }
-
+      if(!params['starting_date'] &&
+        !params['point_a'] &&
+        !params['point_b'] &&
+        !params['status'] &&
+        !params['to_station'] ){
+          this.routes = []
+          return
+        }
       this.route_params = params;
       console.log(this.route_params); // popular
       this.routeService.get(this.route_params).subscribe(result =>{
@@ -57,7 +64,7 @@ export class ChooseSchedulesComponent implements OnInit {
     // Méthode pour filtrer les éléments ayant au moins 3 heures d'écart avec la date actuelle
     filterElements(elements: Array<Route>): Array<Route> {
       // return elements
-      const threeHoursInMillis = 3 * 60 * 60 * 1000; // 3 heures en millisecondes
+      const threeHoursInMillis = 2 * 60 * 60 * 1000; // 3 heures en millisecondes
       const now = new Date(); // Date actuelle
   
       return elements.filter(element => {

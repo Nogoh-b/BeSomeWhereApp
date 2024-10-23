@@ -128,13 +128,14 @@
                                                         <td>
                                                             <div>
                                                                 <i  data-bs-target="#deleteModal" data-bs-toggle="modal" (click)="delete_modal.want_delete_file(file)" class="fa-trash-alt pointer far m-1"></i>
-                                                                <i  data-bs-target="#newfileModal" data-bs-toggle="modal" (click)="file_modal.edit(file)" class="fa-edit far m-1 pointer"></i>
+                                                                <i  data-bs-target="#newfileModal" data-bs-toggle="modal"  (click)="file_modal.edit(file)" class="fa-edit far m-1 pointer"></i>
                                                                 <!-- <i     (click)="file_modal.currentFileToEdit = file" class="fa-copy far m-1 pointer"></i> -->
                                                                 <!-- <i   (click)="toolBarChecklist.copy(file)"  (click)="file_modal.currentFileToEdit = file" class="fa-copy far m-1 pointer"></i> -->
                                                             </div>
                                                         </td>
                                                   </tr>
                                               </tbody>
+                                              <!-- *ngIf="!file.name_en" -->
                                           </table>
                                       </div>
                                   </div>

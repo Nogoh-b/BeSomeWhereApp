@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/be-some-where-app",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

@@ -4,6 +4,7 @@ import { Component, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild } 
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
 import * as $ from 'jquery';
 import { ToastComponent } from '../toast/toast.component';
+import { TranslationService } from 'src/app/service/translation/translation.service';
 
 @Component({
   selector: 'app-modal-new-file',
@@ -24,7 +25,7 @@ export class ModalNewFileComponent implements OnInit {
   title =  'add_in_suitcase'
   loading = false
 
-  constructor(private fb: FormBuilder, private fileChecklistService: FileChecklistService, private renderer: Renderer2) { }
+  constructor(private fb: FormBuilder, private translationService: TranslationService, private fileChecklistService: FileChecklistService, private renderer: Renderer2) { }
 
   ngOnInit(): void {
     this.createForm();
@@ -42,8 +43,9 @@ export class ModalNewFileComponent implements OnInit {
   edit(data){
     this.title = 'edit'
     this.cur_file = data
-    // console.log(Number(this.cur_file.isDefault).toString())
-    this.fileForm.controls['name'].setValue(this.getPlainText(this.cur_file.name))
+    console.log(data)
+    this.fileForm.controls['name'].setValue(this.getPlainText(this.setName(this.cur_file)))
+    this.fileForm.controls['name_en'].setValue(((this.cur_file.name_en)))
     this.fileForm.controls['total'].setValue(this.cur_file.total)
     this.fileForm.controls['qty'].setValue((this.cur_file.qty))
   }
@@ -52,13 +54,18 @@ export class ModalNewFileComponent implements OnInit {
     this.renderer.setProperty(div, 'innerHTML', html);
     return div.innerText || div.textContent;
   }
+
   createForm() {
     this.fileForm = this.fb.group({});
     // this.fileForm.addControl('for_disabled', new FormControl('0', Validators.required));
-      this.fileForm.addControl('name', new FormControl(this.currentFileToEdit ? this.currentFileToEdit.name :'', Validators.required));
+      this.fileForm.addControl('name', new FormControl(this.currentFileToEdit ? this.setName(this.currentFileToEdit.name) :'', Validators.required));
+      this.fileForm.addControl('name_en', new FormControl(this.currentFileToEdit ? this.setName(this.currentFileToEdit.name_en) :null, null));
       this.fileForm.addControl('total', new FormControl(this.currentFileToEdit ? this.currentFileToEdit.total :'1', Validators.required));
       this.fileForm.addControl('qty', new FormControl(this.currentFileToEdit ? this.currentFileToEdit.qty :'', Validators.required));
 
+  }
+  setName(file){
+    return this.translationService.getLanguage() === 'fr' || !file.name_en ? file.name : file.name_en
   }
   onSubmit(){
 

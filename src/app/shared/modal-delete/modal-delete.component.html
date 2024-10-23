@@ -7,12 +7,12 @@
               </div>
               <div class="bg-white border border-3 border-primary">
                   <div class="border-0 modal-header pb-2">
-                      <h4 class="me-auto modal-title ms-auto pt-4" style="z-index: 3;">{{'cancel_action' | translate}} </h4>
+                      <h4 class="me-auto modal-title ms-auto pt-4" style="z-index: 3;">{{'cancel_action' | translate}} df </h4>
                   </div> 
                   <hr class="bg-primary border-1 border-primary border-top mb-0 me-3 ms-3  pb-0">
                   <div class="border-0 modal-body pb-0 pe-4 ps-4 w-100">
                       <p *ngIf="currentFolder && !currentFile" class="text-wrap w-100 text-center">{{'delete_suitcase_confirmation' | translate: { var1: currentFolder.name} }}  </p>
-                      <p *ngIf="currentFile" class="text-wrap w-100 text-center">{{'delete_confirmation' | translate}} <b>{{currentFile && currentFile.name}} ? </b> </p>
+                      <p *ngIf="currentFile" class="text-wrap w-100 text-center">{{'delete_confirmation' | translate}} <b [innerHTML]="(currentFile && currentFile.name) | translate"> </b>?  </p>
                       <p *ngIf="checklist && !currentFolder && !currentFile" class="text-wrap w-100 text-center">{{'delete_checklist_confirmation' | translate: { var1: checklist && checklist.title} }}  </p>
                       <p [innerHTML]="'cancellation_policy' | translate"  *ngIf="reservation && !currentFolder && !currentFile" class="text-wrap w-100 text-center d-flex align-items-center justify-content-center flex-column" > </p>
                       <!-- <p *ngIf="reservation && !currentFolder && !currentFile" class="text-wrap w-100">Voulez vous annuler cette reservation ? </p> -->

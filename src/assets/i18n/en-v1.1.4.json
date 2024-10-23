@@ -192,7 +192,7 @@
         "time_at_your_address": "Time at your address",
         "time_same_as_initial": "The time at your address is the same as the initial time With +/- 15 minutes",
         "important_notice": "Important",
-        "important_notice_content": "\"Pick me up at my doorstep\" option selected. Only valid if each adress is within 2.5 km of the initial meeting point. Besomewhere will contact you up to 15 minutes before your arrival. The address and contact number provided must be valid and without error. It have to be either a local phone number or a number accessible via WhatsApp, Telegram, or Signal.<br><br>-If your address <b>is more than 2.5 km</b>, try another starting point or <b>contact Besomewhere to personalize your booking.</b> <br>Email besomewhere.reservation@gmail.com",
+        "important_notice_content": "\"Come to my door\" option selected. Only valid if each adress is within 2.5 km of the initial meeting point. Besomewhere will contact you up to 15 minutes before your arrival. The address and contact number provided must be valid and without error. It have to be either a local phone number or a number accessible via WhatsApp, Telegram, or Signal.<br><br>-If your address <b>is more than 2.5 km</b>, try another starting point or <b>contact Besomewhere to personalize your booking.</b> <br>Email besomewhere.reservation@gmail.com",
         "enter_full_address": "Pick up or drop off adress ( with city)",
         "come_to_my_door_option": "Come to my door",
         "first_passenger_age_requirement": "First passenger must be at least 18 years old",
@@ -230,6 +230,7 @@
         "existing_trip_connection": "Existing trip connection between Airport-Station and BESOMEWHERE stops",
         "airport_departure_notice": "If your departure is from Airport, meeting point are the following",
 
+        "routeInteruption": "Dear passenger, in order to improve our services, the Besomewhere shuttle service will be suspended from October 31 to November 10, 2024. Please select alternative dates for your bookings ",
     
 
 
@@ -249,7 +250,7 @@
         "digital_services_access": "Information about how you access our digital services, including operating system, IP address, online identifiers, and browser details.",
         "contact_us_surveys": "When you contact us or participate in surveys, we may collect:",
         "personal_data_provided": "Personal data you provide when you contact us, including via email, postal mail, phone, or social media, such as your name, username, and contact details.",
-        "details_of_communications": "Details of emails and other digital communications we have sent you and that you have opened, including any links you clicked.",
+        "details_of_unications": "Details of emails and other digital communications we have sent you and that you have opened, including any links you clicked.",
         "feedback_contributions": "Your feedback and contributions to customer surveys and questionnaires.",
         "social_media_credentials": "If you use your social media credentials to log in to our platforms and online services, e.g., Facebook, Google, you agree to share your user details with us, such as your name, email address, date of birth, location, and any other information you choose to share with us.",
         "personal_data_about_others": "We use personal data you provide about other individuals, such as people in your reservation.",
@@ -385,7 +386,11 @@
         "connexion_réussi": "Login successful",
         "HaveToConnected": "You must be logged in before continuing",
         "NoticeNumber": "*Phone number should include country code (+32, +39,+34…..). If you have selected \"come to my door\" option your address should include the street and <b> exact city </b>. Besomewhere cannot be responsible for missing and no precise information.",
-        "IReadTheRoute": "Have you read the  Imperative information before clicking continue"
+        "IReadTheRoute": "Have you read the  Imperative information before clicking continue",
+        "You_must_fill_date" : "You must fill in a date.",
+        "You_must_fill_address" : "You must fill in your address.",
+        "You_must_fill_station" : "You must choose an airport.",
+        "invalid_address" : "Invalid address."
 
 
 

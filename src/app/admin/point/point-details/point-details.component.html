@@ -135,4 +135,4 @@
 <p>Form status2: {{ formPointAround.status | json }}</p> -->
 
 <app-toast title="Trajet non trouvé"></app-toast>
-<app-modal-delete #delete_modal [datas] = "[data_to_del]" [dataType]="dataType" (onDeleted)="onFileDeleted($event)"></app-modal-delete>
+<app-modal-delete-admin #delete_modal [datas] = "[data_to_del]" [dataType]="dataType" (onDeleted)="onFileDeleted($event)"></app-modal-delete-admin>

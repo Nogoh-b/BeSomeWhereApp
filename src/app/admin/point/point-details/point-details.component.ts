@@ -1,6 +1,6 @@
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { PointService } from './../../../service/point/point.service';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MapService } from './../../../service/map/map.service';
 import { CountriesService } from './../../../service/countries/countries.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -71,6 +71,7 @@ export class PointDetailsComponent implements OnInit {
     this.pointService.getPoint(this.id, {all: true}).subscribe(point =>{
       console.log('mon point ',point)
       this.point = point
+      this.data_to_del = point
       this.currentAddress = point
       this.currentAddress.position = {lat : point.lattitude, lng: point.longitude}
 
@@ -273,7 +274,7 @@ export class PointDetailsComponent implements OnInit {
     this.toast_c.open("Be Somewhere", 'Points(s) Suprimé(s)')
     if(e[0].parent === 0 || !e[0].parent){
       setTimeout(() => {
-        this.router.navigateByUrl('points')
+        this.router.navigateByUrl('back-office/points')
       }, 1500);
     }else{
 

@@ -1,7 +1,15 @@
 import { ToastComponent } from './../../shared/toast/toast.component';
 import { MapService } from './../../service/map/map.service';
 import { DriveService } from './../../service/drive/drive.service';
-import { Component, ElementRef, Input, OnInit, ViewChild, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  ViewChild,
+  Output,
+  EventEmitter,
+  AfterViewInit,
+} from '@angular/core';
 import { Point } from 'src/app/model/Model/Point';
 import { Router } from '@angular/router';
 import { PointService } from 'src/app/service/point/point.service';
@@ -119,7 +127,7 @@ export class HomeSearch1Component implements AfterViewInit {
     const date2 = new Date();
     // alert(this.date)
     if(this.date === '' || !this.date){
-      this.toast_c.open('Be Somewhere', 'vous devez remplir une de date', 3000)
+      this.toast_c.open('Be Somewhere', 'You_must_fill_date', 3000)
       return
     }
     if( date1.toISOString().split('T')[0] < date2.toISOString().split('T')[0]){
@@ -127,22 +135,22 @@ export class HomeSearch1Component implements AfterViewInit {
       return
     }
     if(!this.address || this.address === '' ){
-      this.toast_c.open('Be Somewhere', 'vous devez remplir votre adresse', 3000)
+      this.toast_c.open('Be Somewhere', 'You_must_fill_address', 3000)
       return
     }
-    // alert(JSON.stringify(this.station))
-    if(this.station // 👈 null and undefined check
-    && Object.keys(this.station).length === 0 || !this.station.id){
-      this.toast_c.open('Be Somewhere', 'vous devez choisir une station', 3000)
+    // alert(JSON.stringify(this.station))// 👈 null and undefined check
+    if(!this.station || (this.station
+    && Object.keys(this.station).length === 0 || (this.station && !this.station.id))){
+      this.toast_c.open('Be Somewhere', 'You_must_fill_station', 3000)
       return
-    }
+    } 
 
 
     // console.log('point A and B ', this.pointA.id, this.pointB.id)
     this.mapService.search({q: this.address}).subscribe(result =>{
       console.log(result)
       if(this.mapService.transformResponse(result).items.length === 0){
-      this.toast_c.open('Be Somewhere', 'Addresse non valide', 3000)
+      this.toast_c.open('Be Somewhere', 'invalid_address', 3000)
       return
       }
       let point = new Point()

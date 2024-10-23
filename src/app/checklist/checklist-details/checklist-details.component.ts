@@ -75,6 +75,7 @@ console.log('Heure locale:', localDate);
   // récuperer les element du fichier courant
   //@ts-ignore
   getElements(){
+    // console.log('fillesTree ', this.fillesTree)
     if(this.fillesTree.length > 0)
       return this.fillesTree[this.fillesTree.length - 1].filter(file =>{
         return !file.isFolder

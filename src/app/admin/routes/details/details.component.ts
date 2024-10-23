@@ -132,15 +132,16 @@ export class DetailsComponent implements OnInit {
     let i = '14:10'
     let d_s = new Date(this.formGroupRoute.value.date)
     let d_a = this.drive.date//new Date(this.drive.date)
-    /*d_s.setHours(this.formGroupRoute.value.date_time.split(':')[0],this.formGroupRoute.value.date_time.split(':')[1])*/
+
+    d_s.setHours(this.formGroupRoute.value.date_time.split(':')[0],this.formGroupRoute.value.date_time.split(':')[1])
     // d_a.setHours(this.formGroupRoute.value.arrival_time.split(':')[0],this.formGroupRoute.value.arrival_time.split(':')[1])
     
     /*d_s.setHours(d_s.getHours() + 1)*/
 
     // d_a.setHours(d_a.getHours() + 1)
-    /*var d_string = d_s.toISOString().replace('T',' ')
-    d_string = d_string.replace('.000Z','')*/
-    var d_string = d_s.toISOString()
+    var d_string = d_s.toISOString().replace('T',' ')
+    d_string = d_string.replace('.000Z','')
+    // var d_string = d_s.toISOString()
     d.starting_date = this.drive.to_station ? d_string : d_a
     d.arrival_date = !this.drive.to_station ? d_string : d_a
     if(new Date(d.starting_date) > new Date(d.arrival_date) ){
@@ -150,7 +151,7 @@ export class DetailsComponent implements OnInit {
     }
     // d.arrival_date = d_a.toUTCString()
     // d.starting_date = this.drive.to_station ? '' : this.drive.date
-    console.log(d)
+    console.log('données ', d)
     //  return
    // d.starting_date.setHours(this.formGroupRoute.value.starting_time.split(':')[0],this.formGroupRoute.value.starting_time.split(':')[1])
     //d.arrival_date.setHours(this.formGroupRoute.value.arrival_time.split(':')[0],this.formGroupRoute.value.arrival_time.split(':')[1])
@@ -178,7 +179,7 @@ export class DetailsComponent implements OnInit {
       this.drive = (drive)
       if(this.routes){
         this.routes.forEach((route, index) => {
-          console.log(this.adjustDates(route, drive.date, drive.to_station))
+          console.log(this.adjustDates(route, drive.date, drive.to_station), ' ', drive)
           route = this.adjustDates(route, drive.date, drive.to_station)
           this.routeService.update(route, route.id).subscribe(route1 =>{
             this.routes[index] = route
@@ -215,7 +216,8 @@ export class DetailsComponent implements OnInit {
   
     return differenceDays;
   }
-  adjustDates(data: Route, referenceDateStr: string, to_station: boolean): any {
+
+  adjustDates_old(data: Route, referenceDateStr: string, to_station: boolean): any {
     const referenceDate = new Date(referenceDateStr);
     const startingDate = new Date(data.starting_date);
     const arrivalDate = new Date(data.arrival_date);
@@ -229,7 +231,7 @@ export class DetailsComponent implements OnInit {
       // Si to_station est vrai, mettre à jour la date d'arrivée avec la date de référence
       newArrivalDateStr = this.replaceDateOnly(data.arrival_date, referenceDateStr);
       newStartingDateStr = this.replaceDateOnly(data.starting_date, referenceDateStr);
-      console.log('dayDifference ', newStartingDateStr, ' ',data.starting_date ,' ', data.arrival_date , ' ', dayDifference)
+      console.log('dayDifference ',referenceDateStr,' ', newStartingDateStr, ' ',newArrivalDateStr, ' ',data.starting_date ,' ', data.arrival_date , ' ', dayDifference)
   
       // Calculer la nouvelle date de départ en fonction de l'écart initial
       let newStartingDate = new Date(newStartingDateStr);
@@ -256,6 +258,54 @@ export class DetailsComponent implements OnInit {
       arrival_date: newArrivalDateStr
     };
   }
+  
+
+adjustDates(data: Route, referenceDateStr: string, to_station: boolean): any {
+  const referenceDate = new Date(referenceDateStr);
+  const startingDate = new Date(data.starting_date);
+  const arrivalDate = new Date(data.arrival_date);
+
+  let newStartingDateStr, newArrivalDateStr;
+
+  // Calculer l'écart en millisecondes (incluant l'heure et les minutes)
+  const timeDifference = arrivalDate.getTime() - startingDate.getTime();
+
+  if (to_station) {
+    // Si to_station est vrai, prendre arrival_date comme base
+    newArrivalDateStr = this.replaceDateOnly(data.arrival_date, referenceDateStr);
+    const newArrivalDate = new Date(newArrivalDateStr);
+
+    // Recalculer la date de départ en fonction de l'écart initial
+    const newStartingDate = new Date(newArrivalDate.getTime() - timeDifference);
+    newStartingDateStr = this.formatDate(newStartingDate);
+
+    // Vérification pour s'assurer que la date de départ est antérieure à la date d'arrivée
+    if (newStartingDate >= newArrivalDate) {
+      throw new Error("La date de départ doit être antérieure à la date d'arrivée.");
+    }
+  } else {
+    // Si to_station est faux, prendre starting_date comme base
+    newStartingDateStr = this.replaceDateOnly(data.starting_date, referenceDateStr);
+    const newStartingDate = new Date(newStartingDateStr);
+
+    // Recalculer la date d'arrivée en fonction de l'écart initial
+    const newArrivalDate = new Date(newStartingDate.getTime() + timeDifference);
+    newArrivalDateStr = this.formatDate(newArrivalDate);
+
+    // Vérification pour s'assurer que la date de départ est antérieure à la date d'arrivée
+    if (newStartingDate >= newArrivalDate) {
+      throw new Error("La date de départ doit être antérieure à la date d'arrivée.");
+    }
+  }
+
+  return {
+    ...data,
+    starting_date: newStartingDateStr,
+    arrival_date: newArrivalDateStr,
+  };
+}
+
+
 
   calculateNewDate(originalDateStr: string, dayDifference: number): Date {
     const originalDate = new Date(originalDateStr);
@@ -281,9 +331,9 @@ export class DetailsComponent implements OnInit {
     const newDate = new Date(newDateStr);
   
     // Conserver l'heure de la date d'origine
-    const hours = originalDate.getHours();
-    const minutes = originalDate.getMinutes();
-    const seconds = originalDate.getSeconds();
+    const hours = newDate.getHours();
+    const minutes = newDate.getMinutes();
+    const seconds = newDate.getSeconds();
   
     // Appliquer la nouvelle date avec l'heure conservée
     const updatedDate = new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate(), hours, minutes, seconds);

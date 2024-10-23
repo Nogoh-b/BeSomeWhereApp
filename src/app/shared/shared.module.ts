@@ -21,6 +21,7 @@ import { UploadComponent } from './upload/upload.component';
 import { ModalEditFolderComponent } from './modal-edit-folder/modal-edit-folder.component';
 import { TranslatePipe } from '../pipe/translation/translation.pipe';
 import { ToastrModule } from 'ngx-toastr';
+import { DropdownComponent } from './dropdown/dropdown.component';
 
 
 
@@ -44,7 +45,8 @@ import { ToastrModule } from 'ngx-toastr';
     EmptyPageComponent,
     LoadingPageComponent,
     UploadComponent,
-    ModalEditFolderComponent
+    ModalEditFolderComponent,
+    DropdownComponent
   ],
   imports: [
     CommonModule,
@@ -72,6 +74,7 @@ import { ToastrModule } from 'ngx-toastr';
     RouteCardComponent,
     TimelineComponent,
     SwitchComponent,
+    DropdownComponent,
     InputSearchComponent],
     schemas: [
       CUSTOM_ELEMENTS_SCHEMA

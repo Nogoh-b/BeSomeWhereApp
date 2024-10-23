@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Point } from 'src/app/model/Model/Point';
 import { MapService } from 'src/app/service/map/map.service';
 
 @Component({
@@ -22,8 +21,10 @@ export class InputSearchAdressComponent implements OnInit {
     this.addressChange.emit(e.target.value)
   }
   textInput(e){
+    this.addressChange.emit(e)
     setTimeout(() => {
-      this.mapService.search({q:e.target.value}).subscribe(points =>{
+      // this.mapService.search({q:e.target.value}).subscribe(points =>{
+      this.mapService.search({q:e}).subscribe(points =>{
         console.log(points.features)
         this.points = this.mapService.transformResponse(points).items
         console.log(this.mapService.transformResponse(points))

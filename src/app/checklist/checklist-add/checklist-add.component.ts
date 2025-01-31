@@ -8,7 +8,7 @@ import { ToastComponent } from './../../shared/toast/toast.component';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import * as globals from 'src/global';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { UserServiceFireBase } from 'src/app/service/core/user.service';
 import { ValidateDate } from 'src/app/validators/date.validator';
@@ -20,7 +20,8 @@ import { EmailService } from 'src/app/service/email/email.service';
   styleUrls: ['./checklist-add.component.css']
 })
 export class ChecklistAddComponent implements OnInit {
-  
+  isEditionChecklist: boolean = false;
+
   checkListForm : FormGroup
   submitted = false
   loading = false
@@ -114,6 +115,16 @@ export class ChecklistAddComponent implements OnInit {
       })[0]*/
       console.log(this.currentCity)
     })
+        // Écoute les changements d'URL
+        this.router.events.subscribe((event) => {
+          if (event instanceof NavigationEnd) {
+            // Vérifie si l'URL contient "edition-checklist"
+            this.isEditionChecklist = event.url.includes('edition-checklist');
+          }
+        });
+    
+        // Vérification initiale au cas où l'URL ne change pas immédiatement
+        this.isEditionChecklist = this.router.url.includes('edition-checklist');
   }
   onSubmit(){
     
@@ -183,7 +194,8 @@ export class ChecklistAddComponent implements OnInit {
       return
     }
     
-    if((!checklist || (checklist && !checklist.routes)) || (this.routeParams && this.routeParams.begindate && this.routeParams.begindate != '') ){
+    if(this.isEditionChecklist){
+    // if((!checklist || (checklist && !checklist.routes)) || (this.routeParams && this.routeParams.begindate && this.routeParams.begindate != '') ){
       this.checklistService.update(checklist,this.id).subscribe(result =>{
         console.log('checklist ', result.routes)
         this.loading = false

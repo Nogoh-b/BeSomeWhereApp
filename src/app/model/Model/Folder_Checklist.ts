@@ -8,7 +8,7 @@
   name_en: string;
   parent: number;
   isFolder: boolean;
-  isDefault: boolean;
+  isDefault: boolean | number;
   checklist_id: number;
   total?: number;
   qty?: number;

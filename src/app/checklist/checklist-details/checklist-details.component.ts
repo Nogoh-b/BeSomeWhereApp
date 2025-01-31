@@ -33,6 +33,7 @@ export class ChecklistDetailsComponent implements OnInit {
     return  this.translationService.getLanguage()
   }
   getFiles(file: File_Checklist,id, for_back?: boolean){
+
     this.fileChecklistService.get({parent: file.id , checklist_id: id }).subscribe(result =>{
       console.log('fichier ', result,' ',{parent: file.id , checklist_id: id } )
       this.files = result;
@@ -85,6 +86,8 @@ console.log('Heure locale:', localDate);
   folderDeleted(index){
     this.toast_c.open("Be Somewhere", "deleted_message")
     // this.toast_c.open("Be Somewhere", "Sac suprimé")
+    this.refresh(this.checklist.id)
+
     this.navigateToFolder(index)
   }
 
@@ -107,7 +110,9 @@ console.log('Heure locale:', localDate);
       const i = this.folders.length - 1
       f = this.folders[i]
     }
+    
     this.getFiles(f,this.checklist.id,true)
+    this.refresh(this.checklist.id)
   }
 
   //ajoute un element depuis la checklist proposée

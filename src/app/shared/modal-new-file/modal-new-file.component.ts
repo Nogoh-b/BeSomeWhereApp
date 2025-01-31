@@ -72,7 +72,7 @@ export class ModalNewFileComponent implements OnInit {
     let folder = new File_Checklist
 
     folder.isFolder = false
-    folder.name = this.getPlainText(this.fileForm.controls['name'].value)
+    folder.name = this.cur_file ? null : this.getPlainText(this.fileForm.controls['name'].value)
     folder.isDefault = false
     folder.checklist_id = this.cheklist_id
     folder.parent = this.folder_id
@@ -84,9 +84,10 @@ export class ModalNewFileComponent implements OnInit {
       console.log(folder)
       // return
     }
+    console.log(folder)
 
     if(this.cur_file){
-      this.fileChecklistService.update(this.fileForm.value, this.cur_file.id).subscribe(result =>{
+      this.fileChecklistService.update(folder, this.cur_file.id).subscribe(result =>{
         console.log('file Update créer ', result)
         this.onFileUpdated.emit(folder)
       })
@@ -106,8 +107,10 @@ export class ModalNewFileComponent implements OnInit {
   }
   reset(){
     this.fileForm.controls['name'].setValue('')
+    this.fileForm.controls['name_en'].setValue('')
     this.fileForm.controls['total'].setValue('1')
     this.fileForm.controls['qty'].setValue('')
+    this.cur_file = null
     this.title =  'add_in_suitcase'
   }
   validateTotalGreaterThanQty(control: AbstractControl): { [key: string]: any } | null {

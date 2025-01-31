@@ -65,10 +65,13 @@ export class ModalAddProposedChecklistComponent implements OnInit, AfterViewInit
 
 
       console.log(item);
+      
       // return
       if(this.item){
         this.itemService.update(item, this.item.id).subscribe(p =>{
           console.log(p, ' à été enregistré')
+          this.loading = false
+          this.formItem_Proposed.reset()
           this.close()
           this.toast_c.open('Be Somewhere', 'l\'élément '+ p.id + ' à été Mis à jour')
           this.onUpdated.emit(p)
@@ -76,6 +79,8 @@ export class ModalAddProposedChecklistComponent implements OnInit, AfterViewInit
       }else{
         this.itemService.post(item).subscribe(p =>{
           console.log(p, ' à été enregistré')
+          this.loading = false
+          this.formItem_Proposed.reset()
           this.close()
           this.toast_c.open('Be Somewhere', 'l\'élément '+ p.id + ' à été ajoutée')
           this.onCreated.emit(p)

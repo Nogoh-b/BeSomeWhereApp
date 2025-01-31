@@ -22,6 +22,7 @@ export class ProposedChecklistComponent implements OnInit {
   @Input() checklist_id: number
   @Input() file_id: number
   @Input() file: File_Checklist
+  @Input() files: File_Checklist[]
 
   language = 'en'
 
@@ -42,6 +43,7 @@ export class ProposedChecklistComponent implements OnInit {
           data.qty = 0
           data.name_en = item.name_en
           data.isFolder = false
+          data.id = item.id
           data.checklist_id = this.checklist_id
           data.total = 0
           this.items.push(data)
@@ -58,6 +60,10 @@ export class ProposedChecklistComponent implements OnInit {
   getLanguage(){
     return  this.translationService.getLanguage()
   }
+
+  isInFolder(id){
+    return this.files.findIndex(d => d.isDefault === id) != -1
+  }
   getItems(id){
     return this.items.filter(result =>{
       return result.parent === id
@@ -72,12 +78,13 @@ export class ProposedChecklistComponent implements OnInit {
     data.parent = this.file_id
     data.qty = item.qty
     data.isFolder = false
+    data.isDefault = item.id
     data.checklist_id = this.checklist_id
     data.total = item.total
     // return
     this.fileChecklistService.post(data).subscribe(result =>{
-      console.log('item added ', item)
-      this.onItemAdded.emit(item)
+      console.log('item added ', result)
+      this.onItemAdded.emit(result)
     })
   }
 

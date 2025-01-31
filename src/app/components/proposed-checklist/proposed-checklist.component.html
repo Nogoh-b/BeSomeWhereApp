@@ -22,21 +22,24 @@
         </div>
         <div id="bodyitem{{i}}" class="accordion-collapse border-white collapse" aria-labelledby="collapse1" data-bs-parent="#panels1">
             <div class="accordion-body border-white pe-2 ps-2 pt-0">
-                <div *ngFor="let item of getItems(checlist.id)" class="border-bottom gx-0 pb-3 pe-2 ps-2 pt-3 row row_item">
-                    <div class="align-items-center col-auto d-flex d-flex ps-2">
+                <ng-container *ngFor="let item of getItems(checlist.id)">
+                    <div *ngIf="!isInFolder(item.id)" class="border-bottom gx-0 pb-3 pe-2 ps-2 pt-3 row row_item">
+                      <div class="align-items-center col-auto d-flex d-flex ps-2">
                         <p [innerHTML]="getLanguage() === 'fr' || !item.name_en ? item.name : item.name_en" class="fw-bold  pe-0 text-start"></p>
-                        <!-- <p  class="fw-bold  pe-0 text-start">{{item.name_en | json}}</p> -->
-                        <!-- <p  class="fw-bold  pe-0 text-start">{{getLanguage()}}</p> -->
-                    </div>
-                    <div class="d-flex align-items-center justify-content-around">
+                      </div>
+                      <div class="d-flex align-items-center justify-content-around">
                         <div class="align-items-center pt-4 pe-0">
-                            <button [disabled]="spinner.value <= 0 || !file " (click)="addItem(item)" type="button" class="btn btn-light btn-outline-primary  border-2 border-primary">{{'transfer_to_suitcase' | translate}} </button>
+                          <button [disabled]="spinner.value <= 0 || !file" (click)="addItem(item)" type="button" class="btn btn-light btn-outline-primary border-2 border-primary">
+                            {{ 'transfer_to_suitcase' | translate }}
+                          </button>
                         </div>
-                        <div class="align-items-lg-center  col-lg-auto d-flex d-lg-flex justify-content-end ps-0">
-                        <app-spinner-bouton (value_changed)="item.total = $event" #spinner [max_value]="100" [label]="'quantity' | translate" ></app-spinner-bouton>
+                        <div class="align-items-lg-center col-lg-auto d-flex d-lg-flex justify-content-end ps-0">
+                          <app-spinner-bouton (value_changed)="item.total = $event" #spinner [max_value]="100" [label]="'quantity' | translate"></app-spinner-bouton>
                         </div>
+                      </div>
                     </div>
-                </div>
+                  </ng-container>
+                  
             </div>
         </div>
     </div>

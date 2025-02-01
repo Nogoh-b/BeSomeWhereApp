@@ -390,7 +390,10 @@
         "You_must_fill_date" : "You must fill in a date.",
         "You_must_fill_address" : "You must fill in your address.",
         "You_must_fill_station" : "You must choose an Airport/Station.",
-        "invalid_address" : "Invalid address."
+        "invalid_address" : "Invalid address.",
+        "select_tans_mode" : "You must select at least one mode of transport",
+        "qty_in_file" : "The quantity due must not exceed the total quantity."
+
 
 
 

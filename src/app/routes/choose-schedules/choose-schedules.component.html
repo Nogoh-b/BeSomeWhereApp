@@ -80,7 +80,7 @@
                         </div>
                     </div> -->
                       <div class="align-items-sm-center align-items-start d-flex d-sm-flex flex-column1 flex-sm-row justify-content-sm-end justify-content-around">
-                          <app-spinner-bouton [value]="reservation && reservation.passengers ? reservation.passengers.length : 0" #spiner_btn [max_value] = "route.places"></app-spinner-bouton>
+                          <app-spinner-bouton [value]="reservation && reservation.passengers && reservation.route_id === route.id ? reservation.passengers.length : 0" #spiner_btn [max_value] = "route.places"></app-spinner-bouton>
                           <button [disabled]="spiner_btn.value <= 0" (click)="goToNextStep(route, spiner_btn.value,i)" routerLinkActive="router-link-active"  type="text" class="align-items-center btn btn-lg btn-outline-danger d-flex flex-row-reverse float-end fw-bold justify-content-center mt-3 mb-3 p-2" style="height: 55px;">
                               <i class="fa-arrow-right fas fw-bolder pb-1 ps-3 "></i>{{'continue_option' | translate}}
  ( {{take_at_homes[i] ? (route.price )* spiner_btn.value + price_take_to_home : route.price * spiner_btn.value }} € )

@@ -79,10 +79,10 @@ export class ModalNewFileComponent implements OnInit {
     folder.total = this.fileForm.controls['total'].value
     folder.qty = this.fileForm.controls['qty'].value
     if(folder.total < folder.qty){
-      this.toast_c.open("Be Somewherer", "La quantité due ne dois pas être suppérieur à la quantité totale")
+      this.toast_c.open("BeSomewhere", "qty_in_file")
       this.fileForm.controls['qty'].setValue(folder.total)
       console.log(folder)
-      // return
+      return
     }
     console.log(folder)
 

@@ -85,14 +85,43 @@
                                 <p class="border-2 border-bottom border-top h2 pb-3 ps-2 pt-3">{{'means_of_transport' | translate}}</p>
                                 <div class="d-flex gx-0 pe-2 ps-2 row row-cols-4 row-cols-xl-4">
 
-                                    <div (mouseleave) = "onMouseleave(input_trans)" (mouseenter) = "onMousenter(input_trans)"  *ngFor="let transport of model_trans let i = index" class="align-items-center d-flex flex-column justify-content-center pb-3 pt-3" data-pg-collapsed>
+                                    <!-- <div (mouseleave) = "onMouseleave(input_trans)" (mouseenter) = "onMousenter(input_trans)"  *ngFor="let transport of model_trans let i = index" class="align-items-center d-flex flex-column justify-content-center pb-3 pt-3" data-pg-collapsed>
                                       <input #input_trans  type="checkbox" value="o" class="btn-check" [formControlName] = "'trans'+ i" [id]="'trans'+ i" autocomplete="off">
-                                      <!-- <label #label_trans class="align-items-center btn btn-outline-primary d-flex justify-content-center" [for]="'trans'+ i" style="width: 60px; height: 60px; border-radius: 50%;"> -->
                                       <label #label_trans (mouseleave) = "this.checkListForm.value['trans'+i] !== true  ? img_trans.src = 'assets/img/transport/'+transport.src+'.png' : img_trans.src = 'assets/img/transport/'+transport.src+'_h.png' " (mouseenter) = "img_trans.src = 'assets/img/transport/'+transport.src+'_h.png'" class="align-items-center btn btn-outline-primary d-flex justify-content-center" [for]="'trans'+ i" style="width: 60px; height: 60px; border-radius: 50%;">
                                           <img #img_trans [src]=" this.checkListForm.value['trans'+i] !== true ? 'assets/img/transport/'+transport.src+'.png' : 'assets/img/transport/'+transport.src+'_h.png'" width="25" height="25"/>
                                       </label>
                                       <p #pName   class="pt-1">{{transport.name | translate | titlecase }}</p>
+                                    </div> -->
+
+                                    <div *ngFor="let transport of model_trans; let i = index" 
+                                        class="align-items-center d-flex flex-column justify-content-center pb-3 pt-3">
+                                    
+                                        <!-- Input Checkbox -->
+                                        <input #input_trans 
+                                                type="checkbox" 
+                                                class="btn-check" 
+                                                [formControlName]="'trans'+ i" 
+                                                [id]="'trans'+ i" 
+                                                autocomplete="off">
+
+                                        <!-- Label qui change dynamiquement -->
+                                        <label #label_trans 
+                                                class="align-items-center d-flex justify-content-center" 
+                                                [for]="'trans'+ i" 
+                                                [ngClass]="{'bg-primary text-white': checkListForm.value['trans'+i], 'bg-light text-dark': !checkListForm.value['trans'+i]}" 
+                                                style="width: 60px; height: 60px; border-radius: 50%; transition: background-color 0.3s, color 0.3s;">
+                                            
+                                            <!-- Icône Font Awesome -->
+                                            <i [class]="getIconClass(transport.src)" 
+                                            [ngClass]="{'text-white': checkListForm.value['trans'+i], 'text-dark': !checkListForm.value['trans'+i]}" 
+                                            style="font-size: 25px; transition: color 0.3s;">
+                                            </i>
+                                        </label>
+
+                                        <!-- Nom du transport -->
+                                        <p #pName class="pt-1">{{ transport.name | translate | titlecase }}</p>
                                     </div>
+
 
                                 </div>
                             </div>
@@ -201,7 +230,6 @@
 
                       <div (mouseleave) = "onMouseleave(input_trans)" (mouseenter) = "onMousenter(input_trans)"  *ngFor="let transport of model_trans let i = index" class="align-items-center d-flex flex-column justify-content-center pb-3 pt-3" data-pg-collapsed>
                         <input #input_trans  type="checkbox" value="o" class="btn-check" [formControlName] = "'trans'+ i" [id]="'trans'+ i" autocomplete="off">
-                        <!-- <label #label_trans class="align-items-center btn btn-outline-primary d-flex justify-content-center" [for]="'trans'+ i" style="width: 60px; height: 60px; border-radius: 50%;"> -->
                         <label #label_trans (mouseleave) = "this.checkListForm.value['trans'+i] !== true  ? img_trans.src = 'assets/img/transport/'+transport.src+'.png' : img_trans.src = 'assets/img/transport/'+transport.src+'_h.png' " (mouseenter) = "img_trans.src = 'assets/img/transport/'+transport.src+'_h.png'" class="align-items-center btn btn-outline-primary d-flex justify-content-center" [for]="'trans'+ i" style="width: 60px; height: 60px; border-radius: 50%;">
                             <img #img_trans [src]=" this.checkListForm.value['trans'+i] !== true ? 'assets/img/transport/'+transport.src+'.png' : 'assets/img/transport/'+transport.src+'_h.png'" width="25" height="25"/>
                         </label>

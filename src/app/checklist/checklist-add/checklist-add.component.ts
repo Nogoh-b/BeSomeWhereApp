@@ -126,6 +126,22 @@ export class ChecklistAddComponent implements OnInit {
         // Vérification initiale au cas où l'URL ne change pas immédiatement
         this.isEditionChecklist = this.router.url.includes('edition-checklist');
   }
+
+  getIconClass(iconName: string): string {
+    const iconMap: { [key: string]: string } = {
+      plane: 'fas fa-plane',
+      bus: 'fas fa-bus',
+      boat: 'fas fa-ship',
+      walk: 'fas fa-walking',
+      bicycle: 'fas fa-bicycle',
+      train: 'fas fa-train',
+      scooter: 'fas fa-motorcycle',
+      taxi: 'fas fa-taxi'
+    };
+
+    return iconMap[iconName] || 'fas fa-question'; // Fallback icon
+  }
+  
   onSubmit(){
     
     this.submitted = true
@@ -164,7 +180,7 @@ export class ChecklistAddComponent implements OnInit {
       }
     }
     if(selected_trans.length === 0){
-      this.toast_c.open('Information','Vous devez selecionner au moins un mode de transport_')
+      this.toast_c.open('Information','select_tans_mode')
       return
     }
     

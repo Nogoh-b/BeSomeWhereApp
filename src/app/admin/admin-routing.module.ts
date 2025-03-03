@@ -12,14 +12,16 @@ import { PaymentComponent } from './payment/payment/payment.component';
 import { PointDetailsComponent } from './point/point-details/point-details.component';
 import { PointListComponent } from './point/point-list/point-list.component';
 import { PointShedludesListComponent } from './point/point-shedludes-list/point-shedludes-list.component';
-import { ReservationByRouteComponent } from './reservation-by-route/reservation-by-route.component';
 import { ReservationsComponent } from './reservations/reservations.component';
 import { DetailsComponent } from './routes/details/details.component';
 import { UserDetailsComponent } from './user/user-details/user-details.component';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { ReservationsComponent1 } from './reservations1/reservations.component';
-import { ReservationByRouteComponent1 } from './reservation-by-route1/reservation-by-route.component';
 import { ModalAddProposedChecklistComponent } from './components-admin/modal-add-proposed-checklist/modal-add-proposed-checklist.component';
+import { ReservationByRouteComponent } from './reservation-by-route/reservation-by-route.component';
+import { ReservationByRouteComponent1 } from './reservation-by-route1/reservation-by-route.component';
+import { AuthGuard } from '../guards/auth.guard';
+import { AuthGuardReservation } from '../guards/guards-reservation.guard';
 
 const routes: Routes = [
   {
@@ -68,7 +70,8 @@ const routes: Routes = [
     path: 'reservations_par_trajets', component: ReservationByRouteComponent
   },
   {
-    path: 'reservations_par_trajets-1', component: ReservationByRouteComponent1
+    path: 'reservations_par_trajets-1', component: ReservationByRouteComponent1,
+      canActivate : [AuthGuardReservation]
   },
   {
     path: 'paiements', component: PaymentComponent

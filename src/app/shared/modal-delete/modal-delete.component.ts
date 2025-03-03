@@ -7,6 +7,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Checklist } from 'src/app/model/Model/Checklist';
 import { File_Checklist } from 'src/app/model/Model/Folder_Checklist';
 import { FileChecklistService } from 'src/app/service/file_checklist/file-checklist.service';
+import { TranslationService } from 'src/app/service/translation/translation.service';
 
 @Component({
   selector: 'app-modal-delete',
@@ -27,7 +28,8 @@ export class ModalDeleteComponent implements OnInit {
   @Output() onReservationDeleted = new EventEmitter<Checklist>()
   @Output() userDeleted = new EventEmitter<User>()
 
-  constructor(private userService: UserService,
+  constructor(private userService: UserService
+    , private translationService: TranslationService,
      private fileChecklistService: FileChecklistService,
      private reservationService: ReservationService,
      private authService: AuthService,
@@ -52,6 +54,9 @@ export class ModalDeleteComponent implements OnInit {
   want_delete_folder(folder){
     this.currentFile = null
     this.currentFolder = folder
+  }
+  getLanguage(){
+    return  this.translationService.getLanguage()
   }
   want_delete_user(user){
     this.currentFile = null

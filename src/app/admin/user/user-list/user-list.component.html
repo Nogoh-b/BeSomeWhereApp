@@ -75,7 +75,10 @@
                     <td  class="fw-bold text-end"><span class="fw-normal">{{user.email }}</span> </td>
                     <td  class="text-end"><span class="fw-normal">
                       <a (click)="detailsuser.init(user) "  data-bs-toggle="modal" data-bs-target="#detailsuser" class="userer pe-2 pointer">Details</a>
-                      <!-- <a  [routerLink]="['/horraires_stations', user.id]" class="userer ps-2" *ngIf="user.is_station">Gérer</a> -->
+                      <label class="switch">
+                        <input type="checkbox" (change)="authorizeOrNot(i)" [checked]="user.type === 1 ">
+                        <span class="slider round"></span>
+                      </label>
                     </span> </td>
                 </tr>
 

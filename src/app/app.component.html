@@ -5,7 +5,15 @@
       <p class="fs-1 fw-bold">Chargement...</p>
   </div>
 </div> -->
-
+<!-- <button (click)="generateICSFile(
+  'Réunion importante',
+  'Discussion stratégique sur le projet X',
+  'Bureau principal, Salle 101',
+  ('2024-02-15T09:00:00'),
+  ('2024-02-15T10:00:00')
+)">
+  Ajouter à mon calendrier
+</button> -->
 
 <div *ngIf="!want_back_office">
   <app-nav-bar></app-nav-bar>
@@ -35,9 +43,26 @@
     <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
+
+
+
     <ul class="px-3 d-flex">
         <li class="nav-item text-nowrap">
             <!-- <a style="color: white!important;" class="nav-link" href="#">Deconnexion</a> -->
+            <div class="align-items-center d-flex dropdown h-auto" style="height: 13px !important;">
+              <button (click)="toggleDropdown()" class="border-0 fs-6 btn dropdown-toggle fw-bold pt-2 dropdown-btn" id="dropdown1" data-bs-toggle="dropdown" aria-expanded="false" type="button" data-bs-trigger="hover">{{'fdfdfdfdffdfdf'}}</button>
+      
+                <ul class="dropdown-menu" id="myDropdown" aria-labelledby="dropdown1">
+                    <li>
+                        <a [routerLink]="['/profil']" routerLinkActive="router-link-active"  class="dropdown-item" >{{'Nav_Profile' | translate}}</a>
+                    </li>
+                    <hr>
+                    <li>
+                        <a  class="dropdown-item text-danger pointer" >{{'Nav_Logout' | translate}}</a>
+                    </li>
+                </ul>
+            </div>
+            
         </li>
         <li class="nav-item text-nowrap">
             <a style="color: white!important;" [routerLink]="['/']" routerLinkActive="router-link-active"  class="nav-link" href="#">Aller au site</a>
@@ -46,11 +71,11 @@
   </header>
   <div class="container-fluid" data-pg-collapsed>
     <div class="row">
-      <nav *ngIf="!want_see_reservation" id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light p-0 sidebar collapse" data-pg-collapsed>
+      <nav *ngIf="!want_see_reservation" id="sidebarMenu" class="col-md-3 col-lg-2 d-lg-block bg-light p-0 sidebar collapse" data-pg-collapsed>
         <app-nav-bar-admin></app-nav-bar-admin>
       </nav>
       
-      <main class="col-lg-10 col-md-9 ms-sm-auto px-md-4">
+      <main class="col-12 col-md-12 col-lg-10 p-0 col-md-10 ms-sm-auto px-md-0">
         <router-outlet></router-outlet>
 
       </main>

@@ -1,9 +1,10 @@
 import { DataType, init_selection, per_page } from './../../../../global';
 import { UserService } from './../../../service/user/user.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { filterData, SearchType } from 'filter-data';
 import { ReversePipe } from 'ngx-pipes';
 import { User } from 'src/app/model/Model/Utilisateur';
+import { ToastComponent } from 'src/app/shared/toast/toast.component';
 
 @Component({
   selector: 'app-user-list',
@@ -23,7 +24,7 @@ export class UserListComponent implements OnInit {
   sort_option: string
   search_option: string
   checks_table = []
-
+  @ViewChild(ToastComponent) toast_c: ToastComponent
   selected_data: any[] = []
   datatype = DataType.User
 
@@ -114,8 +115,13 @@ export class UserListComponent implements OnInit {
   isAllchecked(selected_data?:any[]){
     return this.getAllChecked(selected_data).length === selected_data.length
   }
-  isChecked(){
-
+  authorizeOrNot(index){
+    const user : User = this.users[index]
+    this.userService.update({type: user.type === 1 ? 0 : 1}, user.id).subscribe(u =>{
+      console.log('user ', u)
+      this.toast_c.open("BeSomewhere", u.type === 1 ? "Autorisation acceptée" : "Autorisation refusée")
+      this.users[index] = u
+    })
   }
   getAllChecked(selected_data?:any[]){
     let t = []

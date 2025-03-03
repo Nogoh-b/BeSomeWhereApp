@@ -170,6 +170,52 @@ export class AppComponent implements OnInit {
 
    }
 
+   toggleDropdown() {
+    var dropdownMenu = document.getElementById("myDropdown");
+    dropdownMenu.classList.toggle("show");
+  }
+   generateICSFile(eventTitle: string, eventDescription: string, eventLocation: string, startDate: string, endDate: string) {
+    const pad = (num: number) => (num < 10 ? '0' + num : num); // Ajoute un zéro devant les nombres < 10
+  
+    const formatDate = (date: Date) => {
+      return (
+        date.getUTCFullYear().toString() +
+        pad(date.getUTCMonth() + 1) +
+        pad(date.getUTCDate()) +
+        'T' +
+        pad(date.getUTCHours()) +
+        pad(date.getUTCMinutes()) +
+        pad(date.getUTCSeconds()) +
+        'Z'
+      );
+    };
+  
+    const icsContent = `BEGIN:VCALENDAR
+  VERSION:2.0
+  PRODID:-//MyApp//Event Calendar//EN
+  BEGIN:VEVENT
+  UID:${new Date().getTime()}@myapp.com
+  DTSTAMP:${formatDate(new Date())}
+  DTSTART:${formatDate(new Date(startDate))}
+  DTEND:${formatDate(new Date(endDate))}
+  SUMMARY:${eventTitle}
+  DESCRIPTION:${eventDescription}
+  LOCATION:${eventLocation}
+  END:VEVENT
+  END:VCALENDAR`;
+  
+    const blob = new Blob([icsContent], { type: 'text/calendar' });
+    const url = window.URL.createObjectURL(blob);
+  
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'event.ics';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  }
+  
    
 
 }

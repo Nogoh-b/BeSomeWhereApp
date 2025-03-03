@@ -1,8 +1,9 @@
 <div *ngIf="reservations" class=" table-responsive">
   <div class="gx-0 pe-5 ps-5 row row-cols-2">
-      <div class="col-7 p-2">
+      <div class="col-12 col-md-12 col-lg-7 p-2">
           <div class="bg-white container mb-3 p-4">
-            <form (submit)="getData(route_id)" [formGroup]="formFilter">
+            <form  [formGroup]="formFilter">
+            <!-- <form (submit)="getData(route_id)" [formGroup]="formFilter"> -->
                 <div class="d-flex gx-0  row row-cols-3 row-cols-xl-3">
 
                   <div  class=" pe-2">
@@ -17,10 +18,12 @@
                           <label for="floatingInput">Au</label>
                       </div>
                   </div>
-                  <app-button [loading]="loading" btn_class="h-100 text-white" class="pb-2" text="Rechercher"></app-button>
+                  <app-button [routerLink]="['/back-office/reservations_par_trajets']" [queryParams]="{ from: formFilter.get('from').value, to: formFilter.get('to').value }" [loading]="loading" btn_class="h-100 text-white" class="pb-2" text="Rechercher"></app-button>
               </div>
             </form>
           </div>
+        <!-- edit code -->
+        <!-- <app-routedetails [cash_total]="cash_total_for_route" title="Détails du trajet"  [total_take_at_home] = "total_take_at_home_for_route"  [passengersVisible] = "false" [items] = "total_items_for_route"   [total_passengers]="total_passenger_for_route" [reservation]="reservations.length> 0 && reservations[0] "  ></app-routedetails> -->
 
           <div class="bg-white container p-4">
               <div class="align-items-center border-bottom border-info d-flex fs-4 mb-4 pb-1">
@@ -36,10 +39,12 @@
                               <th class="text-center">Prix total</th>
                               <!-- <th class="text-center">items</th> -->
                               <th class="text-center">Date de départ</th>
+                              <th class="text-center">Action(s)</th>
                           </tr>
                       </thead>
                       <tbody>
-                          <tr (click)="setCurrentReservation(reservation.id) " *ngFor="let reservation of reservations let i = index" class="pointer" [ngClass]="{'table-active': i === currentIndex}">
+                        <!-- edit code -->
+                          <tr (click)="setCurrentReservation(reservation.route, i)" *ngFor="let reservation of reservations; let i = index" class="pointer" [ngClass]="{'table-active': i === currentIndex, 'table-primary': current_route === reservation.id}">
                               <td class="align-middle d-table-cell">{{reservation.id}}</td>
                               <td class="align-middle d-table-cell text-center">{{reservation.pointA +' - '+ reservation.pointB}}<br> Transport :  {{reservation.transport}}</td>
                               <td>
@@ -48,6 +53,12 @@
                               <!-- <td class="align-middle d-table-cell fw-bold text-center"><span class="fw-normal">{{reservation}</span> </td> -->
                               <!-- <td class="align-middle d-table-cell text-center">{{reservation.strating_date | date}}</td> -->
                               <td class="align-middle d-table-cell text-center">{{reservation.starting_date | date }} <p class="hours">( {{reservation.starting_date | date : 'shortTime'}} - {{reservation.arrival_date | date : 'shortTime'}} ) </p> </td>
+                              <td class="align-middle d-table-cell text-center">
+
+                                  <button  [routerLink]="['/back-office/reservations']" [queryParams]="{ trajet: reservation.id }"   type="button" class="btn btn-outline-primary ms-1 rounded-pill p-1">
+                                    <i class="fa-eye fas p-1"></i>
+                                </button>
+                              </td>
                           </tr>
 
                       </tbody>
@@ -55,10 +66,15 @@
 
               </div>
           </div>
+
       </div>
       <div class="col-5">
-        <app-routedetails  [cash_total] = "cash_total"  [total_take_at_home] = "total_take_at_home" [total_passengers]="total_passenger_" [price_passengers] = "total_price_passenger_" *ngIf="reservations.length > 0 && !loading" [passengersVisible] = "true" [items] = " total_items1" [passengers]="[]" [reservation]="reservations && reservations[0]" ></app-routedetails>
-      </div>
+        <app-routedetails  [cash_total] = "cash_total"  [total_take_at_home] = "total_take_at_home" [total_passengers]="total_passenger_" [price_passengers] = "total_price_passenger_" *ngIf="reservations.length > 0 && !loading && currentIndex === -1" [passengersVisible] = "true" [items] = " total_items1" [passengers]="[]" [reservation]="reservations && reservations[0]" ></app-routedetails>
+        <app-routedetails *ngIf="currentIndex != -1"  [cash_total] = "cash_total_for_route" [title]="cash_total_for_route.toString()"   [total_take_at_home] = "total_take_at_home_for_route" [total_passengers]="total_passenger_for_route" [price_passengers] = "total_price_passenger_for_route" [items] = " total_items_for_route" [passengers]="[]" [reservation]="reservations && reservations[0]" ></app-routedetails>
+        <!-- *ngIf="current_route === -1"
+         -->
+    </div>
+      
   </div>
 </div>
 

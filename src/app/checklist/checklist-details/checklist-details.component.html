@@ -1,3 +1,5 @@
+
+
 <div *ngIf="checklist" class="container-fluid container_home pe-0 ps-0" style="height: 92vh;
 
 /* padding-top: 99px !important */
@@ -106,7 +108,7 @@
 
                                   <div *ngIf="haveElement() && checklist.stats.total_files != 0" data-pg-collapsed>
                                       <div class="">
-                                          <p class="bg-light border-bottom border-top h5 pb-2 ps-3 pt-2 text-black-50">{{'suitcase_contents' | translate | shorten : 12}} {{ folders.length <= 0 ?'' : ' : '+ folders[folders.length -1].name    |  shorten: 12}}</p>
+                                          <p class="bg-light border-bottom border-top h5 pb-2 ps-3 pt-2 text-black-50">{{'suitcase_contents' | translate | shorten : 10}} {{ folders.length <= 0 ?'' : ' : '+ folders[folders.length -1].name    |  shorten: 12}}</p>
                                       </div>
                                       <div class="pe-3 ps-3 pt-2">
                                           <table class=" table table-hover">
@@ -122,7 +124,7 @@
                                               <tbody class="">
                                                   <tr *ngFor="let file of getElements()">
                                                         <!-- <th scope="row" class="text-center"><i *ngIf="file.total === file.qty" class="fa-check-circle far text-success"></i></th> -->
-                                                        <td><p [innerHTML]="getLanguage() === 'fr' || !file.name_en ? file.name : file.name_en"></p></td>
+                                                        <td><p [innerHTML]="getLanguage() === 'en' && file.name_en ? file.name_en : file.name"></p></td>
                                                         <td class="text-center">{{file.total}}</td> 
                                                         <td class="text-center">{{file.qty}}</td>
                                                         <td>

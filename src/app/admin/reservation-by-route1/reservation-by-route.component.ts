@@ -9,7 +9,9 @@ import { ItemCategory, Item_Drive } from '../../model/Model/Item_Drive';
 import { Passenger } from '../../model/Model/Passenger';
 import { meals, total_take_at_homr } from 'src/global';
 import { Route } from '../../model/Model/Route';
-import { DatePipe } from '@angular/common';
+import { DatePipe, formatDate } from '@angular/common';
+import { UserServiceFireBase } from 'src/app/service/core/user.service';
+import { UserService } from 'src/app/service/user/user.service';
 
 @Component({
   selector: 'app-reservation-by-route1',
@@ -19,6 +21,7 @@ import { DatePipe } from '@angular/common';
 export class ReservationByRouteComponent1 implements OnInit {
 
   reservations = []
+  reservations_by_route_id = []
   route : Route
   route_id : string
   currentReservation: Reservation
@@ -29,6 +32,14 @@ export class ReservationByRouteComponent1 implements OnInit {
   total_price_passenger_ = 0
   total_passenger_ = 0
   total_take_at_home = 0
+
+  current_route = -1
+  total_items_for_route: Item_Drive[] = []
+  cash_total_for_route = 0
+  total_price_passenger_for_route = 0
+  total_passenger_for_route = 0
+  total_take_at_home_for_route = 0
+
   loading = false
   formFilter: FormGroup
   take_at_home_price = JSON.parse(localStorage.getItem('conf')).price_take_to_home
@@ -36,20 +47,19 @@ export class ReservationByRouteComponent1 implements OnInit {
   constructor(private reservationService: ReservationService,
     private router: ActivatedRoute,
     private fb: FormBuilder,
+    private userServiceFireBase: UserServiceFireBase,
+    private userService: UserService,
     private route_: Router,
     private datepipe: DatePipe,
     private routeService: RouteService) {
-    router.queryParams.subscribe(params =>{
-      this.route_id = params['trajet']
-      this.createForm()
-      setTimeout(() => {
-        // this.getData(this.route_id)
-      }, 500);
-      /*this.routeService.getRoute(params.trajet).subscribe(route =>{
-        console.log(route)
-        this.route = route
-      })*/
-    })
+    router.queryParams.subscribe(params => {
+      this.route_id = params['trajet'];
+      const from = params['from'] ? params['from'] : formatDate(new Date(), 'yyyy-MM-dd', 'fr-FR');
+      const to = params['to'] ? params['to'] : formatDate(new Date(), 'yyyy-MM-dd', 'fr-FR');
+      this.createForm();
+      this.formFilter.patchValue({ from, to });
+      this.getData(this.route_id);
+    });
   }
 
   reset(){
@@ -110,6 +120,14 @@ export class ReservationByRouteComponent1 implements OnInit {
           })
         }
   ngOnInit(): void {
+    let user = this.userServiceFireBase.getCurrentUser()
+    this.userService.getUser(user.id).subscribe(u => {
+      this.userServiceFireBase.updateCurrentUser(u)
+      if(u.type <= 0)
+        this.route_.navigate(['/']) 
+      console.log('u ', u)
+
+    })
     setTimeout(() => {
       // this.getData(this.route_id)
     }, 1500);
@@ -213,8 +231,35 @@ export class ReservationByRouteComponent1 implements OnInit {
 
   }
 
-  setCurrentReservation(id){
-    this.route_.navigate(['back-office/reservations-1'], {queryParams:{trajet : id}})
+  setCurrentReservation(id,index=0){
+    this.current_route = id
+    this.currentIndex = this.currentIndex != index ? index : -1
+    this.total_price_passenger_for_route = 0
+    this.total_passenger_for_route = 0
+    this.total_take_at_home_for_route = 0
+    this.cash_total_for_route = 0
+    this.cash_total_for_route = 0
+    this.total_items_for_route = []
+    for (const res of this.reservations_by_route_id[id]) {
+      // this.total_price_passenger_for_route += this.total_price_babyseats(res) + this.total_price_meals(res) + this.total_price_passenger(res)+ this.total_price_suitcase(res) + this.total_price_services(res) + this.getTakeAtHomeOption(res)
+      this.total_passenger_for_route += this.total_passenger(res)
+      this.total_price_passenger_for_route += this.total_price_passenger(res)
+      this.total_take_at_home_for_route += this.getTakeAtHomeOption(res)
+      this.cash_total_for_route += res.status ? 1 : 0
+      this.cash_total_for_route += res.status ? 1 : 0
+      console.log('res.status ', res.status);
+      console.log('total_price_passenger_for_route ', this.total_price_passenger_for_route);
+      console.log('total_passenger_for_route ', this.total_passenger_for_route);
+      console.log('total_price_passenger_ ', this.total_price_passenger_);
+      console.log('total_take_at_home_for_route ', this.total_take_at_home_for_route);
+      console.log('cash_total_for_route ', this.cash_total_for_route);
+      for (const element of res.items) {
+        this.total_items_for_route.push(element)
+        
+      }
+      
+    }
+    // this.route_.navigate(['back-office/reservations'], {queryParams:{trajet : id}}) 
   }
     view(id){
   }
